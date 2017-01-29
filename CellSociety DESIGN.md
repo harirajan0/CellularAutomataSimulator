@@ -46,14 +46,19 @@ Upon calling the update method of a cell in the Game of Life model for a cell, t
 2. Apply the rules to an edge cell: set the next state of a cell to live by counting its number of neighbors using the Game of Life rules for a cell on the edge (i.e., with some of its neighbors missing) <br/>
 
 If a Cell is on the edge, the neighbors on the sides that are touching the edge will be null. The update method will check to make sure that the neighbor is not null before attempting to access the neighbor’s state.<br/>
-3. Move to the next generation: update all cells in a simulation from their current state to their next state and display the result graphically.
+
+3. Move to the next generation: update all cells in a simulation from their current state to their next state and display the result graphically. <br/>
+
 The Controller class will handle updating all cells in a simulation by iterating through the list of cells (an instance variable stored in the Controller class), and calling the update method for each cell. Since each cell stores its current state and next state (both as instance variables), the update method will use the cell’s current state, as well as its neighbors’ current states, to determine its next states. After fully iterating through the list, we can go back and set each cell’s current state to next state, and reset next state to null in preparation for the next iteration. Once this is done, we can pass our list of Cells to the View class which will know how to display each Cell in the window as each Cell will contain information on its x and y positions and color. <br/>
+
 4. Set a simulation parameter: set the value of a parameter, probCatch, for a simulation, Fire, based on the value given in an XML file <br/>
 
 The Loader class will parse the value of probCatch given in the XML file and pass it to the Fire Cell class when it is initializing the list of all Fire Cells. Each of the Fire Cell will store that value as one of its private instance variables. <br/>
 
 Once this parameter is updated in the XML file, the file will have to be reloaded. This action will be collected by the Controller, which will create a Loader object to load the updated XML file. This will create Cells and store them in a list and pass them back to the Controller, which will update the view. The simulation will then be ready to run. <br/>
+
 5. Switch simulations: use the GUI to change the current simulation from Game of Life to Wator <br/>
+
 Our GUI will allow the user to load a new XML file whenever the user chooses to do so. So, if the user wanted to switch simulations to the Wator file while running a simulation from Game of Life, the user would click the “Load” button in our window and choose the appropriate XML file.<br/> 
 DESIGN CONSIDERATION
 ----
