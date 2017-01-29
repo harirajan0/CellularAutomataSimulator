@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Cell {
 	
-	private String state;
+	private String currentState;
+	private String nextState;
 	private ArrayList<Cell> neighbors;
 	private double xPosition;
 	private double yPosition;
@@ -13,18 +14,7 @@ public abstract class Cell {
 		//sets xposition and yposition
 	}
 	
-	
 	public abstract void update();
-
-
-	public String getState() {
-		return state;
-	}
-
-
-	public void setState(String state) {
-		this.state = state;
-	}
 
 
 	public ArrayList<Cell> getNeighbors() {
@@ -54,6 +44,22 @@ public abstract class Cell {
 
 	public void setyPosition(double yPosition) {
 		this.yPosition = yPosition;
+	}
+
+	public String getCurrentState() {
+		return currentState;
+	}
+
+	public void setCurrentState(String currentState) {
+		this.currentState = currentState;
+	}
+
+	public String getNextState() {
+		return nextState;
+	}
+
+	public void setNextState(String nextState) {
+		this.nextState = nextState;
 	}
 
 }
