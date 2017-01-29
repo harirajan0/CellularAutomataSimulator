@@ -74,3 +74,14 @@ We chose not to have an actual Grid class that stores all the Cells. First of al
 
 For resetting the simulation, we chose to reload the XML file again and reinitializing all the initial states of the Cells. An alternative that we thought about was making a copy of the list when it was first created and use that when the user wants to reset the simulation. But considering that the Controller would have to keep that one copy even if it is not needed at all, we decided to reload and reinitialize because that probably would not take too much time. <br/>
 
+TEAM RESPONSIBILITIES
+----
+Conway Cell (Gabriel, Bihan): 2/1/17 7PM<br/>
+Spreading Fire Cell (Vishnu): 2/1/17 7PM <br/>
+Wator Cell (Hari): 2/1/17 7PM <br/>
+Segregation Cell (Gabriel, Bihan): 2/1/17 7PM <br/>
+Cell Superclass (All) 1/29/17<br/>
+Loader Class (Hari) 2/6/17<br/>
+Controller Class (Vishnu, Bihan): 2/6/17<br/> 
+View Class (Gabriel): 2/6/17 <br/>
+
