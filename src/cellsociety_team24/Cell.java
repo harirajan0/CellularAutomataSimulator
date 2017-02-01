@@ -10,8 +10,10 @@ public abstract class Cell {
 	private double xPosition;
 	private double yPosition;
 	
-	public Cell() {
-		//sets xposition and yposition
+	public Cell(double x, double y, String state) {
+		setxPosition(x);
+		setyPosition(y);
+		setCurrentState(state);
 	}
 	
 	public abstract void update();
