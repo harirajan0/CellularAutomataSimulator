@@ -4,12 +4,6 @@ import java.util.ArrayList;
 
 import com.sun.javafx.geom.Shape;
 
-/*THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
- *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
- *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
- *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!! 
- */
-
 public abstract class Cell {
 	
 	private String currentState;
@@ -70,7 +64,7 @@ public abstract class Cell {
 	public void setNextState(String nextState) {
 		this.nextState = nextState;
 	}
-
+	
 	public Shape getMyShape() {
 		return myShape;
 	}
