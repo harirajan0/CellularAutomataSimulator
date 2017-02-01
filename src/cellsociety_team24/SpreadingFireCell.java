@@ -31,11 +31,19 @@ public class SpreadingFireCell extends Cell
 		}
 	}
 	
+	/**
+	 * Tells whether or not the cell's current state is <code>state</code>.
+	 * @param state State to test
+	 * @return Whether or not <code>state</code> is the current state
+	 */
 	private boolean isState(String state)
 	{
 		return getCurrentState().equals(state);
 	}
 	
+	/**
+	 * Sets the next state if the Cell is in the tree state
+	 */
 	private void setTreeState()
 	{
 		List<Cell> neighbors = getNeighbors();
