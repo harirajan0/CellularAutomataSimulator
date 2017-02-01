@@ -25,8 +25,14 @@ public class WaTorCell extends Cell {
 		}
 		WaTorCell fishToEat = getRandomNeighbor("fish");
 		//if there is a fish to eat, then eat it, if not move somewhere if possible
-		if (fishToEat != null) { eatFish(fishToEat); }
-		else { move(); }
+		if (fishToEat != null) { 
+			eatFish(fishToEat); 
+		}
+		else { 
+			//if shark doesnt eat, its closer to dieing
+			turnsToDie++;
+			move(); 
+		}
 		if (turnsToBreed == 3) { breed(); }
 	}
 	
@@ -59,7 +65,6 @@ public class WaTorCell extends Cell {
 		} else {
 			setNextState(getCurrentState());
 		}
-		turnsToDie++;
 	}
 	
 	
