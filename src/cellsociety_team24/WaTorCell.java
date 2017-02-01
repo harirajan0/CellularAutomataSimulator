@@ -1,12 +1,25 @@
 package cellsociety_team24;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class WaTorCell extends Cell {
 	
 	private int turnsToBreed;
 	private int turnsToDie;
+	
+	public WaTorCell(String currentState, double xPosition, double yPosition) {
+		setCurrentState(currentState);
+		setxPosition(xPosition);
+		setyPosition(yPosition);
+		resetFields();
+	}
 
+	public void addNeighbor(WaTorCell neighbor) {
+		ArrayList<Cell> newNeighbors = getNeighbors();
+		newNeighbors.add(neighbor);
+		setNeighbors(newNeighbors);
+	}
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
