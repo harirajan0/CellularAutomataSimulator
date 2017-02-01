@@ -1,34 +1,19 @@
 package cellsociety_team24;
-
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.util.List;
 import com.sun.javafx.geom.Shape;
->>>>>>> f2f70ee4eb72f1a66b1f2743ef76056406365eb8
 
 public abstract class Cell {
-	
 	private String currentState;
 	private String nextState;
-<<<<<<< HEAD
-	private ArrayList<Cell> neighbors;
-	private double xPosition;
-	private double yPosition;
-	
-	public Cell() {
-		//sets xposition and yposition
-=======
 	private List<Cell> neighbors;
 	private int xPosition;
 	private int yPosition;
 	private Shape myShape;
 
 	public Cell(String initState, int x, int y) {
-		currentState = initState;
-		xPosition = x;
-		yPosition = y;
->>>>>>> f2f70ee4eb72f1a66b1f2743ef76056406365eb8
+		setCurrentState(initState);
+		setxPosition(x);
+		setyPosition(y);
 	}
 	
 	public abstract void update();
@@ -78,5 +63,9 @@ public abstract class Cell {
 	public void setNextState(String nextState) {
 		this.nextState = nextState;
 	}
-
+	
+	public Shape getShape()
+	{
+		return myShape;
+	}
 }

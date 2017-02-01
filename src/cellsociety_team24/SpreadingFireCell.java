@@ -1,7 +1,6 @@
 package cellsociety_team24;
-import java.util.ArrayList;
+import java.util.List;
 
-<<<<<<< HEAD
 public class SpreadingFireCell extends Cell 
 {	
 	private static final String EMPTY = "empty";
@@ -9,25 +8,12 @@ public class SpreadingFireCell extends Cell
 	private static final String TREE = "tree";
 	private double probCatch;
 	
-	public SpreadingFireCell(double x, double y, String state, double prob)
+	public SpreadingFireCell(String initState, int x, int y, double prob)
 	{
-		super();
-		setxPosition(x);
-		setyPosition(y);
-		setCurrentState(state);
-		probCatch = prob;
-		//setNeighbors(???);
-	}
-	
-=======
-public class SpreadingFireCell extends Cell {
-
-	public SpreadingFireCell(String initState, int x, int y) {
 		super(initState, x, y);
-		// TODO Auto-generated constructor stub
+		probCatch = prob;
 	}
 
->>>>>>> f2f70ee4eb72f1a66b1f2743ef76056406365eb8
 	@Override
 	public void update() 
 	{
@@ -52,7 +38,7 @@ public class SpreadingFireCell extends Cell {
 	
 	private void setTreeState()
 	{
-		ArrayList<Cell> neighbors = getNeighbors();
+		List<Cell> neighbors = getNeighbors();
 		for(Cell cell : neighbors)
 		{
 			if(((SpreadingFireCell)cell).isState(BURNING))
