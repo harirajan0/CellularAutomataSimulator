@@ -12,10 +12,13 @@ public class WaTorCell extends Cell {
 		// TODO Auto-generated method stub
 		turnsToBreed++;
 		if (getNextState() != "") { return; }
-		
+		else if (getCurrentState().equals("empty")) { return; }
+		else if (getCurrentState().equals("shark")) { updateShark(); }
+		else if (getCurrentState().equals("fish")) { updateShark(); }
 	}
 	
 	public void updateShark() {
+		turnsToBreed++;
 		if (turnsToDie == 3) {//kill this shark
 			setNextState("empty");
 			resetFields();
@@ -24,11 +27,19 @@ public class WaTorCell extends Cell {
 		//if there is a fish to eat, then eat it, if not move somewhere if possible
 		if (fishToEat != null) { eatFish(fishToEat); }
 		else { move(); }
-		if (turnsToBreed == 3) {//breed new shark in random adjacent cell
-			WaTorCell newShark = getRandomNeighbor("empty");
-			if (newShark != null) {
-				newShark.setNextState("shark");
-			}
+		if (turnsToBreed == 3) { breed(); }
+	}
+	
+	public void updateFish() {
+		turnsToBreed++;
+		move();
+		if (turnsToBreed == 3) { breed(); }
+	}
+	
+	private void breed() {
+		WaTorCell newCell = getRandomNeighbor("empty");
+		if (newCell != null) {
+			newCell.setNextState(getCurrentState());
 		}
 	}
 	
@@ -41,7 +52,7 @@ public class WaTorCell extends Cell {
 	private void move() {
 		WaTorCell newLocation = getRandomNeighbor("empty");
 		if (newLocation != null) {
-			newLocation.setNextState("shark");
+			newLocation.setNextState(getCurrentState());
 			newLocation.setFields(this);
 			setNextState("empty");
 			resetFields();
