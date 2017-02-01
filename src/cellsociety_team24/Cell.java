@@ -2,6 +2,14 @@ package cellsociety_team24;
 
 import java.util.ArrayList;
 
+import com.sun.javafx.geom.Shape;
+
+/*THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
+ *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
+ *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!!
+ *THIS IS A TEST TO SEE HOW GIT WORKFLOW WORKS!!!! 
+ */
+
 public abstract class Cell {
 	
 	private String currentState;
@@ -9,9 +17,10 @@ public abstract class Cell {
 	private ArrayList<Cell> neighbors;
 	private double xPosition;
 	private double yPosition;
-	
+	private Shape myShape;
+
 	public Cell() {
-		//sets xposition and yposition
+		
 	}
 	
 	public abstract void update();
@@ -60,6 +69,14 @@ public abstract class Cell {
 
 	public void setNextState(String nextState) {
 		this.nextState = nextState;
+	}
+
+	public Shape getMyShape() {
+		return myShape;
+	}
+
+	public void setMyShape(Shape myShape) {
+		this.myShape = myShape;
 	}
 
 }
