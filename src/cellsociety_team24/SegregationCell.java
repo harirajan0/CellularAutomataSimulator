@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class SegregationCell extends Cell {
 	
+	private static final String EMPTY = "empty";
 	private double percentage;
 	
 	public SegregationCell(String initState, int x, int y, double percentage) {
@@ -22,7 +23,7 @@ public class SegregationCell extends Cell {
 	 * @param emptyPositions
 	 */
 	public void update(List<Cell> emptyPositions) {
-		if (this.getCurrentState().equals("empty")) return;
+		if (this.getCurrentState().equals(EMPTY)) return;
 		List<Cell> neighbors = this.getNeighbors();
 		if (!isSatisfied(neighbors)){
 			changeStates(emptyPositions);
@@ -42,7 +43,7 @@ public class SegregationCell extends Cell {
 		double nonEmpty = 0, sameType = 0;
 		for (Cell nb : neighbors){
 			if (nb != null){
-				if (!nb.getCurrentState().equals("empty")){
+				if (!nb.getCurrentState().equals(EMPTY)){
 					nonEmpty++;
 				}
 				if (nb.getCurrentState().equals(this.getCurrentState())){
@@ -60,7 +61,7 @@ public class SegregationCell extends Cell {
 	 * @param emptyPositions
 	 */
 	private void changeStates(List<Cell> emptyPositions){
-		this.setNextState("empty");
+		this.setNextState(EMPTY);
 		
 		//System.out.println("1. " + this.getCurrentState());
 		//System.out.println("2. " + this.getNextState());
