@@ -60,10 +60,4 @@ public class Controller {
 			}
 		}
 	}
-
-	private List<Cell> findNeighbors(int r, int c){
-		List<Cell> neighbors = new ArrayList<Cell>();
-		
-		return neighbors;
-	}
 }
