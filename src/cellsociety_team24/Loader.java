@@ -9,7 +9,7 @@ public class Loader {
 		
 	}
 
-	public ArrayList<Cell> loadXMl() {
+	public ArrayList<String> loadXMl() {
 		return null;
 	}
 }

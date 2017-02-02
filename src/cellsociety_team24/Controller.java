@@ -13,15 +13,20 @@ public class Controller {
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
 	
-	private void initializeGrid(int rows, int cols, List<String> states,
-			double param, String sim){
+	public Controller(int rows, int cols,	double param, String sim){
 		
 		this.rows = rows;
 		this.cols = cols;
+		List<String> states = loadStates();
 		Collections.shuffle(states);
 		grid = new Cell[rows][cols];
 		createCells(rows, cols, states, param, sim);
 		initializeNeighbors();
+	}
+	
+	private List<String> loadStates(){
+		
+		return new Loader().loadXMl();
 	}
 	
 	private void createCells(int rows, int cols, List<String> states,
