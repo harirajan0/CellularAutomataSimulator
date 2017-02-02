@@ -8,11 +8,7 @@ public abstract class Cell {
 	private int xPosition;
 	private int yPosition;
 	private Shape myShape;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 2ba11f8ceb3dc07638eb25ec33fc4ecee5246c96
 	public Cell(String initState, int x, int y) {
 		setCurrentState(initState);
 		setxPosition(x);
@@ -31,11 +27,7 @@ public abstract class Cell {
 	public List<Cell> getNeighbors() {
 		return neighbors;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 2ba11f8ceb3dc07638eb25ec33fc4ecee5246c96
 	/**
 	 * Sets the neighbors of the cell to those in the specified list
 	 * @param neighbors The neighbors to be set
