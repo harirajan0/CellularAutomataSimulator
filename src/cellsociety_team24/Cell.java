@@ -8,11 +8,7 @@ public abstract class Cell {
 	private int xPosition;
 	private int yPosition;
 	private Shape myShape;
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	public Cell(String initState, int x, int y) {
 		setCurrentState(initState);
 		setxPosition(x);
@@ -31,10 +27,7 @@ public abstract class Cell {
 	public List<Cell> getNeighbors() {
 		return neighbors;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
+	
 	/**
 	 * Sets the neighbors of the cell to those in the specified list
 	 * @param neighbors The neighbors to be set
@@ -42,10 +35,7 @@ public abstract class Cell {
 	public void setNeighbors(List<Cell> neighbors) {
 		this.neighbors = neighbors;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	/**
 	 * Gets the x-coordinate of the cell
 	 * @return x-coordinate of the cell
@@ -53,10 +43,7 @@ public abstract class Cell {
 	public double getxPosition() {
 		return xPosition;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	/**
 	 * Sets the x-coordinate of the cell
 	 * @param xPosition New x-coordinate of the cell
@@ -64,10 +51,7 @@ public abstract class Cell {
 	public void setxPosition(int xPosition) {
 		this.xPosition = xPosition;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	/**
 	 * Gets the y-coordinate of the cell
 	 * @return y-coordinate of the cell
@@ -75,10 +59,7 @@ public abstract class Cell {
 	public double getyPosition() {
 		return yPosition;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	/**
 	 * Sets the y-coordinate of the cell
 	 * @param yPosition New y-coordinate of the cell
@@ -109,10 +90,7 @@ public abstract class Cell {
 	public String getNextState() {
 		return nextState;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ba65429924a7d64cbecc41cdb04ef169092d8e5
 	/**
 	 * Sets the next state of the cell
 	 * @param nextState The new next state of the cell
