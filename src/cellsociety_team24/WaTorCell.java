@@ -5,38 +5,34 @@ import java.util.HashSet;
 
 public class WaTorCell extends Cell {
 	
+	private static final String EMPTY = "empty";
+	private static final String SHARK = "shark";
+	private static final String FISH = "fish";
+	
 	private int turnsToBreed;
 	private int turnsToDie;
 	
-	public WaTorCell(String currentState, double xPosition, double yPosition) {
-		setCurrentState(currentState);
-		setxPosition(xPosition);
-		setyPosition(yPosition);
+	public WaTorCell(String initState, int xPosition, int yPosition) {
+		super(initState, xPosition, yPosition);
 		resetFields();
 	}
 
-	public void addNeighbor(WaTorCell neighbor) {
-		ArrayList<Cell> newNeighbors = getNeighbors();
-		newNeighbors.add(neighbor);
-		setNeighbors(newNeighbors);
-	}
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		turnsToBreed++;
 		if (getNextState() != "") { return; }
-		else if (getCurrentState().equals("empty")) { return; }
-		else if (getCurrentState().equals("shark")) { updateShark(); }
-		else if (getCurrentState().equals("fish")) { updateShark(); }
+		if (getCurrentState().equals(EMPTY)) { return; }
+		turnsToBreed++;
+		if (getCurrentState().equals(SHARK)) { updateShark(); }
+		if (getCurrentState().equals(FISH)) { updateShark(); }
 	}
 	
 	public void updateShark() {
-		turnsToBreed++;
 		if (turnsToDie == 3) {//kill this shark
-			setNextState("empty");
+			setNextState(EMPTY);
 			resetFields();
 		}
-		WaTorCell fishToEat = getRandomNeighbor("fish");
+		WaTorCell fishToEat = getRandomNeighbor(FISH);
 		//if there is a fish to eat, then eat it, if not move somewhere if possible
 		if (fishToEat != null) { 
 			eatFish(fishToEat); 
@@ -50,30 +46,29 @@ public class WaTorCell extends Cell {
 	}
 	
 	public void updateFish() {
-		turnsToBreed++;
 		move();
 		if (turnsToBreed == 3) { breed(); }
 	}
 	
 	private void breed() {
-		WaTorCell newCell = getRandomNeighbor("empty");
+		WaTorCell newCell = getRandomNeighbor(EMPTY);
 		if (newCell != null) {
 			newCell.setNextState(getCurrentState());
 		}
 	}
 	
 	private void eatFish(WaTorCell fish) {
-		fish.setNextState("empty");
+		fish.setNextState(EMPTY);
 		fish.resetFields();
 		turnsToDie = 0;
 	}
 	
 	private void move() {
-		WaTorCell newLocation = getRandomNeighbor("empty");
+		WaTorCell newLocation = getRandomNeighbor(EMPTY);
 		if (newLocation != null) {
 			newLocation.setNextState(getCurrentState());
 			newLocation.setFields(this);
-			setNextState("empty");
+			setNextState(EMPTY);
 			resetFields();
 		} else {
 			setNextState(getCurrentState());
