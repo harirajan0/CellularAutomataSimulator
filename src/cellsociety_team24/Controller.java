@@ -87,10 +87,4 @@ public class Controller {
 			}
 		}
 	}
-
-	private List<Cell> findNeighbors(int row, int col){
-		
-		List<Cell> neighbors = new ArrayList<Cell>();
-		return neighbors;
-	}
 }
