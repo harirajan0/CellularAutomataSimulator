@@ -1,4 +1,5 @@
 package cellsociety_team24;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,13 @@ public class Controller {
 		this.cols = cols;
 		Collections.shuffle(states);
 		grid = new Cell[rows][cols];
-		
+		createCells(rows, cols, states, param, sim);
+		initializeNeighbors();
+	}
+	
+	private void createCells(int rows, int cols, List<String> states,
+			double param, String sim)
+	{
 		for(int r = 0; r < rows; r++){
 			for(int c = 0; c < cols; c++){
 				int xcor = ViewClass.WINDOW_SIZE/rows*r;
@@ -40,6 +47,26 @@ public class Controller {
 					default : 
 							break;
 				}
+			}
+		}
+	}
+	
+	private void initializeNeighbors()
+	{
+		for(int r = 0; r < rows; r++){
+			for(int c = 0; c < cols; c++){
+				
+				List<Cell> neighbors = new ArrayList<Cell>();
+				for(int horiz = r-1; horiz <= r+1; horiz += 2){
+					for(int vert = c-1; vert <= c+1; vert += 2){
+						
+						if(horiz >= 0 && horiz < rows && vert >= 0 && vert < cols)
+						{
+							neighbors.add(grid[horiz][vert]);
+						}
+					}
+				}
+				grid[r][c].setNeighbors(neighbors);
 			}
 		}
 	}
