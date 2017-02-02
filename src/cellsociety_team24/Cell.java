@@ -107,4 +107,13 @@ public abstract class Cell {
 	{
 		return myShape;
 	}
+	
+	/**
+	 * Sets current state to next state and next state to null
+	 */
+	public void nextGeneration()
+	{
+		setCurrentState(getNextState());
+		setNextState(null);
+	}
 }
