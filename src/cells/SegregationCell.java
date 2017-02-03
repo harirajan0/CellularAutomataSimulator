@@ -1,5 +1,6 @@
 package cells;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -75,6 +76,14 @@ public class SegregationCell extends Cell {
 		
 		emptyPositions.add(this);
 		emptyPositions.remove(tmp);
+	}
+
+	/* (non-Javadoc)
+	 * @see cells.Cell#getPossibleStates()
+	 */
+	@Override
+	public List<String> getPossibleStates() {
+		return Arrays.asList(new String[] {EMPTY});
 	}
 	
 }

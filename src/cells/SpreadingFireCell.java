@@ -1,4 +1,5 @@
 package cells;
+import java.util.Arrays;
 import java.util.List;
 
 public class SpreadingFireCell extends Cell 
@@ -58,5 +59,13 @@ public class SpreadingFireCell extends Cell
 				}
 			}
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see cells.Cell#getPossibleStates()
+	 */
+	@Override
+	public List<String> getPossibleStates() {
+		return Arrays.asList(new String[] {EMPTY, BURNING, TREE});
 	}
 }

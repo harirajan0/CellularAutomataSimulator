@@ -1,7 +1,9 @@
 package cells;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class WaTorCell extends Cell {
 	
@@ -130,6 +132,14 @@ public class WaTorCell extends Cell {
 	private void setFields(WaTorCell cell) {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
+	}
+	
+	/* (non-Javadoc)
+	 * @see cells.Cell#getPossibleStates()
+	 */
+	@Override
+	public List<String> getPossibleStates() {
+		return Arrays.asList(new String[] {EMPTY, SHARK, FISH});
 	}
 
 }

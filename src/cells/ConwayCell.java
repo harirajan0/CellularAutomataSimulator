@@ -1,5 +1,6 @@
 package cells;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ConwayCell extends Cell {
@@ -54,6 +55,13 @@ public class ConwayCell extends Cell {
 				}
 			}
 			return livingCount;
+		}
+		/* (non-Javadoc)
+		 * @see cells.Cell#getPossibleStates()
+		 */
+		@Override
+		public List<String> getPossibleStates() {
+			return Arrays.asList(new String[] {ALIVE, DEAD});
 		}
 
 }
