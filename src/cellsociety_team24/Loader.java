@@ -2,10 +2,11 @@ package cellsociety_team24;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Loader {
 	
-	public Loader(File dataFile) {
+	public Loader() {
 		
 	}
 	public ArrayList<String> loadXMl() {
