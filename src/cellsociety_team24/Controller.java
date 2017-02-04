@@ -13,6 +13,9 @@ public class Controller {
 	private Cell[][] grid;
 	private int rows;
 	private int cols;
+	// Controller holds View in order to update it.
+	private View myCellView;
+	
 	private static final String SPREADING_FIRE = "FIRE";
 	private static final String WATOR = "WATOR";
 	private static final String SEGREGATION = "SEGREGATION";
@@ -31,6 +34,8 @@ public class Controller {
 		createCells(states, l.getParameter(), l.getSimulationType());
 		initializeNeighbors();
 	}
+	
+	
 		
 	private void createCells(List<String> states, double param, String sim)
 	{
@@ -123,5 +128,10 @@ public class Controller {
 	public Object changeSpeed() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public void setView(View myCellView2) {
+		myCellView = myCellView2;
 	}
 }

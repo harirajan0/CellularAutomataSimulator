@@ -17,17 +17,24 @@ import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * A class used to display the different View objects and hold buttons.
@@ -39,14 +46,12 @@ public class GUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(800, 600);
     public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
     //public static final String STYLESHEET = "default.css";
-    public static final String BLANK = " ";
+    //public static final String BLANK = " ";
     
-    private View myView1;
+    private View myCellView;
     private Controller myController;
     // scene, needed to report back to Application
     private Scene myScene;
-    // information area (????)
-    private Label myStatus;
     // navigation
     private TextField mySimulation, myNumGeneration;
     private Button myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton;
@@ -58,22 +63,26 @@ public class GUI {
     /**
      * GUI constructor.
      */
-	public GUI() {
+	public GUI(String language) {
 		// Might need to change constructor based on View implementation (because, for example, a View to display the Cell Grid 
 		// will be different from the View to display other things, like Number of generation, etc.)
 		// Also, if more than one View is needed in the future, initialize them in the constructor as well.
 		//
 		// This is just placeholder for CellView
-		myView1 = new View();
+		myCellView = new View();
+		
+		// Create a Controller
+		myController = new Controller();
+		myController.setView(myCellView);
 		
 		// set resource path
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		
 		BorderPane root = new BorderPane();
 		// Center of GUI displays the cell grid
 		root.setCenter(makeCellDisplay());
         // Bottom of GUI displays the control panel that consists of all the buttons
-        root.setBottom(makeControlPanel());
+        root.setRight(makeControlPanel());
         // control the navigation
         enableButtons();
         // create scene to hold UI
@@ -86,6 +95,17 @@ public class GUI {
      */
     public Scene getScene () {
         return myScene;
+    }
+    
+    /** !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * Display given message as an error in the GUI. 
+     * (??????? what type of error can be thrown from XML loading...)
+     */
+    public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(myResources.getString("ErrorTitle"));
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 	
 	/**
@@ -106,6 +126,7 @@ public class GUI {
     	String label = myResources.getString(property);
     	result.setText(label);
     	result.setOnAction(handler);
+    	result.setPrefSize(70, 20);
     	return result;
     }
 
@@ -114,18 +135,35 @@ public class GUI {
 	 * @return
 	 */
 	private Node makeControlPanel() {
-		HBox result = new HBox();
+		VBox result = new VBox(30);
+		result.setPadding(new Insets(15, 12, 15, 12));
+		result.setStyle("-fx-background-color: #8FBC8F;");
+		result.setAlignment(Pos.CENTER);
 		// create buttons and slider to change speed
 		myStartButton = makeButton("StartCommand", e -> myController.start());
 		myPauseButton = makeButton("PauseCommand", e -> myController.pause());
 		myStepButton = makeButton("StepCommand", e -> myController.step());
 		myResetButton = makeButton("ResetCommand", e -> myController.reset());
 		myLoadButton = makeButton("LoadCommand", e -> myController.load());
-		mySlider = new Slider(0, 1000, 50);
-		mySlider.setOnDragDropped(e -> myController.changeSpeed());
+		makeSlider();
+		
 		result.getChildren().addAll(myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton);
 		result.getChildren().add(mySlider);
 		return result;
+	}
+	
+	/**
+	 * Create the slider (unit is Delay in ms)
+	 */
+	private void makeSlider(){
+		mySlider = new Slider(0, 1000, 50);
+		mySlider.setOnDragDropped(e -> myController.changeSpeed());
+		mySlider.setMajorTickUnit(100);
+		mySlider.setShowTickLabels(true);
+		mySlider.setShowTickMarks(true);
+		mySlider.setSnapToTicks(true);
+		mySlider.setPrefHeight(250);
+		mySlider.setOrientation(Orientation.VERTICAL);
 	}
 	
 	/**
@@ -133,8 +171,11 @@ public class GUI {
 	 * @return
 	 */
 	private Node makeCellDisplay() {
+		
 		return null;
 	}
+	
+	
 
 	/**
 	 * Inner class to deal with link-clicks and mouse-overs
