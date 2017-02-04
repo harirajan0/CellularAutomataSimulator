@@ -5,6 +5,12 @@ import java.util.Random;
 
 import cellsociety_team24.Cell;
 
+/**
+ * A subclass of Cell that creates the particular cell type for the 
+ * Segregation simulation.
+ * @author Bihan Zhuang
+ *
+ */
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";

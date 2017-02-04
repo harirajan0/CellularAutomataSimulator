@@ -36,8 +36,8 @@ public class Controller {
 	{
 		for(int r = 0; r < rows; r++){
 			for(int c = 0; c < cols; c++){
-				int xcor = ViewClass.WINDOW_SIZE/rows*r;
-				int ycor = ViewClass.WINDOW_SIZE/cols*c;
+				int xcor = View.WINDOW_SIZE/rows*r;
+				int ycor = View.WINDOW_SIZE/cols*c;
 				switch(sim){
 					case SPREADING_FIRE:
 						grid[r][c] = new SpreadingFireCell(states.remove(0), xcor, ycor, param);

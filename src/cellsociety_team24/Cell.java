@@ -1,6 +1,14 @@
 package cellsociety_team24;
 import java.util.List;
 import com.sun.javafx.geom.Shape;
+
+/**
+ * Cell superclass. 
+ * @author Hari Rajan
+ * @author Vishnu Gottiparthy
+ * @author Bihan Zhuang
+ *
+ */
 public abstract class Cell {
 	private String currentState;
 	private String nextState;

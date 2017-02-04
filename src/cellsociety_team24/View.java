@@ -1,12 +1,12 @@
 package cellsociety_team24;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ViewClass {
+public class View {
 	//beginning work on GUI 2/2/2017
 	public static final int WINDOW_SIZE = 400;
 	
-	public void displayGird(ArrayList<Cell> gird) {
+	public void displayGrid(List<Cell> grid) {
 		
 	}
 
