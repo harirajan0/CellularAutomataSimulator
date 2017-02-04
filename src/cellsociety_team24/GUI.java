@@ -33,6 +33,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -73,6 +74,7 @@ public class GUI {
 		
 		// Create a Controller
 		myController = new Controller();
+		// both Controller and GUI should keep the same view
 		myController.setView(myCellView);
 		
 		// set resource path
@@ -171,8 +173,10 @@ public class GUI {
 	 * @return
 	 */
 	private Node makeCellDisplay() {
-		
-		return null;
+		Pane result = new Pane();
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! should change once Grid class is up
+		result.getChildren().add(myCellView.displayGrid(myController.getGrid()));
+		return result;
 	}
 	
 	

@@ -24,6 +24,8 @@ public class Controller {
 	
 	public Controller(){
 		
+		myCellView = new View();
+		
 		Loader l = new Loader();
 		rows = l.getRows();
 		cols = l.getCols();
@@ -35,6 +37,14 @@ public class Controller {
 		initializeNeighbors();
 	}
 	
+	/**
+	 * Sets view for the instance View in Controller.
+	 * Can be called in GUI multiple times to set up different views.
+	 * @param view
+	 */
+	public void setView(View view) {
+		myCellView = view;
+	}
 	
 		
 	private void createCells(List<String> states, double param, String sim)
@@ -130,8 +140,14 @@ public class Controller {
 		return null;
 	}
 
-
-	public void setView(View myCellView2) {
-		myCellView = myCellView2;
+	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 * Should change once we have the Grid class set up.
+	 * Returns the grid in order to pass it to View in GUI.
+	 * @return
+	 */
+	public Cell[][] getGrid() {
+		return grid;
 	}
+
+	
 }
