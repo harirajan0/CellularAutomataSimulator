@@ -18,14 +18,8 @@ public class Controller {
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
 	
-<<<<<<< HEAD
 	
-	
-	private void initializeGrid(int rows, int cols, List<String> states,
-			double param, String sim){
-=======
 	public Controller(){
->>>>>>> master
 		
 		Loader l = new Loader();
 		rows = l.getRows();
