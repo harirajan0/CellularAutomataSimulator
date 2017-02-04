@@ -1,7 +1,9 @@
-package cellsociety_team24;
+package cellsociety_team24.cells;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import cellsociety_team24.Cell;
 
 public class WaTorCell extends Cell {
 	

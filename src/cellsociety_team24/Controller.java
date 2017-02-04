@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import cellsociety_team24.cells.ConwayCell;
+import cellsociety_team24.cells.SegregationCell;
+import cellsociety_team24.cells.SpreadingFireCell;
+import cellsociety_team24.cells.WaTorCell;
+
 public class Controller {
 	
 	private Cell[][] grid;
@@ -12,6 +17,8 @@ public class Controller {
 	private static final String WATOR = "WATOR";
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
+	
+	
 	
 	private void initializeGrid(int rows, int cols, List<String> states,
 			double param, String sim){

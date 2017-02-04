@@ -1,5 +1,7 @@
-package cellsociety_team24;
+package cellsociety_team24.cells;
 import java.util.List;
+
+import cellsociety_team24.Cell;
 
 public class SpreadingFireCell extends Cell 
 {	

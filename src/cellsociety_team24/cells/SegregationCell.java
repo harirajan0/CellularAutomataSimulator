@@ -1,7 +1,9 @@
-package cellsociety_team24;
+package cellsociety_team24.cells;
 
 import java.util.List;
 import java.util.Random;
+
+import cellsociety_team24.Cell;
 
 public class SegregationCell extends Cell {
 	
