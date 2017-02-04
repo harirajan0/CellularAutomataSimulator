@@ -94,4 +94,34 @@ public class Controller {
 			}
 		}
 	}
+
+	public Object start() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object pause() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object step() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object reset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object load() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object changeSpeed() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

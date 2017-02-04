@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 /**
  * A class used to display the different View objects and hold buttons.
@@ -36,30 +37,22 @@ import javafx.scene.layout.BorderPane;
 public class GUI {
 	
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(800, 600);
-    //public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
     //public static final String STYLESHEET = "default.css";
     public static final String BLANK = " ";
-
+    
+    private View myView1;
+    private Controller myController;
     // scene, needed to report back to Application
     private Scene myScene;
-    // information area
+    // information area (????)
     private Label myStatus;
     // navigation
-    private TextField mySimulation;
-    private TextField myNumGeneration;
-    private Button myPlayButton;
-    private Button myPauseButton;
-    private Button myStepButton;
-    private Button myResetButton;
-    private Button myLoadButton;
+    private TextField mySimulation, myNumGeneration;
+    private Button myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton;
     private Slider mySlider;
-    private View myView1;
-    
-    // favorites
-    private ComboBox<String> myFavorites;
-    // get strings from resource file
-    //private ResourceBundle myResources;
-    // the Model for the particular simulation
+    // resources
+    private ResourceBundle myResources;
     
     
     /**
@@ -72,6 +65,9 @@ public class GUI {
 		//
 		// This is just placeholder for CellView
 		myView1 = new View();
+		
+		// set resource path
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		
 		BorderPane root = new BorderPane();
 		// Center of GUI displays the cell grid
@@ -106,22 +102,10 @@ public class GUI {
 	 * @return
 	 */
     private Button makeButton(String property, EventHandler<ActionEvent> handler) {
-        /*// represent all supported image suffixes
-        final String IMAGEFILE_SUFFIXES =
-                String.format(".*\\.(%s)", String.join("|", ImageIO.getReaderFileSuffixes()));
-
-        Button result = new Button();
-        String label = myResources.getString(property);
-        if (label.matches(IMAGEFILE_SUFFIXES)) {
-            result.setGraphic(new ImageView(
-                                  new Image(getClass().getResourceAsStream(DEFAULT_RESOURCE_PACKAGE + label))));
-        }
-        else {
-            result.setText(label);
-        }
-        result.setOnAction(handler);
-        return result;*/
     	Button result = new Button();
+    	String label = myResources.getString(property);
+    	result.setText(label);
+    	result.setOnAction(handler);
     	return result;
     }
 
@@ -130,7 +114,18 @@ public class GUI {
 	 * @return
 	 */
 	private Node makeControlPanel() {
-		return null;
+		HBox result = new HBox();
+		// create buttons and slider to change speed
+		myStartButton = makeButton("StartCommand", e -> myController.start());
+		myPauseButton = makeButton("PauseCommand", e -> myController.pause());
+		myStepButton = makeButton("StepCommand", e -> myController.step());
+		myResetButton = makeButton("ResetCommand", e -> myController.reset());
+		myLoadButton = makeButton("LoadCommand", e -> myController.load());
+		mySlider = new Slider(0, 1000, 50);
+		mySlider.setOnDragDropped(e -> myController.changeSpeed());
+		result.getChildren().addAll(myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton);
+		result.getChildren().add(mySlider);
+		return result;
 	}
 	
 	/**
@@ -183,7 +178,6 @@ public class GUI {
     	
     	@Override
 		public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
-			// TODO Auto-generated method stub
 			
 		}
     };
