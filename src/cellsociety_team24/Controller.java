@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cellsociety_team24.cells.ConwayCell;
-import cellsociety_team24.cells.SegregationCell;
-import cellsociety_team24.cells.SpreadingFireCell;
-import cellsociety_team24.cells.WaTorCell;
+import cells.ConwayCell;
+import cells.SegregationCell;
+import cells.SpreadingFireCell;
+import cells.WaTorCell;
 
 public class Controller {
 	

@@ -1,4 +1,4 @@
-package cellsociety_team24.cells;
+package cells;
 
 import cellsociety_team24.Cell;
 

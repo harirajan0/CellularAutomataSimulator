@@ -1,4 +1,4 @@
-package cellsociety_team24.cells;
+package cells;
 import java.util.List;
 
 import cellsociety_team24.Cell;
