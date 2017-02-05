@@ -1,45 +1,44 @@
 package main;
-import java.util.ArrayList
-;
 import java.util.Collections;
 import java.util.List;
 
+import cells.Cell;
 import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
 import loader.Loader;
-import cells.Cell;
 
 public class Controller {
 	
 	private Cell[][] grid;
 	private int rows;
 	private int cols;
+	// Controller holds View in order to update it.
+	private View myCellView;
+	
 	private static final String SPREADING_FIRE = "FIRE";
 	private static final String WATOR = "WATOR";
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
 	
-	public Controller(){
-		
-		Loader l = new Loader("filename");
-		rows = l.getRows();
-		cols = l.getCols();
-		
-		List<String> states = l.getStates ();
-		Collections.shuffle(states);
-		grid = new Cell[rows][cols];
-		createCells(states, l.getParameter(), l.getSimulationType());
-		initializeNeighbors();
+	/**
+	 * Constructor for the Controller
+	 * Sets view for the instance View in Controller.
+	 * Can be called in GUI multiple times to set up different views.
+	 * @param view
+	 */
+	public Controller(View view){
+		myCellView = view;
 	}
-		
+	
+	
 	private void createCells(List<String> states, double param, String sim)
 	{
 		for(int r = 0; r < rows; r++){
 			for(int c = 0; c < cols; c++){
-				int xcor = ViewClass.WINDOW_SIZE/rows*r;
-				int ycor = ViewClass.WINDOW_SIZE/cols*c;
+				int xcor = View.WINDOW_SIZE/rows*r;
+				int ycor = View.WINDOW_SIZE/cols*c;
 				switch(sim){
 					case SPREADING_FIRE:
 						grid[r][c] = new SpreadingFireCell(states.remove(0), xcor, ycor, param);
@@ -60,26 +59,7 @@ public class Controller {
 		}
 	}
 	
-	private void initializeNeighbors()
-	{
-		for(int r = 0; r < rows; r++){
-			for(int c = 0; c < cols; c++){
-				
-				List<Cell> neighbors = new ArrayList<Cell>();
-				for(int horiz = r-1; horiz <= r+1; horiz += 2){
-					for(int vert = c-1; vert <= c+1; vert += 2){
-						
-						if(horiz >= 0 && horiz < rows && vert >= 0 && vert < cols)
-						{
-							neighbors.add(grid[horiz][vert]);
-						}
-					}
-				}
-				grid[r][c].setNeighbors(neighbors);
-			}
-		}
-	}
-	
+	/* Needs to change once the Grid class is written
 	public void updateGrid() {
 		
 		for(int r = 0; r < rows; r++){
@@ -95,5 +75,53 @@ public class Controller {
 				grid[r][c].nextGeneration();
 			}
 		}
+	}*/
+
+	public Object start() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	public Object pause() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object step() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object reset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object load(String filename) {
+		Loader l = new Loader(filename);
+		rows = l.getRows();
+		cols = l.getCols();
+		
+		List<String> states = l.getStates ();
+		Collections.shuffle(states);
+		grid = new Cell[rows][cols];
+		createCells(states, l.getParameter(), l.getSimulationType());
+		return null;
+	}
+
+	public Object changeSpeed() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 * Should change once we have the Grid class set up.
+	 * Returns the grid in order to pass it to View in GUI.
+	 * @return
+	 */
+	public Cell[][] getGrid() {
+		return grid;
+	}
+
+	
 }

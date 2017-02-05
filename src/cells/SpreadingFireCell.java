@@ -2,6 +2,7 @@ package cells;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class SpreadingFireCell extends Cell 
 {	
 	private static final String EMPTY = "empty";
