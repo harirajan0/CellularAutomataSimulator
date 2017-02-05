@@ -3,18 +3,21 @@ package main;
 import java.util.List;
 
 import cells.Cell;
+import grid.Grid;
 import javafx.scene.Node;
 
 public class View {
 	//beginning work on GUI 2/2/2017
 	public static final int WINDOW_SIZE = 400;
 	
+	private Grid myGrid;
+	
 	public View(){
 		
 	}
 	
-	public void displayGrid(List<Cell> grid) {
-		
+	public void setGrid(Grid grid){
+		myGrid = grid;
 	}
 
 	/**!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -24,7 +27,7 @@ public class View {
 	 * @param grid
 	 * @return
 	 */
-	public Node displayGrid(Cell[][] grid) {
+	public Node displayGrid(Grid grid) {
 		return null;
 	}
 

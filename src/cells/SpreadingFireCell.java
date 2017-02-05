@@ -10,9 +10,9 @@ public class SpreadingFireCell extends Cell
 	private static final String TREE = "tree";
 	private double probCatch;
 	
-	public SpreadingFireCell(String initState, int x, int y, double prob){
+	public SpreadingFireCell(String initState, double prob){
 		
-		super(initState, x, y);
+		super(initState);
 		probCatch = prob;
 	}
 

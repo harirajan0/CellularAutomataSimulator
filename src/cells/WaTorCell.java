@@ -22,8 +22,8 @@ public class WaTorCell extends Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public WaTorCell(String initState, int xPosition, int yPosition) {
-		super(initState, xPosition, yPosition);
+	public WaTorCell(String initState) {
+		super(initState);
 		resetFields();
 	}
 
