@@ -1,6 +1,10 @@
-package cellsociety_team24;
+package src.cells;
+
+
+
 import java.util.List;
 import com.sun.javafx.geom.Shape;
+
 public abstract class Cell {
 	private String currentState;
 	private String nextState;

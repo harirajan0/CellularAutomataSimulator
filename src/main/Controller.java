@@ -1,7 +1,16 @@
-package cellsociety_team24;
-import java.util.ArrayList;
+package main;
+import java.util.ArrayList
+;
 import java.util.Collections;
 import java.util.List;
+
+import cells.ConwayCell;
+import cells.SegregationCell;
+import cells.SpreadingFireCell;
+import cells.WaTorCell;
+import loader.Loader;
+import cells.Cell;
+
 public class Controller {
 	
 	private Cell[][] grid;
@@ -14,11 +23,11 @@ public class Controller {
 	
 	public Controller(){
 		
-		Loader l = new Loader();
+		Loader l = new Loader("filename");
 		rows = l.getRows();
 		cols = l.getCols();
 		
-		List<String> states = l.loadXMl();
+		List<String> states = l.getStates ();
 		Collections.shuffle(states);
 		grid = new Cell[rows][cols];
 		createCells(states, l.getParameter(), l.getSimulationType());

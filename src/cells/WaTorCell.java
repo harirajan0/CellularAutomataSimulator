@@ -1,8 +1,10 @@
-package cellsociety_team24;
+package cells;
 
 import java.util.ArrayList;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class WaTorCell extends Cell {
 	
@@ -12,6 +14,7 @@ public class WaTorCell extends Cell {
 	
 	private int turnsToBreed;
 	private int turnsToDie;
+
 	/**
 	 * Constructor should initialize state and position on screen and set
 	 * turnsToBreed and turnsToDie to 0
@@ -23,6 +26,7 @@ public class WaTorCell extends Cell {
 		super(initState, xPosition, yPosition);
 		resetFields();
 	}
+
 	/**
 	 * Updates cell based on current state
 	 */
@@ -36,6 +40,7 @@ public class WaTorCell extends Cell {
 		//throw exception
 	}
 	
+
 	/**
 	 * If a cell is a shark, cell should check if it should die, eat, move, and/or breed
 	 */
@@ -65,6 +70,7 @@ public class WaTorCell extends Cell {
 		if (turnsToBreed == 3) { breed(); }
 	}
 	
+
 	/**
 	 * Breed by setting a random neighbor's next state to this cell's current state
 	 */
@@ -114,6 +120,7 @@ public class WaTorCell extends Cell {
 		for (Cell cell : possibleNeighbors) { return (WaTorCell) cell; }
 		return null;
 	}
+
 	private void resetFields() {
 		turnsToDie = 0;
 		turnsToBreed = 0;
@@ -127,4 +134,6 @@ public class WaTorCell extends Cell {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
+
+
 }
