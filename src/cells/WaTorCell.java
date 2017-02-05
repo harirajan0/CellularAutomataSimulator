@@ -133,13 +133,6 @@ public class WaTorCell extends Cell {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
-	
-	/* (non-Javadoc)
-	 * @see cells.Cell#getPossibleStates()
-	 */
-	@Override
-	public List<String> getPossibleStates() {
-		return Arrays.asList(new String[] {EMPTY, SHARK, FISH});
-	}
+
 
 }

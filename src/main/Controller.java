@@ -26,7 +26,7 @@ public class Controller {
 		rows = l.getRows();
 		cols = l.getCols();
 		
-		List<String> states = l.getStates();
+		List<String> states = l.getStates ();
 		Collections.shuffle(states);
 		grid = new Cell[rows][cols];
 		createCells(states, l.getParameter(), l.getSimulationType());

@@ -21,11 +21,6 @@ public abstract class Cell {
 	public abstract void update();
 	
 	/**
-	 * @return list of all possible states of the cell
-	 */
-	public abstract List<String> getPossibleStates();
-	
-	/**
 	 * Gets a List of all of the neighbors of the cell
 	 * @return the neighbors of the cell
 	 */

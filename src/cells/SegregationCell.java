@@ -77,13 +77,5 @@ public class SegregationCell extends Cell {
 		emptyPositions.add(this);
 		emptyPositions.remove(tmp);
 	}
-
-	/* (non-Javadoc)
-	 * @see cells.Cell#getPossibleStates()
-	 */
-	@Override
-	public List<String> getPossibleStates() {
-		return Arrays.asList(new String[] {EMPTY});
-	}
 	
 }

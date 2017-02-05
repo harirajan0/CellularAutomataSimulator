@@ -61,11 +61,4 @@ public class SpreadingFireCell extends Cell
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see cells.Cell#getPossibleStates()
-	 */
-	@Override
-	public List<String> getPossibleStates() {
-		return Arrays.asList(new String[] {EMPTY, BURNING, TREE});
-	}
 }
