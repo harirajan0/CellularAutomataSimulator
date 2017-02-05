@@ -1,4 +1,4 @@
-package cells;
+package src.cells;
 import java.util.List;
 import com.sun.javafx.geom.Shape;
 public abstract class Cell {
