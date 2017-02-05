@@ -1,7 +1,7 @@
 package cells;
+import java.util.Arrays;
 import java.util.List;
 
-import cellsociety_team24.Cell;
 
 public class SpreadingFireCell extends Cell 
 {	
@@ -61,4 +61,5 @@ public class SpreadingFireCell extends Cell
 			}
 		}
 	}
+
 }

@@ -1,12 +1,13 @@
-package cellsociety_team24;
-import java.util.ArrayList;
+package main;
 import java.util.Collections;
 import java.util.List;
 
+import cells.Cell;
 import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
+import loader.Loader;
 
 public class Controller {
 	
@@ -21,32 +22,17 @@ public class Controller {
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
 	
-	
-	public Controller(){
-		
-		myCellView = new View();
-		
-		Loader l = new Loader();
-		rows = l.getRows();
-		cols = l.getCols();
-		
-		List<String> states = l.loadXMl();
-		Collections.shuffle(states);
-		grid = new Cell[rows][cols];
-		createCells(states, l.getParameter(), l.getSimulationType());
-		initializeNeighbors();
-	}
-	
 	/**
+	 * Constructor for the Controller
 	 * Sets view for the instance View in Controller.
 	 * Can be called in GUI multiple times to set up different views.
 	 * @param view
 	 */
-	public void setView(View view) {
+	public Controller(View view){
 		myCellView = view;
 	}
 	
-		
+	
 	private void createCells(List<String> states, double param, String sim)
 	{
 		for(int r = 0; r < rows; r++){
@@ -73,26 +59,7 @@ public class Controller {
 		}
 	}
 	
-	private void initializeNeighbors()
-	{
-		for(int r = 0; r < rows; r++){
-			for(int c = 0; c < cols; c++){
-				
-				List<Cell> neighbors = new ArrayList<Cell>();
-				for(int horiz = r-1; horiz <= r+1; horiz += 2){
-					for(int vert = c-1; vert <= c+1; vert += 2){
-						
-						if(horiz >= 0 && horiz < rows && vert >= 0 && vert < cols)
-						{
-							neighbors.add(grid[horiz][vert]);
-						}
-					}
-				}
-				grid[r][c].setNeighbors(neighbors);
-			}
-		}
-	}
-	
+	/* Needs to change once the Grid class is written
 	public void updateGrid() {
 		
 		for(int r = 0; r < rows; r++){
@@ -108,7 +75,7 @@ public class Controller {
 				grid[r][c].nextGeneration();
 			}
 		}
-	}
+	}*/
 
 	public Object start() {
 		// TODO Auto-generated method stub
@@ -130,8 +97,15 @@ public class Controller {
 		return null;
 	}
 
-	public Object load() {
-		// TODO Auto-generated method stub
+	public Object load(String filename) {
+		Loader l = new Loader(filename);
+		rows = l.getRows();
+		cols = l.getCols();
+		
+		List<String> states = l.getStates ();
+		Collections.shuffle(states);
+		grid = new Cell[rows][cols];
+		createCells(states, l.getParameter(), l.getSimulationType());
 		return null;
 	}
 

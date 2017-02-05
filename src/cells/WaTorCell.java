@@ -1,9 +1,10 @@
 package cells;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
-import cellsociety_team24.Cell;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class WaTorCell extends Cell {
 	
@@ -133,5 +134,6 @@ public class WaTorCell extends Cell {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
+
 
 }

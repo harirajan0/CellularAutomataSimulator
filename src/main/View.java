@@ -1,7 +1,8 @@
-package cellsociety_team24;
+package main;
 
 import java.util.List;
 
+import cells.Cell;
 import javafx.scene.Node;
 
 public class View {

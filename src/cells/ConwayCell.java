@@ -1,7 +1,5 @@
 package cells;
 
-import cellsociety_team24.Cell;
-
 import java.util.List;
 
 public class ConwayCell extends Cell {

@@ -1,4 +1,4 @@
-package cellsociety_team24;
+package main;
 
 import java.util.Iterator;
 

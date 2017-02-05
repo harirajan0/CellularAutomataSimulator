@@ -1,4 +1,4 @@
-package cellsociety_team24;
+package main;
 
 import java.util.ResourceBundle;
 
@@ -60,6 +60,8 @@ public class GUI {
     // resources
     private ResourceBundle myResources;
     
+    private String filename;
+    
     
     /**
      * GUI constructor.
@@ -73,9 +75,7 @@ public class GUI {
 		myCellView = new View();
 		
 		// Create a Controller
-		myController = new Controller();
-		// both Controller and GUI should keep the same view
-		myController.setView(myCellView);
+		myController = new Controller(myCellView);
 		
 		// set resource path
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
@@ -146,7 +146,9 @@ public class GUI {
 		myPauseButton = makeButton("PauseCommand", e -> myController.pause());
 		myStepButton = makeButton("StepCommand", e -> myController.step());
 		myResetButton = makeButton("ResetCommand", e -> myController.reset());
-		myLoadButton = makeButton("LoadCommand", e -> myController.load());
+		//Don'r actually need a filename to call Loader. see class example to make the pop up window instead
+		// will change this later.
+		myLoadButton = makeButton("LoadCommand", e -> myController.load(filename));
 		makeSlider();
 		
 		result.getChildren().addAll(myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton);

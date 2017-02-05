@@ -1,9 +1,9 @@
 package cells;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import cellsociety_team24.Cell;
 
 /**
  * A subclass of Cell that creates the particular cell type for the 
@@ -11,6 +11,7 @@ import cellsociety_team24.Cell;
  * @author Bihan Zhuang
  *
  */
+
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
