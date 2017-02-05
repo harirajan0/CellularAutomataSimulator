@@ -1,6 +1,9 @@
-package cellsociety_team24;
+package cells;
+
 import java.util.List;
-import com.sun.javafx.geom.Shape;
+
+import javafx.scene.shape.Shape;
+
 public abstract class Cell {
 	private String currentState;
 	private String nextState;
