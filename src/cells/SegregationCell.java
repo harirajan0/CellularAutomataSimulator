@@ -16,8 +16,8 @@ public class SegregationCell extends Cell {
 	private static final String EMPTY = "empty";
 	private double percentage;
 	
-	public SegregationCell(String initState, double percentage) {
-		super(initState);
+	public SegregationCell(String initState, int x, int y, double percentage) {
+		super(initState, x, y);
 		this.percentage = percentage;
 	}
 
