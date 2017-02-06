@@ -4,12 +4,19 @@ import java.util.List;
 
 import cells.Cell;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 public class View {
 	//beginning work on GUI 2/2/2017
-	public static final int WINDOW_SIZE = 400;
+	// GUI handles the main Scene. View will have a Pane, as well as other methods for handling displaying cell.
+	private static final int WINDOW_SIZE = 400;
+	private Pane cellGridView;
 	
 	public View(){
+		cellGridView = new Pane();
+	}
+	
+	public void gridViewStep(){
 		
 	}
 	
