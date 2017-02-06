@@ -1,4 +1,5 @@
 package main;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,13 +8,16 @@ import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
+import grid.Grid;
+import grid.SquareGrid;
 import loader.Loader;
 
 public class Controller {
 	
-	private Cell[][] grid;
-	private int rows;
-	private int cols;
+	// Dimension of the Grid, obtained from Loader
+	private int rows, cols;
+	// Grid instance variable
+	private Grid myGrid;
 	// Controller holds View in order to update it.
 	private View myCellView;
 	
@@ -32,32 +36,43 @@ public class Controller {
 		myCellView = view;
 	}
 	
-	
-	private void createCells(List<String> states, double param, String sim)
-	{
-		for(int r = 0; r < rows; r++){
-			for(int c = 0; c < cols; c++){
-				int xcor = View.WINDOW_SIZE/rows*r;
-				int ycor = View.WINDOW_SIZE/cols*c;
-				switch(sim){
-					case SPREADING_FIRE:
-						grid[r][c] = new SpreadingFireCell(states.remove(0), xcor, ycor, param);
-						break;
-					case WATOR : 
-						grid[r][c] = new WaTorCell(states.remove(0),xcor, ycor);
-						break;
-					case CONWAY : 
-						grid[r][c] = new ConwayCell(states.remove(0), xcor, ycor);
-						break;
-					case SEGREGATION : 
-						grid[r][c] = new SegregationCell(states.remove(0), xcor, ycor, param);
-						break;
-					default : 
-							break;
+	/**
+	 * From the list of states, the probability, and simulation type,
+	 * construct a list of cells to be passed in to the Grid later.
+	 * @param states
+	 * @param param
+	 * @param sim
+	 * @return
+	 */
+	private List<Cell> createCells(List<String> states, double param, String sim){
+		List<Cell> result = new ArrayList<Cell>();
+		switch(sim){
+			case SPREADING_FIRE:
+				for (int i=0; i<rows*cols; i++){
+					result.add(new SpreadingFireCell(states.remove(0), param));
 				}
-			}
+				break;
+			case WATOR : 
+				for (int i=0; i<rows*cols; i++){
+					result.add(new WaTorCell(states.remove(0)));
+				}
+				break;
+			case CONWAY : 
+				for (int i=0; i<rows*cols; i++){
+					result.add(new ConwayCell(states.remove(0)));
+				}
+				break;
+			case SEGREGATION : 
+				for (int i=0; i<rows*cols; i++){
+					result.add(new SegregationCell(states.remove(0), param));
+				}
+				break;
+			default : 
+					break;
 		}
+		return result;
 	}
+	
 	
 	/* Needs to change once the Grid class is written
 	public void updateGrid() {
@@ -77,41 +92,42 @@ public class Controller {
 		}
 	}*/
 
-	public Object start() {
-		// TODO Auto-generated method stub
-		return null;
+	public void start() {
 	}
 
-	public Object pause() {
-		// TODO Auto-generated method stub
-		return null;
+	public void pause() {
 	}
 
-	public Object step() {
-		// TODO Auto-generated method stub
-		return null;
+	public void step() {
 	}
 
-	public Object reset() {
-		// TODO Auto-generated method stub
-		return null;
+	public void reset() {
 	}
 
-	public Object load(String filename) {
+	/**
+	 * This method will be called in GUI once the user clicks the Load button.
+	 * @param filename
+	 * @return
+	 */
+	public void load(String filename) {
 		Loader l = new Loader(filename);
 		rows = l.getRows();
 		cols = l.getCols();
 		
-		List<String> states = l.getStates ();
+		// List of states to shuffle 
+		List<String> states = l.getStates();
 		Collections.shuffle(states);
-		grid = new Cell[rows][cols];
-		createCells(states, l.getParameter(), l.getSimulationType());
-		return null;
+		
+		// Create a square grid for our purpose here
+		myGrid = new SquareGrid(rows, cols);
+		// Create a list of cells based on simulation
+		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
+		// Pass the cell list to grid so that grid can make a 2D array
+		// We want to do this in order to hide the implementation of 2D array from the world
+		myGrid.buildGrid(cellList);
 	}
 
-	public Object changeSpeed() {
-		// TODO Auto-generated method stub
-		return null;
+	public void changeSpeed() {
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -119,8 +135,8 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Cell[][] getGrid() {
-		return grid;
+	public Grid getGrid() {
+		return myGrid;
 	}
 
 	

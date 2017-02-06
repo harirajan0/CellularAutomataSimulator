@@ -66,8 +66,9 @@ public class Loader {
 		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_THREE)) * rows * cols; i++) {
 			states.add(simulationMap.get(simulationType).get(2));
 		}
-		return null;
+		return states;
 	}
+	
 	public String getSimulationType(){
 		return myParser.getTextValue(SIMULATION_TYPE);
 	}
