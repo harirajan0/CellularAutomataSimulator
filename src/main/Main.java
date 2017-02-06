@@ -9,11 +9,11 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		GUI myGUI = new GUI("English");
+		SimulationGUI myGUI = new SimulationGUI("English");
+		Controller controller = new Controller(stage, myGUI);
 		stage.setTitle(TITLE);
 		stage.setScene(myGUI.getScene());
 		stage.show();
-		
 	}
 
 	public static void main(String[] args) {

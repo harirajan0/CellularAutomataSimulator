@@ -1,24 +1,29 @@
 package main;
 
-import java.util.List;
-
-import cells.Cell;
 import grid.Grid;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
-public class View {
+public class SimulationView {
 	//beginning work on GUI 2/2/2017
 	public static final int WINDOW_SIZE = 400;
 	
 	private Grid myGrid;
+	private Pane cellSimulationPane;
 	
-	public View(){
+	public SimulationView(){
+		cellSimulationPane = new Pane();
 		
 	}
 	
 	public void setGrid(Grid grid){
 		myGrid = grid;
 	}
+	
+	public Pane getCellSimulationPane(){
+		return cellSimulationPane;
+	}
+	
 
 	/**!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 * This is just a placeholder method. Once we have

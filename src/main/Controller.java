@@ -10,7 +10,15 @@ import cells.SpreadingFireCell;
 import cells.WaTorCell;
 import grid.Grid;
 import grid.SquareGrid;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import loader.Loader;
+
+// This controller class is the central nexus control of the entire program.
+// It will handle things like when to update the model, when to update the view,
+// this class holds the cell simulation togethers
 
 public class Controller {
 	
@@ -19,12 +27,21 @@ public class Controller {
 	// Grid instance variable
 	private Grid myGrid;
 	// Controller holds View in order to update it.
-	private View myCellView;
+	private SimulationView cellSimulationDisplay;
+	
+	private static final int default_fps = 60;
 	
 	private static final String SPREADING_FIRE = "FIRE";
 	private static final String WATOR = "WATOR";
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
+	private int fps;
+	private int mil_delay;
+	private double sec_delay;
+	private Timeline animation;
+	
+	private Stage stage;
+	
 	
 	/**
 	 * Constructor for the Controller
@@ -32,8 +49,13 @@ public class Controller {
 	 * Can be called in GUI multiple times to set up different views.
 	 * @param view
 	 */
-	public Controller(View view){
-		myCellView = view;
+	public Controller(Stage s, SimulationGUI gui){
+//		myCellView = view;
+		stage = s;
+		fps = default_fps;
+		mil_delay = 1000/fps;
+		sec_delay = 1.0/fps;
+		
 	}
 	
 	/**
@@ -93,15 +115,26 @@ public class Controller {
 	}*/
 
 	public void start() {
+		KeyFrame frame = new KeyFrame(Duration.millis(mil_delay),
+				e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+		
 	}
 
 	public void pause() {
+		animation.pause();
 	}
 
 	public void step() {
+		// update model
+		// update view
 	}
 
 	public void reset() {
+		animation.stop();
 	}
 
 	/**
