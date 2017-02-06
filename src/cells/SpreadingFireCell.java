@@ -1,5 +1,7 @@
-package cellsociety_team24;
+package cells;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class SpreadingFireCell extends Cell 
 {	
@@ -8,9 +10,9 @@ public class SpreadingFireCell extends Cell
 	private static final String TREE = "tree";
 	private double probCatch;
 	
-	public SpreadingFireCell(String initState, int x, int y, double prob){
+	public SpreadingFireCell(String initState, double prob){
 		
-		super(initState, x, y);
+		super(initState);
 		probCatch = prob;
 	}
 
@@ -59,4 +61,5 @@ public class SpreadingFireCell extends Cell
 			}
 		}
 	}
+
 }

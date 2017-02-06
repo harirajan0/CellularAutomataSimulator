@@ -1,18 +1,29 @@
-package cellsociety_team24;
+package cells;
+
 import java.util.List;
 import com.sun.javafx.geom.Shape;
+
+/**
+ * Cell superclass. 
+ * @author Hari Rajan
+ * @author Vishnu Gottiparthy
+ * @author Bihan Zhuang
+ *
+ */
 public abstract class Cell {
 	private String currentState;
 	private String nextState;
 	private List<Cell> neighbors;
-	private int xPosition;
-	private int yPosition;
+	//private int xPosition;
+	//private int yPosition;
 	private Shape myShape;
-
-	public Cell(String initState, int x, int y) {
+	
+	// Since we want to hide the 2D array implementation from the world,
+	// we don't need to have the x, y position in each Cell anymore.
+	public Cell(String initState) {
 		setCurrentState(initState);
-		setxPosition(x);
-		setyPosition(y);
+		//setxPosition(x);
+		//setyPosition(y);
 	}
 	
 	/**
@@ -27,7 +38,6 @@ public abstract class Cell {
 	public List<Cell> getNeighbors() {
 		return neighbors;
 	}
-
 	/**
 	 * Sets the neighbors of the cell to those in the specified list
 	 * @param neighbors The neighbors to be set
@@ -35,38 +45,36 @@ public abstract class Cell {
 	public void setNeighbors(List<Cell> neighbors) {
 		this.neighbors = neighbors;
 	}
-
-	/**
-	 * Gets the x-coordinate of the cell
-	 * @return x-coordinate of the cell
-	 */
-	public double getxPosition() {
-		return xPosition;
-	}
-
-	/**
-	 * Sets the x-coordinate of the cell
-	 * @param xPosition New x-coordinate of the cell
-	 */
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-
-	/**
-	 * Gets the y-coordinate of the cell
-	 * @return y-coordinate of the cell
-	 */
-	public double getyPosition() {
-		return yPosition;
-	}
-
-	/**
-	 * Sets the y-coordinate of the cell
-	 * @param yPosition New y-coordinate of the cell
-	 */
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
-	}
+	
+//	/**
+//	 * Gets the x-coordinate of the cell
+//	 * @return x-coordinate of the cell
+//	 */
+//	public double getxPosition() {
+//		return xPosition;
+//	}
+//	/**
+//	 * Sets the x-coordinate of the cell
+//	 * @param xPosition New x-coordinate of the cell
+//	 */
+//	public void setxPosition(int xPosition) {
+//		this.xPosition = xPosition;
+//	}
+//	/**
+//	 * Gets the y-coordinate of the cell
+//	 * @return y-coordinate of the cell
+//	 */
+//	public double getyPosition() {
+//		return yPosition;
+//	}
+//	/**
+//	 * Sets the y-coordinate of the cell
+//	 * @param yPosition New y-coordinate of the cell
+//	 */
+//	public void setyPosition(int yPosition) {
+//		this.yPosition = yPosition;
+//	}
+//	
 	/**
 	 * Gets the current state of the cell
 	 * @return The current state of the cell
@@ -90,7 +98,6 @@ public abstract class Cell {
 	public String getNextState() {
 		return nextState;
 	}
-
 	/**
 	 * Sets the next state of the cell
 	 * @param nextState The new next state of the cell

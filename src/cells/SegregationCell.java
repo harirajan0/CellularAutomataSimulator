@@ -1,15 +1,24 @@
-package cellsociety_team24;
+package cells;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+
+/**
+ * A subclass of Cell that creates the particular cell type for the 
+ * Segregation simulation.
+ * @author Bihan Zhuang
+ *
+ */
 
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
 	private double percentage;
 	
-	public SegregationCell(String initState, int x, int y, double percentage) {
-		super(initState, x, y);
+	public SegregationCell(String initState, double percentage) {
+		super(initState);
 		this.percentage = percentage;
 	}
 
