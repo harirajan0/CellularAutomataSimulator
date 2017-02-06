@@ -13,6 +13,7 @@ public class ApplicationStartup extends Application {
 	public void start(Stage stage) throws Exception {
 		GUI = new SimulationGUI("English");
 		controller = new Controller(GUI);
+		GUI.makeButtons(controller);
 		
 		stage.setTitle(TITLE);
 		stage.setScene(GUI.getScene());

@@ -179,8 +179,7 @@ public class GUI {
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! should change once Grid class is up
 		result.getChildren().add(myCellView.displayGrid(myController.getGrid()));
 		return result;
-	}
-	
+	}	
 	
 
 	/**

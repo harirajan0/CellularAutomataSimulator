@@ -29,6 +29,8 @@ public class Controller {
 	// Controller holds View in order to update it.
 	private SimulationView cellSimulationDisplay;
 	
+	private Loader loader;
+	
 	private static final int default_fps = 60;
 	
 	private static final String SPREADING_FIRE = "FIRE";
@@ -39,6 +41,8 @@ public class Controller {
 	private int mil_delay;
 	private double sec_delay;
 	private Timeline animation;
+	
+	private Model model;
 	
 //	private Stage stage;
 	
@@ -170,8 +174,13 @@ public class Controller {
 		// Create a list of cells based on simulation
 		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
 		// Pass the cell list to grid so that grid can make a 2D array
-		// We want to do this in order to hide the implementation of 2D array from the world
+		// We want to do this in order to hide the implementation of  2Darray from the world
 		myGrid.buildGrid(cellList);
+	}
+	
+	private Model loadModel(String filename){
+		
+		return model;
 	}
 
 	public void changeSpeed() {

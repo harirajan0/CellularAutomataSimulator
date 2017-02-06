@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 public class SimulationView {
 	//beginning work on GUI 2/2/2017
-	public static final int WINDOW_SIZE = 400;
+	public static final int SIMULATION_SIZE = 400;
 	
 	private Grid myGrid;
 	private Pane cellSimulationPane;

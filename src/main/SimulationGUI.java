@@ -60,6 +60,10 @@ public class SimulationGUI {
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
     
+    public void makeButtons(Controller c){
+    	
+    }
+    
     public SimulationView getSimulationView(){
     	return cellSimulationDisplay;
     }
