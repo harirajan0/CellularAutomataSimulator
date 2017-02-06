@@ -10,6 +10,9 @@ public class SquareGrid extends Grid {
 		super(r, c);
 	}
 
+	/**
+	 * Find neighbors for each cell.
+	 */
 	@Override
 	public List<Cell> findNeighbors() {
 		return null;
