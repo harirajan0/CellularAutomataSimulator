@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import cells.Cell;
-
 public class Loader {
 	
     public static final String SIMULATION_TYPE = "simulationType";

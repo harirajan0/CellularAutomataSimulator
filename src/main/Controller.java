@@ -1,14 +1,15 @@
 package main;
-import java.util.ArrayList;
+import java.util.ArrayList
+;
 import java.util.Collections;
 import java.util.List;
 
-import cells.Cell;
 import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
 import loader.Loader;
+import cells.Cell;
 
 public class Controller {
 	

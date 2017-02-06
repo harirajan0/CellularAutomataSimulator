@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";

@@ -1,8 +1,9 @@
-package cells;
+package src.cells;
+
+
 
 import java.util.List;
-
-import javafx.scene.shape.Shape;
+import com.sun.javafx.geom.Shape;
 
 public abstract class Cell {
 	private String currentState;
@@ -11,7 +12,6 @@ public abstract class Cell {
 	private int xPosition;
 	private int yPosition;
 	private Shape myShape;
-
 	public Cell(String initState, int x, int y) {
 		setCurrentState(initState);
 		setxPosition(x);
@@ -30,7 +30,6 @@ public abstract class Cell {
 	public List<Cell> getNeighbors() {
 		return neighbors;
 	}
-
 	/**
 	 * Sets the neighbors of the cell to those in the specified list
 	 * @param neighbors The neighbors to be set
@@ -38,7 +37,6 @@ public abstract class Cell {
 	public void setNeighbors(List<Cell> neighbors) {
 		this.neighbors = neighbors;
 	}
-
 	/**
 	 * Gets the x-coordinate of the cell
 	 * @return x-coordinate of the cell
@@ -46,7 +44,6 @@ public abstract class Cell {
 	public double getxPosition() {
 		return xPosition;
 	}
-
 	/**
 	 * Sets the x-coordinate of the cell
 	 * @param xPosition New x-coordinate of the cell
@@ -54,7 +51,6 @@ public abstract class Cell {
 	public void setxPosition(int xPosition) {
 		this.xPosition = xPosition;
 	}
-
 	/**
 	 * Gets the y-coordinate of the cell
 	 * @return y-coordinate of the cell
@@ -62,7 +58,6 @@ public abstract class Cell {
 	public double getyPosition() {
 		return yPosition;
 	}
-
 	/**
 	 * Sets the y-coordinate of the cell
 	 * @param yPosition New y-coordinate of the cell
@@ -93,7 +88,6 @@ public abstract class Cell {
 	public String getNextState() {
 		return nextState;
 	}
-
 	/**
 	 * Sets the next state of the cell
 	 * @param nextState The new next state of the cell
