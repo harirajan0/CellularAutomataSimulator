@@ -8,13 +8,13 @@ import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
-import grid.Grid;
-import grid.SquareGrid;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import loader.Loader;
+import model.Model;
+import model.SquareModel;
 
 // This controller class is the central nexus control of the entire program.
 // It will handle things like when to update the model, when to update the view,
@@ -25,7 +25,7 @@ public class Controller {
 	// Dimension of the Grid, obtained from Loader
 	private int rows, cols;
 	// Grid instance variable
-	private Grid myGrid;
+	private Model myGrid;
 	// Controller holds View in order to update it.
 	private SimulationView cellSimulationDisplay;
 	
@@ -147,12 +147,12 @@ public class Controller {
 		Collections.shuffle(states);
 		
 		// Create a square grid for our purpose here
-		myGrid = new SquareGrid(rows, cols);
+		myGrid = new SquareModel(rows, cols);
 		// Create a list of cells based on simulation
 		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
 		// Pass the cell list to grid so that grid can make a 2D array
 		// We want to do this in order to hide the implementation of 2D array from the world
-		myGrid.buildGrid(cellList);
+		myGrid.buildModel(cellList);
 	}
 
 	public void changeSpeed() {
@@ -163,7 +163,7 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Grid getGrid() {
+	public Model getGrid() {
 		return myGrid;
 	}
 
