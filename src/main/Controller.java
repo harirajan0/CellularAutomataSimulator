@@ -138,7 +138,7 @@ public class Controller {
 	}
 	
 	// oh this step is currently gonna be used for the loop. not sure if we need to make a seperate
-	// step for the step button or if we can use the same one. 
+	// step for the step button or if we can use the same one.  
 	public void step() {
 		// update model
 		// update view
