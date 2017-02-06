@@ -3,17 +3,24 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class ApplicationStartup extends Application {
 	
 	public static final String TITLE = "Cell Automata Simulator";
+	private SimulationGUI GUI;
+	private Controller controller;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		GUI myGUI = new GUI("English");
-		stage.setTitle(TITLE);
-		stage.setScene(myGUI.getScene());
-		stage.show();
+		GUI = new SimulationGUI("English");
+		controller = new Controller(GUI);
 		
+		stage.setTitle(TITLE);
+		stage.setScene(GUI.getScene());
+		stage.show();
+	}
+	
+	public void setUpComponents(){
+
 	}
 
 	public static void main(String[] args) {
