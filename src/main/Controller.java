@@ -92,25 +92,6 @@ public class Controller {
 		}
 		return result;
 	}
-	
-	
-	/* Needs to change once the Grid class is written
-	public void updateGrid() {
-		
-		for(int r = 0; r < rows; r++){
-			for(int c = 0; c < cols; c++){
-				
-				grid[r][c].update();
-			}
-		}
-		
-		for(int r = 0; r < rows; r++){
-			for(int c = 0; c < cols; c++){
-				
-				grid[r][c].nextGeneration();
-			}
-		}
-	}*/
 
 	// this should be for starting a new simulation maybe? still need to look into it
 	public void start() {
