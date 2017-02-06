@@ -49,7 +49,7 @@ public class GUI {
     //public static final String STYLESHEET = "default.css";
     //public static final String BLANK = " ";
     
-    private View myCellView;
+    private SimulationView myCellView;
     private Controller myController;
     // scene, needed to report back to Application
     private Scene myScene;
