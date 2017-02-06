@@ -1,6 +1,4 @@
 package cellsociety_team24;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Loader {
@@ -9,7 +7,7 @@ public class Loader {
 		
 	}
 
-	public ArrayList<String> loadXMl() {
+	public List<String> loadXMl() {
 		return null;
 	}
 	

@@ -46,7 +46,7 @@ public class Controller {
 						grid[r][c] = new SegregationCell(states.remove(0), xcor, ycor, param);
 						break;
 					default : 
-							break;
+						break;
 				}
 			}
 		}
