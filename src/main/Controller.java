@@ -40,7 +40,7 @@ public class Controller {
 	private double sec_delay;
 	private Timeline animation;
 	
-	private Stage stage;
+//	private Stage stage;
 	
 	
 	/**
@@ -49,10 +49,10 @@ public class Controller {
 	 * Can be called in GUI multiple times to set up different views.
 	 * @param view
 	 */
-	public Controller(Stage s, SimulationGUI gui){
+	public Controller(SimulationGUI gui){
 //		myCellView = view;
 		cellSimulationDisplay = gui.getSimulationView();
-		stage = s;
+//		stage = s;
 		fps = default_fps;
 		mil_delay = 1000/fps;
 		sec_delay = 1.0/fps;

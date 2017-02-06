@@ -12,7 +12,7 @@ public class ApplicationStartup extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		GUI = new SimulationGUI("English");
-		controller = new Controller(stage, GUI);
+		controller = new Controller(GUI);
 		
 		stage.setTitle(TITLE);
 		stage.setScene(GUI.getScene());

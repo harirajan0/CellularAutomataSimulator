@@ -67,4 +67,12 @@ public class SimulationGUI {
     public Scene getScene(){
     	return myScene;
     }
+    
+    private void enableButtons(){
+    	
+    }
+    
+    private void disableButtons(){
+    	
+    }
 }
