@@ -72,7 +72,7 @@ public class GUI {
 		// Also, if more than one View is needed in the future, initialize them in the constructor as well.
 		//
 		// This is just placeholder for CellView
-		myCellView = new View();
+		myCellView = new SimulationView();
 		
 		// Create a Controller
 		myController = new Controller(myCellView);

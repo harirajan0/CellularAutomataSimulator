@@ -9,12 +9,16 @@ public class Model {
 	
 	private Grid simulationGrid;
 
-	public Model(){
-		
+	public Model(Grid grid){
+		simulationGrid = grid;
 	}
 	
+	
 	public void updateModel(){
-		// an iterator that just calls updateCell on all of the Cells
+		for (int i=0; i<simulationGrid.getRow(); i++){
+			for (int j=0; j<simulationGrid.getCol(); j++){
+			}
+		}
 	}
 	
 	public Grid getGrid(){

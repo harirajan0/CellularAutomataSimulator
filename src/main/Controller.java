@@ -12,7 +12,6 @@ import grid.Grid;
 import grid.SquareGrid;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import loader.Loader;
 
@@ -39,8 +38,6 @@ public class Controller {
 	private int mil_delay;
 	private double sec_delay;
 	private Timeline animation;
-	
-//	private Stage stage;
 	
 	
 	/**
