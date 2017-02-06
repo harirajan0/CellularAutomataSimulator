@@ -21,6 +21,10 @@ public class SimulationGUI {
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
     
+    public SimulationView getSimulationView(){
+    	return cellSimulationDiplay;
+    }
+    
     public Scene getScene(){
     	return myScene;
     }

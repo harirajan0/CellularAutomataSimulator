@@ -51,6 +51,7 @@ public class Controller {
 	 */
 	public Controller(Stage s, SimulationGUI gui){
 //		myCellView = view;
+		cellSimulationDisplay = gui.getSimulationView();
 		stage = s;
 		fps = default_fps;
 		mil_delay = 1000/fps;
@@ -114,6 +115,7 @@ public class Controller {
 		}
 	}*/
 
+	// this should be for starting a new simulation maybe? still need to look into it
 	public void start() {
 		KeyFrame frame = new KeyFrame(Duration.millis(mil_delay),
 				e -> step());
@@ -123,17 +125,29 @@ public class Controller {
 		animation.play();
 		
 	}
-
-	public void pause() {
-		animation.pause();
+	
+	// this should be for playing a paused simulation? maybe... rip idk if this actually works.
+	// just a guess.
+	public void resume(){
+		animation.play();
 	}
 
+	public void pause() {
+		// not sure if this is how you would stop the animation, but maybe this would work.
+		animation.pause();
+	}
+	
+	// oh this step is currently gonna be used for the loop. not sure if we need to make a seperate
+	// step for the step button or if we can use the same one. 
 	public void step() {
 		// update model
 		// update view
+		// this method should e less than 5 lines. probably just 2 method calls will already be enough,
+		// but we'll see.
 	}
 
 	public void reset() {
+		// not sure if this is actually how you would stop the animation, but maybe this would work.
 		animation.stop();
 	}
 
