@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cells.Cell;
+import grid.SquareGrid;
+
 public class Loader {
 	
     public static final String SIMULATION_TYPE = "simulationType";
@@ -32,7 +35,8 @@ public class Loader {
     private String simulationType;
     private int rows;
     private int cols;
-
+    private SquareGrid myGrid;
+    private List<Integer> myStates;
     
 	public Loader(String fileName) {
 		setupSimulationMap();
@@ -40,6 +44,7 @@ public class Loader {
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
+		initializeGrid();
 		
 	}
     
@@ -55,18 +60,12 @@ public class Loader {
 		
 	}
 
-	public List<String> getStates() {
-		List<String> states = new ArrayList<String>();
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_ONE)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(0));
+	private void initializeGrid() {
+		myGrid = new SquareGrid(rows, cols);
+		for (Cell cell : myGrid) {
+			
+			cell = new Con
 		}
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_TWO)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(1));
-		}
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_THREE)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(2));
-		}
-		return states;
 	}
 	
 	public String getSimulationType(){
