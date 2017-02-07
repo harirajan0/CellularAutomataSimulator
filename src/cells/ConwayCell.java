@@ -58,13 +58,11 @@ public class ConwayCell extends Cell {
 				livingCount++;
 			}
 		}
-		System.out.println("asdfasdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+livingCount);
 		return livingCount;
 	}
 
 	@Override
 	public void paint(){
-		System.out.println(getCurrentState());
 		switch(getCurrentState()){
 			case ALIVE:
 				setFill(Color.CYAN);
