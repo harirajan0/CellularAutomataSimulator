@@ -4,6 +4,7 @@
 	<simulationName>My Spreading Fire Simulation</simulationName>
 	<numRows>3</numRows>
 	<numCols>3</numCols>
+	<state0>burning</state0>
 	<state1>empty</state1>
 	<state2>empty</state2>
 	<state3>burning</state3>
@@ -12,6 +13,5 @@
 	<state6>tree</state6>
 	<state7>tree</state7>
 	<state8>tree</state8>
-	<state9>burning</state9>
 	<param>0.50</param>
 </data>
