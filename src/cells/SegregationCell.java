@@ -87,17 +87,16 @@ public class SegregationCell extends Cell {
 	}
 	
 	@Override
-	public Color getFill(){
+	public void paint(){
 		switch(getCurrentState()){
 			case EMPTY:
-				return Color.GRAY;
+				setFill(Color.BLACK);
 			case X:
-				return Color.BLUE;
+				setFill(Color.BLUE);
 			case O:
-				return Color.RED;
+				setFill(Color.RED);
 			default:
 				break;
 		}
-		return null; //TODO: Replace with exception handling
 	}
 }

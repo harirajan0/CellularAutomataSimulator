@@ -60,15 +60,14 @@ public class ConwayCell extends Cell {
 	}
 
 	@Override
-	public Color getFill(){
+	public void paint(){
 		switch(getCurrentState()){
 			case ALIVE:
-				return Color.WHITE;
+				setFill(Color.WHITE);
 			case DEAD:
-				return Color.BLACK;
+				setFill(Color.BLACK);
 			default:
 				break;
 		}
-		return null; //TODO: Replace with exception handling
 	}
 }

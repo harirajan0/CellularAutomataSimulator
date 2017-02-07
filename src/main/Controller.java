@@ -92,25 +92,15 @@ public class Controller {
 		// not sure if this is how you would stop the animation, but maybe this would work.
 		animation.pause();
 	}
-	
-	/**
-	 * Call on every iteration of animation
-	 */
-	public void step() {
-		// update model
-		myModel.updateModel();
-		// update view
-		
-		// this method should e less than 5 lines. probably just 2 method calls will already be enough,
-		// but we'll see.
-		myModel.updateModel();
-		cellSimulationDisplay.displayGrid(myModel);
-	}
 
 	public void reset() {
 		// not sure if this is actually how you would stop the animation, but maybe this would work.
 		animation.stop();
 		
+	}
+	
+	public void step() {
+		myModel.updateModel();
 	}
 
 	/**

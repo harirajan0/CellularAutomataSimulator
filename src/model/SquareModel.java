@@ -43,6 +43,7 @@ public class SquareModel extends Model {
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				get(r, c).nextGeneration();
+				get(r, c).paint();
 			}
 		}
 	}

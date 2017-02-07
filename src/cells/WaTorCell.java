@@ -133,17 +133,16 @@ public class WaTorCell extends Cell {
 	}
 
 	@Override
-	public Color getFill(){
+	public void paint(){
 		switch(getCurrentState()){
 			case EMPTY:
-				return Color.BLUE;
+				setFill(Color.BLUE);
 			case FISH:
-				return Color.GREEN;
+				setFill(Color.GREEN);
 			case SHARK:
-				return Color.YELLOW;
+				setFill(Color.YELLOW);
 			default:
 				break;
 		}
-		return null; //TODO: Replace with exception handling
 	}
 }

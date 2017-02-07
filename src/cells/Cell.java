@@ -31,7 +31,7 @@ public abstract class Cell {
 		setxPosition(x);
 		setyPosition(y);
 		myRect = new Rectangle(x, y, width, width);
-		myRect.setFill(getFill());
+		setFill(Color.BLACK);
 	}
 
 	/**
@@ -40,10 +40,17 @@ public abstract class Cell {
 	public abstract void update();
 	
 	/**
-	 * Determines the color of the Cell based on its state
-	 * @return The color corresponding to the cell's current state
+	 * Changes the color of the Cell
+	 * @param c Color to set the Cell
 	 */
-	public abstract Color getFill();
+	public void setFill(Color c){
+		myRect.setFill(c);
+	}
+	
+	/**
+	 * Determines which color to call setFill on
+	 */
+	public abstract void paint();
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
