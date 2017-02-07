@@ -1,12 +1,9 @@
 package main;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 public class SimulationGUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
@@ -35,13 +32,5 @@ public class SimulationGUI {
     
     public Scene getScene(){
     	return myScene;
-    }
-    
-    private void enableButtons(){
-    	
-    }
-    
-    private void disableButtons(){
-    	
     }
 }

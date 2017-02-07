@@ -20,7 +20,6 @@ import loader.Loader;
 
 import cells.Cell;
 import model.Model;
-import model.SquareModel;
 
 // This controller class is the central nexus control of the entire program.
 // It will handle things like when to update the model, when to update the view,
