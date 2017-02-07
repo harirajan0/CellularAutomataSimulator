@@ -1,9 +1,9 @@
 package cells;
-
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
-
 public class WaTorCell extends Cell {
 	
 	private static final String EMPTY = "empty";
@@ -12,7 +12,6 @@ public class WaTorCell extends Cell {
 	
 	private int turnsToBreed;
 	private int turnsToDie;
-
 	/**
 	 * Constructor should initialize state and position on screen and set
 	 * turnsToBreed and turnsToDie to 0
@@ -24,13 +23,12 @@ public class WaTorCell extends Cell {
 		super(initState, x, y, width);
 		resetFields();
 	}
-
 	/**
 	 * Updates cell based on current state
 	 */
 	@Override
 	public void update() {
-		if (getNextState() != null) { return; }
+		if (getNextState() != null) return;
 		if (getCurrentState().equals(EMPTY)) { 
 			setNextState(getCurrentState());
 		}
@@ -46,7 +44,6 @@ public class WaTorCell extends Cell {
 		}
 	}
 	
-
 	/**
 	 * If a cell is a shark, cell should check if it should die, eat, move, and/or breed
 	 */
@@ -54,29 +51,27 @@ public class WaTorCell extends Cell {
 		if (turnsToDie == 3) {//kill this shark
 			setNextState(EMPTY);
 			resetFields();
+			return;
 		}
+		if (turnsToBreed == 3) { breed(); }
 		WaTorCell fishToEat = getRandomNeighbor(FISH);
 		//if there is a fish to eat, then eat it, if not move somewhere if possible
-		if (fishToEat != null) { 
-			eatFish(fishToEat); 
-		}
+		if (fishToEat != null) eatFish(fishToEat); 
 		else { 
 			//if shark doesnt eat, its closer to dieing
 			turnsToDie++;
 			move(); 
 		}
-		if (turnsToBreed == 3) { breed(); }
 	}
 	
 	/**
 	 * If cell is a fish, it should try to move and/or breed
 	 */
 	private void updateFish() {
-		move();
 		if (turnsToBreed == 3) { breed(); }
+		move();
 	}
 	
-
 	/**
 	 * Breed by setting a random neighbor's next state to this cell's current state
 	 */
@@ -119,14 +114,18 @@ public class WaTorCell extends Cell {
 	 * @return random WaTorCell neighbor of given state
 	 */
 	private WaTorCell getRandomNeighbor(String state) {
-		HashSet<Cell> possibleNeighbors = new HashSet<>();
+		List<Cell> possibleNeighbors = new ArrayList<>();
 		for (Cell cell : getNeighbors()) {
-			if (cell.getCurrentState().equals(state)) {possibleNeighbors.add(cell); }
+			if (cell.getCurrentState().equals(state)) {
+				if (cell.getNextState() == null) possibleNeighbors.add(cell);
+				else if (cell.getNextState().equals(state)) possibleNeighbors.add(cell);
+			}
 		}
-		for (Cell cell : possibleNeighbors) { return (WaTorCell) cell; }
+		if (!possibleNeighbors.isEmpty()) {
+			return (WaTorCell) possibleNeighbors.get(new Random().nextInt(possibleNeighbors.size())); 
+		}
 		return null;
 	}
-
 	private void resetFields() {
 		turnsToDie = 0;
 		turnsToBreed = 0;
@@ -140,7 +139,6 @@ public class WaTorCell extends Cell {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
-
 	@Override
 	public void paint(){
 		switch(getCurrentState()){
