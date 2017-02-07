@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>SEGREGATION</simulationType>
+	<simulationName>My Segregation Simulation</simulationName>
+	<numRows>3</numRows>
+	<numCols>3</numCols>
+	<state1>empty</state1>
+	<state2>empty</state2>
+	<state3>X</state3>
+	<state4>O</state4>
+	<state5>O</state5>
+	<state6>X</state6>
+	<state7>empty</state7>
+	<state8>X</state8>
+	<state9>O</state9>
+	<param>0.50</param>
+</data>
