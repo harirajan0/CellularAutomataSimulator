@@ -27,13 +27,14 @@ public class ControlPanel {
 		Button stepButton = makeButton("StepCommand", e-> c.step());
 		Button resetButton = makeButton("ResetCommand", e -> c.reset());
 		Button loadButton = makeButton("LoadCommand", e -> c.load());
+		Button resumeButton = makeButton("ResumeCommand", e -> c.resume());
 
 		Slider speedSlider = makeSpeedSlider(c);
 		
 		buttonsPanel.setMaxHeight(speedSlider.getHeight());
 
 		
-		buttonsPanel.getChildren().addAll(startButton, pauseButton, stepButton, resetButton, loadButton, speedSlider);
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, speedSlider);
 		
 	}
 	

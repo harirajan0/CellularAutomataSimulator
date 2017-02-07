@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>FIRE</simulationType>
+	<simulationName>My Spreading Fire Simulation</simulationName>
+	<numRows>3</numRows>
+	<numCols>3</numCols>
+	<state0>burning</state0>
+	<state1>empty</state1>
+	<state2>empty</state2>
+	<state3>burning</state3>
+	<state4>burning</state4>
+	<state5>tree</state5>
+	<state6>tree</state6>
+	<state7>tree</state7>
+	<state8>tree</state8>
+	<state9>burning</state9>
+	<state10>empty</state10>
+	<state11>empty</state11>
+	<state12>burning</state12>
+	<state13>burning</state13>
+	<state14>tree</state14>
+	<state15>tree</state15>
+	<state16>tree</state16>
+	<state17>tree</state17>
+	<state18>burning</state18>
+	<state19>empty</state19>
+	<state20>empty</state20>
+	<state21>burning</state21>
+	<state22>burning</state22>
+	<state23>tree</state23>
+	<state24>tree</state24>
+	<param>0.50</param>
+</data>
