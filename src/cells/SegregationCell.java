@@ -1,16 +1,13 @@
 package cells;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-
 /**
  * A subclass of Cell that creates the particular cell type for the 
  * Segregation simulation.
  * @author Bihan Zhuang
  *
  */
-
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
@@ -20,10 +17,8 @@ public class SegregationCell extends Cell {
 		super(initState, x, y);
 		this.percentage = percentage;
 	}
-
 	@Override
 	public void update() {}
-
 	/**
 	 * Updates the state of the Cell if it is dissatisfied and changes 
 	 * a random Cell from the specified ArrayList of empty Cells to the 

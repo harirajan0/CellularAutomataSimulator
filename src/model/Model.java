@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 
-public abstract class Model {
+public abstract class Model implements Iterable<Cell> {
 	
 	private Cell[][] myGrid;
 
@@ -59,5 +61,16 @@ public abstract class Model {
 	 */
 	protected boolean contains(int row, int col){
 		return row >=0 && row < getRows() && col >= 0 && col < getCols();
+	}
+	
+	@Override
+	public Iterator<Cell> iterator() {
+		List<Cell> cellList = new ArrayList<>();
+		for (Cell[] row : myGrid) {
+			for (Cell cell : row) {
+				cellList.add(cell);
+			}
+		}
+		return cellList.iterator();
 	}
 }

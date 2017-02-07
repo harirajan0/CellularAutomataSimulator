@@ -1,8 +1,6 @@
 package cells;
-
 import java.util.List;
 import com.sun.javafx.geom.Shape;
-
 /**
  * Cell superclass. 
  * @author Hari Rajan
