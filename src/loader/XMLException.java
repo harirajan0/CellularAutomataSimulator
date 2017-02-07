@@ -11,6 +11,11 @@ public class XMLException extends RuntimeException {
 	
 
 	/**
+	 * set ID to default value
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Create an exception based on a caught exception, with no additional message.
      */
 	public XMLException (Throwable cause) {
