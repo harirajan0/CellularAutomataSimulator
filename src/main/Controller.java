@@ -116,6 +116,7 @@ public class Controller {
 		rows = l.getRows();
 		cols = l.getCols();
 		myModel = l.getFirstGrid();
+		myModel.initializeNeighbors();
 	}
 	
 	
@@ -129,10 +130,6 @@ public class Controller {
         return result;
     }
     
-	private Model loadModel(String filename){
-		
-		return model;
-	}
 
 	public void changeSpeed() {
 	}
@@ -142,7 +139,7 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Model getGrid() {
+	public Model getModel() {
 		return myModel;
 	}
 
