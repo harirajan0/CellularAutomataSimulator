@@ -18,6 +18,7 @@ public class ConwayCell extends Cell {
 	public ConwayCell(String initState, int x, int y, int width) {
 		super(initState, x, y, width);
 	}
+	
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
@@ -35,13 +36,17 @@ public class ConwayCell extends Cell {
 		}
 	}
 	
+	/**
+	 * Tells whether or not the current state is ALIVE
+	 * @return whether or not the current state is ALIVE
+	 */
 	private boolean isAlive(){
 		return getCurrentState().equals(ALIVE);
 	}
 	
 	/**
 	 * Iterates through neighbors to find number of living neighbors.
-	 * @return
+	 * @return the number of living neighbors
 	 */
 	private int getLivingNeighbors(){
 		List<Cell> neighbors = getNeighbors();
