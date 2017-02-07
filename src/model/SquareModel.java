@@ -46,10 +46,4 @@ public class SquareModel extends Model {
 			}
 		}
 	}
-
-	@Override
-	public List<Cell> findNeighbors() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

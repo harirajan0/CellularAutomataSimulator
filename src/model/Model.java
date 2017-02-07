@@ -24,11 +24,7 @@ public abstract class Model implements Iterable<Cell> {
 	public void buildModel(List<Cell> list){
 		
 	}
-	
-	/**
-	 * Initializes the list of neighbors of each Cell in the grid
-	 */
-	public abstract List<Cell> findNeighbors();
+
 	
 	public int getRow(){
 		return row;
