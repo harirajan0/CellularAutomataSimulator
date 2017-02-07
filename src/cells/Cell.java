@@ -31,7 +31,6 @@ public abstract class Cell {
 		setyPosition(y);
 		myRect = new Rectangle(x, y, width, width);
 		myRect.setStroke(Color.WHITE);
-//		setFill(Color.BLACK);
 		paint();
 	}
 

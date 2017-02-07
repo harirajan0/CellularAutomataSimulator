@@ -43,6 +43,7 @@ public class Controller {
 	private double sec_delay;
 	private Timeline animation;
 	private Loader l;
+	private File dataFile;
 	
 	private Model model;
 	
@@ -95,14 +96,19 @@ public class Controller {
 
 	public void reset() {
 		// not sure if this is actually how you would stop the animation, but maybe this would work.
+		if(animation != null){
+			animation.stop();
+		}
+		l = new Loader(dataFile);
+		rows = l.getRows();
+		cols = l.getCols();
 		myModel = l.getFirstGrid();
-		myModel.initializeNeighbors(l.getEdgesOnly());
+		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
 	}
 	
 	public void step() {
 		myModel.updateModel();
-		System.out.println("inloop");
 	}
 
 	/**
@@ -111,12 +117,15 @@ public class Controller {
 	 * @return
 	 */
 	public void load() {
-		File dataFile = myChooser.showOpenDialog(myStage);
+		if(animation != null){
+			animation.stop();
+		}
+		dataFile = myChooser.showOpenDialog(myStage);
 		l = new Loader(dataFile);
 		rows = l.getRows();
 		cols = l.getCols();
 		myModel = l.getFirstGrid();
-		myModel.initializeNeighbors(l.getEdgesOnly());
+		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
 //		cellSimulationDisplay.test();
 	}

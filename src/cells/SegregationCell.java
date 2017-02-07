@@ -16,23 +16,24 @@ public class SegregationCell extends Cell {
 	private static final String EMPTY = "empty";
 	private static final String X = "X";
 	private static final String O = "O";
+	private List<Cell> emptyPositions;
 	
 	private double percentage;
+	
+	public void setAvailableList(List<Cell> availableList){
+		emptyPositions = availableList;
+	}
 	
 	public SegregationCell(String initState, int x, int y, int width, double percentage) {
 		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
 	@Override
-	public void update() {}
-	/**
-	 * Updates the state of the Cell if it is dissatisfied and changes 
-	 * a random Cell from the specified ArrayList of empty Cells to the 
-	 * state of the original Cell (state 1 or state 2).
-	 * @param emptyPositions
-	 */
-	public void update(List<Cell> emptyPositions) {
-		if (this.getCurrentState().equals(EMPTY)) return;
+	public void update() {
+		if (this.getCurrentState().equals(EMPTY)) {
+			setNextState(this.getCurrentState());
+			return;
+		}
 		List<Cell> neighbors = this.getNeighbors();
 		if (!isSatisfied(neighbors)){
 			changeStates(emptyPositions);
@@ -40,6 +41,12 @@ public class SegregationCell extends Cell {
 			setNextState(this.getCurrentState());
 		}
 	}
+	/**
+	 * Updates the state of the Cell if it is dissatisfied and changes 
+	 * a random Cell from the specified ArrayList of empty Cells to the 
+	 * state of the original Cell (state 1 or state 2).
+	 * @param emptyPositions
+	 */
 	
 	/**
 	 * Checks if the Cell is satisfied by comparing the percentage of 
@@ -82,8 +89,8 @@ public class SegregationCell extends Cell {
 		//System.out.println("3. " + tmp.getCurrentState());
 		//System.out.println("4. " + tmp.getNextState());
 		
-		emptyPositions.add(this);
-		emptyPositions.remove(tmp);
+		//emptyPositions.add(this);
+		//emptyPositions.remove(tmp);
 	}
 	
 	@Override
@@ -91,10 +98,13 @@ public class SegregationCell extends Cell {
 		switch(getCurrentState()){
 			case EMPTY:
 				setFill(Color.BLACK);
+				break;
 			case X:
 				setFill(Color.BLUE);
+				break;
 			case O:
 				setFill(Color.RED);
+				break;
 			default:
 				break;
 		}
