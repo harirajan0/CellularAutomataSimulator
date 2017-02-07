@@ -73,7 +73,7 @@ public class Controller {
 	// this should be for starting a new simulation maybe? still need to look into it
 	public void start() {
 		KeyFrame frame = new KeyFrame(Duration.millis(mil_delay),
-				e -> myModel.updateModel());
+				e -> step());
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -95,6 +95,10 @@ public class Controller {
 	public void reset() {
 		// not sure if this is actually how you would stop the animation, but maybe this would work.
 		animation.stop();
+	}
+	
+	public void step() {
+		myModel.updateModel();
 	}
 
 	/**
