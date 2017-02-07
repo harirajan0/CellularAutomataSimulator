@@ -1,12 +1,12 @@
-package grid;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import cells.Cell;
 
-public class SquareGrid extends Grid {
+public class SquareModel extends Model {
 
-	public SquareGrid(int r, int c) {
+	public SquareModel(int r, int c) {
 		super(r, c);
 	}
 
@@ -33,7 +33,7 @@ public class SquareGrid extends Grid {
 		}
 	}
 	
-	public void updateGrid() {
+	public void updateModel() {
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				get(r, c).update();

@@ -75,7 +75,7 @@ public class GUI {
 		myCellView = new SimulationView();
 		
 		// Create a Controller
-		myController = new Controller(myCellView);
+		//myController = new Controller(myCellView);
 		
 		// set resource path
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);

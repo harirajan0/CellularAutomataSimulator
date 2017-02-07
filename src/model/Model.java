@@ -1,27 +1,30 @@
-package grid;
+package model;
 
 import java.util.List;
 import cells.Cell;
 
-public abstract class Grid {
+public abstract class Model {
 	
 	private Cell[][] myGrid;
 	private int row, col;
 
-	public Grid(int r, int c) {
+	public Model(int r, int c) {
 		super();
 		myGrid = new Cell[r][c];
 		row = r;
 		col = c;
 	}
 	
-	public void buildGrid(List<Cell> list){
+	/**
+	 * Tells the grid to make itself
+	 * @param list List of cells to put into the grid
+	 */
+	public void buildModel(List<Cell> list){
 		
 	}
 	
 	/**
-	 * Each simulation will have its own grid type because the need
-	 * of finding neighbors in different ways.
+	 * Initializes the list of neighbors of each Cell in the grid
 	 */
 	public abstract List<Cell> findNeighbors();
 	
@@ -34,6 +37,11 @@ public abstract class Grid {
 	}
 
 	public abstract void initializeNeighbors();
+	
+	/**
+	 * Calls on every Cell in the grid to update itself
+	 */
+	public abstract void updateModel();
 	
 	protected Cell get(int row, int col){
 		
