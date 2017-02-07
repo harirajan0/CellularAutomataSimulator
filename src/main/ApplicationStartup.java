@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -8,12 +10,16 @@ public class ApplicationStartup extends Application {
 	public static final String TITLE = "Cell Automata Simulator";
 	private SimulationGUI GUI;
 	private Controller controller;
+	private ResourceBundle resources;
+    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 		GUI = new SimulationGUI("English");
 		controller = new Controller(GUI);
-		GUI.makeButtons(controller);
+		GUI.createButtons(controller, resources);
 		
 		stage.setTitle(TITLE);
 		stage.setScene(GUI.getScene());

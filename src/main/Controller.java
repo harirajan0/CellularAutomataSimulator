@@ -1,6 +1,5 @@
 package main;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import cells.Cell;
@@ -12,7 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import loader.Loader;
-import model.SquareModel;
+import model.Model;
 
 // This controller class is the central nexus control of the entire program.
 // It will handle things like when to update the model, when to update the view,
@@ -139,28 +138,23 @@ public class Controller {
 	 * @param filename
 	 * @return
 	 */
-	public void load(String filename) {
-		Loader l = new Loader(filename);
-		rows = l.getRows();
-		cols = l.getCols();
-		
-		// List of states to shuffle 
-		List<String> states = l.getStates();
-		Collections.shuffle(states);
-		
-		// Create a square grid for our purpose here
-		myGrid = new SquareModel(rows, cols);
-		// Create a list of cells based on simulation
-		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
-		// Pass the cell list to grid so that grid can make a 2D array
-
-		// We want to do this in order to hide the implementation of 2D array from the world
-		myGrid.buildModel(cellList);
-	}
-	
-	private Model loadModel(String filename){
-		
-		return model;
+	public void load() {
+		Loader l = new Loader("");
+//		rows = l.getRows();
+//		cols = l.getCols();
+//		
+//		// List of states to shuffle 
+//		List<String> states = l.getStates();
+//		Collections.shuffle(states);
+//		
+//		// Create a square grid for our purpose here
+//		myGrid = new SquareModel(rows, cols);
+//		// Create a list of cells based on simulation
+//		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
+//		// Pass the cell list to grid so that grid can make a 2D array
+//
+//		// We want to do this in order to hide the implementation of 2D array from the world
+//		myGrid.buildModel(cellList);
 	}
 
 	public void changeSpeed() {
