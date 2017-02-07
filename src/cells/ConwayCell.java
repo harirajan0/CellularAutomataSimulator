@@ -13,8 +13,8 @@ public class ConwayCell extends Cell {
 	 * 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 	 */
 	
-	public ConwayCell(String initState) {
-		super(initState);
+	public ConwayCell(String initState, int x, int y) {
+		super(initState, x, y);
 	}
 	@Override
 	public void update() {
