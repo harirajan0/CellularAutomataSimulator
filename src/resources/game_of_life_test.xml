@@ -2,16 +2,32 @@
 <data type="simulation">
 	<simulationType>CONWAY</simulationType>
 	<simulationName>My Game of Life Simulation</simulationName>
-	<numRows>3</numRows>
-	<numCols>3</numCols>
-	<state0>dead</state0>
+	<numRows>5</numRows>
+	<numCols>5</numCols>
+	<state0>alive</state0>
 	<state1>alive</state1>
 	<state2>dead</state2>
 	<state3>dead</state3>
-	<state4>alive</state4>
+	<state4>dead</state4>
 	<state5>alive</state5>
 	<state6>alive</state6>
 	<state7>dead</state7>
-	<state8>alive</state8>
+	<state8>dead</state8>
+	<state9>dead</state9>
+	<state10>dead</state10>
+	<state11>dead</state11>
+	<state12>dead</state12>
+	<state13>dead</state13>
+	<state14>dead</state14>
+	<state15>dead</state15>
+	<state16>dead</state16>
+	<state17>dead</state17>
+	<state18>dead</state18>
+	<state19>dead</state19>
+	<state20>dead</state20>
+	<state21>dead</state21>
+	<state22>dead</state22>
+	<state23>dead</state23>
+	<state24>dead</state24>
 	<param>0.50</param>
 </data>

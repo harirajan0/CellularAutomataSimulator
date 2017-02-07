@@ -29,6 +29,8 @@ public class SpreadingFireCell extends Cell
 		else if(isState(BURNING)){
 			
 			setNextState(EMPTY);
+		} else {
+			setNextState(getCurrentState());
 		}
 	}
 	
@@ -56,7 +58,9 @@ public class SpreadingFireCell extends Cell
 					
 					setNextState(BURNING);
 					return;
-				}
+				} 
+			}else {
+				setNextState(getCurrentState());
 			}
 		}
 	}
@@ -66,10 +70,13 @@ public class SpreadingFireCell extends Cell
 		switch(getCurrentState()){
 			case EMPTY:
 				setFill(Color.BLACK);
+				break;
 			case BURNING:
 				setFill(Color.RED);
+				break;
 			case TREE:
 				setFill(Color.GREEN);
+				break;
 			default:
 				break;
 		}

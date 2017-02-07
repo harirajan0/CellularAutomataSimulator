@@ -30,7 +30,9 @@ public abstract class Cell {
 		setxPosition(x);
 		setyPosition(y);
 		myRect = new Rectangle(x, y, width, width);
-		setFill(Color.BLACK);
+		myRect.setStroke(Color.WHITE);
+//		setFill(Color.BLACK);
+		paint();
 	}
 
 	/**
@@ -141,6 +143,7 @@ public abstract class Cell {
 	public void nextGeneration()
 	{
 		setCurrentState(getNextState());
+		paint();
 		setNextState(null);
 	}
 }

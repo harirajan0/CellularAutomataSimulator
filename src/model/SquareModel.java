@@ -11,14 +11,30 @@ public class SquareModel extends Model {
 	}
 
 	@Override
-	public void initializeNeighbors() {
+	public void initializeNeighbors(boolean edgesOnly) {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
-				List<Cell> neighbors = new ArrayList<Cell>();
-				System.out.println("hi");
-				for(int horiz = -1; horiz <= 1; horiz += 2){
-					for(int vert = -1; vert <= 1; vert += 2){
-						
+				neighbors = new ArrayList<Cell>();
+//				for(int horiz = -1; horiz <= 1; horiz += 2){
+//					for(int vert = -1; vert <= 1; vert += 2){
+//						
+//						//Iterate through neighbors, add if not outside array
+//						if(contains(r + horiz, c + vert)){
+//							neighbors.add(get(r + horiz, c + vert));
+//						}
+//					}
+//				}
+				for(int horiz = -1; horiz <= 1; horiz ++){
+					for(int vert = -1; vert <= 1; vert ++){
+						if(horiz ==0 && vert == 0){
+							continue;
+						}
+						if(edgesOnly){
+							if(!(horiz == 0) && !(vert ==0)){
+								continue;
+							}
+						}
 						//Iterate through neighbors, add if not outside array
 						if(contains(r + horiz, c + vert)){
 							neighbors.add(get(r + horiz, c + vert));
@@ -26,6 +42,7 @@ public class SquareModel extends Model {
 					}
 				}
 				get(r, c).setNeighbors(neighbors);
+				System.out.println(neighbors.size());
 			}
 		}
 	}
@@ -40,7 +57,6 @@ public class SquareModel extends Model {
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				get(r, c).nextGeneration();
-				get(r, c).paint();
 			}
 		}
 	}

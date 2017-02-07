@@ -30,11 +30,20 @@ public class WaTorCell extends Cell {
 	 */
 	@Override
 	public void update() {
-		if (getNextState() != "") { return; }
-		if (getCurrentState().equals(EMPTY)) { return; }
+		if (getNextState() != null) { return; }
+		if (getCurrentState().equals(EMPTY)) { 
+			setNextState(getCurrentState());
+		}
 		turnsToBreed++;
-		if (getCurrentState().equals(SHARK)) { updateShark(); }
-		if (getCurrentState().equals(FISH)) { updateFish(); }
+		if (getCurrentState().equals(SHARK)) { 
+			updateShark(); 
+		}
+		if (getCurrentState().equals(FISH)) { 
+			updateFish(); 
+		}
+		if (getNextState() == null) {
+			setNextState(getCurrentState());
+		}
 	}
 	
 
@@ -137,10 +146,13 @@ public class WaTorCell extends Cell {
 		switch(getCurrentState()){
 			case EMPTY:
 				setFill(Color.BLUE);
+				break;
 			case FISH:
 				setFill(Color.GREEN);
+				break;
 			case SHARK:
 				setFill(Color.YELLOW);
+				break;
 			default:
 				break;
 		}

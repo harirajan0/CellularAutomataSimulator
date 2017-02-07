@@ -24,15 +24,17 @@ public class ConwayCell extends Cell {
 		int livingNeighbors = getLivingNeighbors();
 		if(livingNeighbors < 2){
 			setNextState(DEAD);
-		}
-		if(livingNeighbors == 2 || livingNeighbors == 3){
+		} else
+		if(((livingNeighbors == 2)&& isAlive()) || livingNeighbors == 3){
 			setNextState(ALIVE);
-		}
-		if(livingNeighbors > 3){
+		} else
+		if(livingNeighbors > 3 && isAlive()){
 			setNextState(DEAD);
-		}
+		} else
 		if(livingNeighbors > 3 && !isAlive()){
 			setNextState(ALIVE);
+		} else {
+			setNextState(getCurrentState());
 		}
 	}
 	
@@ -56,16 +58,20 @@ public class ConwayCell extends Cell {
 				livingCount++;
 			}
 		}
+		System.out.println("asdfasdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+livingCount);
 		return livingCount;
 	}
 
 	@Override
 	public void paint(){
+		System.out.println(getCurrentState());
 		switch(getCurrentState()){
 			case ALIVE:
-				setFill(Color.WHITE);
+				setFill(Color.CYAN);
+				break;
 			case DEAD:
-				setFill(Color.BLACK);
+				setFill(Color.RED);
+				break;
 			default:
 				break;
 		}

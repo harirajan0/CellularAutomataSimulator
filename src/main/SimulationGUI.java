@@ -13,14 +13,12 @@ public class SimulationGUI {
     private Scene myScene;
     private BorderPane root;
     private SimulationView cellSimulationDisplay;
-    private SimulationView cellSimulationDisplay2;
     
     public SimulationGUI(String lang){
     	root = new BorderPane();
     	root.setStyle("-fx-background-color : white");
     	
     	cellSimulationDisplay = new SimulationView();
-
     	root.setCenter(cellSimulationDisplay.getCellSimulationPane());
     	    	
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());

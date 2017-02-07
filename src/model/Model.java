@@ -25,7 +25,7 @@ public abstract class Model implements Iterable<Cell> {
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
-	public abstract void initializeNeighbors();
+	public abstract void initializeNeighbors(boolean edgesOnly);
 	
 	/**
 	 * Calls on every Cell in the grid to update itself

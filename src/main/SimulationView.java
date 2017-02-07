@@ -1,6 +1,9 @@
 package main;
 
+
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.Model;
 
 public class SimulationView {
@@ -28,6 +31,11 @@ public class SimulationView {
 				cellSimulationPane.getChildren().add(model.get(r, c).getRect());
 			}
 		}
+	}
+	
+	public void test(){
+		Rectangle sq = new Rectangle(80, 80, Color.BLUE);
+		cellSimulationPane.getChildren().add(sq);
 	}
 
 }
