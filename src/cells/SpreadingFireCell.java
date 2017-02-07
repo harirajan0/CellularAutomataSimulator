@@ -62,17 +62,16 @@ public class SpreadingFireCell extends Cell
 	}
 	
 	@Override
-	public Color getFill(){
+	public void paint(){
 		switch(getCurrentState()){
 			case EMPTY:
-				return Color.BLACK;
+				setFill(Color.BLACK);
 			case BURNING:
-				return Color.RED;
+				setFill(Color.RED);
 			case TREE:
-				return Color.GREEN;
+				setFill(Color.GREEN);
 			default:
 				break;
 		}
-		return null; //TODO: Replace with exception handling
 	}
 }

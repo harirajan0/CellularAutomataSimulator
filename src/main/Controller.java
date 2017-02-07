@@ -73,7 +73,7 @@ public class Controller {
 	// this should be for starting a new simulation maybe? still need to look into it
 	public void start() {
 		KeyFrame frame = new KeyFrame(Duration.millis(mil_delay),
-				e -> step());
+				e -> myModel.updateModel());
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -90,14 +90,6 @@ public class Controller {
 	public void pause() {
 		// not sure if this is how you would stop the animation, but maybe this would work.
 		animation.pause();
-	}
-	
-	/**
-	 * Call on every iteration of animation
-	 */
-	public void step() {
-		myModel.updateModel();
-		cellSimulationDisplay.displayGrid(myModel);
 	}
 
 	public void reset() {
