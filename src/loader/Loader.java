@@ -86,7 +86,7 @@ public class Loader {
 	 * @return Number of rows in the grid
 	 */
 	public int getRows(){
-		return Integer.valueOf(myParser.getTextValue(NUM_ROWS));
+		return rows;
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class Loader {
 	 * @return Number of columns in the grid
 	 */
 	public int getCols(){
-		return Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
+		return cols;
 	}
 	
 	/**
@@ -102,15 +102,7 @@ public class Loader {
 	 * @return The additional simulation parameter
 	 */
 	public double getParameter(){
-		return Double.valueOf(myParser.getTextValue(PARAM));
-	}
-
-	/**
-	 * @return
-	 */
-	public List<String> getStates() {
-		// TODO Auto-generated method stub
-		return null;
+		return param;
 	}
 
 	/**
