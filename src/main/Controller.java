@@ -25,7 +25,7 @@ public class Controller {
 	// Dimension of the Grid, obtained from Loader
 	private int rows, cols;
 	// Grid instance variable
-	private Model myGrid;
+	private Model myModel;
 	// Controller holds View in order to update it.
 	private SimulationView cellSimulationDisplay;
 	
@@ -56,43 +56,6 @@ public class Controller {
 		sec_delay = 1.0/fps;
 		
 	}
-	
-	/**
-	 * From the list of states, the probability, and simulation type,
-	 * construct a list of cells to be passed in to the Grid later.
-	 * @param states
-	 * @param param
-	 * @param sim
-	 * @return
-	 */
-	private List<Cell> createCells(List<String> states, double param, String sim){
-		List<Cell> result = new ArrayList<Cell>();
-		switch(sim){
-			case SPREADING_FIRE:
-				for (int i=0; i<rows*cols; i++){
-					result.add(new SpreadingFireCell(states.remove(0), param));
-				}
-				break;
-			case WATOR : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new WaTorCell(states.remove(0)));
-				}
-				break;
-			case CONWAY : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new ConwayCell(states.remove(0)));
-				}
-				break;
-			case SEGREGATION : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new SegregationCell(states.remove(0), param));
-				}
-				break;
-			default : 
-					break;
-		}
-		return result;
-	}
 
 	// this should be for starting a new simulation maybe? still need to look into it
 	public void start() {
@@ -120,8 +83,9 @@ public class Controller {
 	// step for the step button or if we can use the same one.  
 	public void step() {
 		// update model
-		
+		myModel.updateModel();
 		// update view
+		
 		// this method should e less than 5 lines. probably just 2 method calls will already be enough,
 		// but we'll see.
 	}
@@ -129,6 +93,7 @@ public class Controller {
 	public void reset() {
 		// not sure if this is actually how you would stop the animation, but maybe this would work.
 		animation.stop();
+		
 	}
 
 	/**
@@ -146,15 +111,16 @@ public class Controller {
 		Collections.shuffle(states);
 		
 		// Create a square grid for our purpose here
-		myGrid = new SquareModel(rows, cols);
+		myModel = new SquareModel(rows, cols);
 		// Create a list of cells based on simulation
 		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
 		// Pass the cell list to grid so that grid can make a 2D array
 		// We want to do this in order to hide the implementation of 2D array from the world
-		myGrid.buildModel(cellList);
+		myModel.buildModel(cellList);
 	}
 
 	public void changeSpeed() {
+		
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -162,8 +128,8 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Model getGrid() {
-		return myGrid;
+	public Model getModel() {
+		return myModel;
 	}
 
 	

@@ -11,7 +11,6 @@ import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
-import grid.SquareGrid;
 import model.SquareModel;
 
 public class Loader {
@@ -103,7 +102,7 @@ public class Loader {
 				break;
 			case SEGREGATION : 
 				for (Cell cell : myGrid) {
-					cell = new SegregationCell(myParser.getTextValue("state" + Integer.toString(i)), param);
+					cell = new SegregationCell(myParser.getTextValue("state" + Integer.toString(i)), i, i, param);
 					i++;
 				}
 				break;

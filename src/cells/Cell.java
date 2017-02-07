@@ -16,8 +16,6 @@ public abstract class Cell {
 	private int yPosition;
 	private Shape myShape;
 	
-	// Since we want to hide the 2D array implementation from the world,
-	// we don't need to have the x, y position in each Cell anymore.
 	public Cell(String initState, int x, int y) {
 		setCurrentState(initState);
 		setxPosition(x);
