@@ -44,14 +44,16 @@ public class ControlPanel {
 	private Slider makeSpeedSlider(Controller c) {
 		Slider slider = new Slider(0, 1000, 50);
 		slider.setOrientation(Orientation.HORIZONTAL);
-		slider.setOnDragDropped(e -> c.changeSpeed());
 		slider.setMajorTickUnit(100);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setSnapToTicks(true);
 		slider.setPrefHeight(250);
+		double oldValue = slider.getValue();
+		slider.setOnDragDropped(e -> c.changeSpeed(oldValue));
 		return slider;
 	}
+	
     private Button makeButton(String property, EventHandler<ActionEvent> handler) {
     	Button result = new Button();
     	System.out.println(myResources.getString(property));

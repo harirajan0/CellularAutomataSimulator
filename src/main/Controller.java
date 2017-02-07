@@ -139,7 +139,7 @@ public class Controller {
 		return model;
 	}
 
-	public void changeSpeed() {
+	public void changeSpeed(double currentSpeed) {
 		
 	}
 
