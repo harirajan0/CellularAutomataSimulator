@@ -11,11 +11,8 @@ import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
-<<<<<<< HEAD
-=======
 import main.ApplicationStartup;
 import model.Model;
->>>>>>> master
 import model.SquareModel;
 
 public class Loader {
@@ -44,8 +41,8 @@ public class Loader {
     private double param;
     private SquareModel myGrid;
     
-	public Loader(String fileName) {
-		myParser = new XMLParser(fileName);
+	public Loader(File file) {
+		myParser = new XMLParser(file);
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
@@ -63,36 +60,6 @@ public class Loader {
 	 * @return
 	 */
 	private void initializeGrid(){
-		myGrid = new SquareModel(rows, cols);
-<<<<<<< HEAD
-		int i = 0;
-		switch(simulationType){
-			case SPREADING_FIRE:
-				for (Cell cell : myGrid) {
-					cell = new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(i)), param);
-					i++;
-				}
-				break;
-			case WATOR : 
-				for (Cell cell : myGrid) {
-					cell = new WaTorCell(myParser.getTextValue("state" + Integer.toString(i)));
-					i++;
-				}
-				break;
-			case CONWAY : 
-				for (Cell cell : myGrid) {
-					cell = new ConwayCell(myParser.getTextValue("state" + Integer.toString(i)));
-					i++;
-				}
-				break;
-			case SEGREGATION : 
-				for (Cell cell : myGrid) {
-					cell = new SegregationCell(myParser.getTextValue("state" + Integer.toString(i)), i, i, param);
-					i++;
-				}
-				break;
-			default : 
-=======
 		int cellNum = 0;
 		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(rows, cols);
 		for (int row = 0; row < rows; row++) {
@@ -108,7 +75,7 @@ public class Loader {
 					break;
 				case CONWAY :
 					myGrid.set(row, col, new ConwayCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength));
->>>>>>> master
+
 					break;
 				case SEGREGATION : 
 					myGrid.set(row, col, new SegregationCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength, param));

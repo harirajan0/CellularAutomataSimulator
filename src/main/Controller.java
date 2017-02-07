@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +12,9 @@ import cells.SpreadingFireCell;
 import cells.WaTorCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import loader.Loader;
 
@@ -42,7 +46,12 @@ public class Controller {
 
 	private Model model;
 	
-//	private Stage stage;
+	// kind of data files to look for
+    public static final String DATA_FILE_EXTENSION = "*.xml";
+    // it is generally accepted behavior that the chooser remembers where user left it last
+    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
+    
+	private Stage myStage;
 	
 	
 	/**
@@ -51,9 +60,10 @@ public class Controller {
 	 * Can be called in GUI multiple times to set up different views.
 	 * @param view
 	 */
-	public Controller(SimulationGUI gui){
+	public Controller(SimulationGUI gui, Stage stage){
 //		myCellView = view;
 		cellSimulationDisplay = gui.getSimulationView();
+		myStage = stage;
 //		stage = s;
 		fps = default_fps;
 		mil_delay = 1000/fps;
@@ -105,26 +115,27 @@ public class Controller {
 	 * @param filename
 	 * @return
 	 */
-	public void load(String filename) {
-		Loader l = new Loader(filename);
+	public void load() {
+		File dataFile = myChooser.showOpenDialog(myStage);
+		Loader l = new Loader(dataFile);
 		rows = l.getRows();
 		cols = l.getCols();
-		myGrid = l.getFirstGrid();
+		myModel = l.getFirstGrid();
 	}
 	
+	
+	// set some sensible defaults when the FileChooser is created
+    private FileChooser makeChooser (String extensionAccepted) {
+        FileChooser result = new FileChooser();
+        result.setTitle("Open Data File");
+        // pick a reasonable place to start searching for files
+        result.setInitialDirectory(new File(System.getProperty("user.dir")));
+        result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extensionAccepted));
+        return result;
+    }
+    
 	private Model loadModel(String filename){
 
-		// List of states to shuffle 
-		List<String> states = l.getStates();
-		Collections.shuffle(states);
-		
-		// Create a square grid for our purpose here
-		myModel = new SquareModel(rows, cols);
-		// Create a list of cells based on simulation
-		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
-		// Pass the cell list to grid so that grid can make a 2D array
-		// We want to do this in order to hide the implementation of 2D array from the world
-		myModel.buildModel(cellList);
 		return model;
 	}
 

@@ -28,8 +28,8 @@ public class XMLParser {
     
     private Element root;
 
-    public XMLParser(String fileName) {
-    	Element root = getRootElement(new File(fileName));
+    public XMLParser(File file) {
+    	Element root = getRootElement(file);
     }
     
     /**
