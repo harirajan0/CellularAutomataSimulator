@@ -19,7 +19,7 @@ public class ApplicationStartup extends Application {
 	public void start(Stage stage) throws Exception {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English");
 		GUI = new SimulationGUI("English");
-		controller = new Controller(GUI);
+		controller = new Controller(GUI, stage);
 		GUI.createButtons(controller, resources);
 		
 		stage.setTitle(TITLE);

@@ -41,8 +41,8 @@ public class Loader {
     private double param;
     private SquareModel myGrid;
     
-	public Loader(String fileName) {
-		myParser = new XMLParser(fileName);
+	public Loader(File file) {
+		myParser = new XMLParser(file);
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
