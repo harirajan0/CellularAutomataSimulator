@@ -22,9 +22,7 @@ public class SimulationGUI {
     	cellSimulationDisplay = new SimulationView();
 
     	root.setCenter(cellSimulationDisplay.getCellSimulationPane());
-    	
-//    	root.setRight(cellSimulationDisplay2.getCellSimulationPane());
-    	
+    	    	
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
     

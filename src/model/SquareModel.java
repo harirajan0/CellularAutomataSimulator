@@ -23,7 +23,7 @@ public class SquareModel extends Model {
 					for(int vert = -1; vert <= 1; vert += 2){
 						
 						//Iterate through neighbors, add if not outside array
-						if(contains(r + horiz, r + vert)){
+						if(contains(r + horiz, c + vert)){
 							neighbors.add(get(r + horiz, c + vert));
 						}
 					}
