@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 public class ApplicationStartup extends Application {
 	
 	public static final String TITLE = "Cell Automata Simulator";
+	public static final int WINDOW_SIZE = 600;
 	private SimulationGUI GUI;
 	private Controller controller;
 	
