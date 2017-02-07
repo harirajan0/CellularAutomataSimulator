@@ -1,10 +1,6 @@
 package cells;
 
-import java.util.ArrayList;
-
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 public class WaTorCell extends Cell {
 	
@@ -22,8 +18,8 @@ public class WaTorCell extends Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public WaTorCell(String initState) {
-		super(initState);
+	public WaTorCell(String initState, int x, int y) {
+		super(initState, x, y);
 		resetFields();
 	}
 
@@ -36,7 +32,7 @@ public class WaTorCell extends Cell {
 		if (getCurrentState().equals(EMPTY)) { return; }
 		turnsToBreed++;
 		if (getCurrentState().equals(SHARK)) { updateShark(); }
-		if (getCurrentState().equals(FISH)) { updateShark(); }
+		if (getCurrentState().equals(FISH)) { updateFish(); }
 		//throw exception
 	}
 	

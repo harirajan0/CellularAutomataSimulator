@@ -6,6 +6,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cells.Cell;
+import cells.ConwayCell;
+import cells.SegregationCell;
+import cells.SpreadingFireCell;
+import cells.WaTorCell;
+import grid.SquareGrid;
+import model.SquareModel;
+
 public class Loader {
 	
     public static final String SIMULATION_TYPE = "simulationType";
@@ -25,6 +33,11 @@ public class Loader {
     public static final String SHARK = "shark";
     public static final String FISH = "fish";
     
+	private static final String SPREADING_FIRE = "FIRE";
+	private static final String WATOR = "WATOR";
+	private static final String SEGREGATION = "SEGREGATION";
+	private static final String CONWAY = "CONWAY";
+    
     private XMLParser myParser;
     
     private HashMap<String, List<String>> simulationMap;
@@ -32,7 +45,8 @@ public class Loader {
     private String simulationType;
     private int rows;
     private int cols;
-
+    private double param;
+    private SquareModel myGrid;
     
 	public Loader(String fileName) {
 		setupSimulationMap();
@@ -40,6 +54,8 @@ public class Loader {
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
+		param = Double.valueOf(myParser.getTextValue(PARAM));
+		initializeGrid();
 		
 	}
     
@@ -54,19 +70,46 @@ public class Loader {
 		simulationMap.put("PreditorPrey", Arrays.asList(new String[] {EMPTY, SHARK, FISH}));
 		
 	}
-
-	public List<String> getStates() {
-		List<String> states = new ArrayList<String>();
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_ONE)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(0));
+	
+	/**
+	 * From the list of states, the probability, and simulation type,
+	 * construct a list of cells to be passed in to the Grid later.
+	 * @param states
+	 * @param param
+	 * @param sim
+	 * @return
+	 */
+	private void initializeGrid(){
+		myGrid = new SquareModel(rows, cols);
+		int i = 0;
+		switch(simulationType){
+			case SPREADING_FIRE:
+				for (Cell cell : myGrid) {
+					cell = new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(i)), param);
+					i++;
+				}
+				break;
+			case WATOR : 
+				for (Cell cell : myGrid) {
+					cell = new WaTorCell(myParser.getTextValue("state" + Integer.toString(i)));
+					i++;
+				}
+				break;
+			case CONWAY : 
+				for (Cell cell : myGrid) {
+					cell = new ConwayCell(myParser.getTextValue("state" + Integer.toString(i)));
+					i++;
+				}
+				break;
+			case SEGREGATION : 
+				for (Cell cell : myGrid) {
+					cell = new SegregationCell(myParser.getTextValue("state" + Integer.toString(i)), param);
+					i++;
+				}
+				break;
+			default : 
+					break;
 		}
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_TWO)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(1));
-		}
-		for (int i = 0; i < Double.valueOf(myParser.getTextValue(PERCENT_STATE_THREE)) * rows * cols; i++) {
-			states.add(simulationMap.get(simulationType).get(2));
-		}
-		return states;
 	}
 	
 	public String getSimulationType(){
@@ -83,5 +126,13 @@ public class Loader {
 	
 	public double getParameter(){
 		return Double.valueOf(myParser.getTextValue(PARAM));
+	}
+
+	/**
+	 * @return
+	 */
+	public List<String> getStates() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
