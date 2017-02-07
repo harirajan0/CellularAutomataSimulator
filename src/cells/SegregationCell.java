@@ -77,6 +77,10 @@ public class SegregationCell extends Cell {
 	 * @param emptyPositions
 	 */
 	private void changeStates(){
+		if (emptyPositions.size() == 0) {
+			this.setNextState(getCurrentState());
+			return;
+		}
 		this.setNextState(EMPTY);
 		int option = (int)Math.random()*emptyPositions.size();
 		Cell tmp = emptyPositions.get(option);

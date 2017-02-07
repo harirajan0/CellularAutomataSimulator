@@ -44,7 +44,8 @@ public class ControlPanel {
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setPrefWidth(300);
-		slider.setOnDragDropped(e -> c.changeSpeed(slider.getValue()));
+		
+		slider.valueProperty().addListener(e -> c.changeSpeed(slider.getValue()));
 		return slider;
 	}
     private Button makeButton(String property, EventHandler<ActionEvent> handler) {
