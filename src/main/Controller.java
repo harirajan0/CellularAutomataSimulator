@@ -34,10 +34,6 @@ public class Controller {
 	
 	private static final int default_fps = 60;
 	
-	private static final String SPREADING_FIRE = "FIRE";
-	private static final String WATOR = "WATOR";
-	private static final String SEGREGATION = "SEGREGATION";
-	private static final String CONWAY = "CONWAY";
 	private int fps;
 	private int mil_delay;
 	private double sec_delay;
@@ -62,43 +58,6 @@ public class Controller {
 		mil_delay = 1000/fps;
 		sec_delay = 1.0/fps;
 		
-	}
-	
-	/**
-	 * From the list of states, the probability, and simulation type,
-	 * construct a list of cells to be passed in to the Grid later.
-	 * @param states
-	 * @param param
-	 * @param sim
-	 * @return
-	 */
-	private List<Cell> createCells(List<String> states, double param, String sim){
-		List<Cell> result = new ArrayList<Cell>();
-		switch(sim){
-			case SPREADING_FIRE:
-				for (int i=0; i<rows*cols; i++){
-					result.add(new SpreadingFireCell(states.remove(0), param));
-				}
-				break;
-			case WATOR : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new WaTorCell(states.remove(0)));
-				}
-				break;
-			case CONWAY : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new ConwayCell(states.remove(0)));
-				}
-				break;
-			case SEGREGATION : 
-				for (int i=0; i<rows*cols; i++){
-					result.add(new SegregationCell(states.remove(0), param));
-				}
-				break;
-			default : 
-					break;
-		}
-		return result;
 	}
 
 	// this should be for starting a new simulation maybe? still need to look into it
@@ -146,19 +105,7 @@ public class Controller {
 		Loader l = new Loader(filename);
 		rows = l.getRows();
 		cols = l.getCols();
-		
-		// List of states to shuffle 
-		List<String> states = l.getStates();
-		Collections.shuffle(states);
-		
-		// Create a square grid for our purpose here
-		myGrid = new SquareModel(rows, cols);
-		// Create a list of cells based on simulation
-		List<Cell> cellList = createCells(states, l.getParameter(), l.getSimulationType());
-		// Pass the cell list to grid so that grid can make a 2D array
-
-		// We want to do this in order to hide the implementation of 2D array from the world
-		myGrid.buildModel(cellList);
+		myGrid = l.getFirstGrid();
 	}
 	
 	private Model loadModel(String filename){
