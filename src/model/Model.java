@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
+import loader.XMLParser;
 
 public abstract class Model implements Iterable<Cell> {
 	
@@ -31,6 +32,8 @@ public abstract class Model implements Iterable<Cell> {
 	 * Calls on every Cell in the grid to update itself
 	 */
 	public abstract void updateModel();
+	
+	public abstract void populateCells(XMLParser parser, double param);
 	
 	public Cell get(int row, int col){
 		
@@ -77,5 +80,6 @@ public abstract class Model implements Iterable<Cell> {
 		}
 		return cellList.iterator();
 	}
+
 
 }
