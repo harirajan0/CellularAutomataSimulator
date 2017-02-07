@@ -143,7 +143,7 @@ public class Controller {
 	}
 
 	public void changeSpeed(double currentSpeed) {
-		
+		fps *= currentSpeed;
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

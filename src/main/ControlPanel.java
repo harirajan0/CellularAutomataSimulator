@@ -21,6 +21,7 @@ public class ControlPanel {
 		myResources = resources;
 
 		buttonsPanel = new HBox();
+		buttonsPanel.setSpacing(20);
 		buttonsPanel.setStyle("-fx-background-color: gray");
 		Button startButton = makeButton("StartCommand", e -> c.start());
 		Button pauseButton = makeButton("PauseCommand", e -> c.pause());
@@ -42,15 +43,13 @@ public class ControlPanel {
 	}
 	
 	private Slider makeSpeedSlider(Controller c) {
-		Slider slider = new Slider(0, 1000, 50);
+		Slider slider = new Slider(0.1, 5, 1);
 		slider.setOrientation(Orientation.HORIZONTAL);
-		slider.setMajorTickUnit(100);
+		slider.setMajorTickUnit(0.5);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
-		slider.setSnapToTicks(true);
-		slider.setPrefHeight(250);
-		double oldValue = slider.getValue();
-		slider.setOnDragDropped(e -> c.changeSpeed(oldValue));
+		slider.setPrefWidth(300);
+		slider.setOnDragDropped(e -> c.changeSpeed(slider.getValue()));
 		return slider;
 	}
 	
