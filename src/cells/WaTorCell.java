@@ -35,6 +35,7 @@ public class WaTorCell extends Cell {
 		turnsToBreed++;
 		if (getCurrentState().equals(SHARK)) { updateShark(); }
 		if (getCurrentState().equals(FISH)) { updateFish(); }
+		paint();
 	}
 	
 
@@ -85,6 +86,7 @@ public class WaTorCell extends Cell {
 	private void eatFish(WaTorCell fish) {
 		fish.setNextState(EMPTY);
 		fish.resetFields();
+		fish.paint();
 		turnsToDie = 0;
 	}
 	

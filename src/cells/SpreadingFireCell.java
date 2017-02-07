@@ -30,6 +30,7 @@ public class SpreadingFireCell extends Cell
 			
 			setNextState(EMPTY);
 		}
+		paint();
 	}
 	
 	/**
