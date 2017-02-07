@@ -23,10 +23,10 @@ public class Controller {
 	private SimulationView cellSimulationDisplay;
 	
 	
-	private static final int default_fps = 60;
+	private static final double default_fps = 1;
 	
-	private int fps;
-	private int mil_delay;
+	private double fps;
+	private double mil_delay;
 	private Timeline animation;
 	private Loader l;
 	private File dataFile;
@@ -121,7 +121,16 @@ public class Controller {
     }
     
 
-	public void changeSpeed() {
+	public void changeSpeed(double value) {
+		fps = default_fps*value;
+		System.out.println(fps);
+		animation.stop();
+		KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+				e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

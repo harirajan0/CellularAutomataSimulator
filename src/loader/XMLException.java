@@ -6,7 +6,6 @@ package loader;
  */
 public class XMLException extends RuntimeException {
 	
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * set ID to default value
