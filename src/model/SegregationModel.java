@@ -21,8 +21,11 @@ public class SegregationModel extends Model {
 	
 	// put empty list into every cell
 	public void initiateAvailableCells(){
-		for (Iterator<Cell> i = iterator(); i.hasNext();){
-			((SegregationCell)i.next()).setAvailableList(availableCells);
+		for (int row = 0; row < getRows(); row++){
+			for (int col = 0; col < getCols(); col++) {
+				Cell cell = this.get(row, col);
+				((SegregationCell) cell).setAvailableList(availableCells);
+			}
 		}
 	}
 
@@ -69,27 +72,34 @@ public class SegregationModel extends Model {
 	}
 	
 	public void updateModel() {
-		availableCells = new ArrayList<Cell>();
+		createAvailableCells();
+		initiateAvailableCells();
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				get(r, c).update();
+				createAvailableCells();
+				initiateAvailableCells();
 			}
 		}
-		createAvailableCells();
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				get(r, c).nextGeneration();
-				((SegregationCell) this.get(r, c)).setAvailableList(availableCells);
 			}
 		}
 	}
 	
 	// create list of empty cells for Model to hold
 	public void createAvailableCells(){
-		for (Iterator<Cell> i = iterator(); i.hasNext();){
-			Cell cell = i.next();
-			if (cell.getCurrentState().equals(EMPTY)){
-				availableCells.add(cell);
+		availableCells = new ArrayList<>(); 
+		for (int row = 0; row < getRows(); row++){
+			for (int col = 0; col < getCols(); col++) {
+				Cell cell = this.get(row, col);
+				if (cell.getCurrentState().equals(EMPTY)){
+					if (cell.getNextState() != null) {
+						if (!cell.getNextState().equals(EMPTY)) continue;
+					}
+					availableCells.add(cell);
+				}
 			}
 		}
 	}

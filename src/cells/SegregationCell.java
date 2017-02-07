@@ -30,13 +30,13 @@ public class SegregationCell extends Cell {
 	}
 	@Override
 	public void update() {
+		if (this.getNextState() != null) {return; }
 		if (this.getCurrentState().equals(EMPTY)) {
 			setNextState(this.getCurrentState());
 			return;
 		}
-		List<Cell> neighbors = this.getNeighbors();
-		if (!isSatisfied(neighbors)){
-			changeStates(emptyPositions);
+		if (!isSatisfied()){
+			changeStates();
 		} else{
 			setNextState(this.getCurrentState());
 		}
@@ -55,9 +55,9 @@ public class SegregationCell extends Cell {
 	 * @param neighbors
 	 * @return
 	 */
-	private boolean isSatisfied(List<Cell> neighbors){
+	private boolean isSatisfied(){
 		double nonEmpty = 0, sameType = 0;
-		for (Cell nb : neighbors){
+		for (Cell nb : getNeighbors()){
 			if (nb != null){
 				if (!nb.getCurrentState().equals(EMPTY)){
 					nonEmpty++;
@@ -76,21 +76,17 @@ public class SegregationCell extends Cell {
 	 * an empty Cell and sets its NextState to this Cell's CurrentState.
 	 * @param emptyPositions
 	 */
-	private void changeStates(List<Cell> emptyPositions){
+	private void changeStates(){
+		if (emptyPositions.size() == 0) {
+			this.setNextState(getCurrentState());
+			return;
+		}
 		this.setNextState(EMPTY);
-		
-		//System.out.println("1. " + this.getCurrentState());
-		//System.out.println("2. " + this.getNextState());
-		
-		int option = new Random().nextInt(emptyPositions.size());
+		int option = (int)Math.random()*emptyPositions.size();
 		Cell tmp = emptyPositions.get(option);
 		tmp.setNextState(this.getCurrentState());
-		
-		//System.out.println("3. " + tmp.getCurrentState());
-		//System.out.println("4. " + tmp.getNextState());
-		
-		//emptyPositions.add(this);
-		//emptyPositions.remove(tmp);
+		System.out.println("This: " + this.getxPosition() + ", " + this.getyPosition());
+		System.out.println("Moves to " + tmp.getxPosition() + ", " + tmp.getyPosition());
 	}
 	
 	@Override

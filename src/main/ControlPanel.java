@@ -1,17 +1,12 @@
 package main;
 
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class ControlPanel {
 	private HBox buttonsPanel;
@@ -43,14 +38,14 @@ public class ControlPanel {
 	}
 	
 	private Slider makeSpeedSlider(Controller c) {
-		Slider slider = new Slider(0, 1000, 50);
+		Slider slider = new Slider(0.1, 5, 1);
 		slider.setOrientation(Orientation.HORIZONTAL);
-		slider.setOnDragDropped(e -> c.changeSpeed());
-		slider.setMajorTickUnit(100);
+		slider.setMajorTickUnit(0.5);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
-		slider.setSnapToTicks(true);
-		slider.setPrefHeight(250);
+		slider.setPrefWidth(300);
+		
+		slider.valueProperty().addListener(e -> c.changeSpeed(slider.getValue()));
 		return slider;
 	}
     private Button makeButton(String property, EventHandler<ActionEvent> handler) {

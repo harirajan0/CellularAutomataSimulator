@@ -58,7 +58,9 @@ public class SpreadingFireCell extends Cell
 					
 					setNextState(BURNING);
 					return;
-				} 
+				} else{
+					setNextState(getCurrentState());
+				}
 			}else {
 				setNextState(getCurrentState());
 			}
@@ -67,6 +69,7 @@ public class SpreadingFireCell extends Cell
 	
 	@Override
 	public void paint(){
+		System.out.println(this.getCurrentState());
 		switch(getCurrentState()){
 			case EMPTY:
 				setFill(Color.BLACK);
