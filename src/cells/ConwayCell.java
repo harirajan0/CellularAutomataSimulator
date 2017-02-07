@@ -1,10 +1,8 @@
 package cells;
-
 import java.util.List;
 import javafx.scene.paint.Color;
 
 public class ConwayCell extends Cell {
-
 	//begin working on ConwayCell 02/02/2017
 	
 	private static final String ALIVE = "alive";
@@ -20,7 +18,6 @@ public class ConwayCell extends Cell {
 	public ConwayCell(String initState, int x, int y, int width) {
 		super(initState, x, y, width);
 	}
-
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
@@ -70,4 +67,3 @@ public class ConwayCell extends Cell {
 		return null; //TODO: Replace with exception handling
 	}
 }
-

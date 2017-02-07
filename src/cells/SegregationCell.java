@@ -1,5 +1,5 @@
 package cells;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
  * @author Bihan Zhuang
  *
  */
-
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
@@ -25,10 +24,8 @@ public class SegregationCell extends Cell {
 		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
-
 	@Override
 	public void update() {}
-
 	/**
 	 * Updates the state of the Cell if it is dissatisfied and changes 
 	 * a random Cell from the specified ArrayList of empty Cells to the 
