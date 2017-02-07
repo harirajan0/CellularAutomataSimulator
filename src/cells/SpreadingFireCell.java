@@ -58,7 +58,9 @@ public class SpreadingFireCell extends Cell
 					
 					setNextState(BURNING);
 					return;
-				} 
+				} else{
+					setNextState(getCurrentState());
+				}
 			}else {
 				setNextState(getCurrentState());
 			}

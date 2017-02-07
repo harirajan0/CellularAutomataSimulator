@@ -1,4 +1,4 @@
-package main;
+	package main;
 
 import java.io.File;
 import javafx.animation.KeyFrame;
@@ -23,7 +23,7 @@ public class Controller {
 	private SimulationView cellSimulationDisplay;
 	
 	
-	private static final int default_fps = 1;
+	private static final int default_fps = 60;
 	
 	private int fps;
 	private int mil_delay;
@@ -107,7 +107,6 @@ public class Controller {
 		myModel = l.getFirstGrid();
 		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
-//		cellSimulationDisplay.test();
 	}
 	
 	

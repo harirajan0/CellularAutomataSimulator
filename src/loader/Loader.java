@@ -1,12 +1,6 @@
 package loader;
 
 import java.io.File;
-
-import cells.ConwayCell;
-import cells.SegregationCell;
-import cells.SpreadingFireCell;
-import cells.WaTorCell;
-import main.ApplicationStartup;
 import model.ConwayModel;
 import model.Model;
 import model.SegregationModel;
@@ -59,66 +53,18 @@ public class Loader {
 	 * a list of cells to be passed in to the Grid later.
 	 */
 	private void initializeGrid() {
-		int cellNum = 0;
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(rows, cols);
-
 		switch (simulationType) {
-		case SPREADING_FIRE:
-			myModel = new SpreadingFireModel(rows, cols);
-			for (int row = 0; row < rows; row++) {
-				for (int col = 0; col < cols; col++) {
-					int xPosition = row * sideLength;
-					int yPosition = col * sideLength;
-					myModel.set(row, col,
-							new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition,
-									yPosition, sideLength, param));
-					cellNum++;
-				}
-			}
+		case SPREADING_FIRE: myModel = new SpreadingFireModel(rows, cols);
 			break;
-		case WATOR:
-			myModel = new WaTorModel(rows, cols);
-			for (int row = 0; row < rows; row++) {
-				for (int col = 0; col < cols; col++) {
-					int xPosition = row * sideLength;
-					int yPosition = col * sideLength;
-					myModel.set(row, col, new WaTorCell(myParser.getTextValue("state" + Integer.toString(cellNum)),
-							xPosition, yPosition, sideLength));
-					cellNum++;
-				}
-			}
+		case WATOR: myModel = new WaTorModel(rows, cols);
 			break;
-		case CONWAY:
-			myModel = new ConwayModel(rows, cols);
-			for (int row = 0; row < rows; row++) {
-				for (int col = 0; col < cols; col++) {
-					int xPosition = row * sideLength;
-					int yPosition = col * sideLength;
-					myModel.set(row, col, new ConwayCell(myParser.getTextValue("state" + Integer.toString(cellNum)),
-							xPosition, yPosition, sideLength));
-					cellNum++;
-				}
-			}
+		case CONWAY: myModel = new ConwayModel(rows, cols);
 			break;
-		case SEGREGATION:
-			myModel = new SegregationModel(rows, cols);
-			for (int row = 0; row < rows; row++) {
-				for (int col = 0; col < cols; col++) {
-					int xPosition = row * sideLength;
-					int yPosition = col * sideLength;
-					myModel.set(row, col,
-							new SegregationCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition,
-									yPosition, sideLength, param));
-					cellNum++;
-				}
-			}
-			((SegregationModel) myModel).createAvailableCells();
-			((SegregationModel) myModel).initiateAvailableCells();
+		case SEGREGATION: myModel = new SegregationModel(rows, cols);
 			break;
-		default:
-			break;
+		default: break;
 		}
-		
+		myModel.populateCells(myParser, param);
 	}
 
 

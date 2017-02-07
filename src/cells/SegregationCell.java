@@ -79,18 +79,9 @@ public class SegregationCell extends Cell {
 	private void changeStates(List<Cell> emptyPositions){
 		this.setNextState(EMPTY);
 		
-		//System.out.println("1. " + this.getCurrentState());
-		//System.out.println("2. " + this.getNextState());
-		
 		int option = new Random().nextInt(emptyPositions.size());
 		Cell tmp = emptyPositions.get(option);
 		tmp.setNextState(this.getCurrentState());
-		
-		//System.out.println("3. " + tmp.getCurrentState());
-		//System.out.println("4. " + tmp.getNextState());
-		
-		//emptyPositions.add(this);
-		//emptyPositions.remove(tmp);
 	}
 	
 	@Override
