@@ -1,4 +1,4 @@
-package main;
+	package main;
 
 import java.io.File;
 import javafx.animation.KeyFrame;
@@ -107,7 +107,6 @@ public class Controller {
 		myModel = l.getFirstGrid();
 		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
-//		cellSimulationDisplay.test();
 	}
 	
 	

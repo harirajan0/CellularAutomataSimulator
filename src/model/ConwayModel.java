@@ -29,7 +29,6 @@ public class ConwayModel extends Model {
 					}
 				}
 				get(r, c).setNeighbors(neighbors);
-				System.out.println(neighbors.size());
 			}
 		}
 	}

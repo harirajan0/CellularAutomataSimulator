@@ -31,10 +31,5 @@ public class SimulationView {
 			}
 		}
 	}
-	
-	public void test(){
-		Rectangle sq = new Rectangle(80, 80, Color.BLUE);
-		cellSimulationPane.getChildren().add(sq);
-	}
 
 }
