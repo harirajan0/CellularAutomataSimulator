@@ -45,7 +45,7 @@ public abstract class Model implements Iterable<Cell> {
 	 */
 	public abstract void updateModel();
 	
-	protected Cell get(int row, int col){
+	public Cell get(int row, int col){
 		
 		return myGrid[row][col];
 	}
@@ -58,7 +58,7 @@ public abstract class Model implements Iterable<Cell> {
 	 * Gets the number of rows in the grid
 	 * @return The number of rows in the grid
 	 */
-	protected int getRows(){
+	public int getRows(){
 		return myGrid.length;
 	}
 	
@@ -66,7 +66,7 @@ public abstract class Model implements Iterable<Cell> {
 	 * Gets the number of columns in the grid
 	 * @return The number of columns in the grid
 	 */
-	protected int getCols(){
+	public int getCols(){
 		return myGrid[0].length;
 	}
 	
@@ -76,7 +76,7 @@ public abstract class Model implements Iterable<Cell> {
 	 * @param col Column index to check
 	 * @return Whether or not the index at (row, col) is within the grid
 	 */
-	protected boolean contains(int row, int col){
+	public boolean contains(int row, int col){
 		return row >=0 && row < getRows() && col >= 0 && col < getCols();
 	}
 	

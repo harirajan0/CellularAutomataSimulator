@@ -93,8 +93,9 @@ public class Controller {
 		animation.pause();
 	}
 	
-	// oh this step is currently gonna be used for the loop. not sure if we need to make a seperate
-	// step for the step button or if we can use the same one.  
+	/**
+	 * Call on every iteration of animation
+	 */
 	public void step() {
 		// update model
 		myModel.updateModel();
@@ -102,6 +103,8 @@ public class Controller {
 		
 		// this method should e less than 5 lines. probably just 2 method calls will already be enough,
 		// but we'll see.
+		myModel.updateModel();
+		cellSimulationDisplay.displayGrid(myModel);
 	}
 
 	public void reset() {
@@ -148,7 +151,7 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Model getModel() {
+	public Model getGrid() {
 		return myModel;
 	}
 
