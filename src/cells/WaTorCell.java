@@ -2,6 +2,8 @@ package cells;
 
 import java.util.HashSet;
 
+import javafx.scene.paint.Color;
+
 public class WaTorCell extends Cell {
 	
 	private static final String EMPTY = "empty";
@@ -18,8 +20,8 @@ public class WaTorCell extends Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public WaTorCell(String initState, int x, int y) {
-		super(initState, x, y);
+	public WaTorCell(String initState, int x, int y, int width) {
+		super(initState, x, y, width);
 		resetFields();
 	}
 
@@ -131,5 +133,18 @@ public class WaTorCell extends Cell {
 		turnsToBreed = cell.turnsToBreed;
 	}
 
-
+	@Override
+	public Color getFill(){
+		switch(getCurrentState()){
+			case EMPTY:
+				return Color.BLUE;
+			case FISH:
+				return Color.GREEN;
+			case SHARK:
+				return Color.YELLOW;
+			default:
+				break;
+		}
+		return null; //TODO: Replace with exception handling
+	}
 }

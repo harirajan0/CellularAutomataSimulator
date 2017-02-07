@@ -1,7 +1,8 @@
 package main;
-import java.util.ArrayList
-;
+
+import java.util.ArrayList;
 import java.util.Collections;
+
 import java.util.List;
 
 import cells.ConwayCell;
@@ -12,6 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import loader.Loader;
+
 import cells.Cell;
 import model.Model;
 import model.SquareModel;
@@ -29,16 +31,18 @@ public class Controller {
 	// Controller holds View in order to update it.
 	private SimulationView cellSimulationDisplay;
 	
+	private Loader loader;
+	
 	private static final int default_fps = 60;
 	
-	private static final String SPREADING_FIRE = "FIRE";
-	private static final String WATOR = "WATOR";
-	private static final String SEGREGATION = "SEGREGATION";
-	private static final String CONWAY = "CONWAY";
 	private int fps;
 	private int mil_delay;
 	private double sec_delay;
 	private Timeline animation;
+
+	private Model model;
+	
+//	private Stage stage;
 	
 	
 	/**
@@ -105,7 +109,11 @@ public class Controller {
 		Loader l = new Loader(filename);
 		rows = l.getRows();
 		cols = l.getCols();
-		
+		myGrid = l.getFirstGrid();
+	}
+	
+	private Model loadModel(String filename){
+
 		// List of states to shuffle 
 		List<String> states = l.getStates();
 		Collections.shuffle(states);
@@ -117,6 +125,7 @@ public class Controller {
 		// Pass the cell list to grid so that grid can make a 2D array
 		// We want to do this in order to hide the implementation of 2D array from the world
 		myModel.buildModel(cellList);
+		return model;
 	}
 
 	public void changeSpeed() {

@@ -11,6 +11,11 @@ import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
 import cells.WaTorCell;
+<<<<<<< HEAD
+=======
+import main.ApplicationStartup;
+import model.Model;
+>>>>>>> master
 import model.SquareModel;
 
 public class Loader {
@@ -23,14 +28,6 @@ public class Loader {
     public static final String PERCENT_STATE_TWO = "percentState2";
     public static final String PERCENT_STATE_THREE = "percentState3";
     public static final String PARAM = "param";
-    
-    public static final String EMPTY = "empty";
-    public static final String ALIVE = "alive";
-    public static final String DEAD = "dead";
-    private static final String BURNING = "burning";
-	private static final String TREE = "tree";
-    public static final String SHARK = "shark";
-    public static final String FISH = "fish";
     
 	private static final String SPREADING_FIRE = "FIRE";
 	private static final String WATOR = "WATOR";
@@ -48,7 +45,6 @@ public class Loader {
     private SquareModel myGrid;
     
 	public Loader(String fileName) {
-		setupSimulationMap();
 		myParser = new XMLParser(fileName);
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
@@ -59,18 +55,6 @@ public class Loader {
 	}
     
 	/**
-	 * 
-	 */
-	private void setupSimulationMap() {
-		simulationMap = new HashMap<>();
-		simulationMap.put("SpreadingFire", Arrays.asList(new String[] {EMPTY, BURNING, TREE}));
-		simulationMap.put("Segregation", Arrays.asList(new String[] {EMPTY}));
-		simulationMap.put("GameOfLife", Arrays.asList(new String[] {ALIVE, DEAD}));
-		simulationMap.put("PreditorPrey", Arrays.asList(new String[] {EMPTY, SHARK, FISH}));
-		
-	}
-	
-	/**
 	 * From the list of states, the probability, and simulation type,
 	 * construct a list of cells to be passed in to the Grid later.
 	 * @param states
@@ -80,6 +64,7 @@ public class Loader {
 	 */
 	private void initializeGrid(){
 		myGrid = new SquareModel(rows, cols);
+<<<<<<< HEAD
 		int i = 0;
 		switch(simulationType){
 			case SPREADING_FIRE:
@@ -107,7 +92,30 @@ public class Loader {
 				}
 				break;
 			default : 
+=======
+		int cellNum = 0;
+		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(rows, cols);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				int xPosition = row * sideLength;
+				int yPosition = col * sideLength;
+				switch(simulationType){
+				case SPREADING_FIRE: 
+					myGrid.set(row, col, new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength, param));
 					break;
+				case WATOR : 
+					myGrid.set(row, col, new WaTorCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength));
+					break;
+				case CONWAY :
+					myGrid.set(row, col, new ConwayCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength));
+>>>>>>> master
+					break;
+				case SEGREGATION : 
+					myGrid.set(row, col, new SegregationCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength, param));
+					break;
+				default : break;
+			}
+			}
 		}
 	}
 	
@@ -133,5 +141,13 @@ public class Loader {
 	public List<String> getStates() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public Model getFirstGrid() {
+		// TODO Auto-generated method stub
+		return myGrid;
 	}
 }

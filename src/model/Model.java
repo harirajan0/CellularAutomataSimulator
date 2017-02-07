@@ -50,6 +50,10 @@ public abstract class Model implements Iterable<Cell> {
 		return myGrid[row][col];
 	}
 	
+	public void set(int row, int col, Cell cell) {
+		myGrid[row][col] = cell;
+	}
+	
 	/**
 	 * Gets the number of rows in the grid
 	 * @return The number of rows in the grid

@@ -1,5 +1,7 @@
 package cells;
 import java.util.List;
+import javafx.scene.paint.Color;
+
 public class ConwayCell extends Cell {
 	//begin working on ConwayCell 02/02/2017
 	
@@ -7,14 +9,14 @@ public class ConwayCell extends Cell {
 	private static final String DEAD = "dead";
 	
 	/** Conway's game of life rules
-	 * 1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-	 * 2. Any live cell with two or three live neighbours lives on to the next generation.
-	 * 3. Any live cell with more than three live neighbours dies, as if by overpopulation.
-	 * 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+	 * 1. Any live cell with fewer than two live neighbors dies, as if caused by under-population.
+	 * 2. Any live cell with two or three live neighbors lives on to the next generation.
+	 * 3. Any live cell with more than three live neighbors dies, as if by over-population.
+	 * 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 	 */
 	
-	public ConwayCell(String initState, int x, int y) {
-		super(initState, x, y);
+	public ConwayCell(String initState, int x, int y, int width) {
+		super(initState, x, y, width);
 	}
 	@Override
 	public void update() {
@@ -50,5 +52,18 @@ public class ConwayCell extends Cell {
 			}
 		}
 		return livingCount;
+	}
+
+	@Override
+	public Color getFill(){
+		switch(getCurrentState()){
+			case ALIVE:
+				return Color.WHITE;
+			case DEAD:
+				return Color.BLACK;
+			default:
+				break;
+		}
+		return null; //TODO: Replace with exception handling
 	}
 }

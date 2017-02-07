@@ -1,7 +1,10 @@
 package cells;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import javafx.scene.paint.Color;
+
+
 /**
  * A subclass of Cell that creates the particular cell type for the 
  * Segregation simulation.
@@ -11,10 +14,13 @@ import java.util.Random;
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
+	private static final String X = "X";
+	private static final String O = "O";
+	
 	private double percentage;
 	
-	public SegregationCell(String initState, int x, int y, double percentage) {
-		super(initState, x, y);
+	public SegregationCell(String initState, int x, int y, int width, double percentage) {
+		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
 	@Override
@@ -80,4 +86,18 @@ public class SegregationCell extends Cell {
 		emptyPositions.remove(tmp);
 	}
 	
+	@Override
+	public Color getFill(){
+		switch(getCurrentState()){
+			case EMPTY:
+				return Color.GRAY;
+			case X:
+				return Color.BLUE;
+			case O:
+				return Color.RED;
+			default:
+				break;
+		}
+		return null; //TODO: Replace with exception handling
+	}
 }

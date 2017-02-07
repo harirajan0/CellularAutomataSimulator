@@ -148,7 +148,7 @@ public class GUI {
 		myResetButton = makeButton("ResetCommand", e -> myController.reset());
 		//Don'r actually need a filename to call Loader. see class example to make the pop up window instead
 		// will change this later.
-		myLoadButton = makeButton("LoadCommand", e -> myController.load(filename));
+		myLoadButton = makeButton("LoadCommand", e -> myController.load());
 		makeSlider();
 		
 		result.getChildren().addAll(myStartButton, myPauseButton, myStepButton, myResetButton, myLoadButton);
@@ -179,8 +179,7 @@ public class GUI {
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! should change once Grid class is up
 		result.getChildren().add(myCellView.displayGrid(myController.getGrid()));
 		return result;
-	}
-	
+	}	
 	
 
 	/**
