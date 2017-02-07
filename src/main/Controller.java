@@ -23,7 +23,7 @@ public class Controller {
 	private SimulationView cellSimulationDisplay;
 	
 	
-	private static final int default_fps = 60;
+	private static final int default_fps = 10;
 	
 	private int fps;
 	private int mil_delay;
