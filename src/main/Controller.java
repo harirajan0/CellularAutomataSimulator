@@ -1,15 +1,6 @@
 package main;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.List;
-
-import cells.ConwayCell;
-import cells.SegregationCell;
-import cells.SpreadingFireCell;
-import cells.WaTorCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.FileChooser;
@@ -18,7 +9,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import loader.Loader;
 
-import cells.Cell;
 import model.Model;
 
 // This controller class is the central nexus control of the entire program.
@@ -28,23 +18,19 @@ import model.Model;
 public class Controller {
 	
 	// Dimension of the Grid, obtained from Loader
-	private int rows, cols;
 	private Model myModel;
 	// Controller holds View in order to update it.
 	private SimulationView cellSimulationDisplay;
 	
-	private Loader loader;
 	
 	private static final int default_fps = 1;
 	
 	private int fps;
 	private int mil_delay;
-	private double sec_delay;
 	private Timeline animation;
 	private Loader l;
 	private File dataFile;
 	
-	private Model model;
 	
 	// kind of data files to look for
     public static final String DATA_FILE_EXTENSION = "*.xml";
@@ -67,7 +53,6 @@ public class Controller {
 //		stage = s;
 		fps = default_fps;
 		mil_delay = 1000/fps;
-		sec_delay = 1.0/fps;
 		
 	}
 
@@ -99,8 +84,6 @@ public class Controller {
 			animation.stop();
 		}
 		l = new Loader(dataFile);
-		rows = l.getRows();
-		cols = l.getCols();
 		myModel = l.getFirstGrid();
 		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
@@ -121,8 +104,6 @@ public class Controller {
 		}
 		dataFile = myChooser.showOpenDialog(myStage);
 		l = new Loader(dataFile);
-		rows = l.getRows();
-		cols = l.getCols();
 		myModel = l.getFirstGrid();
 		myModel.initializeNeighbors();
 		cellSimulationDisplay.displayGrid(myModel);
