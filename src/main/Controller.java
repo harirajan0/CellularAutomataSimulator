@@ -122,7 +122,14 @@ public class Controller {
     }
     
 
-	public void changeSpeed() {
+	public void changeSpeed(double value) {
+		fps *= value;
+		KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+				e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

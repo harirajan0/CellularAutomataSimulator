@@ -38,14 +38,13 @@ public class ControlPanel {
 	}
 	
 	private Slider makeSpeedSlider(Controller c) {
-		Slider slider = new Slider(0, 1000, 50);
+		Slider slider = new Slider(0.1, 5, 1);
 		slider.setOrientation(Orientation.HORIZONTAL);
-		slider.setOnDragDropped(e -> c.changeSpeed());
-		slider.setMajorTickUnit(100);
+		slider.setMajorTickUnit(0.5);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
-		slider.setSnapToTicks(true);
-		slider.setPrefHeight(250);
+		slider.setPrefWidth(300);
+		slider.setOnDragDropped(e -> c.changeSpeed(slider.getValue()));
 		return slider;
 	}
     private Button makeButton(String property, EventHandler<ActionEvent> handler) {

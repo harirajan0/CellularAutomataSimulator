@@ -67,6 +67,7 @@ public class SpreadingFireCell extends Cell
 	
 	@Override
 	public void paint(){
+		System.out.println(this.getCurrentState());
 		switch(getCurrentState()){
 			case EMPTY:
 				setFill(Color.BLACK);
