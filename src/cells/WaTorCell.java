@@ -36,7 +36,7 @@ public class WaTorCell extends Cell {
 		if (getCurrentState().equals(EMPTY)) { return; }
 		turnsToBreed++;
 		if (getCurrentState().equals(SHARK)) { updateShark(); }
-		if (getCurrentState().equals(FISH)) { updateShark(); }
+		if (getCurrentState().equals(FISH)) { updateFish(); }
 		//throw exception
 	}
 	

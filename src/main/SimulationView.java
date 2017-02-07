@@ -1,14 +1,14 @@
 package main;
 
-import grid.Grid;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import model.Model;
 
 public class SimulationView {
 	//beginning work on GUI 2/2/2017
 	public static final int WINDOW_SIZE = 400;
 	
-	private Grid myGrid;
+	private Model myGrid;
 	private Pane cellSimulationPane;
 	
 	public SimulationView(){
@@ -18,7 +18,7 @@ public class SimulationView {
 		
 	}
 	
-	public void setGrid(Grid grid){
+	public void setGrid(Model grid){
 		myGrid = grid;
 	}
 	
@@ -34,7 +34,7 @@ public class SimulationView {
 	 * @param grid
 	 * @return
 	 */
-	public Node displayGrid(Grid grid) {
+	public Node displayGrid(Model grid) {
 		return null;
 	}
 
