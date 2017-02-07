@@ -1,6 +1,5 @@
 package main;
 
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import model.Model;
 
@@ -8,7 +7,6 @@ public class SimulationView {
 	//beginning work on GUI 2/2/2017
 	public static final int SIMULATION_SIZE = 400;
 	
-	private Model myGrid;
 	private Pane cellSimulationPane;
 	
 	public SimulationView(){
@@ -16,10 +14,6 @@ public class SimulationView {
 		cellSimulationPane.setMaxSize(400, 400);
 //		cellSimulationPane.setStyle("-fx-background-color: black;");
 		
-	}
-	
-	public void setGrid(Model grid){
-		myGrid = grid;
 	}
 	
 	public Pane getCellSimulationPane(){
@@ -32,10 +26,14 @@ public class SimulationView {
 	 * the Grid class we should change the parameter.
 	 * Takes in the grid and display it in the GUI.
 	 * @param grid
-	 * @return
 	 */
-	public Node displayGrid(Model grid) {
-		return null;
+	
+	public void displayGrid(Model grid) {
+		for(int r = 0; r < grid.getRows(); r++){
+			for(int c = 0; c < grid.getCols(); c++){
+				cellSimulationPane.getChildren().add(grid.get(r, c).getRect());
+			}
+		}
 	}
 
 }
