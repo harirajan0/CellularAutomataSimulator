@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 import model.Model;
 
 public class SimulationView {
-	//beginning work on GUI 2/2/2017
+	
 	public static final int SIMULATION_SIZE = 400;
 	
 	private Pane cellSimulationPane;
@@ -21,17 +21,14 @@ public class SimulationView {
 	}
 	
 
-	/**!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	 * This is just a placeholder method. Once we have
-	 * the Grid class we should change the parameter.
-	 * Takes in the grid and display it in the GUI.
-	 * @param grid
+	/* Takes in the model and display it in the GUI.
+	 * @param model The model to display
 	 */
 	
-	public void displayGrid(Model grid) {
-		for(int r = 0; r < grid.getRows(); r++){
-			for(int c = 0; c < grid.getCols(); c++){
-				cellSimulationPane.getChildren().add(grid.get(r, c).getRect());
+	public void displayGrid(Model model) {
+		for(int r = 0; r < model.getRows(); r++){
+			for(int c = 0; c < model.getCols(); c++){
+				cellSimulationPane.getChildren().add(model.get(r, c).getRect());
 			}
 		}
 	}
