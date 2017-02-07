@@ -11,9 +11,7 @@ public class SimulationView {
 	
 	public SimulationView(){
 		cellSimulationPane = new Pane();
-		cellSimulationPane.setMaxSize(400, 400);
-//		cellSimulationPane.setStyle("-fx-background-color: black;");
-		
+		cellSimulationPane.setMaxSize(400, 400);		
 	}
 	
 	public Pane getCellSimulationPane(){

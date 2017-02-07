@@ -1,12 +1,8 @@
 package loader;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-import cells.Cell;
 import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
@@ -21,9 +17,6 @@ public class Loader {
     public static final String SIMULATION_NAME = "simulationName";
     public static final String NUM_ROWS = "numRows";
     public static final String NUM_COLUMNS = "numCols";
-    public static final String PERCENT_STATE_ONE = "percentState1";
-    public static final String PERCENT_STATE_TWO = "percentState2";
-    public static final String PERCENT_STATE_THREE = "percentState3";
     public static final String PARAM = "param";
     
 	private static final String SPREADING_FIRE = "FIRE";
@@ -32,9 +25,7 @@ public class Loader {
 	private static final String CONWAY = "CONWAY";
     
     private XMLParser myParser;
-    
-    private HashMap<String, List<String>> simulationMap;
-    
+        
     private String simulationType;
     private int rows;
     private int cols;
