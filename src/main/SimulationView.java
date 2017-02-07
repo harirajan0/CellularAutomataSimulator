@@ -4,14 +4,12 @@ import javafx.scene.layout.Pane;
 import model.Model;
 
 public class SimulationView {
-	
-	public static final int SIMULATION_SIZE = 400;
-	
+		
 	private Pane cellSimulationPane;
 	
 	public SimulationView(){
 		cellSimulationPane = new Pane();
-		cellSimulationPane.setMaxSize(400, 400);		
+		cellSimulationPane.setMaxSize(ApplicationStartup.WINDOW_SIZE, ApplicationStartup.WINDOW_SIZE);		
 	}
 	
 	public Pane getCellSimulationPane(){
@@ -24,6 +22,7 @@ public class SimulationView {
 	 */
 	
 	public void displayGrid(Model model) {
+		cellSimulationPane.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
 				cellSimulationPane.getChildren().add(model.get(r, c).getRect());
