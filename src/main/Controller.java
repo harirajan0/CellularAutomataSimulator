@@ -1,7 +1,8 @@
 package main;
-import java.util.ArrayList
-;
+
+import java.util.ArrayList;
 import java.util.Collections;
+
 import java.util.List;
 
 import cells.ConwayCell;
