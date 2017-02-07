@@ -1,35 +1,42 @@
 package cells;
-
 import java.util.List;
-import com.sun.javafx.geom.Shape;
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Cell superclass. 
  * @author Hari Rajan
  * @author Vishnu Gottiparthy
  * @author Bihan Zhuang
- *
+ * @author Gabriel Chen
  */
 public abstract class Cell {
 	private String currentState;
 	private String nextState;
 	private List<Cell> neighbors;
-	//private int xPosition;
-	//private int yPosition;
-	private Shape myShape;
+	private int xPosition;
+	private int yPosition;
+	private Rectangle myRect;
 	
-	// Since we want to hide the 2D array implementation from the world,
-	// we don't need to have the x, y position in each Cell anymore.
-	public Cell(String initState) {
+	public Cell(String initState, int x, int y, int width) {
 		setCurrentState(initState);
-		//setxPosition(x);
-		//setyPosition(y);
+		setxPosition(x);
+		setyPosition(y);
+		myRect = new Rectangle(x, y, width, width);
+		myRect.setFill(getFill());
 	}
-	
+
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
 	 */
 	public abstract void update();
+	
+	/**
+	 * Determines the color of the Cell based on its state
+	 * @return The color corresponding to the cell's current state
+	 */
+	public abstract Color getFill();
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
@@ -46,35 +53,35 @@ public abstract class Cell {
 		this.neighbors = neighbors;
 	}
 	
-//	/**
-//	 * Gets the x-coordinate of the cell
-//	 * @return x-coordinate of the cell
-//	 */
-//	public double getxPosition() {
-//		return xPosition;
-//	}
-//	/**
-//	 * Sets the x-coordinate of the cell
-//	 * @param xPosition New x-coordinate of the cell
-//	 */
-//	public void setxPosition(int xPosition) {
-//		this.xPosition = xPosition;
-//	}
-//	/**
-//	 * Gets the y-coordinate of the cell
-//	 * @return y-coordinate of the cell
-//	 */
-//	public double getyPosition() {
-//		return yPosition;
-//	}
-//	/**
-//	 * Sets the y-coordinate of the cell
-//	 * @param yPosition New y-coordinate of the cell
-//	 */
-//	public void setyPosition(int yPosition) {
-//		this.yPosition = yPosition;
-//	}
-//	
+	/**
+	 * Gets the x-coordinate of the cell
+	 * @return x-coordinate of the cell
+	 */
+	public double getxPosition() {
+		return xPosition;
+	}
+	/**
+	 * Sets the x-coordinate of the cell
+	 * @param xPosition New x-coordinate of the cell
+	 */
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
+	/**
+	 * Gets the y-coordinate of the cell
+	 * @return y-coordinate of the cell
+	 */
+	public double getyPosition() {
+		return yPosition;
+	}
+	/**
+	 * Sets the y-coordinate of the cell
+	 * @param yPosition New y-coordinate of the cell
+	 */
+	public void setyPosition(int yPosition) {
+		this.yPosition = yPosition;
+	}
+	
 	/**
 	 * Gets the current state of the cell
 	 * @return The current state of the cell
@@ -107,12 +114,12 @@ public abstract class Cell {
 	}
 	
 	/**
-	 * Gets the shape that represents the cell in the GUI
-	 * @return	Shape that represents the cell in the GUI
+	 * Gets the Rectangle that represents the cell in the GUI
+	 * @return	Rectangle that represents the cell in the GUI
 	 */
-	public Shape getShape()
+	public Rectangle getRect()
 	{
-		return myShape;
+		return myRect;
 	}
 	
 	/**

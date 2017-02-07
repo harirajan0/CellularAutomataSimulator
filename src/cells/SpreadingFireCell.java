@@ -1,7 +1,6 @@
 package cells;
-import java.util.Arrays;
 import java.util.List;
-
+import javafx.scene.paint.Color;
 
 public class SpreadingFireCell extends Cell 
 {	
@@ -10,9 +9,9 @@ public class SpreadingFireCell extends Cell
 	private static final String TREE = "tree";
 	private double probCatch;
 	
-	public SpreadingFireCell(String initState, double prob){
+	public SpreadingFireCell(String initState, int x, int y, int width, double prob){
 		
-		super(initState);
+		super(initState, x, y, width);
 		probCatch = prob;
 	}
 
@@ -61,5 +60,19 @@ public class SpreadingFireCell extends Cell
 			}
 		}
 	}
-
+	
+	@Override
+	public Color getFill(){
+		switch(getCurrentState()){
+			case EMPTY:
+				return Color.BLACK;
+			case BURNING:
+				return Color.RED;
+			case TREE:
+				return Color.GREEN;
+			default:
+				break;
+		}
+		return null; //TODO: Replace with exception handling
+	}
 }

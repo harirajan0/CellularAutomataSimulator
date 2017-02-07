@@ -1,8 +1,9 @@
 package cells;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 
 /**
@@ -11,20 +12,20 @@ import java.util.Random;
  * @author Bihan Zhuang
  *
  */
-
 public class SegregationCell extends Cell {
 	
 	private static final String EMPTY = "empty";
+	private static final String X = "X";
+	private static final String O = "O";
+	
 	private double percentage;
 	
-	public SegregationCell(String initState, double percentage) {
-		super(initState);
+	public SegregationCell(String initState, int x, int y, int width, double percentage) {
+		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
-
 	@Override
 	public void update() {}
-
 	/**
 	 * Updates the state of the Cell if it is dissatisfied and changes 
 	 * a random Cell from the specified ArrayList of empty Cells to the 
@@ -86,4 +87,18 @@ public class SegregationCell extends Cell {
 		emptyPositions.remove(tmp);
 	}
 	
+	@Override
+	public Color getFill(){
+		switch(getCurrentState()){
+			case EMPTY:
+				return Color.GRAY;
+			case X:
+				return Color.BLUE;
+			case O:
+				return Color.RED;
+			default:
+				break;
+		}
+		return null; //TODO: Replace with exception handling
+	}
 }

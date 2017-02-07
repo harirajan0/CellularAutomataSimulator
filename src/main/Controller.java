@@ -1,8 +1,10 @@
 package main;
+
 import java.util.ArrayList;
+import java.util.Collections;
+
 import java.util.List;
 
-import cells.Cell;
 import cells.ConwayCell;
 import cells.SegregationCell;
 import cells.SpreadingFireCell;
@@ -11,7 +13,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import loader.Loader;
+
+import cells.Cell;
 import model.Model;
+import model.SquareModel;
 
 // This controller class is the central nexus control of the entire program.
 // It will handle things like when to update the model, when to update the view,
