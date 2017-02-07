@@ -1,9 +1,6 @@
 package cells;
-
 import java.util.List;
-
 public class ConwayCell extends Cell {
-
 	//begin working on ConwayCell 02/02/2017
 	
 	private static final String ALIVE = "alive";
@@ -16,10 +13,9 @@ public class ConwayCell extends Cell {
 	 * 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 	 */
 	
-	public ConwayCell(String initState) {
-		super(initState);
+	public ConwayCell(String initState, int x, int y) {
+		super(initState, x, y);
 	}
-
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
@@ -55,6 +51,4 @@ public class ConwayCell extends Cell {
 		}
 		return livingCount;
 	}
-
 }
-
