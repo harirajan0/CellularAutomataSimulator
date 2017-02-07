@@ -69,16 +69,16 @@ public class Loader {
 				int yPosition = col * sideLength;
 				switch(simulationType){
 				case SPREADING_FIRE: 
-					myGrid.set(row, col, new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, param));
+					myGrid.set(row, col, new SpreadingFireCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength, param));
 					break;
 				case WATOR : 
-					myGrid.set(row, col, new WaTorCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition));
+					myGrid.set(row, col, new WaTorCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength));
 					break;
 				case CONWAY :
-					myGrid.set(row, col, new ConwayCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition));
+					myGrid.set(row, col, new ConwayCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength));
 					break;
 				case SEGREGATION : 
-					myGrid.set(row, col, new SegregationCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, param));
+					myGrid.set(row, col, new SegregationCell(myParser.getTextValue("state" + Integer.toString(cellNum)), xPosition, yPosition, sideLength, param));
 					break;
 				default : break;
 			}

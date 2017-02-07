@@ -1,12 +1,15 @@
 package cells;
 import java.util.List;
-import com.sun.javafx.geom.Shape;
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 /**
  * Cell superclass. 
  * @author Hari Rajan
  * @author Vishnu Gottiparthy
  * @author Bihan Zhuang
- *
+ * @author Gabriel Chen
  */
 public abstract class Cell {
 	private String currentState;
@@ -14,20 +17,26 @@ public abstract class Cell {
 	private List<Cell> neighbors;
 	private int xPosition;
 	private int yPosition;
-	private Shape myShape;
+	private Rectangle myRect;
 	
-	// Since we want to hide the 2D array implementation from the world,
-	// we don't need to have the x, y position in each Cell anymore.
-	public Cell(String initState, int x, int y) {
+	public Cell(String initState, int x, int y, int width) {
 		setCurrentState(initState);
 		setxPosition(x);
 		setyPosition(y);
+		myRect = new Rectangle(x, y, width, width);
+		myRect.setFill(getFill());
 	}
-	
+
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
 	 */
 	public abstract void update();
+	
+	/**
+	 * Determines the color of the Cell based on its state
+	 * @return The color corresponding to the cell's current state
+	 */
+	public abstract Color getFill();
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
@@ -105,12 +114,12 @@ public abstract class Cell {
 	}
 	
 	/**
-	 * Gets the shape that represents the cell in the GUI
-	 * @return	Shape that represents the cell in the GUI
+	 * Gets the Rectangle that represents the cell in the GUI
+	 * @return	Rectangle that represents the cell in the GUI
 	 */
-	public Shape getShape()
+	public Rectangle getRect()
 	{
-		return myShape;
+		return myRect;
 	}
 	
 	/**
