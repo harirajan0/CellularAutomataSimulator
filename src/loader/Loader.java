@@ -54,10 +54,6 @@ public class Loader {
 	/**
 	 * From the list of states, the probability, and simulation type,
 	 * construct a list of cells to be passed in to the Grid later.
-	 * @param states
-	 * @param param
-	 * @param sim
-	 * @return
 	 */
 	private void initializeGrid(){
 		myGrid = new SquareModel(rows, cols);
@@ -86,18 +82,34 @@ public class Loader {
 		}
 	}
 	
+	/**
+	 * Gets the type of simulation
+	 * @return The simulation type
+	 */
 	public String getSimulationType(){
 		return myParser.getTextValue(SIMULATION_TYPE);
 	}
 	
+	/**
+	 * Gets the number of rows in the grid
+	 * @return Number of rows in the grid
+	 */
 	public int getRows(){
 		return Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 	}
 	
+	/**
+	 * Get the number of columns in the grid
+	 * @return Number of columns in the grid
+	 */
 	public int getCols(){
 		return Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
 	}
 	
+	/**
+	 * Gets the additional simulation parameter
+	 * @return The additional simulation parameter
+	 */
 	public double getParameter(){
 		return Double.valueOf(myParser.getTextValue(PARAM));
 	}

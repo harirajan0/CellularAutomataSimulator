@@ -64,7 +64,7 @@ public abstract class Model implements Iterable<Cell> {
 	 * @return Whether or not the index at (row, col) is within the grid
 	 */
 	public boolean contains(int row, int col){
-		return row >=0 && row < getRows() && col >= 0 && col < getCols();
+		return row >= 0 && row < getRows() && col >= 0 && col < getCols();
 	}
 	
 	@Override

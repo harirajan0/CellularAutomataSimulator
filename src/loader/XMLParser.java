@@ -41,7 +41,11 @@ public class XMLParser {
 		return getTextValue(root, tagName);
     }
 
-    // Get root element of an XML file
+    /**
+     * Gets the root element of the XML file
+     * @param xmlFile XML file to scan
+     * @return root element of <code>xmlFile</code>
+     */
     private Element getRootElement (File xmlFile) {
         try {
             DOCUMENT_BUILDER.reset();
@@ -53,7 +57,12 @@ public class XMLParser {
         }
     }
 
-    // Get value of Element's text
+    /**
+     * Gets the value of an element's text
+     * @param e Element to get the value of
+     * @param tagName Tag to get the text at
+     * @return The text at <code>e</code>
+     */
     private String getTextValue (Element e, String tagName) {
         NodeList nodeList = e.getElementsByTagName(tagName);
         if (nodeList != null && nodeList.getLength() > 0) {
@@ -65,7 +74,10 @@ public class XMLParser {
         }
     }
 
-    // Helper method to do the boilerplate code needed to make a documentBuilder.
+    /**
+     * Boilerplate method to build a DocumentBuilder
+     * @return DocumentBuilder to use for XML file parsing
+     */
     private static DocumentBuilder getDocumentBuilder() {
     	try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder();
