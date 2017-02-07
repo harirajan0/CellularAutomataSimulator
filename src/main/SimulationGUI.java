@@ -20,22 +20,6 @@ public class SimulationGUI {
     	root.setStyle("-fx-background-color : white");
     	
     	cellSimulationDisplay = new SimulationView();
-    	    	
-    	Pane pane1 = new Pane();
-    	pane1.setStyle("-fx-background-color: blue");
-        Button btn = new Button();
-        btn.setText("yo");
-        pane1.setMinWidth(20);
-//        pane1.getChildren().add(btn);
-        
-    	Pane pane2 = new Pane();
-    	pane1.setStyle("-fx-background-color: white");
-
-    	Pane pane3 = new Pane();
-    	pane1.setStyle("-fx-background-color: red");
-
-    	Pane pane4 = new Pane();
-    	pane1.setStyle("-fx-background-color: green");
 
     	root.setCenter(cellSimulationDisplay.getCellSimulationPane());
     	

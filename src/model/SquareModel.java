@@ -18,7 +18,7 @@ public class SquareModel extends Model {
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				List<Cell> neighbors = new ArrayList<Cell>();
-				
+				System.out.println("hi");
 				for(int horiz = -1; horiz <= 1; horiz += 2){
 					for(int vert = -1; vert <= 1; vert += 2){
 						

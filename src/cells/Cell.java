@@ -19,7 +19,12 @@ public abstract class Cell {
 	private int yPosition;
 	private Rectangle myRect;
 	
-
+	/**
+	 * Creates a Cell with specified parameters
+	 * @param initState initial state of cell
+	 * @param xPosition x position of cell on screen
+	 * @param yPosition y position of cell on screen
+	 */
 	public Cell(String initState, int x, int y, int width) {
 
 		setCurrentState(initState);

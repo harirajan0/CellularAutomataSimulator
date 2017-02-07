@@ -124,6 +124,7 @@ public class Controller {
 		rows = l.getRows();
 		cols = l.getCols();
 		myModel = l.getFirstGrid();
+		myModel.initializeNeighbors();
 	}
 	
 	
@@ -136,11 +137,7 @@ public class Controller {
         result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extensionAccepted));
         return result;
     }
-    
-	private Model loadModel(String filename){
-
-		return model;
-	}
+  
 
 	public void changeSpeed(double currentSpeed) {
 		fps *= currentSpeed;
@@ -151,7 +148,7 @@ public class Controller {
 	 * Returns the grid in order to pass it to View in GUI.
 	 * @return
 	 */
-	public Model getGrid() {
+	public Model getModel() {
 		return myModel;
 	}
 
