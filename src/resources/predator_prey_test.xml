@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>WATOR</simulationType>
+	<simulationName>My Predator Prey Simulation</simulationName>
+	<numRows>3</numRows>
+	<numCols>3</numCols>
+	<state1>empty</state1>
+	<state2>empty</state2>
+	<state3>shark</state3>
+	<state4>fish</state4>
+	<state5>fish</state5>
+	<state6>shark</state6>
+	<state7>empty</state7>
+	<state8>shark</state8>
+	<state9>fish</state9>
+	<param>0.50</param>
+</data>

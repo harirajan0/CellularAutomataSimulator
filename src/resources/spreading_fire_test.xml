@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data type="simulation">
-	<simulationType>SpreadingFire</simulationType>
-	<simulationName>My First Simulation</simulationName>
+	<simulationType>FIRE</simulationType>
+	<simulationName>My Spreading Fire Simulation</simulationName>
 	<numRows>3</numRows>
 	<numCols>3</numCols>
 	<state1>empty</state1>
