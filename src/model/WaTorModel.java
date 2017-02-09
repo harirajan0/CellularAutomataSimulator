@@ -19,13 +19,12 @@ public class WaTorModel extends Model {
 		for(int r = 0; r < getRows(); r++){
 			for(int c = 0; c < getCols(); c++){
 				neighbors = new ArrayList<Cell>();
-				for(int horiz = -1; horiz <= 1; horiz += 2){
-					for(int vert = -1; vert <= 1; vert += 2){
-						
-						//Iterate through neighbors, add if not outside array
-						if(contains(r + horiz, c + vert)){
-							neighbors.add(get(r + horiz, c + vert));
-						}
+				for(int shift = -1; shift <= 1; shift += 2){
+					if(contains(r + shift, c)){
+						neighbors.add(get(r + shift, c));
+					}
+					if(contains(r, c + shift)){
+						neighbors.add(get(r, c + shift));
 					}
 				}
 				get(r, c).setNeighbors(neighbors);
