@@ -27,6 +27,7 @@
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
+		private KeyFrame frame;
 		
 		
 		// kind of data files to look for
@@ -54,12 +55,9 @@
 		}
 		// this should be for starting a new simulation maybe? still need to look into it
 		public void start() {
-			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+			frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
-			animation = new Timeline();
-			animation.setCycleCount(Timeline.INDEFINITE);
-			animation.getKeyFrames().add(frame);
-			animation.play();
+			setAnimationKeyFrame();
 			
 		}
 		
@@ -119,9 +117,13 @@
 			animation.stop();
 			
 			// move this stuff into a helper function
-			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
-					e -> step());
-			// animation.getKeyFrames().clear(); <- then don't need to make a new keyframe
+//			frame = new KeyFrame(Duration.millis(1000/fps),
+//					e -> step());
+			animation.getKeyFrames().clear();
+			setAnimationKeyFrame();
+		}
+		
+		private void setAnimationKeyFrame(){
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);
