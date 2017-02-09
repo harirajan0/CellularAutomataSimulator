@@ -49,12 +49,12 @@
 			myStage = stage;
 //			stage = s;
 			fps = default_fps;
-			mil_delay = 1000/fps;
+			//mil_delay = 1000/fps;
 			
 		}
 		// this should be for starting a new simulation maybe? still need to look into it
 		public void start() {
-			KeyFrame frame = new KeyFrame(Duration.millis(mil_delay),
+			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
