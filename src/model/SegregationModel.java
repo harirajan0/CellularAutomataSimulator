@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,17 +9,21 @@ import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
+import states.SegregationState;
 
 public class SegregationModel extends Model {
 	private List<Cell> availableCells;
 	
 	private static String EMPTY = "empty";
 	
+	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
+	
 	public SegregationModel(int r, int c) {
 		super(r, c);
-		availableCells = new ArrayList<>();
+		for (SegregationState state : SegregationState.values()) {
+			stateMap.put(state.getStateValue(), state);
+		}
 	}
-	
 	// put empty list into every cell
 	public void initiateAvailableCells(){
 		for (int row = 0; row < getRows(); row++){

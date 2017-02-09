@@ -1,17 +1,18 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import loader.XMLParser;
+import states.State;
 
 public abstract class Model implements Iterable<Cell> {
 	
 	private Cell[][] myGrid;
 
 	public Model(int r, int c) {
-		super();
 		myGrid = new Cell[r][c];
 	}
 	
@@ -79,6 +80,14 @@ public abstract class Model implements Iterable<Cell> {
 			}
 		}
 		return cellList.iterator();
+	}
+
+	public HashMap<Integer, State> getStateMap() {
+		return stateMap;
+	}
+
+	public void setStateMap(HashMap<Integer, State> stateMap) {
+		this.stateMap = stateMap;
 	}
 
 

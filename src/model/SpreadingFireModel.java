@@ -1,16 +1,25 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cells.Cell;
 import cells.SpreadingFireCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
+import states.SpreadingFireState;
+import states.WaTorState;
 
 public class SpreadingFireModel extends Model {
+	
+	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();
+	
 	public SpreadingFireModel(int r, int c) {
 		super(r, c);
+		for (SpreadingFireState state : SpreadingFireState.values()) {
+			stateMap.put(state.getStateValue(), state);
+		}
 	}
 
 	@Override
