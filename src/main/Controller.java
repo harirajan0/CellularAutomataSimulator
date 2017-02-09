@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
@@ -119,8 +117,14 @@ import model.Model;
 	    }
 	    
 		private void changeSpeed(double value) {
-			fps *= value;
-			animation.setRate(value);
+			fps = DEFAULT_FPS*value;
+			animation.stop();
+			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+					e -> step());
+			animation = new Timeline();
+			animation.setCycleCount(Timeline.INDEFINITE);
+			animation.getKeyFrames().add(frame);
+			animation.play();
 		}
 
 		/** 

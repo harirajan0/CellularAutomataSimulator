@@ -8,7 +8,6 @@ public class ApplicationStartup extends Application {
 	public static final String TITLE = "Cell Automata Simulator";
 	public static final int WINDOW_SIZE = 600;
 	private Controller myController;
-    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 
 	
 	@Override
