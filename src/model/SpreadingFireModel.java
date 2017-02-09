@@ -48,18 +48,4 @@ public class SpreadingFireModel extends Model {
 			}
 		}
 	}
-	
-	public void updateModel() {
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				get(r, c).update();
-			}
-		}
-		
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				get(r, c).nextGeneration();
-			}
-		}
-	}
 }

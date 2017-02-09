@@ -26,12 +26,44 @@ public abstract class Model implements Iterable<Cell> {
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
-	public abstract void initializeNeighbors();
+	public void initializeNeighbors() {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		for(int r = 0; r < getRows(); r++){
+			for(int c = 0; c < getCols(); c++){
+				neighbors = new ArrayList<Cell>();
+				for(int horiz = -1; horiz <= 1; horiz ++){
+					for(int vert = -1; vert <= 1; vert ++){
+						if(horiz ==0 && vert == 0){
+							continue;
+						}
+
+						//Iterate through neighbors, add if not outside array
+						if(contains(r + horiz, c + vert)){
+							neighbors.add(get(r + horiz, c + vert));
+						}
+					}
+				}
+				get(r, c).setNeighbors(neighbors);
+			}
+		}
+	}
 	
 	/**
 	 * Calls on every Cell in the grid to update itself
 	 */
-	public abstract void updateModel();
+	public void updateModel() {
+		for(int r = 0; r < getRows(); r++){
+			for(int c = 0; c < getCols(); c++){
+				get(r, c).update();
+			}
+		}
+		
+		for(int r = 0; r < getRows(); r++){
+			for(int c = 0; c < getCols(); c++){
+				get(r, c).nextGeneration();
+			}
+		}
+	}
 	
 	public abstract void populateCells(XMLParser parser, double param);
 	

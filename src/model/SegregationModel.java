@@ -28,30 +28,6 @@ public class SegregationModel extends Model {
 			}
 		}
 	}
-
-	@Override
-	public void initializeNeighbors() {
-		List<Cell> neighbors = new ArrayList<Cell>();
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				neighbors = new ArrayList<Cell>();
-				for(int horiz = -1; horiz <= 1; horiz ++){
-					for(int vert = -1; vert <= 1; vert ++){
-						if(horiz ==0 && vert == 0){
-							continue;
-						}
-
-						//Iterate through neighbors, add if not outside array
-						if(contains(r + horiz, c + vert)){
-							neighbors.add(get(r + horiz, c + vert));
-						}
-					}
-				}
-				get(r, c).setNeighbors(neighbors);
-				System.out.println(neighbors.size());
-			}
-		}
-	}
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
@@ -71,6 +47,7 @@ public class SegregationModel extends Model {
 		initiateAvailableCells();
 	}
 	
+	@Override
 	public void updateModel() {
 		createAvailableCells();
 		initiateAvailableCells();
