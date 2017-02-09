@@ -49,7 +49,6 @@
 			myStage = stage;
 //			stage = s;
 			fps = default_fps;
-			//mil_delay = 1000/fps;
 			
 		}
 		// this should be for starting a new simulation maybe? still need to look into it
