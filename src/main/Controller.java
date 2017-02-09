@@ -117,8 +117,11 @@
 			fps = default_fps*value;
 			System.out.println(fps);
 			animation.stop();
+			
+			// move this stuff into a helper function
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
+			// animation.getKeyFrames().clear(); <- then don't need to make a new keyframe
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);
