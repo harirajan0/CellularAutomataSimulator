@@ -122,15 +122,16 @@ public class Controller {
     
 
 	public void changeSpeed(double value) {
-		fps = default_fps*value;
-		System.out.println(fps);
-		animation.stop();
+		/*fps = default_fps*value;
+		System.out.println(fps);*/
+		animation.setRate(value);
+		/*animation.stop();
 		KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 				e -> step());
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.play();
+		animation.play();*/
 	}
 
 	/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

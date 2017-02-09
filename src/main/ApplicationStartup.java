@@ -28,7 +28,7 @@ public class ApplicationStartup extends Application {
 	}
 	
 	public void setUpComponents(){
-
+		
 	}
 
 	public static void main(String[] args) {
