@@ -3,6 +3,7 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import states.State;
 
 /**
  * Cell superclass. 
@@ -12,8 +13,8 @@ import javafx.scene.shape.Rectangle;
  * @author Gabriel Chen
  */
 public abstract class Cell {
-	private String currentState;
-	private String nextState;
+	private State currentState;
+	private State nextState;
 	private List<Cell> neighbors;
 	private int xPosition;
 	private int yPosition;
@@ -25,12 +26,12 @@ public abstract class Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public Cell(String initState, int x, int y, int width) {
+	public Cell(State initState, int x, int y, int width) {
 		setCurrentState(initState);
 		setxPosition(x);
 		setyPosition(y);
 		myRect = new Rectangle(x, y, width, width);
-		myRect.setStroke(Color.WHITE);
+		myRect.setStroke(Color.BLACK);
 		paint();
 	}
 
@@ -50,7 +51,9 @@ public abstract class Cell {
 	/**
 	 * Determines which color to call setFill on
 	 */
-	public abstract void paint();
+	public void paint() {
+		setFill(getCurrentState().getColor());
+	}
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
@@ -100,31 +103,40 @@ public abstract class Cell {
 	 * Gets the current state of the cell
 	 * @return The current state of the cell
 	 */
-	public String getCurrentState() {
+	public State getCurrentState() {
 		return currentState;
 	}
 	
 	/**
 	 * Sets the current state of the cell
-	 * @param currentState The new current state of the cell
+	 * @param initState The new current state of the cell
 	 */
-	public void setCurrentState(String currentState) {
-		this.currentState = currentState;
+	public void setCurrentState(State initState) {
+		this.currentState = initState;
 	}
 	
 	/**
 	 * Gets the next state of the cell
 	 * @return The next state of the cell
 	 */
-	public String getNextState() {
+	public State getNextState() {
 		return nextState;
 	}
 	/**
 	 * Sets the next state of the cell
-	 * @param nextState The new next state of the cell
+	 * @param state The new next state of the cell
 	 */
-	public void setNextState(String nextState) {
-		this.nextState = nextState;
+	public void setNextState(State state) {
+		this.nextState = state;
+	}
+	
+	/**
+	 * Tells whether or not the cell's current state is <code>state</code>.
+	 * @param empty State to test
+	 * @return Whether or not <code>state</code> is the current state
+	 */
+	public boolean isState(State state) {
+		return getCurrentState().equals(state);
 	}
 	
 	/**

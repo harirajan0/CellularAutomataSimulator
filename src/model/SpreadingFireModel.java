@@ -1,16 +1,26 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cells.Cell;
 import cells.SpreadingFireCell;
+import cells.WaTorCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
+import states.SpreadingFireState;
+import states.WaTorState;
 
 public class SpreadingFireModel extends Model {
+	
+	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();
+	
 	public SpreadingFireModel(int r, int c) {
 		super(r, c);
+		for (SpreadingFireState state : SpreadingFireState.values()) {
+			stateMap.put(state.getStateValue(), state);
+		}
 	}
 
 	@Override
@@ -36,29 +46,14 @@ public class SpreadingFireModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int cellNum = 0;
 		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
 				int yPosition = col * sideLength;
-				set(row, col, new SpreadingFireCell(parser.getTextValue("state" + Integer.toString(cellNum)),
-						xPosition, yPosition, sideLength, param));
-				cellNum++;
-			}
-		}
-	}
-	
-	public void updateModel() {
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				get(r, c).update();
-			}
-		}
-		
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				get(r, c).nextGeneration();
+				SpreadingFireCell newCell = new SpreadingFireCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
+						xPosition, yPosition, sideLength, param);
+				set(row, col, newCell);
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package main;
 
 import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -9,53 +11,85 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 
 public class ControlPanel {
+	
+	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
+	
 	private HBox buttonsPanel;
+	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton;
+	private Slider speedSlider;
     private ResourceBundle myResources;
 
-	public ControlPanel(Controller c, ResourceBundle resources){
+	public ControlPanel(ResourceBundle resources){
 		myResources = resources;
 
 		buttonsPanel = new HBox();
 		buttonsPanel.setStyle("-fx-background-color: gray");
-		Button startButton = makeButton("StartCommand", e -> c.start());
-		Button pauseButton = makeButton("PauseCommand", e -> c.pause());
-		Button stepButton = makeButton("StepCommand", e-> c.step());
-		Button resetButton = makeButton("ResetCommand", e -> c.reset());
-		Button loadButton = makeButton("LoadCommand", e -> c.load());
-		Button resumeButton = makeButton("ResumeCommand", e -> c.resume());
+		
+		// make buttons' visual 
+		startButton = makeButton("StartCommand");
+		pauseButton = makeButton("PauseCommand");
+		stepButton = makeButton("StepCommand");
+		resetButton = makeButton("ResetCommand");
+		loadButton = makeButton("LoadCommand");
+		resumeButton = makeButton("ResumeCommand");
 
-		Slider speedSlider = makeSpeedSlider(c);
+		speedSlider = makeSpeedSlider();
 		
 		buttonsPanel.setMaxHeight(speedSlider.getHeight());
-
-		
-		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, speedSlider);
-		
 	}
 	
 	public HBox getControlPanel(){
 		return buttonsPanel;
 	}
 	
-	private Slider makeSpeedSlider(Controller c) {
+	public void addToHBox(){
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, speedSlider);
+	}
+	
+	// setter methods to set actions for buttons; used in the controller
+	public void setStart(EventHandler<ActionEvent> handler){
+		startButton.setOnAction(handler);
+	}
+	
+	public void setPause(EventHandler<ActionEvent> handler){
+		pauseButton.setOnAction(handler);
+	}
+	
+	public void setStep(EventHandler<ActionEvent> handler){
+		stepButton.setOnAction(handler);
+	}
+	
+	public void setReset(EventHandler<ActionEvent> handler){
+		resetButton.setOnAction(handler);
+	}
+	
+	public void setLoad(EventHandler<ActionEvent> handler){
+		loadButton.setOnAction(handler);
+	}
+	
+	public void setResume(EventHandler<ActionEvent> handler){
+		resumeButton.setOnAction(handler);
+	}
+	
+	public Slider getSlider(){
+		return speedSlider;
+	}
+	
+	private Slider makeSpeedSlider() {
 		Slider slider = new Slider(0.1, 5, 1);
 		slider.setOrientation(Orientation.HORIZONTAL);
 		slider.setMajorTickUnit(0.5);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setPrefWidth(300);
-		
-		slider.valueProperty().addListener(e -> c.changeSpeed(slider.getValue()));
 		return slider;
 	}
-    private Button makeButton(String property, EventHandler<ActionEvent> handler) {
+	
+    private Button makeButton(String property) {
     	Button result = new Button();
-    	System.out.println(myResources.getString(property));
     	String label = myResources.getString(property);
-    	
     	result.setText(label);
-    	result.setOnAction(handler);
-    	result.setPrefSize(70, 20);
+    	result.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
     	return result;
     }
 	

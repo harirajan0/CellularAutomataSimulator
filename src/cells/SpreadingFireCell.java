@@ -1,47 +1,31 @@
 package cells;
 import java.util.List;
-import javafx.scene.paint.Color;
+import states.SpreadingFireState;
 
 public class SpreadingFireCell extends Cell 
 {	
-	private static final String EMPTY = "empty";
-	private static final String BURNING = "burning";
-	private static final String TREE = "tree";
+	
 	private double probCatch;
 	
-	public SpreadingFireCell(String initState, int x, int y, int width, double prob){
-		
+	public SpreadingFireCell(SpreadingFireState initState, int x, int y, int width, double prob){
 		super(initState, x, y, width);
 		probCatch = prob;
 	}
 
 	@Override
 	public void update() {
-		
-		if(isState(EMPTY)){
-			
-			setNextState(EMPTY);
+		if(isState(SpreadingFireState.EMPTY)){
+			setNextState(SpreadingFireState.EMPTY);
 		}
-		else if(isState(TREE)){
-			
+		else if(isState(SpreadingFireState.TREE)){
 			setTreeState();
 		}
-		else if(isState(BURNING)){
+		else if(isState(SpreadingFireState.BURNING)){
 			
-			setNextState(EMPTY);
+			setNextState(SpreadingFireState.EMPTY);
 		} else {
 			setNextState(getCurrentState());
 		}
-	}
-	
-	/**
-	 * Tells whether or not the cell's current state is <code>state</code>.
-	 * @param state State to test
-	 * @return Whether or not <code>state</code> is the current state
-	 */
-	private boolean isState(String state){
-		
-		return getCurrentState().equals(state);
 	}
 	
 	/**
@@ -52,11 +36,10 @@ public class SpreadingFireCell extends Cell
 		List<Cell> neighbors = getNeighbors();
 		for(Cell cell : neighbors){
 			
-			if(((SpreadingFireCell)cell).isState(BURNING)){
+			if(cell.isState(SpreadingFireState.BURNING)){
 				
 				if(Math.random() <= probCatch){
-					
-					setNextState(BURNING);
+					setNextState(SpreadingFireState.BURNING);
 					return;
 				} else{
 					setNextState(getCurrentState());
@@ -64,24 +47,6 @@ public class SpreadingFireCell extends Cell
 			}else {
 				setNextState(getCurrentState());
 			}
-		}
-	}
-	
-	@Override
-	public void paint(){
-		System.out.println(this.getCurrentState());
-		switch(getCurrentState()){
-			case EMPTY:
-				setFill(Color.BLACK);
-				break;
-			case BURNING:
-				setFill(Color.RED);
-				break;
-			case TREE:
-				setFill(Color.GREEN);
-				break;
-			default:
-				break;
 		}
 	}
 }

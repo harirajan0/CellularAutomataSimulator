@@ -3,12 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.paint.Color;
+import states.WaTorState;
+import states.State;
 public class WaTorCell extends Cell {
-	
-	private static final String EMPTY = "empty";
-	private static final String SHARK = "shark";
-	private static final String FISH = "fish";
 	
 	private int turnsToBreed;
 	private int turnsToDie;
@@ -19,7 +16,7 @@ public class WaTorCell extends Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public WaTorCell(String initState, int x, int y, int width) {
+	public WaTorCell(WaTorState initState, int x, int y, int width) {
 		super(initState, x, y, width);
 		resetFields();
 	}
@@ -29,46 +26,34 @@ public class WaTorCell extends Cell {
 	@Override
 	public void update() {
 		if (getNextState() != null) return;
-		if (getCurrentState().equals(EMPTY)) { 
-			setNextState(getCurrentState());
-		}
-		turnsToBreed++;
-		if (getCurrentState().equals(SHARK)) { 
-			updateShark(); 
-		}
-		if (getCurrentState().equals(FISH)) { 
-			updateFish(); 
-		}
-		if (getNextState() == null) {
-			setNextState(getCurrentState());
-		}
+		if (isState(WaTorState.EMPTY)) setNextState(getCurrentState());
+		else turnsToBreed++;
+		if (isState(WaTorState.SHARK)) updateShark(); 
+		if (isState(WaTorState.FISH)) updateFish(); 
+		if (getNextState() == null) setNextState(getCurrentState());
 	}
 	
 	/**
 	 * If a cell is a shark, cell should check if it should die, eat, move, and/or breed
 	 */
 	private void updateShark() {
-		if (turnsToDie == 3) {//kill this shark
-			setNextState(EMPTY);
+		WaTorCell fishToEat = getRandomNeighbor(WaTorState.FISH);
+		if (fishToEat!= null) eatFish(fishToEat); 
+		else turnsToDie++; 
+		if (turnsToBreed == 3) breed();
+		if (turnsToDie == 3) {
+			setNextState(WaTorState.EMPTY);
 			resetFields();
 			return;
 		}
-		if (turnsToBreed == 3) { breed(); }
-		WaTorCell fishToEat = getRandomNeighbor(FISH);
-		//if there is a fish to eat, then eat it, if not move somewhere if possible
-		if (fishToEat != null) eatFish(fishToEat); 
-		else { 
-			//if shark doesnt eat, its closer to dieing
-			turnsToDie++;
-			move(); 
-		}
+		if (fishToEat == null) move();
 	}
 	
 	/**
 	 * If cell is a fish, it should try to move and/or breed
 	 */
 	private void updateFish() {
-		if (turnsToBreed == 3) { breed(); }
+		if (turnsToBreed == 3) breed();
 		move();
 	}
 	
@@ -76,32 +61,31 @@ public class WaTorCell extends Cell {
 	 * Breed by setting a random neighbor's next state to this cell's current state
 	 */
 	private void breed() {
-		WaTorCell newCell = getRandomNeighbor(EMPTY);
-		if (newCell != null) {
-			newCell.setNextState(getCurrentState());
-		}
+		turnsToBreed = 0;
+		WaTorCell newCell;
+		if ((newCell = getRandomNeighbor(WaTorState.EMPTY)) != null) newCell.setNextState(getCurrentState());
 	}
 	
 	/**
-	 * Eat fish by setting fish cell to empty and resetting the number of turns this cell needs until death
+	 * Eat fish by setting fish cell to WaTorState.EMPTY and resetting the number of turns this cell needs until death
 	 * @param fish fish to be eaten
 	 */
 	private void eatFish(WaTorCell fish) {
-		fish.setNextState(EMPTY);
+		fish.setNextState(WaTorState.EMPTY);
 		fish.resetFields();
 		turnsToDie = 0;
 	}
 	
 	/**
 	 * move by getting random neighbor and setting all of that cell's fields to our current
-	 * fields and reset our fields to initial empty state
+	 * fields and reset our fields to initial WaTorState.EMPTY state
 	 */
 	private void move() {
-		WaTorCell newLocation = getRandomNeighbor(EMPTY);
-		if (newLocation != null) {
+		WaTorCell newLocation;
+		if ((newLocation = getRandomNeighbor(WaTorState.EMPTY)) != null) {
 			newLocation.setNextState(getCurrentState());
 			newLocation.setFields(this);
-			setNextState(EMPTY);
+			setNextState(WaTorState.EMPTY);
 			resetFields();
 		} else {
 			setNextState(getCurrentState());
@@ -113,10 +97,10 @@ public class WaTorCell extends Cell {
 	 * @param state requested state
 	 * @return random WaTorCell neighbor of given state
 	 */
-	private WaTorCell getRandomNeighbor(String state) {
+	private WaTorCell getRandomNeighbor(State state) {
 		List<Cell> possibleNeighbors = new ArrayList<>();
 		for (Cell cell : getNeighbors()) {
-			if (cell.getCurrentState().equals(state)) {
+			if (cell.isState(state)) {
 				if (cell.getNextState() == null) possibleNeighbors.add(cell);
 				else if (cell.getNextState().equals(state)) possibleNeighbors.add(cell);
 			}
@@ -139,20 +123,5 @@ public class WaTorCell extends Cell {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
-	@Override
-	public void paint(){
-		switch(getCurrentState()){
-			case EMPTY:
-				setFill(Color.BLUE);
-				break;
-			case FISH:
-				setFill(Color.GREEN);
-				break;
-			case SHARK:
-				setFill(Color.YELLOW);
-				break;
-			default:
-				break;
-		}
-	}
+
 }
