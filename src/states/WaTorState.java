@@ -32,5 +32,5 @@ public enum WaTorState implements State {
     public int getStateValue() {
         return stateValue;
     }
-   
+
 }

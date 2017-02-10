@@ -9,68 +9,87 @@ import loader.XMLParser;
 import states.State;
 
 public abstract class Model implements Iterable<Cell> {
-	
+
 	private Cell[][] myGrid;
 
 	public Model(int r, int c) {
 		myGrid = new Cell[r][c];
 	}
-	
+
 	/**
 	 * Tells the grid to make itself
-	 * @param list List of cells to put into the grid
+	 * 
+	 * @param list
+	 *            List of cells to put into the grid
 	 */
-	public void buildModel(List<Cell> list){
-		
+	public void buildModel(List<Cell> list) {
+
 	}
-	
+
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
 	public abstract void initializeNeighbors();
-	
+
 	/**
 	 * Calls on every Cell in the grid to update itself
 	 */
-	public abstract void updateModel();
-	
+	public void updateModel() {
+		for (int r = 0; r < getRows(); r++) {
+			for (int c = 0; c < getCols(); c++) {
+				get(r, c).update();
+			}
+		}
+
+		for (int r = 0; r < getRows(); r++) {
+			for (int c = 0; c < getCols(); c++) {
+				get(r, c).nextGeneration();
+			}
+		}
+	}
+
 	public abstract void populateCells(XMLParser parser, double param);
-	
-	public Cell get(int row, int col){
-		
+
+	public Cell get(int row, int col) {
+
 		return myGrid[row][col];
 	}
-	
+
 	public void set(int row, int col, Cell cell) {
 		myGrid[row][col] = cell;
 	}
-	
+
 	/**
 	 * Gets the number of rows in the grid
+	 * 
 	 * @return The number of rows in the grid
 	 */
-	public int getRows(){
+	public int getRows() {
 		return myGrid.length;
 	}
-	
+
 	/**
 	 * Gets the number of columns in the grid
+	 * 
 	 * @return The number of columns in the grid
 	 */
-	public int getCols(){
+	public int getCols() {
 		return myGrid[0].length;
 	}
-	
+
 	/**
 	 * Checks if the given index is within the grid
-	 * @param row Row index to check
-	 * @param col Column index to check
+	 * 
+	 * @param row
+	 *            Row index to check
+	 * @param col
+	 *            Column index to check
 	 * @return Whether or not the index at (row, col) is within the grid
 	 */
-	public boolean contains(int row, int col){
+	public boolean contains(int row, int col) {
 		return row >= 0 && row < getRows() && col >= 0 && col < getCols();
 	}
-	
+
 	@Override
 	public Iterator<Cell> iterator() {
 		List<Cell> cellList = new ArrayList<>();
@@ -80,14 +99,6 @@ public abstract class Model implements Iterable<Cell> {
 			}
 		}
 		return cellList.iterator();
-	}
-
-	public HashMap<Integer, State> getStateMap() {
-		return stateMap;
-	}
-
-	public void setStateMap(HashMap<Integer, State> stateMap) {
-		this.stateMap = stateMap;
 	}
 
 

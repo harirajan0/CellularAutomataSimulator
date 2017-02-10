@@ -13,7 +13,7 @@ public enum ConwayState implements State {
 	
 
 	ALIVE(Color.ALICEBLUE, 0),
-	DEAD(Color.WHITE, 1);
+	DEAD(Color.BLACK, 1);
 
     private Color myColor;
     private int stateValue;
