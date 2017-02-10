@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import cells.Cell;
 import cells.WaTorCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
@@ -22,17 +19,8 @@ public class WaTorModel extends Model {
 
 	@Override
 	public void initializeNeighbors() {
-		List<Cell> neighbors = new ArrayList<Cell>();
-		for(int r = 0; r < getRows(); r++){
-			for(int c = 0; c < getCols(); c++){
-				neighbors = new ArrayList<Cell>();
-				for(int shift = -1; shift <= 1; shift += 2){
-					if(contains(r + shift, c)) neighbors.add(get(r + shift, c));
-					if(contains(r, c + shift)) neighbors.add(get(r, c + shift));
-				}
-				get(r, c).setNeighbors(neighbors);
-			}
-		}
+		super.initializeNeighbors();
+		removeCorners();
 	}
 	
 	@Override
