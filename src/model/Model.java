@@ -1,12 +1,10 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import loader.XMLParser;
-import states.State;
 
 public abstract class Model implements Iterable<Cell> {
 
@@ -15,21 +13,31 @@ public abstract class Model implements Iterable<Cell> {
 	public Model(int r, int c) {
 		myGrid = new Cell[r][c];
 	}
-
+	
 	/**
-	 * Tells the grid to make itself
-	 * 
-	 * @param list
-	 *            List of cells to put into the grid
+	 * Removes the neighbors at the corners of the cell
+	 * TODO: Only works for squares
 	 */
-	public void buildModel(List<Cell> list) {
-
+	public void removeCorners(){
+		for (int r = 0; r < getRows(); r++) {
+			for (int c = 0; c < getCols(); c++) {
+				ArrayList<Cell> neighbors = (ArrayList<Cell>) get(r, c).getNeighbors();
+				for (int horiz = -1; horiz <= 1; horiz += 2) {
+					for (int vert = -1; vert <= 1; vert += 2) {
+						// Iterate through neighbors, remove if at corner
+						if (contains(r + horiz, c + vert)) {
+							neighbors.remove(get(r + horiz, c + vert));
+						}
+					}
+				}
+				get(r, c).setNeighbors(neighbors);
+			}
+		}
 	}
-
+	
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
-
 	public void initializeNeighbors() {
 		List<Cell> neighbors = new ArrayList<Cell>();
 		for (int r = 0; r < getRows(); r++) {
@@ -56,22 +64,20 @@ public abstract class Model implements Iterable<Cell> {
 	 * Calls on every Cell in the grid to update itself
 	 */
 	public void updateModel() {
-		for (int r = 0; r < getRows(); r++) {
-			for (int c = 0; c < getCols(); c++) {
-				get(r, c).update();
-			}
-		}
-		for (int r = 0; r < getRows(); r++) {
-			for (int c = 0; c < getCols(); c++) {
-				get(r, c).nextGeneration();
-			}
-		}
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()) itr.next().update();
+		itr = iterator();
+		while(itr.hasNext()) itr.next().nextGeneration();
 	}
-
+	
+	/**
+	 * Initializes the cells inside the grid
+	 * @param parser XML Parser to read cell information from
+	 * @param param Additional parameter for certain models
+	 */
 	public abstract void populateCells(XMLParser parser, double param);
 
 	public Cell get(int row, int col) {
-
 		return myGrid[row][col];
 	}
 
