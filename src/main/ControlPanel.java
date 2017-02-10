@@ -1,8 +1,6 @@
 package main;
 
 import java.util.ResourceBundle;
-
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;

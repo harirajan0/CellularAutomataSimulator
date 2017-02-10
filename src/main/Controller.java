@@ -33,10 +33,7 @@ import model.Model;
 		private Loader l;
 		private File dataFile;
 		private KeyFrame frame;
-		
-		
-		// kind of data files to look for
-	    public static final String DATA_FILE_EXTENSION = "*.xml";
+
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
 		

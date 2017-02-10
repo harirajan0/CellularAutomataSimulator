@@ -2,12 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
 import cells.Cell;
 import cells.SegregationCell;
-import cells.WaTorCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
 import states.SegregationState;
