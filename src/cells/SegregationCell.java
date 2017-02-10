@@ -1,8 +1,6 @@
 package cells;
 import java.util.List;
-import java.util.Random;
-
-import javafx.scene.paint.Color;
+import states.SegregationState;
 
 
 /**
@@ -13,9 +11,7 @@ import javafx.scene.paint.Color;
  */
 public class SegregationCell extends Cell {
 	
-	private static final String EMPTY = "empty";
-	private static final String X = "X";
-	private static final String O = "O";
+
 	private List<Cell> emptyPositions;
 	
 	private double percentage;
@@ -24,14 +20,14 @@ public class SegregationCell extends Cell {
 		emptyPositions = availableList;
 	}
 	
-	public SegregationCell(String initState, int x, int y, int width, double percentage) {
+	public SegregationCell(SegregationState initState, int x, int y, int width, double percentage) {
 		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
 	@Override
 	public void update() {
 		if (this.getNextState() != null) {return; }
-		if (this.getCurrentState().equals(EMPTY)) {
+		if (this.getCurrentState().equals(SegregationState.EMPTY)) {
 			setNextState(this.getCurrentState());
 			return;
 		}
@@ -59,10 +55,10 @@ public class SegregationCell extends Cell {
 		double nonEmpty = 0, sameType = 0;
 		for (Cell nb : getNeighbors()){
 			if (nb != null){
-				if (!nb.getCurrentState().equals(EMPTY)){
+				if (!nb.getCurrentState().equals(SegregationState.EMPTY)){
 					nonEmpty++;
 				}
-				if (nb.getCurrentState().equals(this.getCurrentState())){
+				if (nb.getCurrentState().equals(getCurrentState())){
 					sameType++;
 				}
 			}
@@ -81,28 +77,9 @@ public class SegregationCell extends Cell {
 			this.setNextState(getCurrentState());
 			return;
 		}
-		this.setNextState(EMPTY);
+		this.setNextState(SegregationState.EMPTY);
 		int option = (int)Math.random()*emptyPositions.size();
 		Cell tmp = emptyPositions.get(option);
 		tmp.setNextState(this.getCurrentState());
-		System.out.println("This: " + this.getxPosition() + ", " + this.getyPosition());
-		System.out.println("Moves to " + tmp.getxPosition() + ", " + tmp.getyPosition());
-	}
-	
-	@Override
-	public void paint(){
-		switch(getCurrentState()){
-			case EMPTY:
-				setFill(Color.BLACK);
-				break;
-			case X:
-				setFill(Color.BLUE);
-				break;
-			case O:
-				setFill(Color.RED);
-				break;
-			default:
-				break;
-		}
 	}
 }
