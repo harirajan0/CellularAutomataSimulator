@@ -1,9 +1,11 @@
+
 package main;
 
 import java.util.ResourceBundle;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 public class SimulationGUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
@@ -21,9 +23,8 @@ public class SimulationGUI {
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
     
-    public void createButtons(Controller c, ResourceBundle r){
-    	ControlPanel cp = new ControlPanel(c, r);
-    	root.setTop(cp.getControlPanel());
+    public void createCP(HBox hbox){
+    	root.setTop(hbox);
     }
     
     public SimulationView getSimulationView(){

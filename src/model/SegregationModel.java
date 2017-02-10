@@ -59,7 +59,7 @@ public class SegregationModel extends Model {
 			}
 		}
 	}
-
+	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
 		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());

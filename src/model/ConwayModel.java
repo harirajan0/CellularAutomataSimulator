@@ -45,7 +45,6 @@ private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 			}
 		}
 	}
-	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
 		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
@@ -56,6 +55,7 @@ private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 				ConwayCell newCell = new ConwayCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
 						xPosition, yPosition, sideLength);
 				set(row, col, newCell);
+
 			}
 		}
 	}
