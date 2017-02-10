@@ -80,6 +80,7 @@ public class SegregationModel extends Model {
 
 	@Override
 	public void updateModel() {
+		System.out.println(get(1, 1).getCurrentState().getColor());
 		createAvailableCells();
 		initiateAvailableCells();
 		for (int r = 0; r < getRows(); r++) {

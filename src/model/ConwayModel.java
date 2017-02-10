@@ -6,8 +6,6 @@ import java.util.List;
 
 import cells.Cell;
 import cells.ConwayCell;
-import cells.ConwayCell;
-import cells.ConwayCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
 import states.ConwayState;

@@ -25,6 +25,7 @@ public class SimulationView {
 		cellSimulationPane.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
+				
 				cellSimulationPane.getChildren().add(model.get(r, c).getRect());
 			}
 		}
