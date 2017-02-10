@@ -32,6 +32,11 @@ import model.Model;
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
+		private KeyFrame frame;
+		
+		
+		// kind of data files to look for
+	    public static final String DATA_FILE_EXTENSION = "*.xml";
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
 		
@@ -65,14 +70,12 @@ import model.Model;
 			cp.addToHBox();
 			myGUI.createCP(cp.getControlPanel());
 		}
-		
-		private void start() {
-			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+		// this should be for starting a new simulation maybe? still need to look into it
+		public void start() {
+			frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
-			animation = new Timeline();
-			animation.setCycleCount(Timeline.INDEFINITE);
-			animation.getKeyFrames().add(frame);
-			animation.play();
+			setAnimationKeyFrame();
+			
 		}
 		
 		private void resume(){
@@ -119,8 +122,15 @@ import model.Model;
 		private void changeSpeed(double value) {
 			fps = DEFAULT_FPS*value;
 			animation.stop();
-			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
-					e -> step());
+			
+			// move this stuff into a helper function
+//			frame = new KeyFrame(Duration.millis(1000/fps),
+//					e -> step());
+			animation.getKeyFrames().clear();
+			setAnimationKeyFrame();
+		}
+		
+		private void setAnimationKeyFrame(){
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);
