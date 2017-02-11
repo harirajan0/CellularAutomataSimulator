@@ -13,8 +13,6 @@ import states.SegregationState;
 public class SegregationModel extends Model {
 	private List<Cell> availableCells;
 
-	private static String EMPTY = "empty";
-
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
 
 	public SegregationModel(int r, int c) {
@@ -52,10 +50,12 @@ public class SegregationModel extends Model {
 	public void updateModel() {
 		createAvailableCells();
 		initiateAvailableCells();
-		
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
-			itr.next().update();
+			Cell cell = itr.next();
+			cell.update();
+//			System.out.println(cell.getCurrentState() + "3");
+//			System.out.println(cell.getNextState() + "4");
 			createAvailableCells();
 			initiateAvailableCells();
 		}
@@ -69,9 +69,9 @@ public class SegregationModel extends Model {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
 			Cell cell = itr.next();
-			if (cell.getCurrentState().equals(EMPTY)) {
+			if (cell.getCurrentState().equals(SegregationState.EMPTY)) {
 				if (cell.getNextState() != null) {
-					if (!cell.getNextState().equals(EMPTY))
+					if (!cell.getNextState().equals(SegregationState.EMPTY))
 						continue;
 				}
 				availableCells.add(cell);
