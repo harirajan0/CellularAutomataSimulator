@@ -66,6 +66,7 @@ import model.Model;
 			cp.addToHBox();
 			myGUI.createCP(cp.getControlPanel());
 		}
+		
 		// this should be for starting a new simulation maybe? still need to look into it
 		public void start() {
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps), e -> step());

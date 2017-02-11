@@ -42,10 +42,12 @@ public class SegregationModel extends Model {
 	public void updateModel() {
 		createAvailableCells();
 		placeAvailableList();
-		
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
-			itr.next().update();
+			Cell cell = itr.next();
+			cell.update();
+//			System.out.println(cell.getCurrentState() + "3");
+//			System.out.println(cell.getNextState() + "4");
 			createAvailableCells();
 			placeAvailableList();
 		}

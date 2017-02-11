@@ -1,6 +1,9 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
+
+import cells.Cell;
 import cells.ConwayCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
