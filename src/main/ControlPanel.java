@@ -58,7 +58,7 @@ public class ControlPanel {
 	}
 	
 	public void addToHBox(){
-		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, cb, speedSlider);
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, cb, speedSlider);
 	}
 	
 	// setter methods to set actions for buttons; used in the controller
@@ -126,4 +126,4 @@ public class ControlPanel {
 			}
     	});
     }
-}
+}
