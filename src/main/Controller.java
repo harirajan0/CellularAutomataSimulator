@@ -127,13 +127,4 @@ import model.Model;
 			animation.getKeyFrames().add(frame);
 			animation.play();
 		}
-
-		/** 
-		 * Returns the Model in order to pass it to View in GUI.
-		 * @return
-		 */
-		public Model getModel() {
-			return myModel;
-		}
-		
 	}

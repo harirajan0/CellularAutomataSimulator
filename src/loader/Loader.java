@@ -19,7 +19,6 @@ public class Loader {
 	private static final String WATOR = "WATOR";
 	private static final String SEGREGATION = "SEGREGATION";
 	private static final String CONWAY = "CONWAY";
-	private boolean edgesOnly;
 
 	private XMLParser myParser;
 
@@ -32,20 +31,11 @@ public class Loader {
 	public Loader(File file) {
 		myParser = new XMLParser(file);
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
-		setEdgesOnly();
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
 		param = Double.valueOf(myParser.getTextValue(PARAM));
 		initializeGrid();
 
-	}
-
-	public boolean getEdgesOnly() {
-		return edgesOnly;
-	}
-
-	private void setEdgesOnly() {
-		edgesOnly = simulationType.equals(SPREADING_FIRE) || simulationType.equals(WATOR);
 	}
 
 	/**
