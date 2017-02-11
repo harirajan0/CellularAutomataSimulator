@@ -32,7 +32,8 @@ import model.Model;
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
-		
+		private KeyFrame frame;
+
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
 		
@@ -119,7 +120,13 @@ import model.Model;
 	    
 		private void changeSpeed(double value) {
 			fps = DEFAULT_FPS*value;
-			animation.setRate(value);
+			animation.stop();
+			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+					e -> step());
+			animation = new Timeline();
+			animation.setCycleCount(Timeline.INDEFINITE);
+			animation.getKeyFrames().add(frame);
+			animation.play();
 		}
 
 		/** 

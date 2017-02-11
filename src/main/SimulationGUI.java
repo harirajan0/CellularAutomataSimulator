@@ -1,7 +1,6 @@
 
 package main;
 
-import java.util.ResourceBundle;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
