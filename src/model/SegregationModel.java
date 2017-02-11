@@ -11,24 +11,14 @@ import main.ApplicationStartup;
 import states.SegregationState;
 
 public class SegregationModel extends Model {
+	
 	private List<Cell> availableCells;
-
-	private static String EMPTY = "empty";
-
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
 
 	public SegregationModel(int r, int c) {
 		super(r, c);
 		for (SegregationState state : SegregationState.values()) {
 			stateMap.put(state.getStateValue(), state);
-		}
-	}
-
-	// put empty list into every cell
-	public void initiateAvailableCells() {
-		Iterator<Cell> itr = iterator();
-		while(itr.hasNext()){
-			((SegregationCell) itr.next()).setAvailableList(availableCells);
 		}
 	}
 	
@@ -45,19 +35,19 @@ public class SegregationModel extends Model {
 			}
 		}
 		createAvailableCells();
-		initiateAvailableCells();
+		placeAvailableList();
 	}
 
 	@Override
 	public void updateModel() {
 		createAvailableCells();
-		initiateAvailableCells();
+		placeAvailableList();
 		
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
 			itr.next().update();
 			createAvailableCells();
-			initiateAvailableCells();
+			placeAvailableList();
 		}
 		itr = iterator();
 		while(itr.hasNext()) itr.next().nextGeneration();
@@ -69,13 +59,21 @@ public class SegregationModel extends Model {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
 			Cell cell = itr.next();
-			if (cell.getCurrentState().equals(EMPTY)) {
+			if (cell.getCurrentState().equals(SegregationState.EMPTY)) {
 				if (cell.getNextState() != null) {
-					if (!cell.getNextState().equals(EMPTY))
+					if (!cell.getNextState().equals(SegregationState.EMPTY))
 						continue;
 				}
 				availableCells.add(cell);
 			}
+		}
+	}
+	
+	// put empty list into every cell
+	public void placeAvailableList() {
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			((SegregationCell) itr.next()).setAvailableList(availableCells);
 		}
 	}
 }

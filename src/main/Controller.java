@@ -32,7 +32,6 @@ import model.Model;
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
-		private KeyFrame frame;
 
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
@@ -69,10 +68,11 @@ import model.Model;
 		}
 		// this should be for starting a new simulation maybe? still need to look into it
 		public void start() {
-			frame = new KeyFrame(Duration.millis(1000/fps),
-					e -> step());
-			setAnimationKeyFrame();
-			
+			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps), e -> step());
+			animation = new Timeline();
+			animation.setCycleCount(Timeline.INDEFINITE);
+			animation.getKeyFrames().add(frame);
+			animation.play();
 		}
 		
 		private void resume(){
@@ -119,15 +119,8 @@ import model.Model;
 		private void changeSpeed(double value) {
 			fps = DEFAULT_FPS*value;
 			animation.stop();
-			
-			// move this stuff into a helper function
-//			frame = new KeyFrame(Duration.millis(1000/fps),
-//					e -> step());
-			animation.getKeyFrames().clear();
-			setAnimationKeyFrame();
-		}
-		
-		private void setAnimationKeyFrame(){
+			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
+					e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);

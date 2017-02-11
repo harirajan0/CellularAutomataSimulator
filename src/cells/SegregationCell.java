@@ -10,10 +10,8 @@ import states.SegregationState;
  *
  */
 public class SegregationCell extends Cell {
-	
 
 	private List<Cell> emptyPositions;
-	
 	private double percentage;
 	
 	public void setAvailableList(List<Cell> availableList){
@@ -24,9 +22,10 @@ public class SegregationCell extends Cell {
 		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
+	
 	@Override
 	public void update() {
-		if (this.getNextState() != null) {return; }
+		if (this.getNextState() != null) return;
 		if (this.getCurrentState().equals(SegregationState.EMPTY)) {
 			setNextState(this.getCurrentState());
 			return;
@@ -37,12 +36,6 @@ public class SegregationCell extends Cell {
 			setNextState(this.getCurrentState());
 		}
 	}
-	/**
-	 * Updates the state of the Cell if it is dissatisfied and changes 
-	 * a random Cell from the specified ArrayList of empty Cells to the 
-	 * state of the original Cell (state 1 or state 2).
-	 * @param emptyPositions
-	 */
 	
 	/**
 	 * Checks if the Cell is satisfied by comparing the percentage of 
@@ -78,7 +71,7 @@ public class SegregationCell extends Cell {
 			return;
 		}
 		this.setNextState(SegregationState.EMPTY);
-		int option = (int)Math.random()*emptyPositions.size();
+		int option = (int)(Math.random()*emptyPositions.size());
 		Cell tmp = emptyPositions.get(option);
 		tmp.setNextState(this.getCurrentState());
 	}
