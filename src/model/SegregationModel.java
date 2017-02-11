@@ -29,9 +29,13 @@ public class SegregationModel extends Model {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
 				int yPosition = col * sideLength;
-				SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-						xPosition, yPosition, sideLength, param);
-				set(row, col, newCell);
+				try{
+					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
+							xPosition, yPosition, sideLength, param);
+					set(row, col, newCell);
+				} catch (StringIndexOutOfBoundsException e) {
+					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+				}
 			}
 		}
 		createAvailableCells();
