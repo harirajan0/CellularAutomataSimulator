@@ -30,9 +30,13 @@ public class WaTorModel extends Model {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
 				int yPosition = col * sideLength;
-				WaTorCell newCell = new WaTorCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-						xPosition, yPosition, sideLength);
-				set(row, col, newCell);
+				try {
+					WaTorCell newCell = new WaTorCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
+							xPosition, yPosition, sideLength);
+					set(row, col, newCell);
+				} catch (StringIndexOutOfBoundsException e) {
+					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+				}
 			}
 		}
 	}

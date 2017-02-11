@@ -1,13 +1,20 @@
 package main;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import loader.Loader;
+import loader.XMLException;
 import model.Model;
 
 	// This controller class is the central nexus control of the entire program.
@@ -62,6 +69,7 @@ import model.Model;
 			cp.setReset(e -> reset());
 			cp.setLoad(e -> load());
 			cp.setResume(e -> resume());
+			cp.setSave(e -> save());
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
 			cp.addToHBox();
 			myGUI.createCP(cp.getControlPanel());
@@ -103,9 +111,25 @@ import model.Model;
 		 * @return
 		 */
 		private void load() {
-			dataFile = myChooser.showOpenDialog(null);
-			reset();
-		}	
+			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
+			try {
+				l = new Loader(dataFile);
+			} catch (XMLException e) {
+				//alert with e.getString Please choose another file.
+				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
+				return;
+			} catch (StringIndexOutOfBoundsException e) {
+				if(CellSocietyAlerts.cellDataError(e)) load();
+				return;
+			}
+			myModel = l.getFirstGrid();
+			myModel.initializeNeighbors();
+			cellSimulationDisplay.displayGrid(myModel);
+		}
+		
+		private void save() {
+			//call method to write XML based on current state
+		}
 		
 		// set some sensible defaults when the FileChooser is created
 	    private FileChooser makeChooser (String extensionAccepted) {

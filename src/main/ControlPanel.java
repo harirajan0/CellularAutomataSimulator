@@ -24,7 +24,7 @@ public class ControlPanel {
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
-	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton;
+	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton;
 	private Slider speedSlider;
     private ResourceBundle myResources;
     private String shapeType;
@@ -44,6 +44,7 @@ public class ControlPanel {
 		resetButton = makeButton("ResetCommand");
 		loadButton = makeButton("LoadCommand");
 		resumeButton = makeButton("ResumeCommand");
+		saveButton = makeButton("SaveCommand");
 
 		initializeChoicebox();
 		
@@ -85,6 +86,10 @@ public class ControlPanel {
 		resumeButton.setOnAction(handler);
 	}
 	
+	public void setSave(EventHandler<ActionEvent> handler){
+		resumeButton.setOnAction(handler);
+	}
+	
 	public Slider getSlider(){
 		return speedSlider;
 	}
@@ -121,4 +126,4 @@ public class ControlPanel {
 			}
     	});
     }
-}
+}
