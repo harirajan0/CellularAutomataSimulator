@@ -9,6 +9,8 @@ import model.WaTorModel;
 
 public class Loader {
 
+	public static final String XML_EXTENSION = ".xml";
+
 	public static final String SIMULATION_TYPE = "simulationType";
 	public static final String SIMULATION_NAME = "simulationName";
 	public static final String NUM_ROWS = "numRows";
@@ -31,6 +33,10 @@ public class Loader {
 
 	public Loader(File file) {
 		myParser = new XMLParser(file);
+		if (!file.getName().endsWith(XML_EXTENSION)) {
+			throw new XMLException("The chosen file is not an xml file");
+			// ASK WINDOWS USERS IF THIS IS AN ISSUE THAT NEEDS TO THROW AN ALERT!!!!!
+		}
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		setEdgesOnly();
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
@@ -54,19 +60,23 @@ public class Loader {
 	 */
 	private void initializeGrid() {
 		switch (simulationType) {
-		case SPREADING_FIRE: myModel = new SpreadingFireModel(rows, cols);
+		case SPREADING_FIRE:
+			myModel = new SpreadingFireModel(rows, cols);
 			break;
-		case WATOR: myModel = new WaTorModel(rows, cols);
+		case WATOR:
+			myModel = new WaTorModel(rows, cols);
 			break;
-		case CONWAY: myModel = new ConwayModel(rows, cols);
+		case CONWAY:
+			myModel = new ConwayModel(rows, cols);
 			break;
-		case SEGREGATION: myModel = new SegregationModel(rows, cols);
+		case SEGREGATION:
+			myModel = new SegregationModel(rows, cols);
 			break;
-		default: break;
+		default:
+			break;
 		}
 		myModel.populateCells(myParser, param);
 	}
-
 
 	/**
 	 * Gets the type of simulation

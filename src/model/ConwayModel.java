@@ -1,16 +1,13 @@
 package model;
 
 import java.util.HashMap;
-import java.util.List;
-
-import cells.Cell;
 import cells.ConwayCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
 import states.ConwayState;
 
 public class ConwayModel extends Model {
-private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
+	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	
 	public ConwayModel(int r, int c) {
 		super(r, c);
@@ -26,9 +23,13 @@ private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
 				int yPosition = col * sideLength;
-				ConwayCell newCell = new ConwayCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-						xPosition, yPosition, sideLength);
-				set(row, col, newCell);
+				try {
+					ConwayCell newCell = new ConwayCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
+							xPosition, yPosition, sideLength);
+					set(row, col, newCell);
+				} catch (StringIndexOutOfBoundsException e) {
+					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+				}
 			}
 		}
 	}

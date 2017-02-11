@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 import cells.SpreadingFireCell;
+import loader.XMLException;
 import loader.XMLParser;
 import main.ApplicationStartup;
 import states.SpreadingFireState;
@@ -30,9 +31,13 @@ public class SpreadingFireModel extends Model {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
 				int yPosition = col * sideLength;
-				SpreadingFireCell newCell = new SpreadingFireCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-						xPosition, yPosition, sideLength, param);
-				set(row, col, newCell);
+				try {
+					SpreadingFireCell newCell = new SpreadingFireCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
+							xPosition, yPosition, sideLength, param);
+					set(row, col, newCell);
+				} catch (StringIndexOutOfBoundsException e) {
+					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+				}
 			}
 		}
 	}

@@ -13,7 +13,7 @@ public class ControlPanel {
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
-	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton;
+	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton;
 	private Slider speedSlider;
     private ResourceBundle myResources;
 
@@ -30,6 +30,7 @@ public class ControlPanel {
 		resetButton = makeButton("ResetCommand");
 		loadButton = makeButton("LoadCommand");
 		resumeButton = makeButton("ResumeCommand");
+		saveButton = makeButton("SaveCommand");
 
 		speedSlider = makeSpeedSlider();
 		
@@ -41,7 +42,7 @@ public class ControlPanel {
 	}
 	
 	public void addToHBox(){
-		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, speedSlider);
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, speedSlider);
 	}
 	
 	// setter methods to set actions for buttons; used in the controller
@@ -66,6 +67,10 @@ public class ControlPanel {
 	}
 	
 	public void setResume(EventHandler<ActionEvent> handler){
+		resumeButton.setOnAction(handler);
+	}
+	
+	public void setSave(EventHandler<ActionEvent> handler){
 		resumeButton.setOnAction(handler);
 	}
 	
