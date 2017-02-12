@@ -1,6 +1,8 @@
 package loader;
 
 import java.io.File;
+
+import alerts.CellSocietyAlerts;
 import model.ConwayModel;
 import model.Model;
 import model.SegregationModel;
@@ -63,7 +65,7 @@ public class Loader {
 			myModel = new SegregationModel(rows, cols);
 			break;
 		default:
-			break;
+			throw new XMLException("Invalid simulation type %s", simulationType);
 		}
 		myModel.populateCells(myParser, param);
 	}

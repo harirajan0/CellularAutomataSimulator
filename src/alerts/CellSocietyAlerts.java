@@ -18,23 +18,12 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class CellSocietyAlerts {
 	
-	public static boolean tagNameError(XMLException e, File file) {
+	public static boolean xmlError(Exception e, File file) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Error");
 		alert.setHeaderText("Problem with chosen file");
-		alert.setContentText(String.format("%s in %s. Please choose a new correctly formatted file", e.getMessage(), file.getName()));
+		alert.setContentText(String.format("%s in %s. Please choose a new correctly formatted file.", e.getMessage(), file.getName()));
 		Optional<ButtonType> result = alert.showAndWait();
 		return result.get() == ButtonType.OK;
 	}
-	
-	public static boolean cellDataError(StringIndexOutOfBoundsException e) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error");
-		alert.setHeaderText("Problem with chosen file");
-		alert.setContentText(String.format("%s. Please choose a new correctly formatted file", e.getMessage()));
-		Optional<ButtonType> result = alert.showAndWait();
-		return result.get() == ButtonType.OK;
-	}
-	
-
 }

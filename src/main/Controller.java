@@ -1,15 +1,11 @@
 package main;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
@@ -114,14 +110,10 @@ import model.Model;
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
 			try {
 				l = new Loader(dataFile);
-			} catch (XMLException e) {
-				//alert with e.getString Please choose another file.
-				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
+			} catch (Exception e) {
+				if (CellSocietyAlerts.xmlError(e, dataFile)) load();
 				return;
-			} catch (StringIndexOutOfBoundsException e) {
-				if(CellSocietyAlerts.cellDataError(e)) load();
-				return;
-			}
+			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
