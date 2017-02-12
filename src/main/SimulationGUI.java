@@ -1,4 +1,3 @@
-
 package main;
 
 import javafx.geometry.Dimension2D;
@@ -12,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 public class SimulationGUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
 	public static final Dimension2D SIMULATION_SPACE = new Dimension2D(620, 800);
+
     private Scene myScene;
     private BorderPane root;
     private BorderPane simulationCenterer;
@@ -59,4 +59,6 @@ public class SimulationGUI {
     public Scene getScene(){
     	return myScene;
     }
+    
+    
 }
