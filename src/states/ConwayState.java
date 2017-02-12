@@ -12,8 +12,8 @@ import javafx.scene.paint.Color;
 public enum ConwayState implements State {
 	
 
-	ALIVE(Color.ALICEBLUE, 0),
-	DEAD(Color.BLACK, 1);
+	ALIVE(Color.BLACK, 1),
+	DEAD(Color.ALICEBLUE, 0);
 
     private Color myColor;
     private int stateValue;
