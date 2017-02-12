@@ -27,7 +27,7 @@ public abstract class Cell {
 		//myRect.setOnMouseClicked(e -> changeStateOnClick());
 		//paint();
 	}
-	
+		
 	// cycles through state of the cell and sets cell on click.
 	public abstract void changeStateOnClick();
 	/**
