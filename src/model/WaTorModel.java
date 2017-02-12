@@ -1,16 +1,16 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import cells.WaTorCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
-import cells.WaTorCell;
-import loader.XMLParser;
-import main.Controller;
 import states.WaTorState;
+
 public class WaTorModel extends Model {
 	
 	private HashMap<Integer, WaTorState> stateMap = new HashMap<>();
@@ -20,6 +20,7 @@ public class WaTorModel extends Model {
 		for (WaTorState state : WaTorState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
+		createGraphPanel("Fish", "Shark", "Empty");
 	}
 	
 	@Override
@@ -53,5 +54,37 @@ public class WaTorModel extends Model {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<Double> updateGraph() {
+		double fishCount = 0;
+		double sharkCount = 0;
+		double emptyCount = 0;
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			WaTorState state = (WaTorState)itr.next().getCurrentState();
+			switch(state){
+				case FISH : 
+					fishCount++;
+					break;
+				case SHARK : 
+					sharkCount++;
+					break;
+				case EMPTY:
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		fishCount /= fishCount + sharkCount + emptyCount;
+		sharkCount /= fishCount + sharkCount + emptyCount;
+		emptyCount /= fishCount + sharkCount + emptyCount;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(fishCount);
+		pops.add(sharkCount);
+		pops.add(emptyCount);
+		return pops;
 	}
 }

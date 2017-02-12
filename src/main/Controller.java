@@ -1,8 +1,6 @@
 package main;
-
 import java.io.File;
 import java.util.ResourceBundle;
-
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,13 +8,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import loader.Loader;
-import loader.XMLException;
 import model.Model;
 import resources.Resources;
 
 	// This controller class is the central nexus control of the entire program.
 	// It will handle things like when to update the model, when to update the view,
-	// this class holds the cell simulation togethers
+	// this class holds the cell simulation together
 	public class Controller {
 		
 		// kind of data files to look for
@@ -116,6 +113,7 @@ import resources.Resources;
 			l = new Loader(dataFile, cp.getShapeType());
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
+			myModel.resetIteration();
 			cellSimulationDisplay.displayGrid(myModel);
 		}
 		
@@ -139,6 +137,7 @@ import resources.Resources;
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
+			myGUI.createGraph(myModel.getGraph());
 			reset();
 		}
 		

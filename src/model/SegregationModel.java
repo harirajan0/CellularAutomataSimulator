@@ -6,9 +6,9 @@ import java.util.List;
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
-import main.Controller;
 import resources.Resources;
 import states.SegregationState;
+
 public class SegregationModel extends Model {
 	
 	private List<Cell> availableCells;
@@ -18,6 +18,7 @@ public class SegregationModel extends Model {
 		for (SegregationState state : SegregationState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
+		createGraphPanel("X", "O", "Empty");
 	}
 	
 	@Override
@@ -73,5 +74,39 @@ public class SegregationModel extends Model {
 		while(itr.hasNext()){
 			((SegregationCell) itr.next()).setAvailableList(availableCells);
 		}
+	}
+
+	@Override
+	public List<Double> updateGraph() {
+		double xCount = 0;
+		double oCount = 0;
+		double emptyCount = 0;
+		
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			SegregationState state = 
+					(SegregationState)itr.next().getCurrentState();
+			switch(state){
+				case X : 
+					xCount++;
+					break;
+				case O :
+					oCount++;
+					break;
+				case EMPTY : 
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		xCount /= xCount + oCount + emptyCount;
+		oCount /= xCount + oCount + emptyCount;
+		emptyCount /= xCount + oCount + emptyCount;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(xCount);
+		pops.add(oCount);
+		pops.add(emptyCount);
+		return pops;
 	}
 }

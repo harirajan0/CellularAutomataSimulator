@@ -1,14 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
+import javafx.scene.layout.VBox;
 import loader.XMLParser;
 import neighborfinder.HexagonNeighborFinder;
 import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
+import main.GraphPanel;
 
 public abstract class Model implements Iterable<Cell> {
 
@@ -16,13 +19,16 @@ public abstract class Model implements Iterable<Cell> {
 	private static final String SQUARE = "Square";
 	private static final String HEXAGON = "Hexagon";
 	
+	private int iteration;
 	private Cell[][] myGrid;
 	private String shapeType;
 	private NeighborFinder myNF;
+	private GraphPanel graph;
 
 	public Model(int r, int c, String shapeType) {
 		myGrid = new Cell[r][c];
 		this.shapeType = shapeType;
+		iteration = 0;
 	}
 	
 	public NeighborFinder initializeNF(String str, int r, int c){
@@ -73,6 +79,8 @@ public abstract class Model implements Iterable<Cell> {
 		while(itr.hasNext()) {
 			(itr.next()).nextGeneration();
 		}
+		iteration++;
+		graph.update(updateGraph(), iteration);
 	}
 	
 	/**
@@ -81,7 +89,18 @@ public abstract class Model implements Iterable<Cell> {
 	 * @param param Additional parameter for certain models
 	 */
 	public abstract void populateCells(XMLParser parser, double param);
-
+	
+	public abstract List<Double> updateGraph();
+	
+	public void createGraphPanel(String... states){
+		graph = new GraphPanel(Arrays.asList(states));
+		graph.update(updateGraph(), 0);
+	}
+	
+	public void resetIteration(){
+		iteration = 0;
+	}
+	
 	public Cell get(int row, int col) {
 		return myGrid[row][col];
 	}
@@ -89,7 +108,7 @@ public abstract class Model implements Iterable<Cell> {
 	public void set(int row, int col, Cell cell) {
 		myGrid[row][col] = cell;
 	}
-
+	
 	/**
 	 * Gets the number of rows in the grid
 	 * 
@@ -135,5 +154,8 @@ public abstract class Model implements Iterable<Cell> {
 	public String getShapeType(){
 		return shapeType;
 	}
-
+	
+	public VBox getGraph(){
+		return graph.getGraph();
+	}
 }

@@ -1,14 +1,16 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import cells.SpreadingFireCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
-import main.Controller;
 import states.SpreadingFireState;
+
 public class SpreadingFireModel extends Model {
 	
 	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();
@@ -18,6 +20,7 @@ public class SpreadingFireModel extends Model {
 		for (SpreadingFireState state : SpreadingFireState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
+		createGraphPanel("Tree", "Burning", "Fish");
 	}
 	
 	@Override
@@ -51,5 +54,39 @@ public class SpreadingFireModel extends Model {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<Double> updateGraph() {
+		double treeCount = 0;
+		double burningCount = 0;
+		double emptyCount = 0;
+		
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			SpreadingFireState state = 
+					(SpreadingFireState)itr.next().getCurrentState();
+			switch(state){
+				case TREE : 
+					treeCount++;
+					break;
+				case BURNING :
+					burningCount++;
+					break;
+				case EMPTY : 
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		treeCount /= treeCount + burningCount + emptyCount;
+		burningCount /= treeCount + burningCount + emptyCount;
+		emptyCount /= treeCount + burningCount + emptyCount;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(treeCount);
+		pops.add(burningCount);
+		pops.add(emptyCount);
+		return pops;
 	}
 }

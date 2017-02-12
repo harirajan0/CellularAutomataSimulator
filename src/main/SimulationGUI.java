@@ -5,8 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.VBox;
 
 public class SimulationGUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
@@ -14,7 +13,6 @@ public class SimulationGUI {
 
     private Scene myScene;
     private BorderPane root;
-    private BorderPane simulationCenterer;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
     
@@ -47,9 +45,12 @@ public class SimulationGUI {
 
     }
     
-    
     public void createCP(HBox hbox){
     	root.setTop(hbox);
+    }
+    
+    public void createGraph(VBox vbox){
+    	root.setRight(vbox);
     }
     
     public SimulationView getSimulationView(){

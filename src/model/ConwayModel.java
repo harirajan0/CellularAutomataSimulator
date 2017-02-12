@@ -1,10 +1,14 @@
 package model;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import cells.ConwayCell;
 import loader.XMLParser;
-
 import resources.Resources;
 import states.ConwayState;
+import cells.Cell;
+
 public class ConwayModel extends Model {
 	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	
@@ -13,7 +17,9 @@ public class ConwayModel extends Model {
 		for (ConwayState state : ConwayState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
+		createGraphPanel("Alive", "Dead");
 	}
+	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
 		for (int row = 0; row < getRows(); row++) {
@@ -26,5 +32,31 @@ public class ConwayModel extends Model {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public List<Double> updateGraph(){
+		double liveCount = 0;
+		double deadCount = 0;
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			ConwayState state = (ConwayState)itr.next().getCurrentState();
+			switch(state){
+				case ALIVE : 
+					liveCount++;
+					break;
+				case DEAD : 
+					deadCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		liveCount /= liveCount + deadCount;
+		deadCount /= liveCount + deadCount;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(liveCount);
+		pops.add(deadCount);
+		return pops;
 	}
 }
