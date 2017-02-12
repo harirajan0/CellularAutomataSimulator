@@ -13,7 +13,7 @@ public class ControlPanel {
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
-	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton;
+	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton, zoomInButton, zoomOutButton, zoomResetButton;
 	private Slider speedSlider;
     private ResourceBundle myResources;
 
@@ -31,6 +31,9 @@ public class ControlPanel {
 		loadButton = makeButton("LoadCommand");
 		resumeButton = makeButton("ResumeCommand");
 		saveButton = makeButton("SaveCommand");
+		zoomInButton = makeButton("ZoomIn");
+		zoomOutButton = makeButton("ZoomOut");
+		zoomResetButton = makeButton("ZoomReset");
 
 		speedSlider = makeSpeedSlider();
 		
@@ -42,12 +45,22 @@ public class ControlPanel {
 	}
 	
 	public void addToHBox(){
-		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, speedSlider);
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, 
+				loadButton, saveButton, speedSlider, zoomInButton, zoomOutButton, zoomResetButton);
 	}
 	
 	// setter methods to set actions for buttons; used in the controller
 	public void setStart(EventHandler<ActionEvent> handler){
 		startButton.setOnAction(handler);
+	}
+	public void setZoomIn(EventHandler<ActionEvent> handler){
+		zoomInButton.setOnAction(handler);
+	}
+	public void setZoomOut(EventHandler<ActionEvent> handler){
+		zoomOutButton.setOnAction(handler);
+	}
+	public void setZoomReset(EventHandler<ActionEvent> handler){
+		zoomResetButton.setOnAction(handler);
 	}
 	
 	public void setPause(EventHandler<ActionEvent> handler){
