@@ -113,6 +113,7 @@ import model.Model;
 		
 		private void step() {
 			myModel.updateModel();
+			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
 		/**

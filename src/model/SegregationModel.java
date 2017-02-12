@@ -7,7 +7,6 @@ import java.util.List;
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
-import main.ApplicationStartup;
 import states.SegregationState;
 
 public class SegregationModel extends Model {
@@ -24,14 +23,10 @@ public class SegregationModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
-				int xPosition = row * sideLength;
-				int yPosition = col * sideLength;
 				try{
-					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-							xPosition, yPosition, sideLength, param);
+					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
 					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));

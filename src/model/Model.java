@@ -34,6 +34,7 @@ public abstract class Model implements Iterable<Cell> {
 			myNF = new SquareNeighborFinder(r, c);
 			break;
 		case HEXAGON:
+			System.out.println("yes");
 			myNF = new HexagonNeighborFinder(r, c);
 			break;
 		default:
@@ -67,8 +68,11 @@ public abstract class Model implements Iterable<Cell> {
 	public void updateModel() {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()) itr.next().update();
+		System.out.println(get(0,0).getCurrentState());
 		itr = iterator();
-		while(itr.hasNext()) itr.next().nextGeneration();
+		while(itr.hasNext()) {
+			(itr.next()).nextGeneration();
+		}
 	}
 	
 	/**
