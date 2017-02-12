@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
@@ -13,7 +14,7 @@ public abstract class Model implements Iterable<Cell> {
 	public Model(int r, int c) {
 		myGrid = new Cell[r][c];
 	}
-	
+		
 	/**
 	 * Removes the neighbors at the corners of the cell
 	 * TODO: Only works for squares
@@ -85,6 +86,8 @@ public abstract class Model implements Iterable<Cell> {
 		myGrid[row][col] = cell;
 	}
 
+	public abstract HashMap<String, Double> updateGraph();
+	
 	/**
 	 * Gets the number of rows in the grid
 	 * 
