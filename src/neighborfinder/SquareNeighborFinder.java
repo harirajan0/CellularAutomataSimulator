@@ -25,7 +25,7 @@ public class SquareNeighborFinder extends NeighborFinder {
 	@Override
 	public void findNeighbors() {
 		for (int i=row-1; i<=row+1; i++){
-			for (int j=col-2; j<=col+2; j++){
+			for (int j=col-1; j<=col+1; j++){
 				// skip itself
 				if (i==row && j==col) continue;
 				this.getNeighborLocations().add(new int[]{i, j});
