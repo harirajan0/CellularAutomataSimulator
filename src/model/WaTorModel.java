@@ -7,9 +7,6 @@ import cells.WaTorCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
-import cells.WaTorCell;
-import loader.XMLParser;
-import main.Controller;
 import states.WaTorState;
 public class WaTorModel extends Model {
 	
