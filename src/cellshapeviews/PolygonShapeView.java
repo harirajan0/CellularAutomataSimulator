@@ -1,5 +1,7 @@
 package cellshapeviews;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
 public abstract class PolygonShapeView {
@@ -23,6 +25,10 @@ public abstract class PolygonShapeView {
 	public abstract Double[] calculateCoordinates();
 	
 	public abstract Double[] pivotPoint();
+	
+	public void changeCellState(EventHandler<? super MouseEvent> value){
+		myPolygon.setOnMouseClicked(value);
+	}
 	
 	public int getRow(){
 		return row;

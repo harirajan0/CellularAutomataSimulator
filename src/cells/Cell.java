@@ -26,13 +26,7 @@ public abstract class Cell {
 	 */
 	public Cell(State initState) {
 		setCurrentState(initState);
-		/*setxPosition(x);
-		setyPosition(y);
-		myRect = new Rectangle(x, y, width, width);
-		myRect.setStroke(Color.BLACK);
-<<<<<<< HEAD
-		paint();*/
-		myRect.setOnMouseClicked(e -> changeStateOnClick());
+		//myRect.setOnMouseClicked(e -> changeStateOnClick());
 		//paint();
 	}
 	

@@ -16,11 +16,9 @@ import javafx.scene.layout.StackPane;
 import model.Model;
 
 public class SimulationView {
-		
-	private Pane cellSimulationPane;
+	
 	private List<PolygonShapeView> cellDisplay;
 
-//	private Pane cellSimulationPane;
 	private Group cellSimulationGroup;
 	private StackPane cellSimStackPane;
 	private double currScale;
@@ -28,6 +26,7 @@ public class SimulationView {
 	public SimulationView(){
 		cellSimulationGroup = new Group();
 		cellSimStackPane = makeSimulationStackPane();
+		cellDisplay = new ArrayList<>();
 		setMinSizeToDefault();
 		currScale = 1;
 	}
@@ -85,14 +84,16 @@ public class SimulationView {
 	
 	public void displayGrid(Model model) {
 		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
-		cellSimulationPane.getChildren().clear();
+		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
+				Cell cell = model.get(r, c);
 				PolygonShapeView psv = new HexagonShapeView(r, c, sideLength);
 				Polygon polygon = psv.getPolygon();
-				polygon.setFill(model.get(r, c).getCurrentState().getColor());
+				polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
+				polygon.setFill(cell.getCurrentState().getColor());
 				polygon.setStroke(Color.BLACK);
-				cellSimulationPane.getChildren().add(polygon);
+				cellSimulationGroup.getChildren().add(polygon);
 				cellDisplay.add(psv);
 			}
 		}
@@ -107,6 +108,11 @@ public class SimulationView {
 			Cell tmpCell = model.get(psv.getRow(), psv.getCol());
 			psv.getPolygon().setFill(tmpCell.getCurrentState().getColor());
 		}
+	}
+	
+	public void updateIndividualCellState(Cell cell, PolygonShapeView psv){
+		cell.changeStateOnClick();
+		psv.getPolygon().setFill(cell.getCurrentState().getColor());
 	}
 	
 }
