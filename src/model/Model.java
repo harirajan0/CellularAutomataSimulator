@@ -5,57 +5,58 @@ import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import loader.XMLParser;
+import neighborfinder.HexagonNeighborFinder;
+import neighborfinder.NeighborFinder;
+import neighborfinder.SquareNeighborFinder;
+import neighborfinder.TriangleNeighborFinder;
 
 public abstract class Model implements Iterable<Cell> {
 
+	private static final String TRIANGLE = "Triangle";
+	private static final String SQUARE = "Square";
+	private static final String HEXAGON = "Hexagon";
+	
 	private Cell[][] myGrid;
+	private String shapeType;
+	private NeighborFinder myNF;
 
-	public Model(int r, int c) {
+	public Model(int r, int c, String shapeType) {
 		myGrid = new Cell[r][c];
+		this.shapeType = shapeType;
 	}
 	
-	/**
-	 * Removes the neighbors at the corners of the cell
-	 * TODO: Only works for squares
-	 */
-	public void removeCorners(){
-		for (int r = 0; r < getRows(); r++) {
-			for (int c = 0; c < getCols(); c++) {
-				ArrayList<Cell> neighbors = (ArrayList<Cell>) get(r, c).getNeighbors();
-				for (int horiz = -1; horiz <= 1; horiz += 2) {
-					for (int vert = -1; vert <= 1; vert += 2) {
-						// Iterate through neighbors, remove if at corner
-						if (contains(r + horiz, c + vert)) {
-							neighbors.remove(get(r + horiz, c + vert));
-						}
-					}
-				}
-				get(r, c).setNeighbors(neighbors);
-			}
+	public NeighborFinder initializeNF(String str, int r, int c){
+		switch(str){
+		case TRIANGLE:
+			myNF = new TriangleNeighborFinder(r, c);
+			break;
+		case SQUARE:
+			myNF = new SquareNeighborFinder(r, c);
+			break;
+		case HEXAGON:
+			myNF = new HexagonNeighborFinder(r, c);
+			break;
+		default:
+			break;
 		}
+		return myNF;
 	}
 	
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
 	public void initializeNeighbors() {
-		List<Cell> neighbors = new ArrayList<Cell>();
 		for (int r = 0; r < getRows(); r++) {
 			for (int c = 0; c < getCols(); c++) {
-				neighbors = new ArrayList<Cell>();
-				for (int horiz = -1; horiz <= 1; horiz++) {
-					for (int vert = -1; vert <= 1; vert++) {
-						if (horiz == 0 && vert == 0) {
-							continue;
-						}
-
-						// Iterate through neighbors, add if not outside array
-						if (contains(r + horiz, c + vert)) {
-							neighbors.add(get(r + horiz, c + vert));
-						}
+				List<Cell> nbs = new ArrayList<>();
+				initializeNF(shapeType, r, c);
+				myNF.findNeighbors();
+				for (int[] arr : myNF.getNeighborLocations()){
+					if (contains(arr[0], arr[1])){
+						nbs.add(get(arr[0], arr[1]));
 					}
 				}
-				get(r, c).setNeighbors(neighbors);
+				get(r, c).setNeighbors(nbs);
 			}
 		}
 	}
@@ -125,6 +126,10 @@ public abstract class Model implements Iterable<Cell> {
 			}
 		}
 		return cellList.iterator();
+	}
+	
+	public String getShapeType(){
+		return shapeType;
 	}
 
 }

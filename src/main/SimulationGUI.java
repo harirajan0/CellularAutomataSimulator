@@ -6,7 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class SimulationGUI {
-	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
+	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1100, 800);
 	
     private Scene myScene;
     private BorderPane root;

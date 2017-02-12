@@ -96,7 +96,16 @@ import model.Model;
 			if(animation != null){
 				animation.stop();
 			}
-			l = new Loader(dataFile);
+			try {
+				l = new Loader(dataFile, cp.getShapeType());
+			} catch (XMLException e) {
+				//alert with e.getString Please choose another file.
+				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
+				return;
+			} catch (StringIndexOutOfBoundsException e) {
+				if(CellSocietyAlerts.cellDataError(e)) load();
+				return;
+			}
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
@@ -112,19 +121,7 @@ import model.Model;
 		 */
 		private void load() {
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
-			try {
-				l = new Loader(dataFile);
-			} catch (XMLException e) {
-				//alert with e.getString Please choose another file.
-				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
-				return;
-			} catch (StringIndexOutOfBoundsException e) {
-				if(CellSocietyAlerts.cellDataError(e)) load();
-				return;
-			}
-			myModel = l.getFirstGrid();
-			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel);
+			reset();
 		}
 		
 		private void save() {

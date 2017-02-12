@@ -18,9 +18,9 @@ import javafx.scene.layout.HBox;
 
 public class ControlPanel {
 	
-	private final String[] SHAPES = new String[]{"Selection", "Square", "Triangle", "Hexagon"};
-	private final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList("Select cell shape", new Separator(),
-			"Square",  new Separator(), "Triangle", new Separator(), "Hexagon"));
+	private final String[] SHAPES = new String[]{"Square", "Triangle", "Hexagon"};
+	private final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(
+			"Square", "Triangle", "Hexagon"));
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
@@ -118,6 +118,7 @@ public class ControlPanel {
 	
     private void initializeChoicebox(){
     	cb.getSelectionModel().selectFirst();
+    	shapeType = SHAPES[cb.getSelectionModel().getSelectedIndex()];
     	cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
 
 			@Override

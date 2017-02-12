@@ -9,8 +9,8 @@ import states.ConwayState;
 public class ConwayModel extends Model {
 	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	
-	public ConwayModel(int r, int c) {
-		super(r, c);
+	public ConwayModel(int r, int c, String shapeType) {
+		super(r, c, shapeType);
 		for (ConwayState state : ConwayState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}

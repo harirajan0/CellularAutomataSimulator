@@ -15,8 +15,8 @@ public class SegregationModel extends Model {
 	private List<Cell> availableCells;
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
 
-	public SegregationModel(int r, int c) {
-		super(r, c);
+	public SegregationModel(int r, int c, String shapeType) {
+		super(r, c, shapeType);
 		for (SegregationState state : SegregationState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}

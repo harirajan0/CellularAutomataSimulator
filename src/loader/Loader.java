@@ -30,7 +30,7 @@ public class Loader {
 	private double param;
 	private Model myModel;
 
-	public Loader(File file) {
+	public Loader(File file, String shapeType) {
 		myParser = new XMLParser(file);
 		if (!file.getName().endsWith(XML_EXTENSION)) {
 			throw new XMLException("The chosen file is not an xml file");
@@ -40,7 +40,7 @@ public class Loader {
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
 		param = Double.valueOf(myParser.getTextValue(PARAM));
-		initializeGrid();
+		initializeGrid(shapeType);
 
 	}
 
@@ -48,19 +48,19 @@ public class Loader {
 	 * From the list of states, the probability, and simulation type, construct
 	 * a list of cells to be passed in to the Grid later.
 	 */
-	private void initializeGrid() {
+	private void initializeGrid(String shapeType) {
 		switch (simulationType) {
 		case SPREADING_FIRE:
-			myModel = new SpreadingFireModel(rows, cols);
+			myModel = new SpreadingFireModel(rows, cols, shapeType);
 			break;
 		case WATOR:
-			myModel = new WaTorModel(rows, cols);
+			myModel = new WaTorModel(rows, cols, shapeType);
 			break;
 		case CONWAY:
-			myModel = new ConwayModel(rows, cols);
+			myModel = new ConwayModel(rows, cols, shapeType);
 			break;
 		case SEGREGATION:
-			myModel = new SegregationModel(rows, cols);
+			myModel = new SegregationModel(rows, cols, shapeType);
 			break;
 		default:
 			break;
