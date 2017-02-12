@@ -9,7 +9,7 @@ public class SimulationView {
 	
 	public SimulationView(){
 		cellSimulationPane = new Pane();
-		cellSimulationPane.setMaxSize(ApplicationStartup.WINDOW_SIZE, ApplicationStartup.WINDOW_SIZE);		
+		cellSimulationPane.setMaxSize(Controller.WINDOW_SIZE, Controller.WINDOW_SIZE);		
 	}
 	
 	public Pane getCellSimulationPane(){

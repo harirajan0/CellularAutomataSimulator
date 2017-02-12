@@ -3,19 +3,19 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class ApplicationStartup extends Application {
+public class ApplicationStartup extends Application{
 	
-	public static final String TITLE = "Cellular Automata Simulator";
-	public static final int WINDOW_SIZE = 600;
-	private Controller myController;
+
+//	private main = new MainStage();
+
+
 
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		myController = new Controller();
-		stage.setTitle(TITLE);
-		stage.setScene(myController.getGUI().getScene());
-		stage.show();
+		MainView mainView = new MainView(stage);
+		
+
 	}
 
 	public static void main(String[] args) {

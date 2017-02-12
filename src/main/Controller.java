@@ -26,6 +26,8 @@ import model.Model;
 	    public static final String DATA_FILE_EXTENSION = "*.xml";
 	    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 		private static final double DEFAULT_FPS = 1;
+		public static final int WINDOW_SIZE = 600;
+
 		
 		// Dimension of the Grid, obtained from Loader
 		private Model myModel;

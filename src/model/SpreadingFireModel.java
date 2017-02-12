@@ -1,10 +1,10 @@
 package model;
 
 import java.util.HashMap;
+
 import cells.SpreadingFireCell;
-import loader.XMLException;
 import loader.XMLParser;
-import main.ApplicationStartup;
+import main.Controller;
 import states.SpreadingFireState;
 
 public class SpreadingFireModel extends Model {
@@ -26,7 +26,7 @@ public class SpreadingFireModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
+		int sideLength = Controller.WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
