@@ -28,4 +28,13 @@ public class CellSocietyAlerts {
 		Optional<ButtonType> result = alert.showAndWait();
 		return result.get() == ButtonType.OK;
 	}
+	
+	public static void xmlGenerated(String filePath) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(Resources.getString("XMLSavedTitle"));
+		alert.setHeaderText(Resources.getString("XMLSavedHeader"));
+		alert.setContentText(String.format(Resources.getString("XMLSavedMessage"), filePath));
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) alert.close();
+	}
 }

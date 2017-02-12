@@ -7,9 +7,6 @@ import cells.WaTorCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
-import cells.WaTorCell;
-import loader.XMLParser;
-import main.Controller;
 import states.WaTorState;
 public class WaTorModel extends Model {
 	
@@ -28,7 +25,6 @@ public class WaTorModel extends Model {
 			for (int c = 0; c < getCols(); c++) {
 				List<Cell> nbs = new ArrayList<>();
 				NeighborFinder myNF = initializeNF(getShapeType(), r, c);
-				System.out.println(getShapeType());
 				myNF.findNeighbors();
 				myNF.removeCorners();
 				for (int[] arr : myNF.getNeighborLocations()){
