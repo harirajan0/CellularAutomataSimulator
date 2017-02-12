@@ -1,7 +1,5 @@
 package neighborfinder;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class HexagonNeighborFinder extends NeighborFinder {
 	
@@ -14,8 +12,7 @@ public class HexagonNeighborFinder extends NeighborFinder {
 	}
 
 	@Override
-	public List<int[]> findNeighbors() {
-		List<int[]> neighborLocations = new ArrayList<>();
+	public void findNeighbors() {
 		
 		for (int i=row-1; i<=row+1; i++){
 			for (int j=col-1; j<=col+1; j++){
@@ -29,11 +26,12 @@ public class HexagonNeighborFinder extends NeighborFinder {
 				else{
 					if ((i==row-1 || i==row+1) && j==col+1) continue;
 				}
-				int[] tmp = new int[]{i, j};
-				neighborLocations.add(tmp);
+				this.getNeighborLocations().add(new int[]{i, j});
 			}
 		}
-		return neighborLocations;
 	}
+
+	@Override
+	public void removeCorners() {}
 
 }

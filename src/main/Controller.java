@@ -116,24 +116,8 @@ import model.Model;
 			if(animation != null){
 				animation.stop();
 			}
-			l = new Loader(dataFile);
-			myModel = l.getFirstGrid();
-			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel);
-		}
-		
-		private void step() {
-			myModel.updateModel();
-		}
-		
-		/**
-		 * This method will be called in GUI once the user clicks the Load button.
-		 * @return
-		 */
-		private void load() {
-			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
 			try {
-				l = new Loader(dataFile);
+				l = new Loader(dataFile, cp.getShapeType());
 			} catch (XMLException e) {
 				//alert with e.getString Please choose another file.
 				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
@@ -145,6 +129,20 @@ import model.Model;
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
+		}
+		
+		private void step() {
+			myModel.updateModel();
+			cellSimulationDisplay.updateGrid(myModel);
+		}
+		
+		/**
+		 * This method will be called in GUI once the user clicks the Load button.
+		 * @return
+		 */
+		private void load() {
+			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
+			reset();
 		}
 		
 		private void save() {

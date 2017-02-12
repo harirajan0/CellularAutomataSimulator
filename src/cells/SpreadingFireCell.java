@@ -9,8 +9,8 @@ public class SpreadingFireCell extends Cell
 	
 	private double probCatch;
 	
-	public SpreadingFireCell(SpreadingFireState initState, int x, int y, int width, double prob){
-		super(initState, x, y, width);
+	public SpreadingFireCell(SpreadingFireState initState, double prob){
+		super(initState);
 		probCatch = prob;
 	}
 

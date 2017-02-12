@@ -23,17 +23,26 @@ public class SquareNeighborFinder extends NeighborFinder {
 	 * in a list of x,y coordinates.
 	 */
 	@Override
-	public List<int[]> findNeighbors() {
-		List<int[]> neighborLocations = new ArrayList<>();
+	public void findNeighbors() {
 		for (int i=row-1; i<=row+1; i++){
 			for (int j=col-2; j<=col+2; j++){
 				// skip itself
 				if (i==row && j==col) continue;
-				int[] tmp = new int[]{i, j};
-				neighborLocations.add(tmp);
+				this.getNeighborLocations().add(new int[]{i, j});
 			}
 		}
-		return neighborLocations;
 	}
 
+	@Override
+	public void removeCorners() {
+		List<int[]> removeList = new ArrayList<>();
+		for (int[] arr : this.getNeighborLocations()){
+			if (sameLocation(arr, row-1, col) || sameLocation(arr, row+1, col) ||
+					sameLocation(arr, row, col-1) || sameLocation(arr, row, col+1)){
+				continue;
+			}
+			removeList.add(arr);	
+		}
+		this.getNeighborLocations().removeAll(removeList);
+	}
 }

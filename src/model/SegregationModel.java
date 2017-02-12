@@ -16,8 +16,8 @@ public class SegregationModel extends Model {
 	private List<Cell> availableCells;
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
 
-	public SegregationModel(int r, int c) {
-		super(r, c);
+	public SegregationModel(int r, int c, String shapeType) {
+		super(r, c, shapeType);
 		for (SegregationState state : SegregationState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
@@ -25,14 +25,10 @@ public class SegregationModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
-				int xPosition = row * sideLength;
-				int yPosition = col * sideLength;
 				try{
-					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), 
-							xPosition, yPosition, sideLength, param);
+					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
 					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));

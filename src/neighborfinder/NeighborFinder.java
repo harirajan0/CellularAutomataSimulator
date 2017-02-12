@@ -12,11 +12,28 @@ import java.util.List;
  */
 public abstract class NeighborFinder {
 	
-	public NeighborFinder(int r, int c) {}
+	private List<int[]> neighborLocations;
+	
+	public NeighborFinder(int r, int c) {
+		neighborLocations = new ArrayList<>();
+	}
 	
 	/**
 	 * Different cell shapes will result in different ways to 
 	 * find neighbors.
 	 */
-	public abstract List<int[]> findNeighbors();	
+	public abstract void findNeighbors();
+	
+	/**
+	 * Remove corners if necessary, depending on the simulation.
+	 */
+	public abstract void removeCorners();
+	
+	public boolean sameLocation(int[] arr, int r, int c){
+		return (arr[0]==r && arr[1]==c);
+	}
+	
+	public List<int[]> getNeighborLocations(){
+		return neighborLocations;
+	}
 }
