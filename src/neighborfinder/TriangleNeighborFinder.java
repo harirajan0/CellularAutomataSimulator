@@ -23,26 +23,46 @@ public class TriangleNeighborFinder extends NeighborFinder {
 	 * in a list of x,y coordinates.
 	 */
 	@Override
-	public List<int[]> findNeighbors() {
-		List<int[]> neighborLocations = new ArrayList<>();
+	public void findNeighbors() {
 		
 		for (int i=row-1; i<=row+1; i++){
 			for (int j=col-2; j<=col+2; j++){
 				// skip itself
 				if (i==row && j==col) continue;
-				// (odd row, odd col) OR (even row, even col)
-				if ((row%2==1 && col%2==1) || (row%2==0&&col%2==0)){
+				if (sameParity()){
 					if (i==row+1 && (j==col-2 || j==col+2)) continue;
-				}
-				// (odd row, even col) OR (even row, odd col)
-				else{
+				} else{
 					if (i==row-1 && (j==col-2 || j==col+2)) continue;
 				}
-				int[] tmp = new int[]{i, j};
-				neighborLocations.add(tmp);
+				this.getNeighborLocations().add(new int[]{i, j});
 			}
 		}
-		return neighborLocations;
+	}
+
+	@Override
+	public void removeCorners() {
+		List<int[]> removeList = new ArrayList<>();
+		for (int[] arr : this.getNeighborLocations()){
+			if (sameParity()){
+				if (sameLocation(arr, row-1, col) || sameLocation(arr, row, col-1) || sameLocation(arr, row, col+1)){
+					continue;
+				}
+			} else{
+				if (sameLocation(arr, row+1, col) || sameLocation(arr, row, col-1) || sameLocation(arr, row, col+1)){
+					continue;
+				}
+			}
+			removeList.add(arr);	
+		}
+		this.getNeighborLocations().removeAll(removeList);
+	}
+	
+	 /**
+	  * (odd row, odd col) OR (even row, even col)
+	  * @return
+	  */
+	private boolean sameParity(){
+		return (row%2==1 && col%2==1) || (row%2==0&&col%2==0);
 	}
 
 }

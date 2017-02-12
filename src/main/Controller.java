@@ -113,7 +113,7 @@ import resources.Resources;
 			if(animation != null){
 				animation.stop();
 			}
-			l = new Loader(dataFile);
+			l = new Loader(dataFile, cp.getShapeType());
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
@@ -121,6 +121,7 @@ import resources.Resources;
 		
 		private void step() {
 			myModel.updateModel();
+			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
 		/**
@@ -130,7 +131,7 @@ import resources.Resources;
 		private void load() {
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
 			try {
-				l = new Loader(dataFile);
+				l = new Loader(dataFile, cp.getShapeType());
 			} catch (Exception e) {
 				if (CellSocietyAlerts.xmlError(e, dataFile)) load();
 				return;
@@ -138,6 +139,7 @@ import resources.Resources;
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
+			reset();
 		}
 		
 		private void save() {

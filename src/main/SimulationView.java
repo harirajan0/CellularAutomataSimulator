@@ -1,13 +1,19 @@
 package main;
-
+import java.util.ArrayList;
+import java.util.List;
+import cells.Cell;
+import cellshapeviews.HexagonShapeView;
+import cellshapeviews.PolygonShapeView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
-
 public class SimulationView {
-		
-//	private Pane cellSimulationPane;
+	
+	private List<PolygonShapeView> cellDisplay;
 	private Group cellSimulationGroup;
 	private StackPane cellSimStackPane;
 	private double currScale;
@@ -15,6 +21,7 @@ public class SimulationView {
 	public SimulationView(){
 		cellSimulationGroup = new Group();
 		cellSimStackPane = makeSimulationStackPane();
+		cellDisplay = new ArrayList<>();
 		setMinSizeToDefault();
 		currScale = 1;
 	}
@@ -65,19 +72,41 @@ public class SimulationView {
     	zoomPane.getChildren().add(cellSimulationGroup);
     	return zoomPane;
     }
-
 	/* Takes in the model and display it in the GUI.
 	 * @param model The model to display
 	 */
 	
 	public void displayGrid(Model model) {
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
-				cellSimulationGroup.getChildren().add(model.get(r, c).getRect());
+				Cell cell = model.get(r, c);
+				PolygonShapeView psv = new HexagonShapeView(r, c, sideLength);
+				Polygon polygon = psv.getPolygon();
+				polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
+				polygon.setFill(cell.getCurrentState().getColor());
+				polygon.setStroke(Color.BLACK);
+				cellSimulationGroup.getChildren().add(polygon);
+				cellDisplay.add(psv);
 			}
 		}
 	}
-
+	
+	/**
+	 * Update view for each cell.
+	 * @param model
+	 */
+	public void updateGrid(Model model){
+		for (PolygonShapeView psv : cellDisplay){
+			Cell tmpCell = model.get(psv.getRow(), psv.getCol());
+			psv.getPolygon().setFill(tmpCell.getCurrentState().getColor());
+		}
+	}
+	
+	public void updateIndividualCellState(Cell cell, PolygonShapeView psv){
+		cell.changeStateOnClick();
+		psv.getPolygon().setFill(cell.getCurrentState().getColor());
+	}
 	
 }

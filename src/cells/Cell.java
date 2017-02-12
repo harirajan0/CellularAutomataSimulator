@@ -1,10 +1,8 @@
 	package cells;
 import java.util.List;
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import states.State;
-
 /**
  * Cell superclass. 
  * @author Hari Rajan
@@ -16,8 +14,6 @@ public abstract class Cell {
 	private State currentState;
 	private State nextState;
 	private List<Cell> neighbors;
-	private int xPosition;
-	private int yPosition;
 	private Rectangle myRect;
 	
 	/**
@@ -26,19 +22,14 @@ public abstract class Cell {
 	 * @param xPosition x position of cell on screen
 	 * @param yPosition y position of cell on screen
 	 */
-	public Cell(State initState, int x, int y, int width) {
+	public Cell(State initState) {
 		setCurrentState(initState);
-		setxPosition(x);
-		setyPosition(y);
-		myRect = new Rectangle(x, y, width, width);
-		myRect.setStroke(Color.BLACK);
-		myRect.setOnMouseClicked(e -> changeStateOnClick());
-		paint();
+		//myRect.setOnMouseClicked(e -> changeStateOnClick());
+		//paint();
 	}
 	
 	// cycles through state of the cell and sets cell on click.
 	public abstract void changeStateOnClick();
-
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
 	 */
@@ -48,16 +39,16 @@ public abstract class Cell {
 	 * Changes the color of the Cell
 	 * @param c Color to set the Cell
 	 */
-	public void setFill(Color c){
-		myRect.setFill(c);
-	}
+//	public void setFill(Color c){
+//		myRect.setFill(c);
+//	}
 	
 	/**
 	 * Determines which color to call setFill on
 	 */
-	public void paint() {
-		setFill(getCurrentState().getColor());
-	}
+//	public void paint() {
+//		setFill(getCurrentState().getColor());
+//	}
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
@@ -72,35 +63,6 @@ public abstract class Cell {
 	 */
 	public void setNeighbors(List<Cell> neighbors) {
 		this.neighbors = neighbors;
-	}
-	
-	/**
-	 * Gets the x-coordinate of the cell
-	 * @return x-coordinate of the cell
-	 */
-	public double getxPosition() {
-		return xPosition;
-	}
-	/**
-	 * Sets the x-coordinate of the cell
-	 * @param xPosition New x-coordinate of the cell
-	 */
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-	/**
-	 * Gets the y-coordinate of the cell
-	 * @return y-coordinate of the cell
-	 */
-	public double getyPosition() {
-		return yPosition;
-	}
-	/**
-	 * Sets the y-coordinate of the cell
-	 * @param yPosition New y-coordinate of the cell
-	 */
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
 	}
 	
 	/**
@@ -147,14 +109,14 @@ public abstract class Cell {
 	 * Gets the Rectangle that represents the cell in the GUI
 	 * @return	Rectangle that represents the cell in the GUI
 	 */
-	public Rectangle getRect()
-	{
-		return myRect;
-	}
+//	public Rectangle getRect()
+//	{
+//		return myRect;
+//	}
 	
 	public void setStateOnClick(State state){
 		this.currentState = state;
-		paint();
+		//paint();
 	}
 	
 	/**
@@ -163,7 +125,7 @@ public abstract class Cell {
 	public void nextGeneration()
 	{
 		setCurrentState(getNextState());
-		paint();
+		//paint();
 		setNextState(null);
 	}
 }
