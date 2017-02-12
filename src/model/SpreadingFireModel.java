@@ -1,18 +1,14 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.List;
-
 import cells.Cell;
-
 import cells.SpreadingFireCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
+import resources.Resources;
 import main.Controller;
 import states.SpreadingFireState;
-
 public class SpreadingFireModel extends Model {
 	
 	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();
@@ -51,7 +47,7 @@ public class SpreadingFireModel extends Model {
 					SpreadingFireCell newCell = new SpreadingFireCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}

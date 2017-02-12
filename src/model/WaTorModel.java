@@ -1,20 +1,16 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import cells.Cell;
 import cells.WaTorCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
-
+import resources.Resources;
 import cells.WaTorCell;
 import loader.XMLParser;
 import main.Controller;
-
 import states.WaTorState;
-
 public class WaTorModel extends Model {
 	
 	private HashMap<Integer, WaTorState> stateMap = new HashMap<>();
@@ -53,7 +49,7 @@ public class WaTorModel extends Model {
 					WaTorCell newCell = new WaTorCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))));
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}

@@ -1,9 +1,6 @@
 package main;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import cells.Cell;
 import cellshapeviews.HexagonShapeView;
 import cellshapeviews.PolygonShapeView;
@@ -14,11 +11,9 @@ import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
-
 public class SimulationView {
 	
 	private List<PolygonShapeView> cellDisplay;
-
 	private Group cellSimulationGroup;
 	private StackPane cellSimStackPane;
 	private double currScale;
@@ -77,7 +72,6 @@ public class SimulationView {
     	zoomPane.getChildren().add(cellSimulationGroup);
     	return zoomPane;
     }
-
 	/* Takes in the model and display it in the GUI.
 	 * @param model The model to display
 	 */

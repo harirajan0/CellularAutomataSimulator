@@ -1,21 +1,18 @@
 package main;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import loader.Loader;
 import loader.XMLException;
 import model.Model;
+import resources.Resources;
 
 	// This controller class is the central nexus control of the entire program.
 	// It will handle things like when to update the model, when to update the view,
@@ -116,16 +113,7 @@ import model.Model;
 			if(animation != null){
 				animation.stop();
 			}
-			try {
-				l = new Loader(dataFile, cp.getShapeType());
-			} catch (XMLException e) {
-				//alert with e.getString Please choose another file.
-				if (CellSocietyAlerts.tagNameError(e, dataFile)) load();
-				return;
-			} catch (StringIndexOutOfBoundsException e) {
-				if(CellSocietyAlerts.cellDataError(e)) load();
-				return;
-			}
+			l = new Loader(dataFile, cp.getShapeType());
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
 			cellSimulationDisplay.displayGrid(myModel);
@@ -142,6 +130,15 @@ import model.Model;
 		 */
 		private void load() {
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
+			try {
+				l = new Loader(dataFile, cp.getShapeType());
+			} catch (Exception e) {
+				if (CellSocietyAlerts.xmlError(e, dataFile)) load();
+				return;
+			} 
+			myModel = l.getFirstGrid();
+			myModel.initializeNeighbors();
+			cellSimulationDisplay.displayGrid(myModel);
 			reset();
 		}
 		
@@ -152,9 +149,9 @@ import model.Model;
 		// set some sensible defaults when the FileChooser is created
 	    private FileChooser makeChooser (String extensionAccepted) {
 	        FileChooser result = new FileChooser();
-	        result.setTitle("Open Data File");
+	        result.setTitle(Resources.getString("FileChooserTitle"));
 	        // pick a reasonable place to start searching for files
-	        result.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        result.setInitialDirectory(new File(System.getProperty("user.dir"), "./src/resources"));
 	        result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extensionAccepted));
 	        return result;
 	    }

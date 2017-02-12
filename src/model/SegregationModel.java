@@ -1,21 +1,18 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
 import main.Controller;
+import resources.Resources;
 import states.SegregationState;
-
 public class SegregationModel extends Model {
 	
 	private List<Cell> availableCells;
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
-
 	public SegregationModel(int r, int c, String shapeType) {
 		super(r, c, shapeType);
 		for (SegregationState state : SegregationState.values()) {
@@ -31,14 +28,13 @@ public class SegregationModel extends Model {
 					SegregationCell newCell = new SegregationCell(stateMap.get(Character.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}
 		createAvailableCells();
 		placeAvailableList();
 	}
-
 	@Override
 	public void updateModel() {
 		createAvailableCells();
@@ -55,7 +51,6 @@ public class SegregationModel extends Model {
 		itr = iterator();
 		while(itr.hasNext()) itr.next().nextGeneration();
 	}
-
 	// create list of empty cells for Model to hold
 	public void createAvailableCells() {
 		availableCells = new ArrayList<>();

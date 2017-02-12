@@ -1,10 +1,8 @@
 	package cells;
 import java.util.List;
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import states.State;
-
 /**
  * Cell superclass. 
  * @author Hari Rajan
@@ -32,7 +30,6 @@ public abstract class Cell {
 	
 	// cycles through state of the cell and sets cell on click.
 	public abstract void changeStateOnClick();
-
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
 	 */
@@ -67,36 +64,6 @@ public abstract class Cell {
 	public void setNeighbors(List<Cell> neighbors) {
 		this.neighbors = neighbors;
 	}
-	
-	/**
-	 * Gets the x-coordinate of the cell
-	 * @return x-coordinate of the cell
-	 */
-//	public double getxPosition() {
-//		return xPosition;
-//	}
-//	/**
-//	 * Sets the x-coordinate of the cell
-//	 * @param xPosition New x-coordinate of the cell
-//	 */
-//	public void setxPosition(int xPosition) {
-//		this.xPosition = xPosition;
-//	}
-//	/**
-//	 * Gets the y-coordinate of the cell
-//	 * @return y-coordinate of the cell
-//	 */
-//	public double getyPosition() {
-//		return yPosition;
-//	}
-//	/**
-//	 * Sets the y-coordinate of the cell
-//	 * @param yPosition New y-coordinate of the cell
-//	 */
-//	public void setyPosition(int yPosition) {
-//		this.yPosition = yPosition;
-//	}
-//	
 	
 	/**
 	 * Gets the current state of the cell
