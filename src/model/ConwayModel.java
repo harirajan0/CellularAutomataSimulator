@@ -4,12 +4,12 @@ import java.util.HashMap;
 import cells.ConwayCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
+import main.Controller;
 import states.ConwayState;
 
 public class ConwayModel extends Model {
 	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	
-	Class cellType;
 	
 	public ConwayModel(int r, int c) {
 		super(r, c);
@@ -20,7 +20,7 @@ public class ConwayModel extends Model {
 
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
