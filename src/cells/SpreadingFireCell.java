@@ -1,5 +1,7 @@
 package cells;
 import java.util.List;
+
+import states.SegregationState;
 import states.SpreadingFireState;
 
 public class SpreadingFireCell extends Cell 
@@ -47,6 +49,20 @@ public class SpreadingFireCell extends Cell
 			}else {
 				setNextState(getCurrentState());
 			}
+		}
+	}
+
+	// check super cell to see general comment
+	@Override
+	public void changeStateOnClick() {
+		if(getCurrentState().equals(SpreadingFireState.EMPTY)){
+			setStateOnClick(SpreadingFireState.TREE);
+		} else if(getCurrentState().equals(SpreadingFireState.TREE)){
+			setStateOnClick(SpreadingFireState.BURNING);
+
+		} else {
+			setStateOnClick(SpreadingFireState.EMPTY);
+
 		}
 	}
 }
