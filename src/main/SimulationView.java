@@ -13,44 +13,43 @@ public class SimulationView {
 	private double currScale;
 	
 	public SimulationView(){
-//		cellSimulationPane = new Pane();
 		cellSimulationGroup = new Group();
 		cellSimStackPane = makeSimulationStackPane();
-		cellSimStackPane.setMinWidth(600);
-		cellSimStackPane.setMinHeight(600);
-
+		setMinSizeToDefault();
 		currScale = 1;
-//		cellSimulationPane.setMaxSize(Controller.WINDOW_SIZE, Controller.WINDOW_SIZE);		
 	}
 	
+	private void setGroupScale(){
+		cellSimulationGroup.setScaleX(currScale);
+		cellSimulationGroup.setScaleY(currScale);
+	}
+	
+	private void setStackPaneMinSize(double scaleFactor){
+		cellSimStackPane.setMinWidth(cellSimStackPane.getMinWidth() * scaleFactor);
+		cellSimStackPane.setMinHeight(cellSimStackPane.getMinHeight() * scaleFactor);
+	}
+	
+	//Doubles Simulation view size
 	public void zoomIn(){
 		currScale = currScale * 2;
-		cellSimulationGroup.setScaleX(currScale);
-		cellSimulationGroup.setScaleY(currScale);
-		cellSimStackPane.setMinWidth(cellSimStackPane.getMinWidth() * 2);
-		cellSimStackPane.setMinHeight(cellSimStackPane.getMinHeight() * 2);
-
-//		System.out.println(currScale);
+		setGroupScale();
+		setStackPaneMinSize(2);
 	}
-	
+	//halves simulation view size
 	public void zoomOut(){
 		currScale = currScale * .5;
-		cellSimulationGroup.setScaleX(currScale);
-		cellSimulationGroup.setScaleY(currScale);
-		cellSimStackPane.setMinWidth(cellSimStackPane.getMinWidth() * .5);
-		cellSimStackPane.setMinHeight(cellSimStackPane.getMinHeight() * .5);
-
-//		System.out.println(currScale);
+		setGroupScale();
+		setStackPaneMinSize(.5);
 	}
+	//resets simulation view size
 	public void zoomReset(){
 		currScale = 1;
-		cellSimulationGroup.setScaleX(currScale);
-		cellSimulationGroup.setScaleY(currScale);
-		cellSimStackPane.setMinWidth(600);
-		cellSimStackPane.setMinHeight(600);
-
-//		System.out.println(currScale);
-
+		setGroupScale();
+		setMinSizeToDefault();
+	}
+	private void setMinSizeToDefault(){
+		cellSimStackPane.setMinWidth(Controller.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinHeight(Controller.INIT_WINDOW_SIZE);
 	}
 	
 	public Group getCellSimulationGroup(){

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import states.WaTorState;
+import states.SpreadingFireState;
 import states.State;
 public class WaTorCell extends Cell {
 	
@@ -122,6 +123,20 @@ public class WaTorCell extends Cell {
 	private void setFields(WaTorCell cell) {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
+	}
+	
+	// check super cell to see general comment
+	@Override
+	public void changeStateOnClick() {
+		if(getCurrentState().equals(WaTorState.EMPTY)){
+			setStateOnClick(WaTorState.FISH);
+		} else if(getCurrentState().equals(WaTorState.FISH)){
+			setStateOnClick(WaTorState.SHARK);
+
+		} else {
+			setStateOnClick(WaTorState.EMPTY);
+
+		}		
 	}
 
 }
