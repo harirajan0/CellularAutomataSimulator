@@ -12,8 +12,8 @@ public class ConwayCell extends Cell {
 	 * 4. Any ConwayState.DEAD cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 	 */
 	
-	public ConwayCell(ConwayState initState) {
-		super(initState);
+	public ConwayCell(ConwayState initState, int x, int y, int width) {
+		super(initState, x, y, width);
 	}
 	
 	@Override

@@ -1,16 +1,15 @@
 package loader;
 
 import java.io.File;
-
-import alerts.CellSocietyAlerts;
 import model.ConwayModel;
 import model.Model;
 import model.SegregationModel;
 import model.SpreadingFireModel;
 import model.WaTorModel;
-import resources.Resources;
 
 public class Loader {
+
+	public static final String XML_EXTENSION = ".xml";
 
 	public static final String SIMULATION_TYPE = "simulationType";
 	public static final String SIMULATION_NAME = "simulationName";
@@ -31,13 +30,17 @@ public class Loader {
 	private double param;
 	private Model myModel;
 
-	public Loader(File file, String shapeType) {
+	public Loader(File file) {
 		myParser = new XMLParser(file);
+		if (!file.getName().endsWith(XML_EXTENSION)) {
+			throw new XMLException("The chosen file is not an xml file");
+			// ASK WINDOWS USERS IF THIS IS AN ISSUE THAT NEEDS TO THROW AN ALERT!!!!!
+		}
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
 		param = Double.valueOf(myParser.getTextValue(PARAM));
-		initializeGrid(shapeType);
+		initializeGrid();
 
 	}
 
@@ -45,22 +48,22 @@ public class Loader {
 	 * From the list of states, the probability, and simulation type, construct
 	 * a list of cells to be passed in to the Grid later.
 	 */
-	private void initializeGrid(String shapeType) {
+	private void initializeGrid() {
 		switch (simulationType) {
 		case SPREADING_FIRE:
-			myModel = new SpreadingFireModel(rows, cols, shapeType);
+			myModel = new SpreadingFireModel(rows, cols);
 			break;
 		case WATOR:
-			myModel = new WaTorModel(rows, cols, shapeType);
+			myModel = new WaTorModel(rows, cols);
 			break;
 		case CONWAY:
-			myModel = new ConwayModel(rows, cols, shapeType);
+			myModel = new ConwayModel(rows, cols);
 			break;
 		case SEGREGATION:
-			myModel = new SegregationModel(rows, cols, shapeType);
+			myModel = new SegregationModel(rows, cols);
 			break;
 		default:
-			throw new XMLException(Resources.getString("InvalidSimulationMessage"), simulationType);
+			break;
 		}
 		myModel.populateCells(myParser, param);
 	}

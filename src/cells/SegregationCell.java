@@ -18,8 +18,8 @@ public class SegregationCell extends Cell {
 		emptyPositions = availableList;
 	}
 	
-	public SegregationCell(SegregationState initState, double percentage) {
-		super(initState);
+	public SegregationCell(SegregationState initState, int x, int y, int width, double percentage) {
+		super(initState, x, y, width);
 		this.percentage = percentage;
 	}
 	

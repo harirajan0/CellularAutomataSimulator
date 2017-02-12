@@ -1,4 +1,5 @@
 package model;
+
 import java.util.HashMap;
 import main.GraphPanel;
 import cells.ConwayCell;
@@ -8,22 +9,22 @@ import states.ConwayState;
 import cells.Cell;
 import java.util.Iterator;
 
-import resources.Resources;
-import states.ConwayState;
 public class ConwayModel extends Model {
 	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	private GraphPanel graph;
 	private int iteration;
 	
-	public ConwayModel(int r, int c, String shapeType) {
-		super(r, c, shapeType);
+	public ConwayModel(int r, int c) {
+		super(r, c);
 		for (ConwayState state : ConwayState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
 		iteration = 0;
 	}
+
 	@Override
 	public void populateCells(XMLParser parser, double param) {
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;

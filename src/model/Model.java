@@ -6,24 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
 import loader.XMLParser;
-import neighborfinder.HexagonNeighborFinder;
-import neighborfinder.NeighborFinder;
-import neighborfinder.SquareNeighborFinder;
-import neighborfinder.TriangleNeighborFinder;
 
 public abstract class Model implements Iterable<Cell> {
 
-	private static final String TRIANGLE = "Triangle";
-	private static final String SQUARE = "Square";
-	private static final String HEXAGON = "Hexagon";
-	
 	private Cell[][] myGrid;
-	private String shapeType;
-	private NeighborFinder myNF;
 
-	public Model(int r, int c, String shapeType) {
+	public Model(int r, int c) {
 		myGrid = new Cell[r][c];
-		this.shapeType = shapeType;
 	}
 		
 	/**
@@ -45,24 +34,29 @@ public abstract class Model implements Iterable<Cell> {
 				get(r, c).setNeighbors(neighbors);
 			}
 		}
-		return myNF;
 	}
 	
 	/**
 	 * Initializes the list of neighbors of each Cell in the grid
 	 */
 	public void initializeNeighbors() {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		for (int r = 0; r < getRows(); r++) {
 			for (int c = 0; c < getCols(); c++) {
-				List<Cell> nbs = new ArrayList<>();
-				initializeNF(shapeType, r, c);
-				myNF.findNeighbors();
-				for (int[] arr : myNF.getNeighborLocations()){
-					if (contains(arr[0], arr[1])){
-						nbs.add(get(arr[0], arr[1]));
+				neighbors = new ArrayList<Cell>();
+				for (int horiz = -1; horiz <= 1; horiz++) {
+					for (int vert = -1; vert <= 1; vert++) {
+						if (horiz == 0 && vert == 0) {
+							continue;
+						}
+
+						// Iterate through neighbors, add if not outside array
+						if (contains(r + horiz, c + vert)) {
+							neighbors.add(get(r + horiz, c + vert));
+						}
 					}
 				}
-				get(r, c).setNeighbors(nbs);
+				get(r, c).setNeighbors(neighbors);
 			}
 		}
 	}
@@ -73,11 +67,8 @@ public abstract class Model implements Iterable<Cell> {
 	public void updateModel() {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()) itr.next().update();
-		System.out.println(get(0,0).getCurrentState());
 		itr = iterator();
-		while(itr.hasNext()) {
-			(itr.next()).nextGeneration();
-		}
+		while(itr.hasNext()) itr.next().nextGeneration();
 	}
 	
 	/**
@@ -137,10 +128,6 @@ public abstract class Model implements Iterable<Cell> {
 			}
 		}
 		return cellList.iterator();
-	}
-	
-	public String getShapeType(){
-		return shapeType;
 	}
 
 }

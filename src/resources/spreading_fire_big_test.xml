@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data type="simulation">
-	<simulationType>FIRE</simulationType>
-	<inputType>SPECIFIC</inputType>
+	<simulationSType>FIRE</simulationSType>
 	<simulationName>My Spreading Fire Simulation</simulationName>
 	<numRows>40</numRows>
 	<numCols>40</numCols>
