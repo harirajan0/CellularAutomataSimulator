@@ -5,6 +5,7 @@ import java.util.HashMap;
 import cells.SpreadingFireCell;
 import loader.XMLParser;
 import main.Controller;
+import resources.Resources;
 import states.SpreadingFireState;
 
 public class SpreadingFireModel extends Model {
@@ -36,7 +37,7 @@ public class SpreadingFireModel extends Model {
 							xPosition, yPosition, sideLength, param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}

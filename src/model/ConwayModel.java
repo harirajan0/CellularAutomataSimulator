@@ -5,6 +5,7 @@ import cells.ConwayCell;
 import loader.XMLParser;
 import main.ApplicationStartup;
 import main.Controller;
+import resources.Resources;
 import states.ConwayState;
 
 public class ConwayModel extends Model {
@@ -30,7 +31,7 @@ public class ConwayModel extends Model {
 							xPosition, yPosition, sideLength);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}

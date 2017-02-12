@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import loader.Loader;
 import loader.XMLException;
 import model.Model;
+import resources.Resources;
 
 	// This controller class is the central nexus control of the entire program.
 	// It will handle things like when to update the model, when to update the view,
@@ -146,9 +147,9 @@ import model.Model;
 		// set some sensible defaults when the FileChooser is created
 	    private FileChooser makeChooser (String extensionAccepted) {
 	        FileChooser result = new FileChooser();
-	        result.setTitle("Open Data File");
+	        result.setTitle(Resources.getString("FileChooserTitle"));
 	        // pick a reasonable place to start searching for files
-	        result.setInitialDirectory(new File(System.getProperty("user.dir")));
+	        result.setInitialDirectory(new File(System.getProperty("user.dir"), "./src/resources"));
 	        result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extensionAccepted));
 	        return result;
 	    }

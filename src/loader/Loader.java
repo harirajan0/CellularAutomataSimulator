@@ -8,10 +8,9 @@ import model.Model;
 import model.SegregationModel;
 import model.SpreadingFireModel;
 import model.WaTorModel;
+import resources.Resources;
 
 public class Loader {
-
-	public static final String XML_EXTENSION = ".xml";
 
 	public static final String SIMULATION_TYPE = "simulationType";
 	public static final String SIMULATION_NAME = "simulationName";
@@ -34,10 +33,6 @@ public class Loader {
 
 	public Loader(File file) {
 		myParser = new XMLParser(file);
-		if (!file.getName().endsWith(XML_EXTENSION)) {
-			throw new XMLException("The chosen file is not an xml file");
-			// ASK WINDOWS USERS IF THIS IS AN ISSUE THAT NEEDS TO THROW AN ALERT!!!!!
-		}
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
@@ -65,7 +60,7 @@ public class Loader {
 			myModel = new SegregationModel(rows, cols);
 			break;
 		default:
-			throw new XMLException("Invalid simulation type %s", simulationType);
+			throw new XMLException(Resources.getString("InvalidSimulationMessage"), simulationType);
 		}
 		myModel.populateCells(myParser, param);
 	}

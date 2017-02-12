@@ -9,6 +9,7 @@ import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
 import main.Controller;
+import resources.Resources;
 import states.SegregationState;
 
 public class SegregationModel extends Model {
@@ -35,7 +36,7 @@ public class SegregationModel extends Model {
 							xPosition, yPosition, sideLength, param);
 					set(row, col, newCell);
 				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(String.format("Cannot find cell state for row %d, col %d", row, col));
+					throw new StringIndexOutOfBoundsException(String.format(Resources.getString("InvalidCellDataMessage"), row, col));
 				}
 			}
 		}
