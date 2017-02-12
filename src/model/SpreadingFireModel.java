@@ -26,7 +26,6 @@ public class SpreadingFireModel extends Model {
 			for (int c = 0; c < getCols(); c++) {
 				List<Cell> nbs = new ArrayList<>();
 				NeighborFinder myNF = initializeNF(getShapeType(), r, c);
-				System.out.println(getShapeType());
 				myNF.findNeighbors();
 				myNF.removeCorners();
 				for (int[] arr : myNF.getNeighborLocations()){
