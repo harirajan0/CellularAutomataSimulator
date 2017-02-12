@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
@@ -24,21 +25,25 @@ public abstract class Model implements Iterable<Cell> {
 		myGrid = new Cell[r][c];
 		this.shapeType = shapeType;
 	}
-	
-	public NeighborFinder initializeNF(String str, int r, int c){
-		switch(str){
-		case TRIANGLE:
-			myNF = new TriangleNeighborFinder(r, c);
-			break;
-		case SQUARE:
-			myNF = new SquareNeighborFinder(r, c);
-			break;
-		case HEXAGON:
-			System.out.println("yes");
-			myNF = new HexagonNeighborFinder(r, c);
-			break;
-		default:
-			break;
+		
+	/**
+	 * Removes the neighbors at the corners of the cell
+	 * TODO: Only works for squares
+	 */
+	public void removeCorners(){
+		for (int r = 0; r < getRows(); r++) {
+			for (int c = 0; c < getCols(); c++) {
+				ArrayList<Cell> neighbors = (ArrayList<Cell>) get(r, c).getNeighbors();
+				for (int horiz = -1; horiz <= 1; horiz += 2) {
+					for (int vert = -1; vert <= 1; vert += 2) {
+						// Iterate through neighbors, remove if at corner
+						if (contains(r + horiz, c + vert)) {
+							neighbors.remove(get(r + horiz, c + vert));
+						}
+					}
+				}
+				get(r, c).setNeighbors(neighbors);
+			}
 		}
 		return myNF;
 	}
@@ -90,6 +95,8 @@ public abstract class Model implements Iterable<Cell> {
 		myGrid[row][col] = cell;
 	}
 
+	public abstract HashMap<String, Double> updateGraph();
+	
 	/**
 	 * Gets the number of rows in the grid
 	 * 
