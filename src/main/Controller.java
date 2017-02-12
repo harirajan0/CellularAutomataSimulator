@@ -116,7 +116,7 @@ import resources.Resources;
 			l = new Loader(dataFile, cp.getShapeType());
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel);
+			cellSimulationDisplay.displayGrid(myModel, cp.getShapeType());
 		}
 		
 		private void step() {
@@ -138,7 +138,7 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel);
+			cellSimulationDisplay.displayGrid(myModel, cp.getShapeType());
 			reset();
 		}
 		
