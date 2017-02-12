@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
-import main.ApplicationStartup;
+import main.Controller;
 import states.SegregationState;
 
 public class SegregationModel extends Model {
@@ -24,7 +25,7 @@ public class SegregationModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(getRows(), getCols());
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;
