@@ -44,8 +44,6 @@ public class SegregationModel extends Model {
 		while(itr.hasNext()){
 			Cell cell = itr.next();
 			cell.update();
-//			System.out.println(cell.getCurrentState() + "3");
-//			System.out.println(cell.getNextState() + "4");
 			createAvailableCells();
 			placeAvailableList();
 		}

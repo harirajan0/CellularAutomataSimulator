@@ -26,6 +26,7 @@ public class Loader {
 	private XMLParser myParser;
 
 	private String simulationType;
+	private String simulationName;
 	private int rows;
 	private int cols;
 	private double param;
@@ -34,6 +35,7 @@ public class Loader {
 	public Loader(File file, String shapeType) {
 		myParser = new XMLParser(file);
 		simulationType = myParser.getTextValue(SIMULATION_TYPE);
+		simulationName = myParser.getTextValue(SIMULATION_NAME);
 		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
 		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
 		param = Double.valueOf(myParser.getTextValue(PARAM));
@@ -99,6 +101,10 @@ public class Loader {
 	 */
 	public double getParameter() {
 		return param;
+	}
+	
+	public String getSimulationName() {
+		return simulationName;
 	}
 
 	/**

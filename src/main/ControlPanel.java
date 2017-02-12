@@ -100,7 +100,7 @@ public class ControlPanel {
 	}
 	
 	public void setSave(EventHandler<ActionEvent> handler){
-		resumeButton.setOnAction(handler);
+		saveButton.setOnAction(handler);
 	}
 	
 	public Slider getSlider(){

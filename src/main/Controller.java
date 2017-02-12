@@ -1,5 +1,7 @@
 package main;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
@@ -8,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import loader.Loader;
+import loader.XMLCreator;
 import model.Model;
 import resources.Resources;
 
@@ -38,7 +41,8 @@ import resources.Resources;
 
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
-		
+
+	    private XMLCreator myXMLCreator;
 		
 		/**
 		 * Constructor for the Controller
@@ -52,6 +56,7 @@ import resources.Resources;
 			cp = new ControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
 			setupCP();
 			fps = DEFAULT_FPS;
+			myXMLCreator = new XMLCreator();
 		}
 		
 		public SimulationGUI getGUI(){
@@ -143,6 +148,17 @@ import resources.Resources;
 		
 		private void save() {
 			//call method to write XML based on current state
+			List<String> states = new ArrayList<String>();
+			for (int row = 0; row < myModel.getRows(); row++) {
+				StringBuilder rowData = new StringBuilder("");
+				for (int col = 0; col < myModel.getCols(); col++) {
+					rowData.append(Integer.toString(myModel.get(row, col).getCurrentState().getStateValue()));
+				}
+				states.add(rowData.toString());
+			}
+			myXMLCreator.createXML
+				(l.getSimulationType(), l.getSimulationName(), myModel.getRows(), myModel.getCols(), states, l.getParameter());
+			//simulationType, simulationName, numRows, numCols, myList
 		}
 		
 		// set some sensible defaults when the FileChooser is created
