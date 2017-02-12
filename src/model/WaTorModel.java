@@ -26,7 +26,7 @@ public class WaTorModel extends Model {
 	
 	@Override
 	public void populateCells(XMLParser parser, double param) {
-		int sideLength = Controller.WINDOW_SIZE / Math.max(getRows(), getCols());
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(getRows(), getCols());
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				int xPosition = row * sideLength;

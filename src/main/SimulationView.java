@@ -1,19 +1,22 @@
 package main;
 
+import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import model.Model;
 
 public class SimulationView {
 		
-	private Pane cellSimulationPane;
+//	private Pane cellSimulationPane;
+	private Group cellSimulationGroup;
 	
 	public SimulationView(){
-		cellSimulationPane = new Pane();
-		cellSimulationPane.setMaxSize(Controller.WINDOW_SIZE, Controller.WINDOW_SIZE);		
+//		cellSimulationPane = new Pane();
+		cellSimulationGroup = new Group();
+//		cellSimulationPane.setMaxSize(Controller.WINDOW_SIZE, Controller.WINDOW_SIZE);		
 	}
 	
-	public Pane getCellSimulationPane(){
-		return cellSimulationPane;
+	public Group getCellSimulationGroup(){
+		return cellSimulationGroup;
 	}
 	
 
@@ -22,10 +25,10 @@ public class SimulationView {
 	 */
 	
 	public void displayGrid(Model model) {
-		cellSimulationPane.getChildren().clear();
+		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
-				cellSimulationPane.getChildren().add(model.get(r, c).getRect());
+				cellSimulationGroup.getChildren().add(model.get(r, c).getRect());
 			}
 		}
 	}
