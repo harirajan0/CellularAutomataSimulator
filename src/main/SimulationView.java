@@ -1,5 +1,6 @@
 package main;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,30 +10,81 @@ import cellshapeviews.PolygonShapeView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.Group;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import model.Model;
 
 public class SimulationView {
 		
 	private Pane cellSimulationPane;
 	private List<PolygonShapeView> cellDisplay;
+
+//	private Pane cellSimulationPane;
+	private Group cellSimulationGroup;
+	private StackPane cellSimStackPane;
+	private double currScale;
 	
 	public SimulationView(){
-		cellSimulationPane = new Pane();
-		cellSimulationPane.setMaxSize(ApplicationStartup.WINDOW_SIZE, ApplicationStartup.WINDOW_SIZE);	
-		cellDisplay = new ArrayList<>();
+		cellSimulationGroup = new Group();
+		cellSimStackPane = makeSimulationStackPane();
+		setMinSizeToDefault();
+		currScale = 1;
 	}
 	
-	public Pane getCellSimulationPane(){
-		return cellSimulationPane;
+	private void setGroupScale(){
+		cellSimulationGroup.setScaleX(currScale);
+		cellSimulationGroup.setScaleY(currScale);
 	}
 	
+	private void setStackPaneMinSize(double scaleFactor){
+		cellSimStackPane.setMinWidth(cellSimStackPane.getMinWidth() * scaleFactor);
+		cellSimStackPane.setMinHeight(cellSimStackPane.getMinHeight() * scaleFactor);
+	}
+	
+	//Doubles Simulation view size
+	public void zoomIn(){
+		currScale = currScale * 2;
+		setGroupScale();
+		setStackPaneMinSize(2);
+	}
+	//halves simulation view size
+	public void zoomOut(){
+		currScale = currScale * .5;
+		setGroupScale();
+		setStackPaneMinSize(.5);
+	}
+	//resets simulation view size
+	public void zoomReset(){
+		currScale = 1;
+		setGroupScale();
+		setMinSizeToDefault();
+	}
+	private void setMinSizeToDefault(){
+		cellSimStackPane.setMinWidth(Controller.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinHeight(Controller.INIT_WINDOW_SIZE);
+	}
+	
+	public Group getCellSimulationGroup(){
+		return cellSimulationGroup;
+	}
+	
+	public StackPane getSimulationStackPane(){
+		return cellSimStackPane;
+	}
+	
+    private StackPane makeSimulationStackPane(){
+    	StackPane zoomPane = new StackPane();
+    	zoomPane.getChildren().add(cellSimulationGroup);
+    	return zoomPane;
+    }
 
 	/* Takes in the model and display it in the GUI.
 	 * @param model The model to display
 	 */
 	
 	public void displayGrid(Model model) {
-		int sideLength = ApplicationStartup.WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationPane.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){

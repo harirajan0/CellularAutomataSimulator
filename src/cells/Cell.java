@@ -1,4 +1,4 @@
-package cells;
+	package cells;
 import java.util.List;
 
 import javafx.scene.paint.Color;
@@ -30,8 +30,14 @@ public abstract class Cell {
 		setyPosition(y);
 		myRect = new Rectangle(x, y, width, width);
 		myRect.setStroke(Color.BLACK);
+<<<<<<< HEAD
 		paint();*/
+		myRect.setOnMouseClicked(e -> changeStateOnClick());
+		//paint();
 	}
+	
+	// cycles through state of the cell and sets cell on click.
+	public abstract void changeStateOnClick();
 
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
@@ -146,6 +152,11 @@ public abstract class Cell {
 //	{
 //		return myRect;
 //	}
+	
+	public void setStateOnClick(State state){
+		this.currentState = state;
+		//paint();
+	}
 	
 	/**
 	 * Sets current state to next state and next state to null

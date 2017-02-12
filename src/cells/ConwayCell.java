@@ -57,4 +57,14 @@ public class ConwayCell extends Cell {
 		}
 		return livingCount;
 	}
+
+	// check super cell to see general comment
+	@Override
+	public void changeStateOnClick() {
+		if(isAlive()){
+			setStateOnClick(ConwayState.DEAD);
+		} else {
+			setStateOnClick(ConwayState.ALIVE);
+		}
+	}
 }

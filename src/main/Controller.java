@@ -26,6 +26,8 @@ import model.Model;
 	    public static final String DATA_FILE_EXTENSION = "*.xml";
 	    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 		private static final double DEFAULT_FPS = 1;
+		public static final int INIT_WINDOW_SIZE = 600;
+
 		
 		// Dimension of the Grid, obtained from Loader
 		private Model myModel;
@@ -71,8 +73,26 @@ import model.Model;
 			cp.setResume(e -> resume());
 			cp.setSave(e -> save());
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
+			
+			cp.setZoomIn(e -> zoomIn());
+			cp.setZoomOut(e -> zoomOut());
+			cp.setZoomReset(e -> zoomReset());
+
 			cp.addToHBox();
+			
 			myGUI.createCP(cp.getControlPanel());
+		}
+		
+		private void zoomIn(){
+			myGUI.simViewZoomIn();
+		}
+		
+		private void zoomOut(){
+			myGUI.simViewZoomOut();
+		}
+		
+		private void zoomReset(){
+			myGUI.simViewZoomReset();
 		}
 		
 		// this should be for starting a new simulation maybe? still need to look into it

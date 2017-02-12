@@ -2,12 +2,15 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
 
 import cells.Cell;
+
 import cells.SpreadingFireCell;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
+import main.Controller;
 import states.SpreadingFireState;
 
 public class SpreadingFireModel extends Model {

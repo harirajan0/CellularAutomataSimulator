@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLParser;
+import main.Controller;
 import states.SegregationState;
 
 public class SegregationModel extends Model {

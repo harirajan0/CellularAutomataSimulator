@@ -75,4 +75,18 @@ public class SegregationCell extends Cell {
 		Cell tmp = emptyPositions.get(option);
 		tmp.setNextState(this.getCurrentState());
 	}
+	
+	// check super cell to see general comment
+	@Override
+	public void changeStateOnClick() {
+		if(getCurrentState().equals(SegregationState.EMPTY)){
+			setStateOnClick(SegregationState.X);
+		} else if(getCurrentState().equals(SegregationState.X)){
+			setStateOnClick(SegregationState.O);
+
+		} else {
+			setStateOnClick(SegregationState.EMPTY);
+
+		}
+	}
 }

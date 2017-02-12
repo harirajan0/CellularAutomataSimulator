@@ -1,8 +1,11 @@
 package model;
 
 import java.util.HashMap;
+
 import cells.ConwayCell;
 import loader.XMLParser;
+import main.Controller;
+import main.MainView;
 import states.ConwayState;
 
 public class ConwayModel extends Model {
