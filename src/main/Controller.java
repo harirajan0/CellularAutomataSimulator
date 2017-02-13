@@ -14,9 +14,10 @@ import loader.XMLCreator;
 import model.Model;
 import resources.Resources;
 
-	// This controller class is the central nexus control of the entire program.
-	// It will handle things like when to update the model, when to update the view,
-	// this class holds the cell simulation together
+	/** This controller class is the central nexus control of the entire program.
+	 * It will handle things like when to update the model, when to update the view,
+	 * this class holds the cell simulation together
+	 */
 	public class Controller {
 		
 		// kind of data files to look for

@@ -14,9 +14,10 @@ Hours: 50
 ##### Hari
 
 ##### Bihan
-1) Designed the class hierarchy following the MVC model. Refactored so that the Controller, Views and Models integrate well together
+1) Designed the class hierarchy following the MVC model. Refactored so that the Controller, Views and Models integrate well together. Also refactored to better
+separate frontend and backend. Worked on some GUI, View, Controller and Model methods. 
 
-2) Designed and wrote classes in the cellshapeview and neighborfinder packages in order to better separate frontend and backend. 
+2) Designed and wrote classes in the cellshapeview and neighborfinder packages to allow different shapes of cells. 
 
 3) Wrote backend for Segregation Cells.
 

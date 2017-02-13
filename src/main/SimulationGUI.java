@@ -15,7 +15,6 @@ public class SimulationGUI {
     private BorderPane root;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
-    private VBox simulationLayout;
     
     public SimulationGUI(String lang){
     	simulationHolder = new ScrollPane();
@@ -24,12 +23,10 @@ public class SimulationGUI {
     	cellSimulationView = new SimulationView();
     	simulationHolder.setContent(cellSimulationView.getSimulationStackPane());
     	
-    	simulationLayout = new VBox();
-    	simulationLayout.getChildren().add(simulationHolder);
     	root = new BorderPane();
     	root.setStyle("-fx-background-color : white");
     	
-    	root.setRight(simulationLayout);
+    	root.setRight(simulationHolder);
     	    	
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
@@ -57,7 +54,7 @@ public class SimulationGUI {
     }
     
     public void createBP(HBox hbox){
-    	simulationLayout.getChildren().add(hbox);
+    	root.setBottom(hbox);
     }
     
     public SimulationView getSimulationView(){

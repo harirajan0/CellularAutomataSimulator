@@ -3,10 +3,11 @@ package cellshapeviews;
 public class TriangleShapeView extends PolygonShapeView {
 	
 	private double sideLength;
+	private final double FACTOR = 1.9;
 
 	public TriangleShapeView(int r, int c, double size) {
 		super(r, c, size);
-		this.sideLength = size*1.9;
+		this.sideLength = size*FACTOR;
 		definePolygon();
 	}
 
