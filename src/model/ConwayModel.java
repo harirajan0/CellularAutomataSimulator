@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import cells.ConwayCell;
-import cells.WaTorCell;
 import loader.XMLException;
 import loader.XMLParser;
 

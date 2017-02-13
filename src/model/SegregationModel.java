@@ -7,10 +7,8 @@ import java.util.Random;
 
 import cells.Cell;
 import cells.SegregationCell;
-import cells.SpreadingFireCell;
 import loader.XMLException;
 import loader.XMLParser;
-import main.Controller;
 import resources.Resources;
 import states.SegregationState;
 public class SegregationModel extends Model {

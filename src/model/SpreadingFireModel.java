@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import cells.Cell;
-import cells.ConwayCell;
 import cells.SpreadingFireCell;
 import loader.XMLException;
 import loader.XMLParser;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
-import main.Controller;
 import states.SpreadingFireState;
+
 public class SpreadingFireModel extends Model {
 	
 	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();

@@ -6,11 +6,9 @@ import cellshapeviews.HexagonShapeView;
 import cellshapeviews.PolygonShapeView;
 import cellshapeviews.SquareShapeView;
 import cellshapeviews.TriangleShapeView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
 public class SimulationView {

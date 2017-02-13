@@ -10,6 +10,9 @@ public class HexagonShapeView extends PolygonShapeView {
 		definePolygon();
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
@@ -40,6 +43,9 @@ public class HexagonShapeView extends PolygonShapeView {
 		return coord;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Double[] pivotPoint(){
 		Double[] myXY = new Double[2];
