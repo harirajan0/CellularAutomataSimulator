@@ -20,7 +20,6 @@ public class ConwayModel extends Model {
 		for (ConwayState state : ConwayState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
-		createGraphPanel("Alive", "Dead");
 	}
 	
 	@Override
@@ -55,6 +54,7 @@ public class ConwayModel extends Model {
 				}
 			}
 		}
+		createGraphPanel("Alive", "Dead");
 	}
 	
 	@Override
@@ -75,12 +75,12 @@ public class ConwayModel extends Model {
 					break;
 			}
 		}
-		liveCount /= liveCount + deadCount;
-		deadCount /= liveCount + deadCount;
+		double totalStates = liveCount + deadCount;
+		liveCount /= totalStates;
+		deadCount /= totalStates;
 		ArrayList<Double> pops = new ArrayList<Double>();
 		pops.add(liveCount);
 		pops.add(deadCount);
-		System.out.println(liveCount);
 		return pops;
 	}
 

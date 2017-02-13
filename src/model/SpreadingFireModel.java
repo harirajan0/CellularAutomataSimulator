@@ -22,7 +22,6 @@ public class SpreadingFireModel extends Model {
 		for (SpreadingFireState state : SpreadingFireState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
-		createGraphPanel("Tree", "Burning", "Fish");
 	}
 	
 	@Override
@@ -77,6 +76,7 @@ public class SpreadingFireModel extends Model {
 				}
 			}
 		}
+		createGraphPanel("Tree", "Burning", "Empty");
 	}
 
 	@Override
@@ -103,9 +103,10 @@ public class SpreadingFireModel extends Model {
 					break;
 			}
 		}
-		treeCount /= treeCount + burningCount + emptyCount;
-		burningCount /= treeCount + burningCount + emptyCount;
-		emptyCount /= treeCount + burningCount + emptyCount;
+		double totalStates = treeCount + burningCount + emptyCount;
+		treeCount /= totalStates;
+		burningCount /= totalStates;
+		emptyCount /= totalStates;
 		ArrayList<Double> pops = new ArrayList<Double>();
 		pops.add(treeCount);
 		pops.add(burningCount);

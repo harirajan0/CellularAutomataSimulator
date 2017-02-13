@@ -132,6 +132,7 @@ import resources.Resources;
 		private void step() {
 			checkShape();
 			myModel.updateModel();
+			myGUI.createGraph(myModel.getGraph());
 			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
@@ -149,7 +150,7 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			//myGUI.createGraph(myModel.getGraph());
+			myGUI.createGraph(myModel.getGraph());
 			checkShape();
 			reset();
 		}

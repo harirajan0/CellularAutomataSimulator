@@ -23,7 +23,6 @@ public class WaTorModel extends Model {
 		for (WaTorState state : WaTorState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
-		createGraphPanel("Fish", "Shark", "Empty");
 	}
 
 	@Override
@@ -78,6 +77,7 @@ public class WaTorModel extends Model {
 				}
 			}
 		}
+		createGraphPanel("Fish", "Shark", "Empty");
 	}
 
 	@Override
@@ -102,9 +102,10 @@ public class WaTorModel extends Model {
 					break;
 			}
 		}
-		fishCount /= fishCount + sharkCount + emptyCount;
-		sharkCount /= fishCount + sharkCount + emptyCount;
-		emptyCount /= fishCount + sharkCount + emptyCount;
+		double totalStates = fishCount + sharkCount + emptyCount;
+		fishCount /= totalStates;
+		sharkCount /= totalStates;
+		emptyCount /= totalStates;
 		ArrayList<Double> pops = new ArrayList<Double>();
 		pops.add(fishCount);
 		pops.add(sharkCount);

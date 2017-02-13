@@ -20,7 +20,6 @@ public class SegregationModel extends Model {
 		for (SegregationState state : SegregationState.values()) {
 			stateMap.put(state.getStateValue(), state);
 		}
-		createGraphPanel("X", "O", "Empty");
 	}
 	
 	@Override
@@ -59,6 +58,7 @@ public class SegregationModel extends Model {
 		}
 		createAvailableCells();
 		placeAvailableList();
+		createGraphPanel("X", "O", "Empty");
 	}
 	@Override
 	public void updateModel() {
@@ -128,9 +128,10 @@ public class SegregationModel extends Model {
 					break;
 			}
 		}
-		xCount /= xCount + oCount + emptyCount;
-		oCount /= xCount + oCount + emptyCount;
-		emptyCount /= xCount + oCount + emptyCount;
+		double totalStates = xCount + oCount + emptyCount;
+		xCount /= totalStates;
+		oCount /= totalStates;
+		emptyCount /= totalStates;
 		ArrayList<Double> pops = new ArrayList<Double>();
 		pops.add(xCount);
 		pops.add(oCount);

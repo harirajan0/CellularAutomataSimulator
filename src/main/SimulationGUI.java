@@ -53,7 +53,7 @@ public class SimulationGUI {
     }
     
     public void createGraph(VBox vbox){
-    	root.setRight(vbox);
+    	root.setLeft(vbox);
     }
     
     public void createBP(HBox hbox){

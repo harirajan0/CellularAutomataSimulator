@@ -25,24 +25,28 @@ public class GraphPanel {
 		yAxis.setLabel("Population");
 		
 		chart = new LineChart<Number, Number>(tAxis, yAxis);
+		chart.getXAxis().setAutoRanging(true);
+		chart.getYAxis().setAutoRanging(true);
 		
 		for(String state : states){
 			//Initialize new series for each type
 			XYChart.Series<Number, Number> series = 
 					new XYChart.Series<Number, Number>();
 			series.setName(state);
+			chart.getData().add(series);
 		}
 		graphBox.getChildren().add(chart);
 	}
 	
 	public void update(List<Double> populations, double iteration){
 		if(populations.size() != chart.getData().size()){
-			throw new IllegalArgumentException("Invalid number of states passed");
+			throw new IllegalArgumentException("Only " + populations.size() + 
+					" states passed. Need " + chart.getData().size());
 		}
 		
 		for(int index = 0; index < chart.getData().size(); index++){
 			chart.getData().get(index).getData().add(
-					new XYChart.Data<Number, Number>(0, populations.get(index)));
+					new XYChart.Data<Number, Number>(iteration, populations.get(index)));
 		}
 	}
 	
