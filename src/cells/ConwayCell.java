@@ -2,20 +2,22 @@ package cells;
 import java.util.List;
 import states.ConwayState;
 
-
+/**
+ * A subclass of Cell for Conway's Game of Life simulation
+ */
 public class ConwayCell extends Cell {
 	
+	/**
+	 * Constructor for the <code>ConwayCell</code>
+	 * @param initState
+	 */
 	public ConwayCell(ConwayState initState) {
 		super(initState);
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
-//		System.out.println(livingNeighbors);
 		if(livingNeighbors < 2 && isAlive()){
 			setNextState(ConwayState.DEAD);
 		} else
@@ -33,8 +35,8 @@ public class ConwayCell extends Cell {
 	}
 	
 	/**
-	 * Tells whether or not the current state is ConwayState.ALIVE
-	 * @return whether or not the current state is ConwayState.ALIVE
+	 * Tells whether or not the current state is <code>ConwayState.ALIVE</code>
+	 * @return whether or not the current state is <code>ConwayState.ALIVE</code>
 	 */
 	private boolean isAlive(){
 		return this.getCurrentState().equals(ConwayState.ALIVE);
@@ -55,9 +57,6 @@ public class ConwayCell extends Cell {
 		return livingCount;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void changeStateOnClick() {
 		if(isAlive()){

@@ -3,13 +3,10 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Starts the application
+ */
 public class ApplicationStartup extends Application{
-	
-
-//	private main = new MainStage();
-
-
-
 	
 	@SuppressWarnings("unused")
 	@Override

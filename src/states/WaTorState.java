@@ -2,12 +2,10 @@
  * 
  */
 package states;
-
 import javafx.scene.paint.Color;
 
 /**
- * @author harirajan
- *
+ * Enum for the states of the WaTor simulation
  */
 public enum WaTorState implements State {
 	
@@ -18,6 +16,11 @@ public enum WaTorState implements State {
     private Color myColor;
     private int stateValue;
 
+    /**
+     * Creates the state enum
+     * @param color Color corresponding to <code>state</code>
+     * @param state The state of the cell
+     */
     WaTorState(Color color, int state) {
         myColor = color;
         stateValue = state;

@@ -6,11 +6,9 @@ package states;
 import javafx.scene.paint.Color;
 
 /**
- * @author harirajan
- *
+ * Enum for the states for Conway's Game of Life
  */
 public enum ConwayState implements State {
-	
 
 	ALIVE(Color.BLACK, 1),
 	DEAD(Color.ALICEBLUE, 0);
@@ -18,6 +16,11 @@ public enum ConwayState implements State {
     private Color myColor;
     private int stateValue;
 
+    /**
+     * Creates the state enum
+     * @param color Color corresponding to <code>state</code>
+     * @param state State of the cell
+     */
     ConwayState(Color color, int state) {
         myColor = color;
         stateValue = state;

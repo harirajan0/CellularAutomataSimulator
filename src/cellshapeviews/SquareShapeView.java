@@ -1,13 +1,25 @@
 package cellshapeviews;
+
+/**
+ * A shape view for a square cell
+ */
 public class SquareShapeView extends PolygonShapeView {
+	/**
+	 * Creates a square shape view
+	 * @param r The row number of the cell
+	 * @param c The column number of the cell
+	 * @param size The side length of the cell
+	 */
 	public SquareShapeView(int r, int c, double size) {
 		super(r, c, size);
 		definePolygon();
 	}
+	
 	@Override
 	public void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
 	}
+	
 	@Override
 	public Double[] calculateCoordinates() {
 		Double[] coord = new Double[8];
@@ -23,6 +35,7 @@ public class SquareShapeView extends PolygonShapeView {
 		coord[7] = y + getSideLength();
 		return coord;
 	}
+	
 	@Override
 	public Double[] pivotPoint() {
 		return null;

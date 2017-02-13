@@ -23,11 +23,8 @@ import org.w3c.dom.Element;
 import alerts.CellSocietyAlerts;
 import resources.Resources;
 
-
-
 /**
- * @author harirajan
- *
+ * Writes current state of simulation to an XML file.
  */
 public class XMLCreator {
 	
@@ -36,15 +33,16 @@ public class XMLCreator {
 
 	/**
 	 * Saves the current state of the simulation to an XML file in src/resources
-	 * @param simulationType
-	 * @param simulationName
-	 * @param numRows
-	 * @param numCols
-	 * @param states
-	 * @param param
+	 * @param simulationType Type of the simulation
+	 * @param simulationName Name of the simulation
+	 * @param numRows The number of rows in the grid
+	 * @param numCols The number of columns in the grid
+	 * @param states All possible states
+	 * @param param Additional simulation parameter
 	 */
 	public void createXML
-		(String simulationType, String simulationName, int numRows, int numCols, List<String> states, double param) {
+		(String simulationType, String simulationName, int numRows, int numCols, 
+				List<String> states, double param) {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -71,10 +69,10 @@ public class XMLCreator {
 	}
 	
 	/**
-	 * adds element with tag elementTitle and data elementData to root element
-	 * @param elementTitle
-	 * @param elementData
-	 * @param root
+	 * Adds element with tag elementTitle and data elementData to root element
+	 * @param elementTitle Title of the element
+	 * @param elementData Data of the element
+	 * @param root Root element
 	 */
 	private void addElement(String elementTitle, String elementData, Element root) {
 		Element newElement = doc.createElement(elementTitle);
@@ -84,7 +82,7 @@ public class XMLCreator {
 	
 	/**
 	 * Saves the document to the given file path
-	 * @param filePath
+	 * @param filePath Path at which to save file
 	 * @throws TransformerException
 	 * @throws IOException
 	 */

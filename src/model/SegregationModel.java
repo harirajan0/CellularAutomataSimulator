@@ -11,10 +11,20 @@ import loader.XMLParser;
 import resources.Resources;
 import states.SegregationState;
 
+/**
+ * Data model for the Segregation simulation
+ */
 public class SegregationModel extends Model {
 	
 	private List<Cell> availableCells;
 	private HashMap<Integer, SegregationState> stateMap = new HashMap<>();
+	
+	/**
+	 * Creates a <code>SegregationModel</code>
+	 * @param r Row number
+	 * @param c Column number
+	 * @param shapeType The type of shape
+	 */
 	public SegregationModel(int r, int c, String shapeType) {
 		super(r, c, shapeType);
 		for (SegregationState state : SegregationState.values()) {
@@ -23,7 +33,8 @@ public class SegregationModel extends Model {
 	}
 	
 	@Override
-	public void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution) {
+	public void populateCells(XMLParser parser, double param, 
+			String inputType, List<Double> distribution) {
 		for (int row = 0; row < getRows(); row++) {
 			for (int col = 0; col < getCols(); col++) {
 				try {
@@ -60,6 +71,7 @@ public class SegregationModel extends Model {
 		placeAvailableList();
 		createGraphPanel("X", "O", "Empty");
 	}
+	
 	@Override
 	public void updateModel() {
 		createAvailableCells();
@@ -73,6 +85,7 @@ public class SegregationModel extends Model {
 		}
 		itr = iterator();
 		while(itr.hasNext()) itr.next().nextGeneration();
+		updateGraph();
 	}
 	
 	@Override
@@ -80,7 +93,9 @@ public class SegregationModel extends Model {
 		return stateMap.size();
 	}
 	
-	// create list of empty cells for Model to hold
+	/**
+	 *  Create list of empty cells for Model to hold
+	 */
 	public void createAvailableCells() {
 		availableCells = new ArrayList<>();
 		Iterator<Cell> itr = iterator();
@@ -96,7 +111,9 @@ public class SegregationModel extends Model {
 		}
 	}
 	
-	// put empty list into every cell
+	/**
+	 * Put empty list into every cell
+	 */
 	public void placeAvailableList() {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
@@ -105,7 +122,7 @@ public class SegregationModel extends Model {
 	}
 
 	@Override
-	public List<Double> updateGraph() {
+	public List<Double> updatePopulations() {
 		double xCount = 0;
 		double oCount = 0;
 		double emptyCount = 0;
