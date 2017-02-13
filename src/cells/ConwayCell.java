@@ -22,7 +22,7 @@ public class ConwayCell extends Cell {
 		if(livingNeighbors < 2){
 			setNextState(ConwayState.DEAD);
 		} else
-		if(((livingNeighbors == 2)&& isAlive()) || livingNeighbors == 3){
+		if(((livingNeighbors == 2)&& isAlive()) || (livingNeighbors == 3 && isAlive())){
 			setNextState(ConwayState.ALIVE);
 		} else
 		if(livingNeighbors > 3 && isAlive()){
