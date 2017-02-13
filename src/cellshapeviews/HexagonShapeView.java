@@ -6,7 +6,7 @@ public class HexagonShapeView extends PolygonShapeView {
 
 	public HexagonShapeView(int r, int c, double sideLength) {
 		super(r, c, sideLength);
-		this.sideLength = sideLength/Math.sqrt(3.0);
+		this.sideLength = sideLength/1.6;
 		definePolygon();
 	}
 

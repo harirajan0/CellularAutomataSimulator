@@ -93,12 +93,15 @@ public class WaTorCell extends Cell {
 	 */
 	private WaTorCell getRandomNeighbor(State state) {
 		List<Cell> possibleNeighbors = new ArrayList<>();
+		int num = 0;
 		for (Cell cell : getNeighbors()) {
+			num++;
 			if (cell.isState(state)) {
 				if (cell.getNextState() == null) possibleNeighbors.add(cell);
 				else if (cell.getNextState().equals(state)) possibleNeighbors.add(cell);
 			}
 		}
+		System.out.println(num);
 		if (!possibleNeighbors.isEmpty()) {
 			return (WaTorCell) possibleNeighbors.get(new Random().nextInt(possibleNeighbors.size())); 
 		}
