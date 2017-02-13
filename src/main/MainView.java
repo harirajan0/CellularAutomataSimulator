@@ -1,7 +1,6 @@
 package main;
 
 import javafx.stage.Stage;
-import resources.Resources;
 
 /**
  * Owns the controller and stage, keeping the two separated
@@ -10,6 +9,7 @@ public class MainView {
 
 	private Controller myController;
 	private Stage stage;
+	public static final String TITLE = "Cellular Automata Simulator";
 
 	/**
 	 * Creates an object to house the controller and stage
@@ -19,7 +19,7 @@ public class MainView {
 		stage = s;
 		myController = new Controller();
 		
-		stage.setTitle(Resources.getString("Title"));
+		stage.setTitle(TITLE);
 		stage.setScene(myController.getGUI().getScene());
 		stage.show();
 	}

@@ -1,8 +1,6 @@
 package main;
 
 import javafx.scene.layout.VBox;
-import resources.Resources;
-
 import java.util.List;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -19,13 +17,13 @@ public class GraphPanel {
 	 */
 	public GraphPanel(List<String> states){
 		graphBox = new VBox();
-		graphBox.setStyle(Resources.WHITE_PANE_STYLE);
+		graphBox.setStyle("-fx-background-color: gray");
 		graphBox.setSpacing(25);
 		
 		NumberAxis tAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
-		tAxis.setLabel(Resources.getString("Iterations"));
-		yAxis.setLabel(Resources.getString("Populations"));
+		tAxis.setLabel("Iterations");
+		yAxis.setLabel("Population");
 		
 		chart = new LineChart<Number, Number>(tAxis, yAxis);
 		chart.getXAxis().setAutoRanging(true);

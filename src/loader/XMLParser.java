@@ -2,16 +2,18 @@
  * 
  */
 package loader;
+
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import resources.Resources;
 
 /**
  * Parses the XML file for data
@@ -66,7 +68,8 @@ public class XMLParser {
             return nodeList.item(0).getTextContent();
         }
         else {
-        	throw new XMLException(Resources.getString("XMLInvalidTagError"), tagName);
+            // FIXME: empty string or null, is it an error to not find the text value?
+        	throw new XMLException("Cannot find text value for tag %s", tagName);
         }
     }
 
@@ -78,7 +81,8 @@ public class XMLParser {
     	try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
-			throw new XMLException(e.getMessage());
+			e.printStackTrace();
+			return null;
 		}
     }
     

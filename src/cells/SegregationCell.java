@@ -2,6 +2,7 @@ package cells;
 import java.util.List;
 import states.SegregationState;
 
+
 /**
  * A subclass of <code>Cell</code> for the Segregation simulation.
  */
@@ -20,6 +21,14 @@ public class SegregationCell extends Cell {
 		this.percentage = percentage;
 	}
 	
+	/**
+	 * Sets the global list of empty positions
+	 * @param availableList the list of empty positions
+	 */
+	public void setAvailableList(List<Cell> availableList){
+		emptyPositions = availableList;
+	}
+	
 	@Override
 	public void update() {
 		if (this.getNextState() != null) return;
@@ -32,14 +41,6 @@ public class SegregationCell extends Cell {
 		} else{
 			setNextState(this.getCurrentState());
 		}
-	}
-	
-	/**
-	 * Sets the global list of empty positions
-	 * @param availableList <code>List</code> of empty position
-	 */
-	public void setAvailableList(List<Cell> availableList){
-		emptyPositions = availableList;
 	}
 	
 	/**

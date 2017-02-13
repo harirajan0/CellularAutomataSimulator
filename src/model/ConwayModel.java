@@ -63,7 +63,7 @@ public class ConwayModel extends Model {
 				}
 			}
 		}
-		createGraphPanel(ConwayState.DEAD.getPossibleStatesAsString());
+		createGraphPanel("Alive", "Dead");
 	}
 	
 	@Override

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>SEGREGATION</simulationType>
+	<inputType>SPECIFIC</inputType>
+	<simulationName>My Segregation Simulation</simulationName>
+	<numRows>10</numRows>
+	<numCols>10</numCols>
+	<row0>1101012020</row0>
+	<row1>1212201010</row1>
+	<row2>0001010001</row2>
+	<row3>2200022000</row3>
+	<row4>1010110200</row4>
+	<row5>2001201100</row5>
+	<row6>0220100020</row6>
+	<row7>0001110010</row7>
+	<row8>0012111110</row8>
+	<row9>0010110200</row9>
+	<param>0.50</param>
+</data>

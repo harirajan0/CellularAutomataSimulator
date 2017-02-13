@@ -1,5 +1,6 @@
 package main;
-import java.util.Arrays;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,30 +12,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
-import resources.Resources;
 
 /**
  * Contains all buttons and sliders to interact with the GUI 
  */
 public class ControlPanel {
 	
-	private final ChoiceBox<String> cb;
+	private final String[] SHAPES = new String[]{"Square", "Triangle", "Hexagon"};
+	private final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(
+			"Square", "Triangle", "Hexagon"));
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
 	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton;
 	private Slider speedSlider;
+    private ResourceBundle myResources;
     private String shapeType;
 
     /**
      * Creates the <code>ControlPanel</code>
+     * @param resources
      */
-	public ControlPanel(){
+	public ControlPanel(ResourceBundle resources){
+		myResources = resources;
+
 		buttonsPanel = new HBox();
-		buttonsPanel.setStyle(Resources.GRAY_PANE_STYLE);
+		buttonsPanel.setStyle("-fx-background-color: gray");
 		buttonsPanel.setPadding(new Insets(15, 15, 15, 15));
 		buttonsPanel.setSpacing(10);
 		
+		// make buttons' visual 
 		startButton = makeButton("StartCommand");
 		pauseButton = makeButton("PauseCommand");
 		stepButton = makeButton("StepCommand");
@@ -43,7 +50,6 @@ public class ControlPanel {
 		resumeButton = makeButton("ResumeCommand");
 		saveButton = makeButton("SaveCommand");
 
-		cb = new ChoiceBox<String>(FXCollections.observableArrayList(Arrays.asList(Resources.SHAPES)));
 		initializeChoicebox();
 		speedSlider = makeSpeedSlider();
 		buttonsPanel.setMaxHeight(speedSlider.getHeight());
@@ -53,14 +59,14 @@ public class ControlPanel {
 	 * Gets the <code>HBox</code> containing all of the objects
 	 * @return The <code>HBox</code> containing all buttons and sliders
 	 */
-	protected HBox getControlPanel(){
+	public HBox getControlPanel(){
 		return buttonsPanel;
 	}
 	
 	/**
 	 * Adds a button to the <code>ControlPanel HBox</code> 
 	 */
-	protected void addToHBox(){
+	public void addToHBox(){
 		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, cb, speedSlider);
 	}
 	
@@ -68,7 +74,7 @@ public class ControlPanel {
 	 * Sets the start button's action
 	 * @param handler Click event
 	 */
-	protected void setStart(EventHandler<ActionEvent> handler){
+	public void setStart(EventHandler<ActionEvent> handler){
 		startButton.setOnAction(handler);
 	}
 
@@ -76,7 +82,7 @@ public class ControlPanel {
 	 * Sets the pause button's action
 	 * @param handler Click event
 	 */
-	protected void setPause(EventHandler<ActionEvent> handler){
+	public void setPause(EventHandler<ActionEvent> handler){
 		pauseButton.setOnAction(handler);
 	}
 	
@@ -84,7 +90,7 @@ public class ControlPanel {
 	 * Sets the step button's action
 	 * @param handler Click event
 	 */
-	protected void setStep(EventHandler<ActionEvent> handler){
+	public void setStep(EventHandler<ActionEvent> handler){
 		stepButton.setOnAction(handler);
 	}
 	
@@ -92,7 +98,7 @@ public class ControlPanel {
 	 * Sets the reset button's action
 	 * @param handler Click event
 	 */
-	protected void setReset(EventHandler<ActionEvent> handler){
+	public void setReset(EventHandler<ActionEvent> handler){
 		resetButton.setOnAction(handler);
 	}
 	
@@ -100,7 +106,7 @@ public class ControlPanel {
 	 * Sets the load button's action
 	 * @param handler Click event
 	 */
-	protected void setLoad(EventHandler<ActionEvent> handler){
+	public void setLoad(EventHandler<ActionEvent> handler){
 		loadButton.setOnAction(handler);
 	}
 	
@@ -108,7 +114,7 @@ public class ControlPanel {
 	 * Sets the resume button's action
 	 * @param handler Click event
 	 */
-	protected void setResume(EventHandler<ActionEvent> handler){
+	public void setResume(EventHandler<ActionEvent> handler){
 		resumeButton.setOnAction(handler);
 	}
 	
@@ -116,7 +122,7 @@ public class ControlPanel {
 	 * Sets the save button's action
 	 * @param handler Click event
 	 */
-	protected void setSave(EventHandler<ActionEvent> handler){
+	public void setSave(EventHandler<ActionEvent> handler){
 		saveButton.setOnAction(handler);
 	}
 	
@@ -124,7 +130,7 @@ public class ControlPanel {
 	 * Sets the speed slider's action
 	 * @param handler Drag event
 	 */
-	protected Slider getSlider(){
+	public Slider getSlider(){
 		return speedSlider;
 	}
 	
@@ -132,16 +138,8 @@ public class ControlPanel {
 	 * Gets the shape type of the cells
 	 * @return The shape type of the cells
 	 */
-	protected String getShapeType(){
+	public String getShapeType(){
 		return shapeType;
-	}
-	
-	/**
-	 * Gets the <code>ChoiceBox</code> containing all shape choices
-	 * @return The <code>ChoiceBox</code> containing all shape choices
-	 */
-	protected ChoiceBox<String> getChoiceBox(){
-		return cb;
 	}
 	
 	/**
@@ -165,7 +163,7 @@ public class ControlPanel {
 	 */
     private Button makeButton(String property) {
     	Button result = new Button();
-    	String label = Resources.getString(property);
+    	String label = myResources.getString(property);
     	result.setText(label);
     	result.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
     	return result;
@@ -176,14 +174,15 @@ public class ControlPanel {
      */
     private void initializeChoicebox(){
     	cb.getSelectionModel().selectFirst();
-    	shapeType = Resources.SHAPES[cb.getSelectionModel().getSelectedIndex()];
+    	shapeType = SHAPES[cb.getSelectionModel().getSelectedIndex()];
     	cb.getSelectionModel().selectedIndexProperty().addListener(
-    			new ChangeListener<Number>(){
+    		new ChangeListener<Number>(){
 
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				shapeType = Resources.SHAPES[newValue.intValue()];
-			}
-    	});
+    			@Override
+    			public void changed(ObservableValue<? extends Number> observable, 
+    					Number oldValue, Number newValue) {
+    				shapeType = SHAPES[newValue.intValue()];
+    			}
+    		});
     }
 }

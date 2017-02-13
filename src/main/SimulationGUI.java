@@ -1,69 +1,64 @@
 package main;
 
-import javafx.geometry.Pos;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import resources.Resources;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 /**
  * The GUI for interacting with and viewing the simulation
  */
 public class SimulationGUI {
+	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
+	public static final Dimension2D SIMULATION_SPACE = new Dimension2D(620, 800);
 
     private Scene myScene;
     private BorderPane root;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
-    private VBox graphSideLayout;
+    private VBox simulationLayout;
     
     /**
      * Creates a <code>SimulationGUI</code> with the desired language
      * @param lang Desired language
      */
-    public SimulationGUI(){
+    public SimulationGUI(String lang){
     	simulationHolder = new ScrollPane();
-    	simulationHolder.setPrefSize(Resources.SIMULATION_SPACE.getWidth(), 
-    			Resources.SIMULATION_SPACE.getHeight());
+    	simulationHolder.setPrefSize(SIMULATION_SPACE.getWidth(), SIMULATION_SPACE.getHeight());
 
     	cellSimulationView = new SimulationView();
     	simulationHolder.setContent(cellSimulationView.getSimulationStackPane());
     	
+    	simulationLayout = new VBox();
+    	simulationLayout.getChildren().add(simulationHolder);
     	root = new BorderPane();
-    	root.setStyle(Resources.WHITE_PANE_STYLE);
+    	root.setStyle("-fx-background-color : white");
     	
-    	root.setRight(simulationHolder);
-    	
-    	graphSideLayout = new VBox();
-    	graphSideLayout.setAlignment(Pos.CENTER);
-    	
-    	root.setLeft(graphSideLayout);
+    	root.setRight(simulationLayout);
     	    	
-    	myScene = new Scene(root, Resources.DEFAULT_SIZE.getWidth(), Resources.DEFAULT_SIZE.getHeight());
+    	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
     
     /**
      * Zooms in on the simulation view
      */
-    protected void simViewZoomIn(){
+    public void simViewZoomIn(){
     	cellSimulationView.zoomIn();
     }
     
     /**
      * Zooms out on the simulation view
      */
-    protected void simViewZoomOut(){
+    public void simViewZoomOut(){
     	cellSimulationView.zoomOut();
     }
     
     /**
      * Resets the zoom on the simulation view
      */
-    protected void simViewZoomReset(){
+    public void simViewZoomReset(){
     	cellSimulationView.zoomReset();
     }
     
@@ -71,7 +66,7 @@ public class SimulationGUI {
      * Adds the <code>ControlPanel</code> to the GUI
      * @param hbox <code>HBox</code> containing all buttons and sliders
      */
-    protected void createCP(HBox hbox){
+    public void createCP(HBox hbox){
     	root.setTop(hbox);
     }
     
@@ -79,7 +74,7 @@ public class SimulationGUI {
      * Adds the graph to the GUI
      * @param vbox <code>VBox</code> containing the graph
      */
-    private void createGraph(VBox vbox){
+    public void createGraph(VBox vbox){
     	root.setLeft(vbox);
     }
     
@@ -87,21 +82,8 @@ public class SimulationGUI {
      * Adds the <code>SimulationControlPanel</code> to the GUI
      * @param hbox <code>HBox</code> containing the zoom controls
      */
-    protected void createBP(HBox hbox){
-    	graphSideLayout.getChildren().add(hbox);
-    }
-    
-    /**
-     * Creates the graph panel with simulation name and graph
-     * @param simulationName Name of the simulation
-     * @param graph Graph to display
-     */
-    protected void createGraphSidePanel(String simulationName, VBox graph) {
-    	graphSideLayout.getChildren().clear();
-    	Text simulationTitle = new Text(simulationName);
-    	simulationTitle.setFont(new Font(20));
-    	graphSideLayout.getChildren().add(simulationTitle);
-    	createGraph(graph);
+    public void createBP(HBox hbox){
+    	simulationLayout.getChildren().add(hbox);
     }
     
     /**

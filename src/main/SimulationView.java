@@ -11,12 +11,15 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import model.Model;
-import resources.Resources;
 
 /**
  * View containing the display of all of the cells
  */
 public class SimulationView {
+	
+	private static final String TRIANGLE = "Triangle";
+	private static final String SQUARE = "Square";
+	private static final String HEXAGON = "Hexagon";
 	
 	private List<PolygonShapeView> cellDisplay;
 	private Group cellSimulationGroup;
@@ -54,7 +57,7 @@ public class SimulationView {
 	/**
 	 * Doubles the simulation view size
 	 */
-	protected void zoomIn(){
+	public void zoomIn(){
 		currScale = currScale * 2;
 		setGroupScale();
 		setStackPaneMinSize(2);
@@ -63,7 +66,7 @@ public class SimulationView {
 	/**
 	 * Halves the simulation view size
 	 */
-	protected void zoomOut(){
+	public void zoomOut(){
 		currScale = currScale * .5;
 		setGroupScale();
 		setStackPaneMinSize(.5);
@@ -72,7 +75,7 @@ public class SimulationView {
 	/**
 	 * Resets simulation view size
 	 */
-	protected void zoomReset(){
+	public void zoomReset(){
 		currScale = 1;
 		setGroupScale();
 		setMinSizeToDefault();
@@ -82,8 +85,8 @@ public class SimulationView {
 	 * Sets the size back to default
 	 */
 	private void setMinSizeToDefault(){
-		cellSimStackPane.setMinWidth(Resources.INIT_WINDOW_SIZE);
-		cellSimStackPane.setMinHeight(Resources.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinWidth(Controller.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinHeight(Controller.INIT_WINDOW_SIZE);
 	}
 	
 	/**
@@ -117,20 +120,20 @@ public class SimulationView {
 	 * @param model The model to display
 	 * @param shapeType The type of shape to use
 	 */
-protected void displayGrid(Model model, String shapeType) {
-		int sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
+	public void displayGrid(Model model, String shapeType) {
+		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
 				Cell cell = model.get(r, c);
 				PolygonShapeView psv;
-				if (shapeType == Resources.TRIANGLE){
+				if (shapeType == TRIANGLE){
 					psv = new TriangleShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.SQUARE){
+				} else if (shapeType == SQUARE){
 					psv = new SquareShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.HEXAGON){
+				} else if (shapeType == HEXAGON){
 					psv = new HexagonShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
 				}
@@ -156,7 +159,7 @@ protected void displayGrid(Model model, String shapeType) {
 	 * Update view for each cell.
 	 * @param model The data model to use
 	 */
-	protected void updateGrid(Model model){
+	public void updateGrid(Model model){
 		for (PolygonShapeView psv : cellDisplay){
 			Cell tmpCell = model.get(psv.getRow(), psv.getCol());
 			psv.getPolygon().setFill(tmpCell.getCurrentState().getColor());
@@ -168,8 +171,9 @@ protected void displayGrid(Model model, String shapeType) {
 	 * @param cell Cell to update
 	 * @param psv <code>PolygonShapeView</code> of cell to update
 	 */
-	protected void updateIndividualCellState(Cell cell, PolygonShapeView psv){
+	public void updateIndividualCellState(Cell cell, PolygonShapeView psv){
 		cell.changeStateOnClick();
 		psv.getPolygon().setFill(cell.getCurrentState().getColor());
 	}
+	
 }
