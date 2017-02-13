@@ -20,12 +20,12 @@ public class TriangleShapeView extends PolygonShapeView {
 	}
 
 	@Override
-	protected void definePolygon() {
+	public void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
 	}
 
 	@Override
-	protected Double[] calculateCoordinates() {
+	public Double[] calculateCoordinates() {
 		Double[] coord = new Double[6];
 		Double[] tmp = pivotPoint();
 		double x = tmp[0];
@@ -47,7 +47,7 @@ public class TriangleShapeView extends PolygonShapeView {
 	}
 
 	@Override
-	protected Double[] pivotPoint() {
+	public Double[] pivotPoint() {
 		Double[] myXY = new Double[2];
 		if (oddRow()){
 			if (getCol()%2!=0){

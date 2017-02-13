@@ -82,7 +82,7 @@ public class WaTorModel extends Model {
 				}
 			}
 		}
-		createGraphPanel(WaTorState.EMPTY.getPossibleStatesAsString());
+		createGraphPanel("Fish", "Shark", "Empty");
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class WaTorModel extends Model {
 		pops.add(emptyCount);
 		return pops;
 	}
-	
+
 	@Override
 	public int numStates() {
 		return stateMap.size();

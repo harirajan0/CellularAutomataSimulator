@@ -1,11 +1,12 @@
 package main;
+
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import resources.Resources;
 
 /**
  * A control panel containing zoom functionality
@@ -13,17 +14,20 @@ import resources.Resources;
 public class SimulationControlPanel {
 	private HBox buttonsPanel;
 	private Button zoomInButton, zoomOutButton, zoomResetButton;
+    private ResourceBundle myResources;
 	private final int BTN_HEIGHT = 20;
 
 	/**
 	 * Creates the <code>SimulationControlPanel</code>
+	 * @param resources Resources file to use
 	 */
-	public SimulationControlPanel(){
+	public SimulationControlPanel(ResourceBundle resources){
+		myResources = resources;
 		buttonsPanel = new HBox();
-		buttonsPanel.setStyle(Resources.GRAY_PANE_STYLE);
+		buttonsPanel.setStyle("-fx-background-color: gray");
 		buttonsPanel.setPadding(new Insets(15, 15, 15, 15));
 		buttonsPanel.setSpacing(10);
-		buttonsPanel.setAlignment(Pos.CENTER_RIGHT);
+
 		
 		zoomInButton = makeButton("ZoomIn");
 		zoomOutButton = makeButton("ZoomOut");
@@ -37,7 +41,7 @@ public class SimulationControlPanel {
 	 */
     private Button makeButton(String property) {
     	Button result = new Button();
-    	String label = Resources.getString(property);
+    	String label = myResources.getString(property);
     	result.setText(label);
     	result.setPrefHeight(BTN_HEIGHT);
     	return result;
@@ -46,7 +50,7 @@ public class SimulationControlPanel {
     /**
      * Adds the buttons to a <code>HBox</code>
      */
-    protected void addToHBox(){
+    public void addToHBox(){
     	buttonsPanel.getChildren().addAll(zoomInButton, zoomOutButton, zoomResetButton);
     }
     
@@ -54,7 +58,7 @@ public class SimulationControlPanel {
      * Sets the action for the zoom in button
      * @param handler Click event
      */
-	protected void setZoomIn(EventHandler<ActionEvent> handler){
+	public void setZoomIn(EventHandler<ActionEvent> handler){
 		zoomInButton.setOnAction(handler);
 	}
 	
@@ -62,7 +66,7 @@ public class SimulationControlPanel {
      * Sets the action for the zoom out button
      * @param handler Click event
      */
-	protected void setZoomOut(EventHandler<ActionEvent> handler){
+	public void setZoomOut(EventHandler<ActionEvent> handler){
 		zoomOutButton.setOnAction(handler);
 	}
 	
@@ -70,14 +74,14 @@ public class SimulationControlPanel {
      * Sets the action for the reset zoom button
      * @param handler Click event
      */
-	protected void setZoomReset(EventHandler<ActionEvent> handler){
+	public void setZoomReset(EventHandler<ActionEvent> handler){
 		zoomResetButton.setOnAction(handler);
 	}
 	
 	/**
      * Gets the <code>HBox</code> containing all of the buttons
      */
-	protected HBox getSimulationControlPanel(){
+	public HBox getSimulationControlPanel(){
 		return buttonsPanel;
 	}
 	
