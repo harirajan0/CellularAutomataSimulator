@@ -5,8 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.VBox;
 
 public class SimulationGUI {
 	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
@@ -14,9 +13,9 @@ public class SimulationGUI {
 
     private Scene myScene;
     private BorderPane root;
-    private BorderPane simulationCenterer;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
+    private VBox simulationLayout;
     
     public SimulationGUI(String lang){
     	simulationHolder = new ScrollPane();
@@ -25,10 +24,12 @@ public class SimulationGUI {
     	cellSimulationView = new SimulationView();
     	simulationHolder.setContent(cellSimulationView.getSimulationStackPane());
     	
+    	simulationLayout = new VBox();
+    	simulationLayout.getChildren().add(simulationHolder);
     	root = new BorderPane();
     	root.setStyle("-fx-background-color : white");
     	
-    	root.setRight(simulationHolder);
+    	root.setRight(simulationLayout);
     	    	
     	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
     }
@@ -52,6 +53,11 @@ public class SimulationGUI {
     	root.setTop(hbox);
     }
     
+    public void createBP(HBox hbox){
+    	simulationLayout.getChildren().add(hbox);
+    }
+    
+
     public SimulationView getSimulationView(){
     	return cellSimulationView;
     }
