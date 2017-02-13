@@ -9,9 +9,9 @@ public class ApplicationStartup extends Application{
 	 * the application. It should never be touched again. No implementation
 	 * should be done in this class.
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public void start(Stage stage) throws Exception {
+		@SuppressWarnings("unused")
 		MainView mainView = new MainView(stage);
 	}
 

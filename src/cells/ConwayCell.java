@@ -21,7 +21,6 @@ public class ConwayCell extends Cell {
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
-//		System.out.println(livingNeighbors);
 		if(livingNeighbors < 2 && isAlive()){
 			setNextState(ConwayState.DEAD);
 		} else

@@ -39,19 +39,19 @@ public class SimulationView {
 	}
 	
 	//Doubles Simulation view size
-	public void zoomIn(){
+	protected void zoomIn(){
 		currScale = currScale * 2;
 		setGroupScale();
 		setStackPaneMinSize(2);
 	}
 	//halves simulation view size
-	public void zoomOut(){
+	protected void zoomOut(){
 		currScale = currScale * .5;
 		setGroupScale();
 		setStackPaneMinSize(.5);
 	}
 	//resets simulation view size
-	public void zoomReset(){
+	protected void zoomReset(){
 		currScale = 1;
 		setGroupScale();
 		setMinSizeToDefault();
@@ -78,7 +78,7 @@ public class SimulationView {
 	 * @param model The model to display
 	 */
 	
-	public void displayGrid(Model model, String shapeType) {
+    protected void displayGrid(Model model, String shapeType) {
 		int sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
@@ -112,14 +112,14 @@ public class SimulationView {
 	 * Update view for each cell.
 	 * @param model
 	 */
-	public void updateGrid(Model model){
+	protected void updateGrid(Model model){
 		for (PolygonShapeView psv : cellDisplay){
 			Cell tmpCell = model.get(psv.getRow(), psv.getCol());
 			psv.getPolygon().setFill(tmpCell.getCurrentState().getColor());
 		}
 	}
 	
-	public void updateIndividualCellState(Cell cell, PolygonShapeView psv){
+	protected void updateIndividualCellState(Cell cell, PolygonShapeView psv){
 		cell.changeStateOnClick();
 		psv.getPolygon().setFill(cell.getCurrentState().getColor());
 	}

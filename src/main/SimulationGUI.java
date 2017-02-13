@@ -1,11 +1,15 @@
 package main;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import resources.Resources;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class SimulationGUI {
 
@@ -13,6 +17,7 @@ public class SimulationGUI {
     private BorderPane root;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
+    private VBox graphSideLayout;
     
     public SimulationGUI(){
     	simulationHolder = new ScrollPane();
@@ -25,34 +30,43 @@ public class SimulationGUI {
     	root.setStyle(Resources.WHITE_PANE_STYLE);
     	
     	root.setRight(simulationHolder);
+    	
+    	graphSideLayout = new VBox();
+    	graphSideLayout.setAlignment(Pos.CENTER);
+    	
+    	root.setLeft(graphSideLayout);
     	    	
     	myScene = new Scene(root, Resources.DEFAULT_SIZE.getWidth(), Resources.DEFAULT_SIZE.getHeight());
     }
     
-    public void simViewZoomIn(){
+    protected void simViewZoomIn(){
     	cellSimulationView.zoomIn();
     }
-    public void simViewZoomOut(){
+    protected void simViewZoomOut(){
     	cellSimulationView.zoomOut();
-
-
     }
-    public void simViewZoomReset(){
+    protected void simViewZoomReset(){
     	cellSimulationView.zoomReset();
-
-
     }
     
-    public void createCP(HBox hbox){
+    protected void createCP(HBox hbox){
     	root.setTop(hbox);
     }
     
-    public void createGraph(VBox vbox){
-    	root.setLeft(vbox);
+    private void createGraph(VBox vbox){
+    	graphSideLayout.getChildren().add(vbox);
     }
     
-    public void createBP(HBox hbox){
+    protected void createBP(HBox hbox){
     	root.setBottom(hbox);
+    }
+    
+    protected void createGraphSidePanel(String simulationName, VBox graph) {
+    	graphSideLayout.getChildren().clear();
+    	Text simulationTitle = new Text(simulationName);
+    	simulationTitle.setFont(new Font(20));
+    	graphSideLayout.getChildren().add(simulationTitle);
+    	createGraph(graph);
     }
     
     public SimulationView getSimulationView(){
