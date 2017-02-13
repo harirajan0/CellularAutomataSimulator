@@ -77,7 +77,7 @@ public class WaTorModel extends Model {
 				}
 			}
 		}
-		createGraphPanel("Fish", "Shark", "Empty");
+		createGraphPanel(WaTorState.EMPTY.getPossibleStatesAsString());
 	}
 
 	@Override

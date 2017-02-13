@@ -57,8 +57,8 @@ public class SimulationView {
 		setMinSizeToDefault();
 	}
 	private void setMinSizeToDefault(){
-		cellSimStackPane.setMinWidth(Controller.INIT_WINDOW_SIZE);
-		cellSimStackPane.setMinHeight(Controller.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinWidth(Resources.INIT_WINDOW_SIZE);
+		cellSimStackPane.setMinHeight(Resources.INIT_WINDOW_SIZE);
 	}
 	
 	public Group getCellSimulationGroup(){
@@ -79,7 +79,7 @@ public class SimulationView {
 	 */
 	
 	public void displayGrid(Model model, String shapeType) {
-		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
+		int sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){

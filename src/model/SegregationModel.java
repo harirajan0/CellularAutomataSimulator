@@ -58,7 +58,7 @@ public class SegregationModel extends Model {
 		}
 		createAvailableCells();
 		placeAvailableList();
-		createGraphPanel("X", "O", "Empty");
+		createGraphPanel(SegregationState.EMPTY.getPossibleStatesAsString());
 	}
 	@Override
 	public void updateModel() {

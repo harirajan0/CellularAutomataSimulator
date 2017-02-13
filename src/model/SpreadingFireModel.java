@@ -76,7 +76,7 @@ public class SpreadingFireModel extends Model {
 				}
 			}
 		}
-		createGraphPanel("Tree", "Burning", "Empty");
+		createGraphPanel(SpreadingFireState.EMPTY.getPossibleStatesAsString());
 	}
 
 	@Override

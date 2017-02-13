@@ -29,8 +29,8 @@ public abstract class Model implements Iterable<Cell> {
 		iteration = 0;
 	}
 	
-	public NeighborFinder initializeNF(String str, int r, int c){
-		switch(str){
+	public NeighborFinder initializeNF(String shape, int r, int c){
+		switch (shape){
 		case Resources.TRIANGLE:
 			myNF = new TriangleNeighborFinder(r, c);
 			break;
@@ -81,8 +81,8 @@ public abstract class Model implements Iterable<Cell> {
 	
 	public abstract List<Double> updateGraph();
 	
-	public void createGraphPanel(String... states){
-		graph = new GraphPanel(Arrays.asList(states));
+	public void createGraphPanel(List<String> states){
+		graph = new GraphPanel(states);
 		graph.update(updateGraph(), 0);
 	}
 	
