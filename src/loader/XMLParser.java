@@ -26,10 +26,12 @@ public class XMLParser {
     // keep only one documentBuilder because it is expensive to make and can reset it before parsing
     private static final DocumentBuilder DOCUMENT_BUILDER = getDocumentBuilder();
     
-    private Element root;
+    private Element myRoot;
+    private File myFile;
 
     public XMLParser(File file) {
-    	root = getRootElement(file);
+    	myRoot = getRootElement(file);
+    	myFile = file;
     }
     
     /**
@@ -38,7 +40,7 @@ public class XMLParser {
      * @return returns text value for given tagName
      */
     public String getTextValue(String tagName) {
-		return getTextValue(root, tagName);
+		return getTextValue(myRoot, tagName);
     }
 
     /**
@@ -85,6 +87,10 @@ public class XMLParser {
 			e.printStackTrace();
 			return null;
 		}
+    }
+    
+    public File getFile() {
+    	return myFile;
     }
     
 }

@@ -81,13 +81,6 @@ public abstract class Model implements Iterable<Cell> {
 		graph.update(updateGraph(), iteration);
 	}
 	
-	/**
-	 * Initializes the cells inside the grid
-	 * @param parser XML Parser to read cell information from
-	 * @param param Additional parameter for certain models
-	 */
-	public abstract void populateCells(XMLParser parser, double param);
-	
 	public abstract List<Double> updateGraph();
 	
 	public void createGraphPanel(String... states){
@@ -99,6 +92,15 @@ public abstract class Model implements Iterable<Cell> {
 		iteration = 0;
 	}
 	
+	/**
+	 * Initializes the cells inside the grid
+	 * @param parser XML Parser to read cell information from
+	 * @param param Additional parameter for certain models
+	 */	
+	public abstract void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution);
+	
+	public abstract int numStates();
+
 	public Cell get(int row, int col) {
 		return myGrid[row][col];
 	}

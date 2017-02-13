@@ -19,18 +19,19 @@ public class ConwayCell extends Cell {
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
-		if(livingNeighbors < 2){
+//		System.out.println(livingNeighbors);
+		if(livingNeighbors < 2 && isAlive()){
 			setNextState(ConwayState.DEAD);
 		} else
-		if(((livingNeighbors == 2)&& isAlive()) || livingNeighbors == 3){
+		if((livingNeighbors == 2 || livingNeighbors == 3)&& isAlive()){
 			setNextState(ConwayState.ALIVE);
 		} else
-		if(livingNeighbors > 3 && isAlive()){
+		if(livingNeighbors > 3){
 			setNextState(ConwayState.DEAD);
 		} else
-		if(livingNeighbors > 3 && !isAlive()){
-			setNextState(ConwayState.ALIVE);
-		} else {
+		if(livingNeighbors == 3 && !isAlive()){
+			setNextState(ConwayState.ALIVE);}
+		 else {
 			setNextState(getCurrentState());
 		}
 	}
@@ -40,7 +41,7 @@ public class ConwayCell extends Cell {
 	 * @return whether or not the current state is ConwayState.ALIVE
 	 */
 	private boolean isAlive(){
-		return getCurrentState().equals(ConwayState.ALIVE);
+		return this.getCurrentState().equals(ConwayState.ALIVE);
 	}
 	
 	/**

@@ -4,14 +4,19 @@ import java.util.List;
 import cells.Cell;
 import cellshapeviews.HexagonShapeView;
 import cellshapeviews.PolygonShapeView;
-import javafx.scene.layout.Pane;
+import cellshapeviews.SquareShapeView;
+import cellshapeviews.TriangleShapeView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Model;
+
 public class SimulationView {
+	
+	private static final String TRIANGLE = "Triangle";
+	private static final String SQUARE = "Square";
+	private static final String HEXAGON = "Hexagon";
 	
 	private List<PolygonShapeView> cellDisplay;
 	private Group cellSimulationGroup;
@@ -76,21 +81,34 @@ public class SimulationView {
 	 * @param model The model to display
 	 */
 	
-	public void displayGrid(Model model) {
+	public void displayGrid(Model model, String shapeType) {
 		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
 				Cell cell = model.get(r, c);
-				PolygonShapeView psv = new HexagonShapeView(r, c, sideLength);
-				Polygon polygon = psv.getPolygon();
-				polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
-				polygon.setFill(cell.getCurrentState().getColor());
-				polygon.setStroke(Color.BLACK);
-				cellSimulationGroup.getChildren().add(polygon);
-				cellDisplay.add(psv);
+				PolygonShapeView psv;
+				if (shapeType == TRIANGLE){
+					psv = new TriangleShapeView(r, c, sideLength);
+					setupPolygon(psv, cell);
+				} else if (shapeType == SQUARE){
+					psv = new SquareShapeView(r, c, sideLength);
+					setupPolygon(psv, cell);
+				} else if (shapeType == HEXAGON){
+					psv = new HexagonShapeView(r, c, sideLength);
+					setupPolygon(psv, cell);
+				}
 			}
 		}
+	}
+	
+	private void setupPolygon(PolygonShapeView psv, Cell cell){
+		Polygon polygon = psv.getPolygon();
+		polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
+		polygon.setFill(cell.getCurrentState().getColor());
+		polygon.setStroke(Color.BLACK);
+		cellSimulationGroup.getChildren().add(polygon);
+		cellDisplay.add(psv);
 	}
 	
 	/**

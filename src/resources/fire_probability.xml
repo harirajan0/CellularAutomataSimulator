@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>FIRE</simulationType>
+	<inputType>RANDOM</inputType>
+	<simulationName>My Spreading Fire Simulation</simulationName>
+	<numRows>40</numRows>
+	<numCols>40</numCols>
+	<state0>0.2</state0>
+	<state1>0.4</state1>
+	<state2>0.4</state2>
+	<param>0.50</param>
+</data>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>CONWAY</simulationType>
+	<inputType>SPECIFIC</inputType>
+	<simulationName>My Game of Life Simulation</simulationName>
+	<numRows>5</numRows>
+	<numCols>5</numCols>
+	<row0>00000</row0>
+	<row1>00000</row1>
+	<row2>00000</row2>
+	<row3>00000</row3>
+	<row4>00000</row4>
+	<param>0.50</param>
+</data>

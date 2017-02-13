@@ -3,7 +3,6 @@
  */
 package loader;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.List;
