@@ -13,7 +13,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import loader.Loader;
 import loader.XMLCreator;
-import loader.XMLException;
 import model.Model;
 import resources.Resources;
 

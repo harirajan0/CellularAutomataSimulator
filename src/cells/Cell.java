@@ -1,20 +1,18 @@
-	package cells;
+package cells;
 import java.util.List;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import states.State;
 /**
- * Cell superclass. 
+ * Cell superclass 
  * @author Hari Rajan
  * @author Vishnu Gottiparthy
  * @author Bihan Zhuang
  * @author Gabriel Chen
  */
 public abstract class Cell {
+	
 	private State currentState;
 	private State nextState;
 	private List<Cell> neighbors;
-	private Rectangle myRect;
 	
 	/**
 	 * Creates a Cell with specified parameters
@@ -24,31 +22,14 @@ public abstract class Cell {
 	 */
 	public Cell(State initState) {
 		setCurrentState(initState);
-		//myRect.setOnMouseClicked(e -> changeStateOnClick());
-		//paint();
 	}
 		
-	// cycles through state of the cell and sets cell on click.
 	public abstract void changeStateOnClick();
+	
 	/**
 	 * Update the Cell's state based on its current state and its neighbors' states
 	 */
 	public abstract void update();
-	
-	/**
-	 * Changes the color of the Cell
-	 * @param c Color to set the Cell
-	 */
-//	public void setFill(Color c){
-//		myRect.setFill(c);
-//	}
-	
-	/**
-	 * Determines which color to call setFill on
-	 */
-//	public void paint() {
-//		setFill(getCurrentState().getColor());
-//	}
 	
 	/**
 	 * Gets a List of all of the neighbors of the cell
@@ -57,6 +38,7 @@ public abstract class Cell {
 	public List<Cell> getNeighbors() {
 		return neighbors;
 	}
+	
 	/**
 	 * Sets the neighbors of the cell to those in the specified list
 	 * @param neighbors The neighbors to be set
@@ -104,28 +86,16 @@ public abstract class Cell {
 	public boolean isState(State state) {
 		return getCurrentState().equals(state);
 	}
-	
-	/**
-	 * Gets the Rectangle that represents the cell in the GUI
-	 * @return	Rectangle that represents the cell in the GUI
-	 */
-//	public Rectangle getRect()
-//	{
-//		return myRect;
-//	}
-	
-	public void setStateOnClick(State state){
+
+	public void setStateOnClick(State state) {
 		this.currentState = state;
-		//paint();
 	}
 	
 	/**
 	 * Sets current state to next state and next state to null
 	 */
-	public void nextGeneration()
-	{
+	public void nextGeneration() {
 		setCurrentState(getNextState());
-		//paint();
 		setNextState(null);
 	}
 }

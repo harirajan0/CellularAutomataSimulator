@@ -60,7 +60,11 @@ public class Loader {
 		List<Double> distribution = generateDistribution();
 		myModel.populateCells(myParser, param, inputType, distribution);
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	private List<Double> generateDistribution() {
 		List<Double> distribution = new ArrayList<>();
 		if (inputType.equals(Resources.PROBABILITY)) {
