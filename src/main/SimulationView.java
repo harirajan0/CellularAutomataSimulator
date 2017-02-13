@@ -5,6 +5,7 @@ import cells.Cell;
 import cellshapeviews.HexagonShapeView;
 import cellshapeviews.PolygonShapeView;
 import cellshapeviews.SquareShapeView;
+import cellshapeviews.TriangleShapeView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -89,7 +90,8 @@ public class SimulationView {
 				Cell cell = model.get(r, c);
 				PolygonShapeView psv;
 				if (shapeType == TRIANGLE){
-					//TODO
+					psv = new TriangleShapeView(r, c, sideLength);
+					setupPolygon(psv, cell);
 				} else if (shapeType == SQUARE){
 					psv = new SquareShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);

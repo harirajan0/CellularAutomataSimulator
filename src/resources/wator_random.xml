@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data type="simulation">
+	<simulationType>WATOR</simulationType>
+	<inputType>RANDOM</inputType>
+	<simulationName>My Predator Prey Simulation</simulationName>
+	<numRows>40</numRows>
+	<numCols>40</numCols>
+	<param>0.50</param>
+</data>

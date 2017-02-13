@@ -1,6 +1,8 @@
 package loader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import alerts.CellSocietyAlerts;
 import model.ConwayModel;
@@ -12,20 +14,11 @@ import resources.Resources;
 
 public class Loader {
 
-	public static final String SIMULATION_TYPE = "simulationType";
-	public static final String SIMULATION_NAME = "simulationName";
-	public static final String NUM_ROWS = "numRows";
-	public static final String NUM_COLUMNS = "numCols";
-	public static final String PARAM = "param";
-
-	private static final String SPREADING_FIRE = "FIRE";
-	private static final String WATOR = "WATOR";
-	private static final String SEGREGATION = "SEGREGATION";
-	private static final String CONWAY = "CONWAY";
-
 	private XMLParser myParser;
 
 	private String simulationType;
+	private String inputType;
+	private String simulationName;
 	private int rows;
 	private int cols;
 	private double param;
@@ -33,10 +26,12 @@ public class Loader {
 
 	public Loader(File file, String shapeType) {
 		myParser = new XMLParser(file);
-		simulationType = myParser.getTextValue(SIMULATION_TYPE);
-		rows = Integer.valueOf(myParser.getTextValue(NUM_ROWS));
-		cols = Integer.valueOf(myParser.getTextValue(NUM_COLUMNS));
-		param = Double.valueOf(myParser.getTextValue(PARAM));
+		simulationType = myParser.getTextValue(Resources.SIMULATION_TYPE).trim();
+		simulationName = myParser.getTextValue(Resources.SIMULATION_NAME).trim();
+		rows = Integer.valueOf(myParser.getTextValue(Resources.NUM_ROWS).trim());
+		cols = Integer.valueOf(myParser.getTextValue(Resources.NUM_COLUMNS));
+		param = Double.valueOf(myParser.getTextValue(Resources.PARAM).trim());
+		inputType = myParser.getTextValue(Resources.INPUT_TYPE).trim();
 		initializeGrid(shapeType);
 
 	}
@@ -47,31 +42,51 @@ public class Loader {
 	 */
 	private void initializeGrid(String shapeType) {
 		switch (simulationType) {
-		case SPREADING_FIRE:
+		case Resources.SPREADING_FIRE:
 			myModel = new SpreadingFireModel(rows, cols, shapeType);
 			break;
-		case WATOR:
+		case Resources.WATOR:
 			myModel = new WaTorModel(rows, cols, shapeType);
 			break;
-		case CONWAY:
+		case Resources.CONWAY:
 			myModel = new ConwayModel(rows, cols, shapeType);
 			break;
-		case SEGREGATION:
+		case Resources.SEGREGATION:
 			myModel = new SegregationModel(rows, cols, shapeType);
 			break;
 		default:
 			throw new XMLException(Resources.getString("InvalidSimulationMessage"), simulationType);
 		}
-		myModel.populateCells(myParser, param);
+		List<Double> distribution = generateDistribution();
+		myModel.populateCells(myParser, param, inputType, distribution);
 	}
 
+	private List<Double> generateDistribution() {
+		List<Double> distribution = new ArrayList<>();
+		if (inputType.equals(Resources.PROBABILITY)) {
+			try {
+				double current = 0.0;
+				for (int i = 0; i < myModel.numStates(); i++) {
+					current += Double.parseDouble(myParser.getTextValue(String.format("state%d", i)));
+					distribution.add(current);
+				}
+				if (current != 1.0) {
+					throw new XMLException("State distribution does not add to 1.0");
+				}
+			} catch (XMLException e) {
+				CellSocietyAlerts.xmlError(e, myParser.getFile());
+			}
+		}
+		return distribution;
+		
+	}
 	/**
 	 * Gets the type of simulation
 	 * 
 	 * @return The simulation type
 	 */
 	public String getSimulationType() {
-		return myParser.getTextValue(SIMULATION_TYPE);
+		return simulationType;
 	}
 
 	/**
@@ -99,6 +114,10 @@ public class Loader {
 	 */
 	public double getParameter() {
 		return param;
+	}
+	
+	public String getSimulationName() {
+		return simulationName;
 	}
 
 	/**
