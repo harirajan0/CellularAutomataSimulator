@@ -48,16 +48,18 @@ public class SimulationGUI {
 
     }
     
-    
     public void createCP(HBox hbox){
     	root.setTop(hbox);
+    }
+    
+    public void createGraph(VBox vbox){
+    	root.setLeft(vbox);
     }
     
     public void createBP(HBox hbox){
     	simulationLayout.getChildren().add(hbox);
     }
     
-
     public SimulationView getSimulationView(){
     	return cellSimulationView;
     }

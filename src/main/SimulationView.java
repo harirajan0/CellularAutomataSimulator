@@ -11,6 +11,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import model.Model;
+
 public class SimulationView {
 	
 	private static final String TRIANGLE = "Triangle";
