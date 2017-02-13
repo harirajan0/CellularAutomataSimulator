@@ -8,13 +8,7 @@ public class WaTorCell extends Cell {
 	
 	private int turnsToBreed;
 	private int turnsToDie;
-	/**
-	 * Constructor should initialize state and position on screen and set
-	 * turnsToBreed and turnsToDie to 0
-	 * @param initState initial state of cell
-	 * @param xPosition x position of cell on screen
-	 * @param yPosition y position of cell on screen
-	 */
+
 	public WaTorCell(WaTorState initState) {
 		super(initState);
 		resetFields();
@@ -112,6 +106,7 @@ public class WaTorCell extends Cell {
 		}
 		return null;
 	}
+	
 	private void resetFields() {
 		turnsToDie = 0;
 		turnsToBreed = 0;
@@ -126,7 +121,9 @@ public class WaTorCell extends Cell {
 		turnsToBreed = cell.turnsToBreed;
 	}
 	
-	// check super cell to see general comment
+	/**
+	 * 
+	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(WaTorState.EMPTY)){

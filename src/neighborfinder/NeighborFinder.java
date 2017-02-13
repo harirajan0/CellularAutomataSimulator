@@ -29,6 +29,7 @@ public abstract class NeighborFinder {
 	 */
 	public abstract void removeCorners();
 	
+	
 	public boolean sameLocation(int[] arr, int r, int c){
 		return (arr[0]==r && arr[1]==c);
 	}

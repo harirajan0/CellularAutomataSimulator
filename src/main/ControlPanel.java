@@ -11,9 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 public class ControlPanel {
@@ -24,7 +22,7 @@ public class ControlPanel {
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
-	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton, zoomInButton, zoomOutButton, zoomResetButton;
+	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton;
 	private Slider speedSlider;
     private ResourceBundle myResources;
     private String shapeType;
@@ -45,9 +43,7 @@ public class ControlPanel {
 		loadButton = makeButton("LoadCommand");
 		resumeButton = makeButton("ResumeCommand");
 		saveButton = makeButton("SaveCommand");
-		zoomInButton = makeButton("ZoomIn");
-		zoomOutButton = makeButton("ZoomOut");
-		zoomResetButton = makeButton("ZoomReset");
+
 
 		initializeChoicebox();
 		
@@ -61,23 +57,14 @@ public class ControlPanel {
 	}
 	
 	public void addToHBox(){
-		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, cb, speedSlider, zoomInButton,
-				zoomOutButton, zoomResetButton);
+		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, cb, speedSlider);
 	}
 	
 	// setter methods to set actions for buttons; used in the controller
 	public void setStart(EventHandler<ActionEvent> handler){
 		startButton.setOnAction(handler);
 	}
-	public void setZoomIn(EventHandler<ActionEvent> handler){
-		zoomInButton.setOnAction(handler);
-	}
-	public void setZoomOut(EventHandler<ActionEvent> handler){
-		zoomOutButton.setOnAction(handler);
-	}
-	public void setZoomReset(EventHandler<ActionEvent> handler){
-		zoomResetButton.setOnAction(handler);
-	}
+
 	
 	public void setPause(EventHandler<ActionEvent> handler){
 		pauseButton.setOnAction(handler);

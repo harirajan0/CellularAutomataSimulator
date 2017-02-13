@@ -33,6 +33,7 @@ import resources.Resources;
 		private SimulationView cellSimulationDisplay;
 		// Control Panel will provide all the button visuals.
 		private ControlPanel cp;
+		private SimulationControlPanel bp;
 		
 		private double fps;
 		private Timeline animation;
@@ -55,6 +56,7 @@ import resources.Resources;
 			myGUI = new SimulationGUI("English");
 			cellSimulationDisplay = myGUI.getSimulationView();
 			cp = new ControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
+			bp = new SimulationControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
 			setupCP();
 			fps = DEFAULT_FPS;
 			myXMLCreator = new XMLCreator();
@@ -75,13 +77,16 @@ import resources.Resources;
 			cp.setSave(e -> save());
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
 			
-			cp.setZoomIn(e -> zoomIn());
-			cp.setZoomOut(e -> zoomOut());
-			cp.setZoomReset(e -> zoomReset());
+			bp.setZoomIn(e -> zoomIn());
+			bp.setZoomOut(e -> zoomOut());
+			bp.setZoomReset(e -> zoomReset());
 
 			cp.addToHBox();
 			
+			bp.addToHBox();
+			
 			myGUI.createCP(cp.getControlPanel());
+			myGUI.createBP(bp.getSimulationControlPanel());
 		}
 		
 		private void zoomIn(){
