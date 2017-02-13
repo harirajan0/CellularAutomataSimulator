@@ -2,7 +2,13 @@ package cells;
 import java.util.List;
 import states.ConwayState;
 
-
+/**
+ * a subclass of the cell that creates the particular cell type for
+ * Conway's game of life
+ * 
+ * @author Gabriel Chen
+ *
+ */
 public class ConwayCell extends Cell {
 	
 	public ConwayCell(ConwayState initState) {
@@ -10,7 +16,7 @@ public class ConwayCell extends Cell {
 	}
 	
 	/**
-	 * 
+	 * updates cells based on rules of Conway's game of life.
 	 */
 	@Override
 	public void update() {
@@ -56,7 +62,8 @@ public class ConwayCell extends Cell {
 	}
 
 	/**
-	 * 
+	 * changes the state of the cell on click.
+	 * cycles through the cell states available in the model.
 	 */
 	@Override
 	public void changeStateOnClick() {

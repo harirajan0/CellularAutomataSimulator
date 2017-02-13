@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
@@ -21,7 +22,7 @@ public class SimulationControlPanel {
 		buttonsPanel.setStyle("-fx-background-color: gray");
 		buttonsPanel.setPadding(new Insets(15, 15, 15, 15));
 		buttonsPanel.setSpacing(10);
-
+		buttonsPanel.setAlignment(Pos.CENTER_RIGHT);
 		
 		zoomInButton = makeButton("ZoomIn");
 		zoomOutButton = makeButton("ZoomOut");
