@@ -80,6 +80,7 @@ public class ConwayModel extends Model {
 		ArrayList<Double> pops = new ArrayList<Double>();
 		pops.add(liveCount);
 		pops.add(deadCount);
+		System.out.println(liveCount);
 		return pops;
 	}
 
