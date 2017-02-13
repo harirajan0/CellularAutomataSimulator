@@ -2,9 +2,7 @@ package cells;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import states.WaTorState;
-import states.SpreadingFireState;
 import states.State;
 public class WaTorCell extends Cell {
 	

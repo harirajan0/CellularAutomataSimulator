@@ -1,7 +1,5 @@
-	package cells;
+package cells;
 import java.util.List;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import states.State;
 /**
  * Cell superclass. 
@@ -14,7 +12,6 @@ public abstract class Cell {
 	private State currentState;
 	private State nextState;
 	private List<Cell> neighbors;
-	private Rectangle myRect;
 	
 	/**
 	 * Creates a Cell with specified parameters

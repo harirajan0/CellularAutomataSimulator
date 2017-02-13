@@ -1,7 +1,5 @@
 package cells;
 import java.util.List;
-
-import states.SegregationState;
 import states.SpreadingFireState;
 
 public class SpreadingFireCell extends Cell 
