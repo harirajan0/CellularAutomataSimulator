@@ -14,15 +14,27 @@ public class SegregationCell extends Cell {
 	private List<Cell> emptyPositions;
 	private double percentage;
 	
+	/**
+	 * 
+	 * @param availableList
+	 */
 	public void setAvailableList(List<Cell> availableList){
 		emptyPositions = availableList;
 	}
 	
+	/**
+	 * 
+	 * @param initState
+	 * @param percentage
+	 */
 	public SegregationCell(SegregationState initState, double percentage) {
 		super(initState);
 		this.percentage = percentage;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void update() {
 		if (this.getNextState() != null) return;
@@ -76,7 +88,9 @@ public class SegregationCell extends Cell {
 		tmp.setNextState(this.getCurrentState());
 	}
 	
-	// check super cell to see general comment
+	/**
+	 * 
+	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(SegregationState.EMPTY)){

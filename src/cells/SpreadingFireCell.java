@@ -1,7 +1,6 @@
 package cells;
 import java.util.List;
 
-import states.SegregationState;
 import states.SpreadingFireState;
 
 public class SpreadingFireCell extends Cell 
@@ -14,6 +13,9 @@ public class SpreadingFireCell extends Cell
 		probCatch = prob;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void update() {
 		if(isState(SpreadingFireState.EMPTY)){
@@ -52,7 +54,9 @@ public class SpreadingFireCell extends Cell
 		}
 	}
 
-	// check super cell to see general comment
+	/**
+	 * 
+	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(SpreadingFireState.EMPTY)){
