@@ -48,4 +48,4 @@ public class SimulationControlPanel {
 		return buttonsPanel;
 	}
 	
-}
+}
