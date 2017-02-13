@@ -5,7 +5,9 @@ CompSci 308 Cell Society Project
 Team members: Hari Rajan, Bihan Zhuang, Vishnu Gottiparthy, Gabriel Chen
 
 Started: 01/29/2017
-Finisheded: 02/12/2017
+
+Finished: 02/12/2017
+
 Hours: 50
 
 ### Role of each member
