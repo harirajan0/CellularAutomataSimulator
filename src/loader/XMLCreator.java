@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -16,7 +15,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -51,17 +49,17 @@ public class XMLCreator {
 			Element dataElement = doc.createElement("data");
 			doc.appendChild(dataElement);
 			
-			addElement("simulationType", simulationType, dataElement);
-			addElement("simulationName", simulationName, dataElement);
-			addElement("inputType", "SPECIFIC", dataElement);
-			addElement("numRows", Integer.toString(numRows), dataElement);
-			addElement("numCols", Integer.toString(numCols), dataElement);
+			addElement(Resources.SIMULATION_TYPE, simulationType, dataElement);
+			addElement(Resources.SIMULATION_NAME, simulationName, dataElement);
+			addElement(Resources.INPUT_TYPE, Resources.SPECIFIC, dataElement);
+			addElement(Resources.NUM_ROWS, Integer.toString(numRows), dataElement);
+			addElement(Resources.NUM_COLUMNS, Integer.toString(numCols), dataElement);
 			
 			for (int row = 0; row < numRows; row++) addElement(String.format("row%d", row), states.get(row), dataElement);
 			
-			addElement("param", Double.toString(param), dataElement);
+			addElement(Resources.PARAM, Double.toString(param), dataElement);
 			
-			saveXML(String.format("src/resources/mySimulation%d.xml", xmlCreationNumber));
+			saveXML(String.format(Resources.XML_FILE_PATH, xmlCreationNumber));
 			
 		} catch (Exception e) {
 			throw new XMLException(Resources.getString("XMLGeneratorError"));
@@ -78,27 +76,5 @@ public class XMLCreator {
 		Element newElement = doc.createElement(elementTitle);
 		newElement.appendChild(doc.createTextNode(elementData));
 		root.appendChild(newElement);
-	}
-	
-	/**
-	 * Saves the document to the given file path
-	 * @param filePath Path at which to save file
-	 * @throws TransformerException
-	 * @throws IOException
-	 */
-	private void saveXML(String filePath) throws TransformerException, IOException {
-		TransformerFactory transfac = TransformerFactory.newInstance();
-		Transformer transformer = transfac.newTransformer();
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		StringWriter stringWriter = new StringWriter();
-		StreamResult result = new StreamResult(stringWriter);
-		DOMSource source = new DOMSource(doc);
-		transformer.transform(source, result);
-		String xmlString = stringWriter.toString();
-		FileWriter fileWriter = new FileWriter(filePath);
-		fileWriter.write(xmlString);
-		fileWriter.close();
-		CellSocietyAlerts.xmlGenerated(filePath);
 	}
 }
