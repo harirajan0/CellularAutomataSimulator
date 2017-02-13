@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Arrays;
-import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,7 +17,7 @@ import resources.Resources;
 
 public class ControlPanel {
 	
-	private final ChoiceBox cb;
+	private final ChoiceBox<String> cb;
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
@@ -41,7 +40,7 @@ public class ControlPanel {
 		saveButton = makeButton("SaveCommand");
 
 
-		cb = new ChoiceBox(FXCollections.observableArrayList(Arrays.asList(Resources.SHAPES)));
+		cb = new ChoiceBox<String>(FXCollections.observableArrayList(Arrays.asList(Resources.SHAPES)));
 		initializeChoicebox();
 		
 		speedSlider = makeSpeedSlider();
@@ -95,7 +94,7 @@ public class ControlPanel {
 		return shapeType;
 	}
 	
-	public ChoiceBox getChoiceBox() {
+	public ChoiceBox<String> getChoiceBox() {
 		return cb;
 	}
 	private Slider makeSpeedSlider() {

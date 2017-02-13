@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

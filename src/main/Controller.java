@@ -2,7 +2,6 @@ package main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
