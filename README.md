@@ -12,11 +12,11 @@ Hours: 50
 ##### Hari
 
 ##### Bihan
-Designed the class hierarchy following the MVC model. Refactored so that the Controller, Views and Models integrate well together
+1) Designed the class hierarchy following the MVC model. Refactored so that the Controller, Views and Models integrate well together
 
-Designed and wrote classes in the cellshapeview and neighborfinder packages in order to better separate frontend and backend. 
+2) Designed and wrote classes in the cellshapeview and neighborfinder packages in order to better separate frontend and backend. 
 
-Wrote backend for Segregation Cells.
+3) Wrote backend for Segregation Cells.
 
 
 ##### Vishnu
@@ -32,10 +32,12 @@ Compsci 308 Piazza page.
 Run ApplicationStartup in main package
 
 ### To Test
-
+Use any XML file in the resources package. 
 
 ### Required data or resource files
-
+1) The English properties file in the resources package.
+ 
+2) All the XML files in the resources package for running the simulations.
 
 ### Information about using the program
 
