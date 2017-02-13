@@ -3,6 +3,7 @@
  */
 package states;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,7 @@ import javafx.scene.paint.Color;
 import resources.Resources;
 
 /**
- * @author harirajan
- *
+ * Enum for states of the Spreading Fire simulation
  */
 public enum SpreadingFireState implements State{
 	
@@ -23,7 +23,14 @@ public enum SpreadingFireState implements State{
     private int stateValue;
     private String stateString;
 
+
+    /**
+     * Creates the state enum
+     * @param color Color corresponding to <code>state</code>
+     * @param state The state of the cell
+     */
     SpreadingFireState(Color color, int state, String stateStr) {
+
         myColor = color;
         stateValue = state;
         stateString = stateStr;

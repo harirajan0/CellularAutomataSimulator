@@ -14,7 +14,8 @@ public class GraphPanel {
 	
 	/**
 	 * TODO: Set up chart colors using CSS (preferred method)
-	 * @param statesMap
+	 * Creates a GraphPanel with the desired states
+	 * @param states A list of all possible states
 	 */
 	public GraphPanel(List<String> states){
 		graphBox = new VBox();
@@ -40,6 +41,11 @@ public class GraphPanel {
 		graphBox.getChildren().add(chart);
 	}
 	
+	/**
+	 * Updates the data contained in the graph
+	 * @param populations A list of the population percentages of each state
+	 * @param iteration The number of elapsed generations
+	 */
 	public void update(List<Double> populations, double iteration){
 		if(populations.size() != chart.getData().size()){
 			throw new IllegalArgumentException("Only " + populations.size() + 
@@ -52,6 +58,10 @@ public class GraphPanel {
 		}
 	}
 	
+	/**
+	 * Gets the <code>VBox</code> containing the graph
+	 * @return The <code>VBox</code> containing the graph
+	 */
 	public VBox getGraph(){
 		return graphBox;
 	}

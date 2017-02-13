@@ -1,8 +1,4 @@
-/**
- * 
- */
 package alerts;
-
 import java.io.File;
 import java.util.Optional;
 import javafx.scene.control.Alert;
@@ -11,8 +7,7 @@ import resources.Resources;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * @author Hari Rajan
- *
+ * Pop-up alert that displays when the user interacts incorrectly with the program
  */
 public class CellSocietyAlerts {
 	

@@ -1,18 +1,24 @@
 package cellshapeviews;
 
+/**
+ * Shape view for hexagonal cells
+ */
 public class HexagonShapeView extends PolygonShapeView {
 	
 	private double sideLength;
 
+	/**
+	 * Creates a hexagonal shape view
+	 * @param r Row number of cell
+	 * @param c Column number of cell
+	 * @param sideLength Length of the cell's sides
+	 */
 	public HexagonShapeView(int r, int c, double sideLength) {
 		super(r, c, sideLength);
 		this.sideLength = sideLength/1.6;
 		definePolygon();
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	protected void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
@@ -43,9 +49,6 @@ public class HexagonShapeView extends PolygonShapeView {
 		return coord;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	protected Double[] pivotPoint(){
 		Double[] myXY = new Double[2];

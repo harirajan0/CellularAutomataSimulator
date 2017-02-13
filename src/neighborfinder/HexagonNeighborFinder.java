@@ -1,10 +1,17 @@
 package neighborfinder;
 
-
+/**
+ * A <code>NeighborFinder</code> for hexagonal cells
+ */
 public class HexagonNeighborFinder extends NeighborFinder {
 	
 	private int row, col;
 
+	/**
+	 * Creates a <code>NeighborFinder</code>
+	 * @param r Row number
+	 * @param c Column number
+	 */
 	public HexagonNeighborFinder(int r, int c) {
 		super(r, c);
 		row = r;
@@ -33,5 +40,4 @@ public class HexagonNeighborFinder extends NeighborFinder {
 
 	@Override
 	public void removeCorners() {}
-
 }

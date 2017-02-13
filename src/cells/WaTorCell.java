@@ -4,18 +4,24 @@ import java.util.List;
 import java.util.Random;
 import states.WaTorState;
 import states.State;
+
+/**
+ * A subclass of <code>Cell</code> for the WaTor simulation.
+ */
 public class WaTorCell extends Cell {
 	
 	private int turnsToBreed;
 	private int turnsToDie;
 
+	/**
+	 * Constructor for the <code>WaTorCell</code>
+	 * @param initState Initial state of the cell
+	 */
 	public WaTorCell(WaTorState initState) {
 		super(initState);
 		resetFields();
 	}
-	/**
-	 * Updates cell based on current state
-	 */
+
 	@Override
 	public void update() {
 		if (getNextState() != null) return;
@@ -60,7 +66,8 @@ public class WaTorCell extends Cell {
 	}
 	
 	/**
-	 * Eat fish by setting fish cell to WaTorState.EMPTY and resetting the number of turns this cell needs until death
+	 * Eat fish by setting fish cell to <code>WaTorState.EMPTY</code> 
+	 * and resetting the number of turns this cell needs until death
 	 * @param fish fish to be eaten
 	 */
 	private void eatFish(WaTorCell fish) {
@@ -71,7 +78,7 @@ public class WaTorCell extends Cell {
 	
 	/**
 	 * move by getting random neighbor and setting all of that cell's fields to our current
-	 * fields and reset our fields to initial WaTorState.EMPTY state
+	 * fields and reset our fields to initial <code>WaTorState.EMPTY</code> state
 	 */
 	private void move() {
 		WaTorCell newLocation;
@@ -88,7 +95,7 @@ public class WaTorCell extends Cell {
 	/**
 	 * gets random neighbor of the given state
 	 * @param state requested state
-	 * @return random WaTorCell neighbor of given state
+	 * @return random <code>WaTorCell</code> neighbor of given state
 	 */
 	private WaTorCell getRandomNeighbor(State state) {
 		List<Cell> possibleNeighbors = new ArrayList<>();
@@ -107,6 +114,9 @@ public class WaTorCell extends Cell {
 		return null;
 	}
 	
+	/**
+	 * Resets the number of turns for the cell to die and breed.
+	 */
 	private void resetFields() {
 		turnsToDie = 0;
 		turnsToBreed = 0;
@@ -114,16 +124,13 @@ public class WaTorCell extends Cell {
 	
 	/**
 	 * sets fields of other cell to match this cell
-	 * @param cell WaTorCell that needs to have its fields cell
+	 * @param cell <code>WaTorCell</code> that needs to have its fields cell
 	 */
 	private void setFields(WaTorCell cell) {
 		turnsToDie = cell.turnsToDie;
 		turnsToBreed = cell.turnsToBreed;
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(WaTorState.EMPTY)){
@@ -136,5 +143,4 @@ public class WaTorCell extends Cell {
 
 		}		
 	}
-
 }

@@ -12,6 +12,7 @@ import loader.Loader;
 import loader.XMLCreator;
 import model.Model;
 import resources.Resources;
+
 	/** This controller class is the central nexus control of the entire program.
 	 * It will handle things like when to update the model, when to update the view,
 	 * this class holds the cell simulation together
@@ -41,7 +42,6 @@ import resources.Resources;
 		 * Constructor for the Controller
 		 * Sets view for the instance View in Controller.
 		 * Can be called in GUI multiple times to set up different views.
-		 * @param view
 		 */
 		public Controller(){
 			myGUI = new SimulationGUI();
@@ -54,10 +54,17 @@ import resources.Resources;
 			currentShape = cp.getShapeType();
 		}
 		
+		/**
+		 * Gets the GUI for the application
+		 * @return GUI for the application
+		 */
 		public SimulationGUI getGUI(){
 			return myGUI;
 		}
 		
+		/**
+		 * Sets all action listeners for the <code>ControlPanel</code>
+		 */
 		private void setupCP(){
 			cp.setStart(e -> start());
 			cp.setPause(e -> pause());
@@ -81,20 +88,35 @@ import resources.Resources;
 			myGUI.createBP(bp.getSimulationControlPanel());
 		}
 		
+		/**
+		 * Called when the display is zoomed in
+		 */
 		private void zoomIn(){
 			myGUI.simViewZoomIn();
 		}
 		
+		/**
+		 * Called when the display is zoomed out
+		 */
 		private void zoomOut(){
 			myGUI.simViewZoomOut();
 		}
 		
+		/**
+		 * Called when the zoom is reset to default
+		 */
 		private void zoomReset(){
 			myGUI.simViewZoomReset();
 		}
 		
+
+		/**
+		 * Starts the animation
+		 */
+
 		// this should be for starting a new simulation maybe? still need to look into it
 		private void start() {
+
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps), e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
@@ -102,14 +124,23 @@ import resources.Resources;
 			animation.play();
 		}
 		
+		/**
+		 * Resumes the animation
+		 */
 		private void resume(){
 			animation.play();
 		}
 		
+		/**
+		 * Pauses the animation
+		 */
 		private void pause() {
 			animation.pause();
 		}
 		
+		/**
+		 * Resets the simulation to its initial state
+		 */
 		private void reset() {
 			if(animation != null){
 				animation.stop();
@@ -122,6 +153,9 @@ import resources.Resources;
 			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 		}
 		
+		/**
+		 * Called on each iteration of the animation
+		 */
 		private void step() {
 			myModel.updateModel();
 			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
@@ -129,8 +163,7 @@ import resources.Resources;
 		}
 		
 		/**
-		 * This method will be called in GUI once the user clicks the Load button.
-		 * @return
+		 * Called in GUI once the user clicks the Load button.
 		 */
 		private void load() {
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
@@ -146,10 +179,12 @@ import resources.Resources;
 //			myGUI.createVBox(myModel.getGraph());
 			reset();
 		}
+
 		
-		
+		/**
+		 * Writes an XML file of the current simulation state
+		 */
 		private void save() {
-			//call method to write XML based on current state
 			List<String> states = new ArrayList<String>();
 			for (int row = 0; row < myModel.getRows(); row++) {
 				StringBuilder rowData = new StringBuilder("");
@@ -163,7 +198,11 @@ import resources.Resources;
 			//simulationType, simulationName, numRows, numCols, myList
 		}
 		
-		// set some sensible defaults when the FileChooser is created
+		/**
+		 * Creates a <code>FileChooser</code> for selecting a simulation to load
+		 * @param extensionAccepted
+		 * @return
+		 */
 	    private FileChooser makeChooser (String extensionAccepted) {
 	        FileChooser result = new FileChooser();
 	        result.setTitle(Resources.getString("FileChooserTitle"));
@@ -173,6 +212,10 @@ import resources.Resources;
 	        return result;
 	    }
 	    
+	    /**
+	     * Changes the speed based on a slider's value
+	     * @param value Speed to set
+	     */
 		private void changeSpeed(double value) {
 			fps = Resources.DEFAULT_FPS * value;
 			animation.stop();

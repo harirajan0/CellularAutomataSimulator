@@ -11,10 +11,19 @@ import resources.Resources;
 import states.ConwayState;
 import cells.Cell;
 
+/**
+ * Model for Conway's Game of Life simulation
+ */
 public class ConwayModel extends Model {
 	
 	private HashMap<Integer, ConwayState> stateMap = new HashMap<>();
 	
+	/**
+	 * Creates the model
+	 * @param r Number of rows
+	 * @param c Number of columns
+	 * @param shapeType Type of shape
+	 */
 	public ConwayModel(int r, int c, String shapeType) {
 		super(r, c, shapeType);
 		for (ConwayState state : ConwayState.values()) {
@@ -58,7 +67,7 @@ public class ConwayModel extends Model {
 	}
 	
 	@Override
-	public List<Double> updateGraph(){
+	public List<Double> updatePopulations(){
 		double liveCount = 0;
 		double deadCount = 0;
 		Iterator<Cell> itr = iterator();

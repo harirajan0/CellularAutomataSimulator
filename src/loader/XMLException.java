@@ -1,8 +1,7 @@
 package loader;
 
 /**
- * @author harirajan
- *
+ * Thrown when there is an issue with an XML file
  */
 public class XMLException extends RuntimeException {
 	

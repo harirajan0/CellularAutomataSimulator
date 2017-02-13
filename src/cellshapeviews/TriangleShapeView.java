@@ -1,10 +1,19 @@
 package cellshapeviews;
 
+/**
+ * A shape view for a triangular cell
+ */
 public class TriangleShapeView extends PolygonShapeView {
 	
 	private double sideLength;
 	private final double FACTOR = 1.9;
 
+	/**
+	 * Creates a triangular shape view
+	 * @param r The row number of the cell
+	 * @param c The column number of the cell
+	 * @param size The side length of the cell
+	 */
 	public TriangleShapeView(int r, int c, double size) {
 		super(r, c, size);
 		this.sideLength = size*FACTOR;
