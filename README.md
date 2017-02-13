@@ -1,4 +1,5 @@
 # CellSociety Team 24
+===================
 
 CompSci 308 Cell Society Project
 
@@ -8,7 +9,7 @@ Started: 01/29/2017
 
 Finished: 02/12/2017
 
-Hours: 50
+Hours: 50 per individual
 
 ### Role of each member
 ##### Hari
@@ -25,6 +26,15 @@ separate frontend and backend. Worked on some GUI, View, Controller and Model me
 ##### Vishnu
 
 ##### Gabriel
+1) Worked with group on class hierarchy following the MVC model. Worked on Controller, Views, and Model integration. Worked on step logic, and main application logic.
+Worked on refactoring in various areas in the project as well. Worked mainly on GUI, View, Controller, and Model. Also implemented interactions like zooming, scrolling, and click
+to change state.
+
+2) Designed and wrote the classes for Simulation View, Simulation GUI, Control Panel, working closely with oother components as well. 
+
+3) Wrote backend for Conway Cells.
+
+4) Worked with everyone on debugging basically everything as things came up.
 
 ### Resources
 Many official Java Documentation on different built-in classes and StackOverflow Q&A.
