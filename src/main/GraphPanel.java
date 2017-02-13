@@ -24,7 +24,7 @@ public class GraphPanel {
 		NumberAxis tAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
 		tAxis.setLabel(Resources.getString("Iterations"));
-		yAxis.setLabel(Resources.getString("Population"));
+		yAxis.setLabel(Resources.getString("Populations"));
 		
 		chart = new LineChart<Number, Number>(tAxis, yAxis);
 		chart.getXAxis().setAutoRanging(true);
