@@ -28,25 +28,25 @@ public abstract class PolygonShapeView {
 	/**
 	 * Calculates all the coordinates needed to define a polygon.
 	 */
-	public abstract void definePolygon();
+	protected abstract void definePolygon();
 	
 	/**
 	 * Calculates the coordinates for the simulation view
 	 * @return The coordinates in the simulation view
 	 */
-	public abstract Double[] calculateCoordinates();
+	protected abstract Double[] calculateCoordinates();
 	
 	/**
 	 * Calculates the pivot point of the cell
 	 * @return The coordinates of the pivot point of the cell
 	 */
-	public abstract Double[] pivotPoint();
+	protected abstract Double[] pivotPoint();
 	
 	/**
 	 * Changes the state of the cell on click
 	 * @param value Click event 
 	 */
-	public void changeCellState(EventHandler<? super MouseEvent> value){
+	protected void changeCellState(EventHandler<? super MouseEvent> value){
 		myPolygon.setOnMouseClicked(value);
 	}
 	
@@ -78,7 +78,7 @@ public abstract class PolygonShapeView {
 	 * Tells whether or not the row number is odd
 	 * @return Whether or not the row number is odd
 	 */
-	public boolean oddRow(){
+	protected boolean oddRow(){
 		return row%2==1;
 	}
 	
@@ -86,7 +86,7 @@ public abstract class PolygonShapeView {
 	 * Returns whether or not the row and column are both even or odd
 	 * @return Whether or not the row and column are both even or odd
 	 */
-	public boolean sameParity(){
+	protected boolean sameParity(){
 		return (row+col)%2==0;
 	}
 	

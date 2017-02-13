@@ -51,17 +51,17 @@ public class XMLCreator {
 			Element dataElement = doc.createElement("data");
 			doc.appendChild(dataElement);
 			
-			addElement("simulationType", simulationType, dataElement);
-			addElement("simulationName", simulationName, dataElement);
-			addElement("inputType", "SPECIFIC", dataElement);
-			addElement("numRows", Integer.toString(numRows), dataElement);
-			addElement("numCols", Integer.toString(numCols), dataElement);
+			addElement(Resources.SIMULATION_TYPE, simulationType, dataElement);
+			addElement(Resources.SIMULATION_NAME, simulationName, dataElement);
+			addElement(Resources.INPUT_TYPE, Resources.SPECIFIC, dataElement);
+			addElement(Resources.NUM_ROWS, Integer.toString(numRows), dataElement);
+			addElement(Resources.NUM_COLUMNS, Integer.toString(numCols), dataElement);
 			
 			for (int row = 0; row < numRows; row++) addElement(String.format("row%d", row), states.get(row), dataElement);
 			
-			addElement("param", Double.toString(param), dataElement);
+			addElement(Resources.PARAM, Double.toString(param), dataElement);
 			
-			saveXML(String.format("src/resources/mySimulation%d.xml", xmlCreationNumber));
+			saveXML(String.format(Resources.XML_FILE_PATH, xmlCreationNumber));
 			
 		} catch (Exception e) {
 			throw new XMLException(Resources.getString("XMLGeneratorError"));

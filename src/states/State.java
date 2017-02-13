@@ -2,6 +2,8 @@
  * 
  */
 package states;
+import java.util.List;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -20,5 +22,9 @@ public interface State {
 	 * @return The integer value of the state
 	 */
 	public int getStateValue();
+	
+	public String getStateAsString();
+	
+	public List<String> getPossibleStatesAsString();
 	
 }

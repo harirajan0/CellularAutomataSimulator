@@ -38,7 +38,7 @@ public abstract class NeighborFinder {
 	 * @param c Column to check
 	 * @return Whether or not <code>arr</code> is at index (<code>r, c</code>) 
 	 */
-	public boolean sameLocation(int[] arr, int r, int c){
+	protected boolean sameLocation(int[] arr, int r, int c){
 		return (arr[0]==r && arr[1]==c);
 	}
 	

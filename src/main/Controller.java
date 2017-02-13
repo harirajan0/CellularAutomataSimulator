@@ -2,7 +2,6 @@ package main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,14 +18,6 @@ import resources.Resources;
 	 * this class holds the cell simulation together
 	 */
 	public class Controller {
-		
-		// kind of data files to look for
-	    public static final String DATA_FILE_EXTENSION = "*.xml";
-	    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-		private static final double DEFAULT_FPS = 1;
-		public static final int INIT_WINDOW_SIZE = 600;
-
-		
 		// Dimension of the Grid, obtained from Loader
 		private Model myModel;
 		SimulationGUI myGUI;
@@ -41,10 +32,8 @@ import resources.Resources;
 		private Loader l;
 		private File dataFile;
 		private String currentShape;
-
 	    // it is generally accepted behavior that the chooser remembers where user left it last
-	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
-
+	    private FileChooser myChooser = makeChooser(Resources.DATA_FILE_EXTENSION);
 	    private XMLCreator myXMLCreator;
 		
 		/**
@@ -53,12 +42,12 @@ import resources.Resources;
 		 * Can be called in GUI multiple times to set up different views.
 		 */
 		public Controller(){
-			myGUI = new SimulationGUI("English");
+			myGUI = new SimulationGUI();
 			cellSimulationDisplay = myGUI.getSimulationView();
-			cp = new ControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
-			bp = new SimulationControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
+			cp = new ControlPanel();
+			bp = new SimulationControlPanel();
 			setupCP();
-			fps = DEFAULT_FPS;
+			fps = Resources.DEFAULT_FPS;
 			myXMLCreator = new XMLCreator();
 			currentShape = cp.getShapeType();
 		}
@@ -83,11 +72,12 @@ import resources.Resources;
 			cp.setResume(e -> resume());
 			cp.setSave(e -> save());
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
+			cp.getChoiceBox().valueProperty().addListener(e -> 
+				changeShape(Resources.SHAPES[cp.getChoiceBox().getSelectionModel().getSelectedIndex()]));
 			
 			bp.setZoomIn(e -> zoomIn());
 			bp.setZoomOut(e -> zoomOut());
 			bp.setZoomReset(e -> zoomReset());
-
 			cp.addToHBox();
 			
 			bp.addToHBox();
@@ -120,7 +110,7 @@ import resources.Resources;
 		/**
 		 * Starts the animation
 		 */
-		public void start() {
+		private void start() {
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps), e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
@@ -154,15 +144,15 @@ import resources.Resources;
 			myModel.initializeNeighbors();
 			myModel.resetIteration();
 			cellSimulationDisplay.displayGrid(myModel, currentShape);
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 		}
 		
 		/**
 		 * Called on each iteration of the animation
 		 */
 		private void step() {
-			checkShape();
 			myModel.updateModel();
-			myGUI.createGraph(myModel.getGraph());
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
@@ -179,19 +169,8 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			myGUI.createGraph(myModel.getGraph());
-			checkShape();
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 			reset();
-		}
-		
-		/**
-		 * Gets the shape type selected
-		 */
-		private void checkShape(){
-			if (!cp.getShapeType().equals(currentShape)){
-				currentShape = cp.getShapeType();
-				cellSimulationDisplay.displayGrid(myModel, currentShape);
-			}
 		}
 		
 		/**
@@ -230,7 +209,7 @@ import resources.Resources;
 	     * @param value Speed to set
 	     */
 		private void changeSpeed(double value) {
-			fps = DEFAULT_FPS*value;
+			fps = Resources.DEFAULT_FPS * value;
 			animation.stop();
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
@@ -238,5 +217,10 @@ import resources.Resources;
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);
 			animation.play();
+		}
+		
+		private void changeShape(String newShape) {
+			currentShape = newShape;
+			cellSimulationDisplay.displayGrid(myModel, currentShape);
 		}
 	}

@@ -69,7 +69,7 @@ public class SegregationModel extends Model {
 		}
 		createAvailableCells();
 		placeAvailableList();
-		createGraphPanel("X", "O", "Empty");
+		createGraphPanel(SegregationState.EMPTY.getPossibleStatesAsString());
 	}
 	
 	@Override
@@ -96,7 +96,7 @@ public class SegregationModel extends Model {
 	/**
 	 *  Create list of empty cells for Model to hold
 	 */
-	public void createAvailableCells() {
+	private void createAvailableCells() {
 		availableCells = new ArrayList<>();
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
@@ -114,7 +114,8 @@ public class SegregationModel extends Model {
 	/**
 	 * Put empty list into every cell
 	 */
-	public void placeAvailableList() {
+	// put empty list into every cell
+	private void placeAvailableList() {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
 			((SegregationCell) itr.next()).setAvailableList(availableCells);
