@@ -1,5 +1,4 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,10 +12,19 @@ import neighborfinder.NeighborFinder;
 import resources.Resources;
 import states.SpreadingFireState;
 
+/**
+ * Creates a data model for the Spreading Fire simulation
+ */
 public class SpreadingFireModel extends Model {
 	
 	private HashMap<Integer, SpreadingFireState> stateMap = new HashMap<>();
 	
+	/**
+	 * Creates a <code>SpreadingFireModel</code>
+	 * @param r The row number
+	 * @param c The column number
+	 * @param shapeType The type of shape
+	 */
 	public SpreadingFireModel(int r, int c, String shapeType) {
 		super(r, c, shapeType);
 		for (SpreadingFireState state : SpreadingFireState.values()) {
@@ -80,7 +88,7 @@ public class SpreadingFireModel extends Model {
 	}
 
 	@Override
-	public List<Double> updateGraph() {
+	public List<Double> updatePopulations() {
 		double treeCount = 0;
 		double burningCount = 0;
 		double emptyCount = 0;

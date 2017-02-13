@@ -15,13 +15,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
 import resources.Resources;
 
 
-
 /**
- * @author harirajan
- *
+ * Parses the XML file for data
  */
 public class XMLParser {
 
@@ -89,6 +88,10 @@ public class XMLParser {
 		}
     }
     
+    /**
+     * Gets the file being used
+     * @return The file being used
+     */
     public File getFile() {
     	return myFile;
     }

@@ -1,5 +1,4 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,7 +16,13 @@ import states.WaTorState;
 public class WaTorModel extends Model {
 
 	private HashMap<Integer, WaTorState> stateMap = new HashMap<>();
-
+	
+	/**
+	 * Creates a <code>WaTorModel</code>
+	 * @param r The row number
+	 * @param c The column number
+	 * @param shapeType The type of shape
+	 */
 	public WaTorModel(int r, int c, String shapeType) {
 		super(r, c, shapeType);
 		for (WaTorState state : WaTorState.values()) {
@@ -81,7 +86,7 @@ public class WaTorModel extends Model {
 	}
 
 	@Override
-	public List<Double> updateGraph() {
+	public List<Double> updatePopulations() {
 		double fishCount = 0;
 		double sharkCount = 0;
 		double emptyCount = 0;
@@ -112,7 +117,7 @@ public class WaTorModel extends Model {
 		pops.add(emptyCount);
 		return pops;
 	}
-	
+
 	@Override
 	public int numStates() {
 		return stateMap.size();

@@ -3,10 +3,6 @@ import java.util.List;
 import states.State;
 /**
  * Cell superclass 
- * @author Hari Rajan
- * @author Vishnu Gottiparthy
- * @author Bihan Zhuang
- * @author Gabriel Chen
  */
 public abstract class Cell {
 	
@@ -17,13 +13,14 @@ public abstract class Cell {
 	/**
 	 * Creates a Cell with specified parameters
 	 * @param initState initial state of cell
-	 * @param xPosition x position of cell on screen
-	 * @param yPosition y position of cell on screen
 	 */
 	public Cell(State initState) {
 		setCurrentState(initState);
 	}
-		
+	
+	/**
+	 * Updates the cell's state on click
+	 */
 	public abstract void changeStateOnClick();
 	
 	/**
@@ -85,7 +82,11 @@ public abstract class Cell {
 	 */
 	public boolean isState(State state) {
 		return getCurrentState().equals(state);
-	}
+	}	
+	/**
+	 * Sets the state of the cell to <code>state</code> on click
+	 * @param state
+	 */
 
 	protected void setStateOnClick(State state) {
 		this.currentState = state;

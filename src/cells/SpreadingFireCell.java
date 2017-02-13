@@ -2,19 +2,23 @@ package cells;
 import java.util.List;
 import states.SpreadingFireState;
 
+/**
+ * A subclass of <code>Cell</code> for the Spreading Fire simulation.
+ */
 public class SpreadingFireCell extends Cell 
 {	
-	
 	private double probCatch;
 	
+	/**
+	 * Constructor for the <code>SpreadingFireCell</code>
+	 * @param initState The initial state of the cell
+	 * @param prob Probability of fire catching to a neighboring cell
+	 */
 	public SpreadingFireCell(SpreadingFireState initState, double prob){
 		super(initState);
 		probCatch = prob;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void update() {
 		if(isState(SpreadingFireState.EMPTY)){
@@ -53,9 +57,6 @@ public class SpreadingFireCell extends Cell
 		}
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(SpreadingFireState.EMPTY)){

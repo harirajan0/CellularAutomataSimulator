@@ -3,14 +3,22 @@ import java.util.List;
 import states.ConwayState;
 
 /**
+<<<<<<< HEAD
+ * A subclass of Cell for Conway's Game of Life simulation
+=======
  * a subclass of the cell that creates the particular cell type for
  * Conway's game of life
  * 
  * @author Gabriel Chen
  *
+>>>>>>> master
  */
 public class ConwayCell extends Cell {
 	
+	/**
+	 * Constructor for the <code>ConwayCell</code>
+	 * @param initState
+	 */
 	public ConwayCell(ConwayState initState) {
 		super(initState);
 	}
@@ -38,8 +46,8 @@ public class ConwayCell extends Cell {
 	}
 	
 	/**
-	 * Tells whether or not the current state is ConwayState.ALIVE
-	 * @return whether or not the current state is ConwayState.ALIVE
+	 * Tells whether or not the current state is <code>ConwayState.ALIVE</code>
+	 * @return whether or not the current state is <code>ConwayState.ALIVE</code>
 	 */
 	private boolean isAlive(){
 		return this.getCurrentState().equals(ConwayState.ALIVE);
@@ -59,6 +67,7 @@ public class ConwayCell extends Cell {
 		}
 		return livingCount;
 	}
+
 
 	/**
 	 * changes the state of the cell on click.

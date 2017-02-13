@@ -4,10 +4,7 @@ import states.SegregationState;
 
 
 /**
- * A subclass of Cell that creates the particular cell type for the 
- * Segregation simulation.
- * @author Bihan Zhuang
- *
+ * A subclass of <code>Cell</code> for the Segregation simulation.
  */
 public class SegregationCell extends Cell {
 
@@ -15,9 +12,9 @@ public class SegregationCell extends Cell {
 	private double percentage;
 	
 	/**
-	 * 
-	 * @param initState
-	 * @param percentage
+	 * Constructor for the <code>SegregationCell</code>
+	 * @param initState Initial state of the cell
+	 * @param percentage Percentage of neighbors needed to be alike for cell to be satisfied
 	 */
 	public SegregationCell(SegregationState initState, double percentage) {
 		super(initState);
@@ -25,8 +22,13 @@ public class SegregationCell extends Cell {
 	}
 	
 	/**
-	 * 
+	 * Sets the global list of empty positions
+	 * @param availableList the list of empty positions
 	 */
+	public void setAvailableList(List<Cell> availableList){
+		emptyPositions = availableList;
+	}
+	
 	@Override
 	public void update() {
 		if (this.getNextState() != null) return;
@@ -41,13 +43,6 @@ public class SegregationCell extends Cell {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param availableList
-	 */
-	public void setAvailableList(List<Cell> availableList){
-		emptyPositions = availableList;
-	}
 	
 	/**
 	 * Checks if the Cell is satisfied by comparing the percentage of 
@@ -88,9 +83,6 @@ public class SegregationCell extends Cell {
 		tmp.setNextState(this.getCurrentState());
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public void changeStateOnClick() {
 		if(getCurrentState().equals(SegregationState.EMPTY)){
@@ -100,7 +92,6 @@ public class SegregationCell extends Cell {
 
 		} else {
 			setStateOnClick(SegregationState.EMPTY);
-
 		}
 	}
 }

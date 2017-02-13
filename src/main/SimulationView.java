@@ -13,6 +13,9 @@ import javafx.scene.layout.StackPane;
 import model.Model;
 import resources.Resources;
 
+/**
+ * View containing the display of all of the cells
+ */
 public class SimulationView {
 	
 	private List<PolygonShapeView> cellDisplay;
@@ -20,6 +23,9 @@ public class SimulationView {
 	private StackPane cellSimStackPane;
 	private double currScale;
 	
+	/**
+	 * Create the <code>SimulationView</code>
+	 */
 	public SimulationView(){
 		cellSimulationGroup = new Group();
 		cellSimStackPane = makeSimulationStackPane();
@@ -28,54 +34,95 @@ public class SimulationView {
 		currScale = 1;
 	}
 	
+	/**
+	 * Sets the scaling on the dimensions of the view
+	 */
 	private void setGroupScale(){
 		cellSimulationGroup.setScaleX(currScale);
 		cellSimulationGroup.setScaleY(currScale);
 	}
 	
+	/**
+	 * Sets the minimum size of the view
+	 * @param scaleFactor ScaleFactor of minimum zoom
+	 */
 	private void setStackPaneMinSize(double scaleFactor){
 		cellSimStackPane.setMinWidth(cellSimStackPane.getMinWidth() * scaleFactor);
 		cellSimStackPane.setMinHeight(cellSimStackPane.getMinHeight() * scaleFactor);
 	}
 	
-	//Doubles Simulation view size
+
+	/**
+	 * Doubles the simulation view size
+	 */
+
 	protected void zoomIn(){
 		currScale = currScale * 2;
 		setGroupScale();
 		setStackPaneMinSize(2);
 	}
-	//halves simulation view size
+
+	
+	/**
+	 * Halves the simulation view size
+	 */
+
 	protected void zoomOut(){
 		currScale = currScale * .5;
 		setGroupScale();
 		setStackPaneMinSize(.5);
 	}
-	//resets simulation view size
+
+	
+	/**
+	 * Resets simulation view size
+	 */
+
 	protected void zoomReset(){
+
 		currScale = 1;
 		setGroupScale();
 		setMinSizeToDefault();
 	}
+	
+	/**
+	 * Sets the size back to default
+	 */
 	private void setMinSizeToDefault(){
 		cellSimStackPane.setMinWidth(Resources.INIT_WINDOW_SIZE);
 		cellSimStackPane.setMinHeight(Resources.INIT_WINDOW_SIZE);
 	}
 	
+	/**
+	 * Gets the <code>Group</code> for the simulation view
+	 * @return The <code>Group</code> for the simulation view
+	 */
 	public Group getCellSimulationGroup(){
 		return cellSimulationGroup;
 	}
 	
+	/**
+	 * Gets the <code>StackPane</code> for the simulation
+	 * @return The <code>StackPane</code> for the simulation
+	 */
 	public StackPane getSimulationStackPane(){
 		return cellSimStackPane;
 	}
 	
+	/**
+	 * Makes the <code>StackPane</code> for the simulation view
+	 * @return The created <code>StackPane</code>
+	 */
     private StackPane makeSimulationStackPane(){
     	StackPane zoomPane = new StackPane();
     	zoomPane.getChildren().add(cellSimulationGroup);
     	return zoomPane;
     }
-	/* Takes in the model and display it in the GUI.
+	
+    /** 
+     * Takes in the model and displays it in the GUI.
 	 * @param model The model to display
+	 * @param shapeType The type of shape to use
 	 */
 	
     protected void displayGrid(Model model, String shapeType) {
@@ -99,6 +146,11 @@ public class SimulationView {
 		}
 	}
 	
+	/**
+	 * Sets up the proper shapes for the cells
+	 * @param psv <code>PolygonShapeView</code> of the desired shape
+	 * @param cell Cell to set for <code>psv</code>
+	 */
 	private void setupPolygon(PolygonShapeView psv, Cell cell){
 		Polygon polygon = psv.getPolygon();
 		polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
@@ -110,7 +162,7 @@ public class SimulationView {
 	
 	/**
 	 * Update view for each cell.
-	 * @param model
+	 * @param model The data model to use
 	 */
 	protected void updateGrid(Model model){
 		for (PolygonShapeView psv : cellDisplay){
@@ -119,6 +171,12 @@ public class SimulationView {
 		}
 	}
 	
+
+	/**
+	 * Updates an individual cell's state
+	 * @param cell Cell to update
+	 * @param psv <code>PolygonShapeView</code> of cell to update
+	 */
 	protected void updateIndividualCellState(Cell cell, PolygonShapeView psv){
 		cell.changeStateOnClick();
 		psv.getPolygon().setFill(cell.getCurrentState().getColor());

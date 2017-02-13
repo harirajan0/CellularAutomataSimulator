@@ -3,7 +3,11 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Starts the application
+ */
 public class ApplicationStartup extends Application{
+
 	/**
 	 * This class starts the application. It's sole purpose is to start
 	 * the application. It should never be touched again. No implementation
