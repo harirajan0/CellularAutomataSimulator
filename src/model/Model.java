@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
@@ -12,16 +11,13 @@ import neighborfinder.HexagonNeighborFinder;
 import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
+import resources.Resources;
 import main.GraphPanel;
 
 /**
  * Abstract class for simulation data models
  */
 public abstract class Model implements Iterable<Cell> {
-
-	private static final String TRIANGLE = "Triangle";
-	private static final String SQUARE = "Square";
-	private static final String HEXAGON = "Hexagon";
 	
 	private int iteration;
 	private Grid myGrid;
@@ -41,6 +37,7 @@ public abstract class Model implements Iterable<Cell> {
 		iteration = 0;
 	}
 	
+
 	/**
 	 * Creates <code>NeighborFinder</code> to identify the neighbors of the cell
 	 * @param str Indicates which <code>NeighborFinder</code> to use
@@ -48,15 +45,15 @@ public abstract class Model implements Iterable<Cell> {
 	 * @param c Column number
 	 * @return A <code>NeighborFinder</code> with the specified parameters
 	 */
-	public NeighborFinder initializeNF(String str, int r, int c){
-		switch(str){
-		case TRIANGLE:
+	protected NeighborFinder initializeNF(String shape, int r, int c){
+		switch (shape){
+		case Resources.TRIANGLE:
 			myNF = new TriangleNeighborFinder(r, c);
 			break;
-		case SQUARE:
+		case Resources.SQUARE:
 			myNF = new SquareNeighborFinder(r, c);
 			break;
-		case HEXAGON:
+		case Resources.HEXAGON:
 			myNF = new HexagonNeighborFinder(r, c);
 			break;
 		default:
@@ -111,13 +108,14 @@ public abstract class Model implements Iterable<Cell> {
 	 */
 	public abstract List<Double> updatePopulations();
 	
+
 	/**
 	 * Creates the <code>GraphPanel</code> containing the population graph
 	 * @param states All possible states
 	 */
-	public void createGraphPanel(String... states){
-		graph = new GraphPanel(Arrays.asList(states));
-		updateGraph();
+	public void createGraphPanel(List<String> states){
+		graph = new GraphPanel(states);
+		graph.update(updatePopulations(), 0);
 	}
 	
 	/**
@@ -150,13 +148,15 @@ public abstract class Model implements Iterable<Cell> {
 		return myGrid.get(row, col);
 	}
 
+
 	/**
 	 * Sets the <code>Cell</code> at index (<code>row, col</code>)
 	 * @param row Set row number
 	 * @param col Set column number
 	 * @param cell The <code>Cell</code> to set
 	 */
-	public void set(int row, int col, Cell cell) {
+
+	protected void set(int row, int col, Cell cell) {
 		myGrid.set(row, col, cell);
 	}
 	

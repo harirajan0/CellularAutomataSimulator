@@ -3,7 +3,15 @@ import java.util.List;
 import states.ConwayState;
 
 /**
+<<<<<<< HEAD
  * A subclass of Cell for Conway's Game of Life simulation
+=======
+ * a subclass of the cell that creates the particular cell type for
+ * Conway's game of life
+ * 
+ * @author Gabriel Chen
+ *
+>>>>>>> master
  */
 public class ConwayCell extends Cell {
 	
@@ -15,6 +23,9 @@ public class ConwayCell extends Cell {
 		super(initState);
 	}
 	
+	/**
+	 * updates cells based on rules of Conway's game of life.
+	 */
 	@Override
 	public void update() {
 		int livingNeighbors = getLivingNeighbors();
@@ -57,6 +68,11 @@ public class ConwayCell extends Cell {
 		return livingCount;
 	}
 
+
+	/**
+	 * changes the state of the cell on click.
+	 * cycles through the cell states available in the model.
+	 */
 	@Override
 	public void changeStateOnClick() {
 		if(isAlive()){

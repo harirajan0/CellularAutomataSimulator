@@ -16,12 +16,12 @@ public class SquareShapeView extends PolygonShapeView {
 	}
 	
 	@Override
-	public void definePolygon() {
+	protected void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
 	}
 	
 	@Override
-	public Double[] calculateCoordinates() {
+	protected Double[] calculateCoordinates() {
 		Double[] coord = new Double[8];
 		double x = getSideLength()*getCol();
 		double y = getSideLength()*getRow();
@@ -37,7 +37,7 @@ public class SquareShapeView extends PolygonShapeView {
 	}
 	
 	@Override
-	public Double[] pivotPoint() {
+	protected Double[] pivotPoint() {
 		return null;
 	}
 }

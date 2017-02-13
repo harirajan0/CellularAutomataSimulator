@@ -43,6 +43,7 @@ public class SegregationCell extends Cell {
 		}
 	}
 	
+	
 	/**
 	 * Checks if the Cell is satisfied by comparing the percentage of 
 	 * neighbors being the same type calculate, to the threshold percentage 
