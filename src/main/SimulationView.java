@@ -84,7 +84,6 @@ public class SimulationView {
 	
 	public void displayGrid(Model model, String shapeType) {
 		int sideLength = Controller.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
-		System.out.println(sideLength);
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
 			for(int c = 0; c < model.getCols(); c++){
