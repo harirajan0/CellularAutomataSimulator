@@ -39,7 +39,18 @@ separate frontend and backend. Worked on some GUI, View, Controller and Model me
 
 
 ##### Vishnu
+1) Spreading Fire model backend
 
+2) Population graph visualization front and back end
+
+3) Refactored model double for-loop methods to iterator methods, and 
+	cut down on duplicate code/hide methods from subclasses
+
+5) Displaying of cells in the model view
+
+6) Debugging with the team
+
+7) Javadoc comments
 ##### Gabriel
 1) Worked with group on class hierarchy following the MVC model. Worked on Controller, Views, and Model integration. Worked on step logic, and main application logic.
 Worked on refactoring in various areas in the project as well. Worked mainly on GUI, View, Controller, and Model. Also implemented interactions like zooming, scrolling, and click
@@ -68,14 +79,26 @@ Use any XML file in the resources package.
 2) All the XML files in the resources package for running the simulations.
 
 ### Information about using the program
-
+Nothing special
 
 ### Known bugs, crashes, or problems
-
+None identified
 
 ### Extra features
+1) Different arrangements of neighbors
 
+2) Triangle, square, and hexagon cell shapes
+
+3) Error checking
+
+4) Initial configurations set by specific locations and states, randomly based on total number of locations, and randomly based on probability distribution
+
+5) Graph of populations of each type of cell
+
+6) Click to change cell state
+
+7) Zoom in/out functionality
 
 ### Impressions and Improvements
-
+Assignment was a good challenge that pushed us to make good design decisions. 
 
