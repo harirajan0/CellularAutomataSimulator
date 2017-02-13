@@ -41,6 +41,7 @@ import resources.Resources;
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
+		private String currentShape;
 
 	    // it is generally accepted behavior that the chooser remembers where user left it last
 	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
@@ -60,6 +61,7 @@ import resources.Resources;
 			setupCP();
 			fps = DEFAULT_FPS;
 			myXMLCreator = new XMLCreator();
+			currentShape = cp.getShapeType();
 		}
 		
 		public SimulationGUI getGUI(){
@@ -118,13 +120,14 @@ import resources.Resources;
 			if(animation != null){
 				animation.stop();
 			}
-			l = new Loader(dataFile, cp.getShapeType());
+			l = new Loader(dataFile, currentShape);
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel, cp.getShapeType());
+			cellSimulationDisplay.displayGrid(myModel, currentShape);
 		}
 		
 		private void step() {
+			checkShape();
 			myModel.updateModel();
 			cellSimulationDisplay.updateGrid(myModel);
 		}
@@ -136,15 +139,22 @@ import resources.Resources;
 		private void load() {
 			if ((dataFile = myChooser.showOpenDialog(null)) == null) return;
 			try {
-				l = new Loader(dataFile, cp.getShapeType());
+				l = new Loader(dataFile, currentShape);
 			} catch (Exception e) {
 				if (CellSocietyAlerts.xmlError(e, dataFile)) load();
 				return;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			cellSimulationDisplay.displayGrid(myModel, cp.getShapeType());
+			checkShape();
 			reset();
+		}
+		
+		private void checkShape(){
+			if (!cp.getShapeType().equals(currentShape)){
+				currentShape = cp.getShapeType();
+				cellSimulationDisplay.displayGrid(myModel, currentShape);
+			}
 		}
 		
 		private void save() {
