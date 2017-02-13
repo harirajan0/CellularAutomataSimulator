@@ -1,9 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
+import javafx.scene.layout.VBox;
 import grid.Grid;
 import loader.XMLParser;
 import neighborfinder.HexagonNeighborFinder;
@@ -11,16 +13,20 @@ import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
 import resources.Resources;
+import main.GraphPanel;
 
 public abstract class Model implements Iterable<Cell> {
 	
+	private int iteration;
 	private Grid myGrid;
 	private String shapeType;
 	private NeighborFinder myNF;
+	private GraphPanel graph;
 
 	public Model(int r, int c, String shapeType) {
 		myGrid = new Grid(r, c);
 		this.shapeType = shapeType;
+		iteration = 0;
 	}
 	
 	public NeighborFinder initializeNF(String shape, int r, int c){
@@ -69,13 +75,26 @@ public abstract class Model implements Iterable<Cell> {
 		while(itr.hasNext()) {
 			(itr.next()).nextGeneration();
 		}
+		iteration++;
+		graph.update(updateGraph(), iteration);
+	}
+	
+	public abstract List<Double> updateGraph();
+	
+	public void createGraphPanel(List<String> states){
+		graph = new GraphPanel(states);
+		graph.update(updateGraph(), 0);
+	}
+	
+	public void resetIteration(){
+		iteration = 0;
 	}
 	
 	/**
 	 * Initializes the cells inside the grid
 	 * @param parser XML Parser to read cell information from
 	 * @param param Additional parameter for certain models
-	 */
+	 */	
 	public abstract void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution);
 	
 	public abstract int numStates();
@@ -87,7 +106,7 @@ public abstract class Model implements Iterable<Cell> {
 	public void set(int row, int col, Cell cell) {
 		myGrid.set(row, col, cell);
 	}
-
+	
 	/**
 	 * Gets the number of rows in the grid
 	 * 
@@ -127,5 +146,8 @@ public abstract class Model implements Iterable<Cell> {
 	public String getShapeType(){
 		return shapeType;
 	}
-
+	
+	public VBox getGraph(){
+		return graph.getGraph();
+	}
 }

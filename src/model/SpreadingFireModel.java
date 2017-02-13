@@ -1,9 +1,10 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import cells.Cell;
 import cells.SpreadingFireCell;
 import loader.XMLException;
@@ -75,6 +76,42 @@ public class SpreadingFireModel extends Model {
 				}
 			}
 		}
+		createGraphPanel(SpreadingFireState.EMPTY.getPossibleStatesAsString());
+	}
+
+	@Override
+	public List<Double> updateGraph() {
+		double treeCount = 0;
+		double burningCount = 0;
+		double emptyCount = 0;
+		
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			SpreadingFireState state = 
+					(SpreadingFireState)itr.next().getCurrentState();
+			switch(state){
+				case TREE : 
+					treeCount++;
+					break;
+				case BURNING :
+					burningCount++;
+					break;
+				case EMPTY : 
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		double totalStates = treeCount + burningCount + emptyCount;
+		treeCount /= totalStates;
+		burningCount /= totalStates;
+		emptyCount /= totalStates;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(treeCount);
+		pops.add(burningCount);
+		pops.add(emptyCount);
+		return pops;
 	}
 	
 	@Override

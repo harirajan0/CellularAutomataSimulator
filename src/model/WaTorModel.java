@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -76,9 +77,42 @@ public class WaTorModel extends Model {
 				}
 			}
 		}
+		createGraphPanel(WaTorState.EMPTY.getPossibleStatesAsString());
 	}
 
 	@Override
+	public List<Double> updateGraph() {
+		double fishCount = 0;
+		double sharkCount = 0;
+		double emptyCount = 0;
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			WaTorState state = (WaTorState)itr.next().getCurrentState();
+			switch(state){
+				case FISH : 
+					fishCount++;
+					break;
+				case SHARK : 
+					sharkCount++;
+					break;
+				case EMPTY:
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		double totalStates = fishCount + sharkCount + emptyCount;
+		fishCount /= totalStates;
+		sharkCount /= totalStates;
+		emptyCount /= totalStates;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(fishCount);
+		pops.add(sharkCount);
+		pops.add(emptyCount);
+		return pops;
+	}
+
 	public int numStates() {
 		return stateMap.size();
 	}

@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import cells.Cell;
 import cells.SegregationCell;
 import loader.XMLException;
 import loader.XMLParser;
 import resources.Resources;
 import states.SegregationState;
+
 public class SegregationModel extends Model {
 	
 	private List<Cell> availableCells;
@@ -58,6 +58,7 @@ public class SegregationModel extends Model {
 		}
 		createAvailableCells();
 		placeAvailableList();
+		createGraphPanel(SegregationState.EMPTY.getPossibleStatesAsString());
 	}
 	@Override
 	public void updateModel() {
@@ -101,5 +102,40 @@ public class SegregationModel extends Model {
 		while(itr.hasNext()){
 			((SegregationCell) itr.next()).setAvailableList(availableCells);
 		}
+	}
+
+	@Override
+	public List<Double> updateGraph() {
+		double xCount = 0;
+		double oCount = 0;
+		double emptyCount = 0;
+		
+		Iterator<Cell> itr = iterator();
+		while(itr.hasNext()){
+			SegregationState state = 
+					(SegregationState)itr.next().getCurrentState();
+			switch(state){
+				case X : 
+					xCount++;
+					break;
+				case O :
+					oCount++;
+					break;
+				case EMPTY : 
+					emptyCount++;
+					break;
+				default : 
+					break;
+			}
+		}
+		double totalStates = xCount + oCount + emptyCount;
+		xCount /= totalStates;
+		oCount /= totalStates;
+		emptyCount /= totalStates;
+		ArrayList<Double> pops = new ArrayList<Double>();
+		pops.add(xCount);
+		pops.add(oCount);
+		pops.add(emptyCount);
+		return pops;
 	}
 }

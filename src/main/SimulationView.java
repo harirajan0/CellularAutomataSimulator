@@ -12,11 +12,8 @@ import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import model.Model;
 import resources.Resources;
+
 public class SimulationView {
-	
-	private static final String TRIANGLE = "Triangle";
-	private static final String SQUARE = "Square";
-	private static final String HEXAGON = "Hexagon";
 	
 	private List<PolygonShapeView> cellDisplay;
 	private Group cellSimulationGroup;
@@ -88,13 +85,13 @@ public class SimulationView {
 			for(int c = 0; c < model.getCols(); c++){
 				Cell cell = model.get(r, c);
 				PolygonShapeView psv;
-				if (shapeType == TRIANGLE){
+				if (shapeType == Resources.TRIANGLE){
 					psv = new TriangleShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
-				} else if (shapeType == SQUARE){
+				} else if (shapeType == Resources.SQUARE){
 					psv = new SquareShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
-				} else if (shapeType == HEXAGON){
+				} else if (shapeType == Resources.HEXAGON){
 					psv = new HexagonShapeView(r, c, sideLength);
 					setupPolygon(psv, cell);
 				}

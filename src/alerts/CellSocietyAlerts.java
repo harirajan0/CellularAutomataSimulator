@@ -5,13 +5,9 @@ package alerts;
 
 import java.io.File;
 import java.util.Optional;
-import java.util.ResourceBundle;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import loader.XMLException;
 import resources.Resources;
-import sun.awt.CausedFocusEvent.Cause;
 import javafx.scene.control.Alert.AlertType;
 
 /**

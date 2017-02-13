@@ -1,6 +1,5 @@
 package cells;
 import java.util.List;
-
 import states.SpreadingFireState;
 
 public class SpreadingFireCell extends Cell 

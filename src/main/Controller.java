@@ -1,9 +1,8 @@
 package main;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.ResourceBundle;
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,11 +13,16 @@ import loader.Loader;
 import loader.XMLCreator;
 import model.Model;
 import resources.Resources;
-
 	// This controller class is the central nexus control of the entire program.
 	// It will handle things like when to update the model, when to update the view,
-	// this class holds the cell simulation togethers
+	// this class holds the cell simulation together
 	public class Controller {
+		
+		// kind of data files to look for
+	    public static final String DATA_FILE_EXTENSION = "*.xml";
+	    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+		private static final double DEFAULT_FPS = 1;
+		public static final int INIT_WINDOW_SIZE = 600;
 		
 		// Dimension of the Grid, obtained from Loader
 		private Model myModel;
@@ -27,16 +31,15 @@ import resources.Resources;
 		private SimulationView cellSimulationDisplay;
 		// Control Panel will provide all the button visuals.
 		private ControlPanel cp;
+		private SimulationControlPanel bp;
 		
 		private double fps;
 		private Timeline animation;
 		private Loader l;
 		private File dataFile;
 		private String currentShape;
-
 	    // it is generally accepted behavior that the chooser remembers where user left it last
-	    private FileChooser myChooser = makeChooser(Resources.DATA_FILE_EXTENSION);
-
+	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
 	    private XMLCreator myXMLCreator;
 		
 		/**
@@ -49,8 +52,9 @@ import resources.Resources;
 			myGUI = new SimulationGUI("English");
 			cellSimulationDisplay = myGUI.getSimulationView();
 			cp = new ControlPanel();
+			bp = new SimulationControlPanel();
 			setupCP();
-			fps = Resources.DEFAULT_FPS;
+			fps = DEFAULT_FPS;
 			myXMLCreator = new XMLCreator();
 			currentShape = cp.getShapeType();
 		}
@@ -67,18 +71,19 @@ import resources.Resources;
 			cp.setLoad(e -> load());
 			cp.setResume(e -> resume());
 			cp.setSave(e -> save());
-			
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
 			cp.getChoiceBox().valueProperty().addListener(e -> 
-					changeShape(Resources.SHAPES[cp.getChoiceBox().getSelectionModel().getSelectedIndex()]));
+				changeShape(Resources.SHAPES[cp.getChoiceBox().getSelectionModel().getSelectedIndex()]));
 			
-			cp.setZoomIn(e -> zoomIn());
-			cp.setZoomOut(e -> zoomOut());
-			cp.setZoomReset(e -> zoomReset());
-
+			bp.setZoomIn(e -> zoomIn());
+			bp.setZoomOut(e -> zoomOut());
+			bp.setZoomReset(e -> zoomReset());
 			cp.addToHBox();
 			
+			bp.addToHBox();
+			
 			myGUI.createCP(cp.getControlPanel());
+			myGUI.createBP(bp.getSimulationControlPanel());
 		}
 		
 		private void zoomIn(){
@@ -117,11 +122,13 @@ import resources.Resources;
 			l = new Loader(dataFile, currentShape);
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
+			myModel.resetIteration();
 			cellSimulationDisplay.displayGrid(myModel, currentShape);
 		}
 		
 		private void step() {
 			myModel.updateModel();
+			myGUI.createGraph(myModel.getGraph());
 			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
@@ -139,8 +146,10 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
+			myGUI.createGraph(myModel.getGraph());
 			reset();
 		}
+		
 		
 		private void save() {
 			//call method to write XML based on current state
@@ -154,6 +163,7 @@ import resources.Resources;
 			}
 			myXMLCreator.createXML
 				(l.getSimulationType(), l.getSimulationName(), myModel.getRows(), myModel.getCols(), states, l.getParameter());
+			//simulationType, simulationName, numRows, numCols, myList
 		}
 		
 		// set some sensible defaults when the FileChooser is created
@@ -167,7 +177,7 @@ import resources.Resources;
 	    }
 	    
 		private void changeSpeed(double value) {
-			fps = Resources.DEFAULT_FPS * value;
+			fps = DEFAULT_FPS*value;
 			animation.stop();
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
