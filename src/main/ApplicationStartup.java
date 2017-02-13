@@ -5,12 +5,6 @@ import javafx.stage.Stage;
 
 public class ApplicationStartup extends Application{
 	
-
-//	private main = new MainStage();
-
-
-
-	
 	@SuppressWarnings("unused")
 	@Override
 	public void start(Stage stage) throws Exception {

@@ -29,6 +29,10 @@ public class Resources {
 	public static final String RANDOM = "RANDOM";
 	public static final String PROBABILITY = "PROBABILITY";
 	
+	public static final String TRIANGLE = "Triangle";
+	public static final String SQUARE = "Square";
+	public static final String HEXAGON = "Hexagon";
+	
 	public static String getString(String key) {
 		return RESOURCES.getString(key);
 	}
