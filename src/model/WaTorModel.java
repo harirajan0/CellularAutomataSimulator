@@ -112,7 +112,8 @@ public class WaTorModel extends Model {
 		pops.add(emptyCount);
 		return pops;
 	}
-
+	
+	@Override
 	public int numStates() {
 		return stateMap.size();
 	}

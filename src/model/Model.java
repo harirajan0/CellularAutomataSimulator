@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import cells.Cell;
@@ -29,7 +28,7 @@ public abstract class Model implements Iterable<Cell> {
 		iteration = 0;
 	}
 	
-	public NeighborFinder initializeNF(String shape, int r, int c){
+	protected NeighborFinder initializeNF(String shape, int r, int c){
 		switch (shape){
 		case Resources.TRIANGLE:
 			myNF = new TriangleNeighborFinder(r, c);
@@ -103,7 +102,7 @@ public abstract class Model implements Iterable<Cell> {
 		return myGrid.get(row, col);
 	}
 
-	public void set(int row, int col, Cell cell) {
+	protected void set(int row, int col, Cell cell) {
 		myGrid.set(row, col, cell);
 	}
 	

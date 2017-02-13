@@ -20,13 +20,13 @@ public abstract class PolygonShapeView {
 	/**
 	 * Calculates all the coordinates needed to define a polygon.
 	 */
-	public abstract void definePolygon();
+	protected abstract void definePolygon();
 	
-	public abstract Double[] calculateCoordinates();
+	protected abstract Double[] calculateCoordinates();
 	
-	public abstract Double[] pivotPoint();
+	protected abstract Double[] pivotPoint();
 	
-	public void changeCellState(EventHandler<? super MouseEvent> value){
+	protected void changeCellState(EventHandler<? super MouseEvent> value){
 		myPolygon.setOnMouseClicked(value);
 	}
 	
@@ -42,11 +42,11 @@ public abstract class PolygonShapeView {
 		return sideLength;
 	}
 	
-	public boolean oddRow(){
+	protected boolean oddRow(){
 		return row%2==1;
 	}
 	
-	public boolean sameParity(){
+	protected boolean sameParity(){
 		return (row+col)%2==0;
 	}
 	

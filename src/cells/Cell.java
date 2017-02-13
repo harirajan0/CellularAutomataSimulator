@@ -59,7 +59,7 @@ public abstract class Cell {
 	 * Sets the current state of the cell
 	 * @param initState The new current state of the cell
 	 */
-	public void setCurrentState(State initState) {
+	private void setCurrentState(State initState) {
 		this.currentState = initState;
 	}
 	
@@ -87,7 +87,7 @@ public abstract class Cell {
 		return getCurrentState().equals(state);
 	}
 
-	public void setStateOnClick(State state) {
+	protected void setStateOnClick(State state) {
 		this.currentState = state;
 	}
 	

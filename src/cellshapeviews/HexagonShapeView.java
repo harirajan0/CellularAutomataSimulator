@@ -14,7 +14,7 @@ public class HexagonShapeView extends PolygonShapeView {
 	 * 
 	 */
 	@Override
-	public void definePolygon() {
+	protected void definePolygon() {
 		getPolygon().getPoints().addAll(this.calculateCoordinates());
 	}
 	
@@ -23,7 +23,7 @@ public class HexagonShapeView extends PolygonShapeView {
 	 * left corner, in clockwise order.
 	 */
 	@Override
-	public Double[] calculateCoordinates() {
+	protected Double[] calculateCoordinates() {
 		Double[] coord = new Double[12];
 		Double[] tmp = pivotPoint();
 		double x = tmp[0];
@@ -47,7 +47,7 @@ public class HexagonShapeView extends PolygonShapeView {
 	 * 
 	 */
 	@Override
-	public Double[] pivotPoint(){
+	protected Double[] pivotPoint(){
 		Double[] myXY = new Double[2];
 		if (oddRow()){
 			myXY[0] = sideLength*Math.sqrt(3.0)*(0.5+getCol());
