@@ -10,12 +10,9 @@ import neighborfinder.HexagonNeighborFinder;
 import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
+import resources.Resources;
 
 public abstract class Model implements Iterable<Cell> {
-
-	private static final String TRIANGLE = "Triangle";
-	private static final String SQUARE = "Square";
-	private static final String HEXAGON = "Hexagon";
 	
 	private Grid myGrid;
 	private String shapeType;
@@ -26,15 +23,15 @@ public abstract class Model implements Iterable<Cell> {
 		this.shapeType = shapeType;
 	}
 	
-	public NeighborFinder initializeNF(String str, int r, int c){
-		switch(str){
-		case TRIANGLE:
+	public NeighborFinder initializeNF(String shape, int r, int c){
+		switch (shape){
+		case Resources.TRIANGLE:
 			myNF = new TriangleNeighborFinder(r, c);
 			break;
-		case SQUARE:
+		case Resources.SQUARE:
 			myNF = new SquareNeighborFinder(r, c);
 			break;
-		case HEXAGON:
+		case Resources.HEXAGON:
 			myNF = new HexagonNeighborFinder(r, c);
 			break;
 		default:

@@ -1,36 +1,31 @@
 package main;
 
-import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import resources.Resources;
 
 public class SimulationGUI {
-	public static final Dimension2D DEFAULT_SIZE = new Dimension2D(1000, 800);
-	public static final Dimension2D SIMULATION_SPACE = new Dimension2D(620, 800);
 
     private Scene myScene;
     private BorderPane root;
-    private BorderPane simulationCenterer;
     private SimulationView cellSimulationView;
     private ScrollPane simulationHolder;
     
     public SimulationGUI(String lang){
     	simulationHolder = new ScrollPane();
-    	simulationHolder.setPrefSize(SIMULATION_SPACE.getWidth(), SIMULATION_SPACE.getHeight());
+    	simulationHolder.setPrefSize(Resources.SIMULATION_SPACE.getWidth(), Resources.SIMULATION_SPACE.getHeight());
 
     	cellSimulationView = new SimulationView();
     	simulationHolder.setContent(cellSimulationView.getSimulationStackPane());
     	
     	root = new BorderPane();
-    	root.setStyle("-fx-background-color : white");
+    	root.setStyle(Resources.PANE_STYLE);
     	
     	root.setRight(simulationHolder);
     	    	
-    	myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());
+    	myScene = new Scene(root, Resources.DEFAULT_SIZE.getWidth(), Resources.DEFAULT_SIZE.getHeight());
     }
     
     public void simViewZoomIn(){

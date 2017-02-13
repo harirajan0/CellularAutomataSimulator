@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -13,29 +14,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
+import resources.Resources;
 
 public class ControlPanel {
 	
-	private final String[] SHAPES = new String[]{"Square", "Triangle", "Hexagon"};
-	private final ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(
-			"Square", "Triangle", "Hexagon"));
+	private final ChoiceBox cb;
 	private final int BTN_WIDTH  = 70, BTN_HEIGHT = 20;
 	
 	private HBox buttonsPanel;
 	private Button startButton, pauseButton, stepButton, resetButton, loadButton, resumeButton, saveButton, zoomInButton, zoomOutButton, zoomResetButton;
 	private Slider speedSlider;
-    private ResourceBundle myResources;
     private String shapeType;
 
-	public ControlPanel(ResourceBundle resources){
-		myResources = resources;
-
+	public ControlPanel(){
 		buttonsPanel = new HBox();
 		buttonsPanel.setStyle("-fx-background-color: gray");
 		buttonsPanel.setPadding(new Insets(15, 15, 15, 15));
 		buttonsPanel.setSpacing(10);
 		
-		// make buttons' visual 
 		startButton = makeButton("StartCommand");
 		pauseButton = makeButton("PauseCommand");
 		stepButton = makeButton("StepCommand");
@@ -47,6 +43,7 @@ public class ControlPanel {
 		zoomOutButton = makeButton("ZoomOut");
 		zoomResetButton = makeButton("ZoomReset");
 
+		cb = new ChoiceBox(FXCollections.observableArrayList(Arrays.asList(Resources.SHAPES)));
 		initializeChoicebox();
 		
 		speedSlider = makeSpeedSlider();
@@ -109,6 +106,9 @@ public class ControlPanel {
 		return shapeType;
 	}
 	
+	public ChoiceBox getChoiceBox() {
+		return cb;
+	}
 	private Slider makeSpeedSlider() {
 		Slider slider = new Slider(0.1, 5, 1);
 		slider.setOrientation(Orientation.HORIZONTAL);
@@ -121,7 +121,7 @@ public class ControlPanel {
 	
     private Button makeButton(String property) {
     	Button result = new Button();
-    	String label = myResources.getString(property);
+    	String label = Resources.getString(property);
     	result.setText(label);
     	result.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
     	return result;
@@ -129,12 +129,12 @@ public class ControlPanel {
 	
     private void initializeChoicebox(){
     	cb.getSelectionModel().selectFirst();
-    	shapeType = SHAPES[cb.getSelectionModel().getSelectedIndex()];
+    	shapeType = Resources.SHAPES[cb.getSelectionModel().getSelectedIndex()];
     	cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				shapeType = SHAPES[newValue.intValue()];
+				shapeType = Resources.SHAPES[newValue.intValue()];
 			}
     	});
     }

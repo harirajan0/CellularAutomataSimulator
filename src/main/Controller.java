@@ -3,7 +3,6 @@ package main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import alerts.CellSocietyAlerts;
 import javafx.animation.KeyFrame;
@@ -21,13 +20,6 @@ import resources.Resources;
 	// this class holds the cell simulation togethers
 	public class Controller {
 		
-		// kind of data files to look for
-	    public static final String DATA_FILE_EXTENSION = "*.xml";
-	    public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-		private static final double DEFAULT_FPS = 1;
-		public static final int INIT_WINDOW_SIZE = 600;
-
-		
 		// Dimension of the Grid, obtained from Loader
 		private Model myModel;
 		SimulationGUI myGUI;
@@ -43,7 +35,7 @@ import resources.Resources;
 		private String currentShape;
 
 	    // it is generally accepted behavior that the chooser remembers where user left it last
-	    private FileChooser myChooser = makeChooser(DATA_FILE_EXTENSION);
+	    private FileChooser myChooser = makeChooser(Resources.DATA_FILE_EXTENSION);
 
 	    private XMLCreator myXMLCreator;
 		
@@ -56,9 +48,9 @@ import resources.Resources;
 		public Controller(){
 			myGUI = new SimulationGUI("English");
 			cellSimulationDisplay = myGUI.getSimulationView();
-			cp = new ControlPanel(ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "English"));
+			cp = new ControlPanel();
 			setupCP();
-			fps = DEFAULT_FPS;
+			fps = Resources.DEFAULT_FPS;
 			myXMLCreator = new XMLCreator();
 			currentShape = cp.getShapeType();
 		}
@@ -75,7 +67,10 @@ import resources.Resources;
 			cp.setLoad(e -> load());
 			cp.setResume(e -> resume());
 			cp.setSave(e -> save());
+			
 			cp.getSlider().valueProperty().addListener(e -> changeSpeed(cp.getSlider().getValue()));
+			cp.getChoiceBox().valueProperty().addListener(e -> 
+					changeShape(Resources.SHAPES[cp.getChoiceBox().getSelectionModel().getSelectedIndex()]));
 			
 			cp.setZoomIn(e -> zoomIn());
 			cp.setZoomOut(e -> zoomOut());
@@ -126,7 +121,6 @@ import resources.Resources;
 		}
 		
 		private void step() {
-			checkShape();
 			myModel.updateModel();
 			cellSimulationDisplay.updateGrid(myModel);
 		}
@@ -145,15 +139,7 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			checkShape();
 			reset();
-		}
-		
-		private void checkShape(){
-			if (!cp.getShapeType().equals(currentShape)){
-				currentShape = cp.getShapeType();
-				cellSimulationDisplay.displayGrid(myModel, currentShape);
-			}
 		}
 		
 		private void save() {
@@ -168,7 +154,6 @@ import resources.Resources;
 			}
 			myXMLCreator.createXML
 				(l.getSimulationType(), l.getSimulationName(), myModel.getRows(), myModel.getCols(), states, l.getParameter());
-			//simulationType, simulationName, numRows, numCols, myList
 		}
 		
 		// set some sensible defaults when the FileChooser is created
@@ -182,7 +167,7 @@ import resources.Resources;
 	    }
 	    
 		private void changeSpeed(double value) {
-			fps = DEFAULT_FPS*value;
+			fps = Resources.DEFAULT_FPS * value;
 			animation.stop();
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps),
 					e -> step());
@@ -190,5 +175,10 @@ import resources.Resources;
 			animation.setCycleCount(Timeline.INDEFINITE);
 			animation.getKeyFrames().add(frame);
 			animation.play();
+		}
+		
+		private void changeShape(String newShape) {
+			currentShape = newShape;
+			cellSimulationDisplay.displayGrid(myModel, currentShape);
 		}
 	}
