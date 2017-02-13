@@ -8,18 +8,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import resources.Resources;
 
 public class SimulationControlPanel {
 	private HBox buttonsPanel;
 	private Button zoomInButton, zoomOutButton, zoomResetButton;
-    private ResourceBundle myResources;
 	private final int BTN_HEIGHT = 20;
 
 	
-	public SimulationControlPanel(ResourceBundle resources){
-		myResources = resources;
+	public SimulationControlPanel(){
 		buttonsPanel = new HBox();
-		buttonsPanel.setStyle("-fx-background-color: gray");
+		buttonsPanel.setStyle(Resources.GRAY_PANE_STYLE);
 		buttonsPanel.setPadding(new Insets(15, 15, 15, 15));
 		buttonsPanel.setSpacing(10);
 		buttonsPanel.setAlignment(Pos.CENTER_RIGHT);
@@ -30,7 +29,7 @@ public class SimulationControlPanel {
 	}
     private Button makeButton(String property) {
     	Button result = new Button();
-    	String label = myResources.getString(property);
+    	String label = Resources.getString(property);
     	result.setText(label);
     	result.setPrefHeight(BTN_HEIGHT);
     	return result;

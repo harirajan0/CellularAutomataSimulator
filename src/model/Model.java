@@ -12,13 +12,10 @@ import neighborfinder.HexagonNeighborFinder;
 import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
+import resources.Resources;
 import main.GraphPanel;
 
 public abstract class Model implements Iterable<Cell> {
-
-	private static final String TRIANGLE = "Triangle";
-	private static final String SQUARE = "Square";
-	private static final String HEXAGON = "Hexagon";
 	
 	private int iteration;
 	private Grid myGrid;
@@ -32,15 +29,15 @@ public abstract class Model implements Iterable<Cell> {
 		iteration = 0;
 	}
 	
-	public NeighborFinder initializeNF(String str, int r, int c){
-		switch(str){
-		case TRIANGLE:
+	public NeighborFinder initializeNF(String shape, int r, int c){
+		switch (shape){
+		case Resources.TRIANGLE:
 			myNF = new TriangleNeighborFinder(r, c);
 			break;
-		case SQUARE:
+		case Resources.SQUARE:
 			myNF = new SquareNeighborFinder(r, c);
 			break;
-		case HEXAGON:
+		case Resources.HEXAGON:
 			myNF = new HexagonNeighborFinder(r, c);
 			break;
 		default:
@@ -84,8 +81,8 @@ public abstract class Model implements Iterable<Cell> {
 	
 	public abstract List<Double> updateGraph();
 	
-	public void createGraphPanel(String... states){
-		graph = new GraphPanel(Arrays.asList(states));
+	public void createGraphPanel(List<String> states){
+		graph = new GraphPanel(states);
 		graph.update(updateGraph(), 0);
 	}
 	
