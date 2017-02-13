@@ -16,14 +16,6 @@ public class SegregationCell extends Cell {
 	
 	/**
 	 * 
-	 * @param availableList
-	 */
-	public void setAvailableList(List<Cell> availableList){
-		emptyPositions = availableList;
-	}
-	
-	/**
-	 * 
 	 * @param initState
 	 * @param percentage
 	 */
@@ -47,6 +39,14 @@ public class SegregationCell extends Cell {
 		} else{
 			setNextState(this.getCurrentState());
 		}
+	}
+	
+	/**
+	 * 
+	 * @param availableList
+	 */
+	public void setAvailableList(List<Cell> availableList){
+		emptyPositions = availableList;
 	}
 	
 	/**

@@ -13,6 +13,14 @@ Hours: 50 per individual
 
 ### Role of each member
 ##### Hari
+For this project, I was in charge of the following:
+-Predator-Prey Model backend
+-State interface and State Enums for each simulation
+-Loader package (Loader.java, XMLCreator.java, XMLException.javaj, XMLParse.java), and all configuration features
+-Exception handling and alerts
+-Refactoring code into the Model.java superclass and its subclasses
+-Removing magic values from code and moving them to Resources.java 
+As the project progressed, we all ended up helping each other out on practically every facet of the project so I also had a role working on other parts of the project including the Segregation model, the main package (specifically Controller.java), and other parts as well. Also, we all spent a lot of time refactoring and debugging each other's code.
 
 ##### Bihan
 1) Designed the class hierarchy following the MVC model with group. Refactored so that the Controller, Views and Models integrate well together. Also refactored to better

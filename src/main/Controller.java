@@ -94,7 +94,7 @@ import resources.Resources;
 		}
 		
 		// this should be for starting a new simulation maybe? still need to look into it
-		public void start() {
+		private void start() {
 			KeyFrame frame = new KeyFrame(Duration.millis(1000/fps), e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
@@ -119,11 +119,12 @@ import resources.Resources;
 			myModel.initializeNeighbors();
 			myModel.resetIteration();
 			cellSimulationDisplay.displayGrid(myModel, currentShape);
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 		}
 		
 		private void step() {
 			myModel.updateModel();
-			myGUI.createGraph(myModel.getGraph());
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
 			cellSimulationDisplay.updateGrid(myModel);
 		}
 		
@@ -141,7 +142,8 @@ import resources.Resources;
 			} 
 			myModel = l.getFirstGrid();
 			myModel.initializeNeighbors();
-			myGUI.createGraph(myModel.getGraph());
+			myGUI.createGraphSidePanel(l.getSimulationName(), myModel.getGraph());
+//			myGUI.createVBox(myModel.getGraph());
 			reset();
 		}
 		

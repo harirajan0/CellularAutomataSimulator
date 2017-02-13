@@ -81,7 +81,7 @@ public class SegregationModel extends Model {
 	}
 	
 	// create list of empty cells for Model to hold
-	public void createAvailableCells() {
+	private void createAvailableCells() {
 		availableCells = new ArrayList<>();
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
@@ -97,7 +97,7 @@ public class SegregationModel extends Model {
 	}
 	
 	// put empty list into every cell
-	public void placeAvailableList() {
+	private void placeAvailableList() {
 		Iterator<Cell> itr = iterator();
 		while(itr.hasNext()){
 			((SegregationCell) itr.next()).setAvailableList(availableCells);

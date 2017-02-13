@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Arrays;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -52,49 +51,49 @@ public class ControlPanel {
 		return buttonsPanel;
 	}
 	
-	public void addToHBox(){
+	protected void addToHBox(){
 		buttonsPanel.getChildren().addAll(startButton, resumeButton, pauseButton, stepButton, resetButton, loadButton, saveButton, cb, speedSlider);
 	}
 	
 	// setter methods to set actions for buttons; used in the controller
-	public void setStart(EventHandler<ActionEvent> handler){
+	protected void setStart(EventHandler<ActionEvent> handler){
 		startButton.setOnAction(handler);
 	}
 
 	
-	public void setPause(EventHandler<ActionEvent> handler){
+	protected void setPause(EventHandler<ActionEvent> handler){
 		pauseButton.setOnAction(handler);
 	}
 	
-	public void setStep(EventHandler<ActionEvent> handler){
+	protected void setStep(EventHandler<ActionEvent> handler){
 		stepButton.setOnAction(handler);
 	}
 	
-	public void setReset(EventHandler<ActionEvent> handler){
+	protected void setReset(EventHandler<ActionEvent> handler){
 		resetButton.setOnAction(handler);
 	}
 	
-	public void setLoad(EventHandler<ActionEvent> handler){
+	protected void setLoad(EventHandler<ActionEvent> handler){
 		loadButton.setOnAction(handler);
 	}
 	
-	public void setResume(EventHandler<ActionEvent> handler){
+	protected void setResume(EventHandler<ActionEvent> handler){
 		resumeButton.setOnAction(handler);
 	}
 	
-	public void setSave(EventHandler<ActionEvent> handler){
+	protected void setSave(EventHandler<ActionEvent> handler){
 		saveButton.setOnAction(handler);
 	}
 	
-	public Slider getSlider(){
+	protected Slider getSlider(){
 		return speedSlider;
 	}
 	
-	public String getShapeType(){
+	protected String getShapeType(){
 		return shapeType;
 	}
 	
-	public ChoiceBox<String> getChoiceBox() {
+	protected ChoiceBox<String> getChoiceBox() {
 		return cb;
 	}
 	private Slider makeSpeedSlider() {

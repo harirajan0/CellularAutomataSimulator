@@ -1,6 +1,4 @@
 package main;
-
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,20 +32,20 @@ public class SimulationControlPanel {
     	return result;
     }
     
-    public void addToHBox(){
+    protected void addToHBox(){
     	buttonsPanel.getChildren().addAll(zoomInButton, zoomOutButton, zoomResetButton);
     }
-	public void setZoomIn(EventHandler<ActionEvent> handler){
+    protected void setZoomIn(EventHandler<ActionEvent> handler){
 		zoomInButton.setOnAction(handler);
 	}
-	public void setZoomOut(EventHandler<ActionEvent> handler){
+    protected void setZoomOut(EventHandler<ActionEvent> handler){
 		zoomOutButton.setOnAction(handler);
 	}
-	public void setZoomReset(EventHandler<ActionEvent> handler){
+    protected void setZoomReset(EventHandler<ActionEvent> handler){
 		zoomResetButton.setOnAction(handler);
 	}
-	public HBox getSimulationControlPanel(){
+    protected HBox getSimulationControlPanel(){
 		return buttonsPanel;
 	}
 	
-}
+}
