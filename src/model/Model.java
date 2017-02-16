@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// HARI RAJAN
+
 package model;
 
 import java.util.ArrayList;
@@ -130,7 +133,30 @@ public abstract class Model implements Iterable<Cell> {
 	 * @param parser XML Parser to read cell information from
 	 * @param param Additional parameter for certain models
 	 */	
-	public abstract void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution);
+	public void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution) {
+		for (int row = 0; row < getRows(); row++) {
+			for (int col = 0; col < getCols(); col++) {
+				try {
+					set(row, col, generateCell(row, col, inputType, parser, distribution, param));
+				} catch (StringIndexOutOfBoundsException e) {
+					throw new StringIndexOutOfBoundsException(
+							String.format(Resources.getString("InvalidCellDataMessage"), row, col));
+				}
+			}
+		}
+	}
+
+	/**
+	 * generates a cell from the given parameters
+	 * @param row
+	 * @param col
+	 * @param inputType XML input type format (probability, specific, or random)
+	 * @param parser 
+	 * @param distribution percent distribution if input type is probability
+	 * @param param
+	 * @return
+	 */
+	protected abstract Cell generateCell(int row, int col, String inputType, XMLParser parser, List<Double> distribution, double param);
 	
 	/**
 	 * Returns the total number of states

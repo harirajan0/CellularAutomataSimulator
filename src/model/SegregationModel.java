@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// HARI RAJAN
+
 package model;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,43 +36,30 @@ public class SegregationModel extends Model {
 	}
 	
 	@Override
-	public void populateCells(XMLParser parser, double param, 
-			String inputType, List<Double> distribution) {
-		for (int row = 0; row < getRows(); row++) {
-			for (int col = 0; col < getCols(); col++) {
-				try {
-					SegregationCell newCell = null;
-					switch (inputType) {
-					case Resources.SPECIFIC:
-						newCell = new SegregationCell(stateMap.get(Character
-								.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
-						break;
-					case Resources.RANDOM:
-						Random rand = new Random();
-						newCell = new SegregationCell(stateMap.get(rand.nextInt(stateMap.size())), param);
-						break;
-					case Resources.PROBABILITY:
-						double rand1 = Math.random();
-						if (rand1 <= distribution.get(0))
-							newCell = new SegregationCell(stateMap.get(0), param);
-						else if (rand1 <= distribution.get(1))
-							newCell = new SegregationCell(stateMap.get(1), param);
-						else
-							newCell = new SegregationCell(stateMap.get(2), param);
-						break;
-					default:
-						throw new XMLException(String.format(Resources.getString("InvalidInputTypeMessage"), inputType));
-					}
-					set(row, col, newCell);
-				} catch (StringIndexOutOfBoundsException e) {
-					throw new StringIndexOutOfBoundsException(
-							String.format(Resources.getString("InvalidCellDataMessage"), row, col));
-				}
-			}
-		}
+	public void populateCells(XMLParser parser, double param, String inputType, List<Double> distribution) {
+		super.populateCells(parser, param, inputType, distribution);
 		createAvailableCells();
 		placeAvailableList();
 		createGraphPanel(SegregationState.EMPTY.getPossibleStatesAsString());
+	}
+	
+	@Override
+	protected SegregationCell generateCell(int row, int col, String inputType, XMLParser parser, List<Double> distribution, double param) {
+		switch (inputType) {
+		case Resources.SPECIFIC:
+			return new SegregationCell(stateMap.get(Character
+					.getNumericValue(parser.getTextValue(String.format("row%d", row)).charAt(col))), param);
+		case Resources.RANDOM:
+			Random rand = new Random();
+			return new SegregationCell(stateMap.get(rand.nextInt(stateMap.size())), param);
+		case Resources.PROBABILITY:
+			double rand1 = Math.random();
+			if (rand1 <= distribution.get(0)) return new SegregationCell(stateMap.get(0), param);
+			else if (rand1 <= distribution.get(1)) return new SegregationCell(stateMap.get(1), param);
+			else return new SegregationCell(stateMap.get(2), param);
+		default:
+			throw new XMLException(String.format(Resources.getString("InvalidInputTypeMessage"), inputType));
+		}
 	}
 	
 	@Override
