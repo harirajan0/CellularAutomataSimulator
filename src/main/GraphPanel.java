@@ -1,3 +1,15 @@
+// This entire file is part of my masterpiece.
+// Vishnu Gottiparthy
+
+/*
+ *  This class holds and updates a graph of the populations for each Cell type.
+ *  This piece of code has a good design because it is very encapsulated, so as 
+ *  long as someone else's implementation contains all of the same functions 
+ *  (constructor, update, getGraph) are all implemented, the rest of the details
+ *  can change. The GraphPanel also only needs access to a very limited number of
+ *  things and can do its job with very little information.
+ */
+
 package main;
 
 import javafx.scene.layout.VBox;
@@ -13,7 +25,6 @@ public class GraphPanel {
 	private LineChart<Number, Number> chart;
 	
 	/**
-	 * TODO: Set up chart colors using CSS (preferred method)
 	 * Creates a GraphPanel with the desired states
 	 * @param states A list of all possible states
 	 */
