@@ -1,13 +1,12 @@
+// This is part of my code masterpiece
+// I refactored it this way so that the simulation view just handles the displaying and the stuff involving the pane and the group display.
+// Meanwile the simulationviewshapeHandler will handle the making of the polygon.
+// Gabriel Chen
 package main;
 import java.util.ArrayList;
 import java.util.List;
 import cells.Cell;
-import cellshapeviews.HexagonShapeView;
 import cellshapeviews.PolygonShapeView;
-import cellshapeviews.SquareShapeView;
-import cellshapeviews.TriangleShapeView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import model.Model;
@@ -22,6 +21,7 @@ public class SimulationView {
 	private Group cellSimulationGroup;
 	private StackPane cellSimStackPane;
 	private double currScale;
+	private SimulationViewShapeHandler shapeHandler;
 	
 	/**
 	 * Create the <code>SimulationView</code>
@@ -32,6 +32,7 @@ public class SimulationView {
 		cellDisplay = new ArrayList<>();
 		setMinSizeToDefault();
 		currScale = 1;
+		shapeHandler = new SimulationViewShapeHandler(cellSimulationGroup, cellDisplay);
 	}
 	
 	/**
@@ -126,39 +127,15 @@ public class SimulationView {
 	 */
 	
     protected void displayGrid(Model model, String shapeType) {
-		int sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
 		cellSimulationGroup.getChildren().clear();
 		for(int r = 0; r < model.getRows(); r++){
-			for(int c = 0; c < model.getCols(); c++){
-				Cell cell = model.get(r, c);
-				PolygonShapeView psv;
-				if (shapeType == Resources.TRIANGLE){
-					psv = new TriangleShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.SQUARE){
-					psv = new SquareShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.HEXAGON){
-					psv = new HexagonShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
-				}
+			for(int c = 0; c < model.getCols(); c++){				
+				shapeHandler.chooseAndAddShape(model, shapeType, r, c);
 			}
 		}
 	}
 	
-	/**
-	 * Sets up the proper shapes for the cells
-	 * @param psv <code>PolygonShapeView</code> of the desired shape
-	 * @param cell Cell to set for <code>psv</code>
-	 */
-	private void setupPolygon(PolygonShapeView psv, Cell cell){
-		Polygon polygon = psv.getPolygon();
-		polygon.setOnMouseClicked(e -> updateIndividualCellState(cell, psv));
-		polygon.setFill(cell.getCurrentState().getColor());
-		polygon.setStroke(Color.BLACK);
-		cellSimulationGroup.getChildren().add(polygon);
-		cellDisplay.add(psv);
-	}
+
 	
 	/**
 	 * Update view for each cell.
@@ -171,15 +148,5 @@ public class SimulationView {
 		}
 	}
 	
-
-	/**
-	 * Updates an individual cell's state
-	 * @param cell Cell to update
-	 * @param psv <code>PolygonShapeView</code> of cell to update
-	 */
-	protected void updateIndividualCellState(Cell cell, PolygonShapeView psv){
-		cell.changeStateOnClick();
-		psv.getPolygon().setFill(cell.getCurrentState().getColor());
-	}
 	
 }
