@@ -1,5 +1,5 @@
 // This entire file is part of my masterpiece.
-// Bihan Zhuanag
+// Bihan Zhuana
 
 package neighborfinder;
 
