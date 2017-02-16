@@ -9,6 +9,7 @@ import cells.Cell;
 import cells.WaTorCell;
 import loader.XMLException;
 import loader.XMLParser;
+import neighborfinder.Location;
 import neighborfinder.NeighborFinder;
 import resources.Resources;
 import states.WaTorState;
@@ -38,9 +39,9 @@ public class WaTorModel extends Model {
 				NeighborFinder myNF = initializeNF(getShapeType(), r, c);
 				myNF.findNeighbors();
 				myNF.removeCorners();
-				for (int[] arr : myNF.getNeighborLocations()) {
-					if (contains(arr[0], arr[1])) {
-						nbs.add(get(arr[0], arr[1]));
+				for (Location location : myNF.getNeighborLocations()) {
+					if (contains(location.getX(), location.getY())) {
+						nbs.add(get(location.getX(), location.getY()));
 					}
 				}
 				get(r, c).setNeighbors(nbs);

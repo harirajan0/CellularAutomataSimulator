@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Bihan Zhuanag
+
 package neighborfinder;
 
 import java.util.ArrayList;
@@ -9,7 +12,10 @@ import java.util.List;
  */
 public abstract class NeighborFinder {
 	
-	private List<int[]> neighborLocations;
+	// This is needed because the removeCorners method will
+	// need to access the list after the list is generated in
+	// certain types of simulations, such as Spreading Fire.
+	private List<Location> neighborLocations;
 	
 	/**
 	 * Creates a <code>NeighborFinder</code>
@@ -24,7 +30,7 @@ public abstract class NeighborFinder {
 	 * Different cell shapes will result in different ways to 
 	 * find neighbors.
 	 */
-	public abstract void findNeighbors();
+	public abstract List<Location> findNeighbors();
 	
 	/**
 	 * Remove corners if necessary, depending on the simulation.
@@ -38,15 +44,15 @@ public abstract class NeighborFinder {
 	 * @param c Column to check
 	 * @return Whether or not <code>arr</code> is at index (<code>r, c</code>) 
 	 */
-	protected boolean sameLocation(int[] arr, int r, int c){
-		return (arr[0]==r && arr[1]==c);
+	protected boolean sameLocation(Location location, int r, int c){
+		return (location.getX()==r && location.getY()==c);
 	}
 	
 	/**
 	 * Gets a <code>List</code> of all of the neighbors' locations
 	 * @return Gets a <code>List</code> of all of the neighbors' locations
 	 */
-	public List<int[]> getNeighborLocations(){
+	public List<Location> getNeighborLocations(){
 		return neighborLocations;
 	}
 }

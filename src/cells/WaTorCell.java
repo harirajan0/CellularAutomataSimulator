@@ -107,7 +107,6 @@ public class WaTorCell extends Cell {
 				else if (cell.getNextState().equals(state)) possibleNeighbors.add(cell);
 			}
 		}
-		System.out.println(num);
 		if (!possibleNeighbors.isEmpty()) {
 			return (WaTorCell) possibleNeighbors.get(new Random().nextInt(possibleNeighbors.size())); 
 		}

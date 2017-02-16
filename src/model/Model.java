@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import grid.Grid;
 import loader.XMLParser;
 import neighborfinder.HexagonNeighborFinder;
+import neighborfinder.Location;
 import neighborfinder.NeighborFinder;
 import neighborfinder.SquareNeighborFinder;
 import neighborfinder.TriangleNeighborFinder;
@@ -70,10 +71,9 @@ public abstract class Model implements Iterable<Cell> {
 			for (int c = 0; c < getCols(); c++) {
 				List<Cell> nbs = new ArrayList<>();
 				initializeNF(shapeType, r, c);
-				myNF.findNeighbors();
-				for (int[] arr : myNF.getNeighborLocations()){
-					if (contains(arr[0], arr[1])){
-						nbs.add(get(arr[0], arr[1]));
+				for (Location location : myNF.findNeighbors()){
+					if (contains(location.getX(), location.getY())){
+						nbs.add(get(location.getX(), location.getY()));
 					}
 				}
 				get(r, c).setNeighbors(nbs);

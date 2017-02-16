@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Bihan Zhuang
+
 package neighborfinder;
 
 import java.util.ArrayList;
@@ -21,9 +24,10 @@ public class TriangleNeighborFinder extends NeighborFinder {
 	/**
 	 * Find neighbors for one triangular cell and returns its neighbors
 	 * in a list of x,y coordinates.
+	 * @return 
 	 */
 	@Override
-	public void findNeighbors() {
+	public List<Location> findNeighbors() {
 		
 		for (int i=row-1; i<=row+1; i++){
 			for (int j=col-2; j<=col+2; j++){
@@ -34,25 +38,30 @@ public class TriangleNeighborFinder extends NeighborFinder {
 				} else{
 					if (i==row-1 && (j==col-2 || j==col+2)) continue;
 				}
-				this.getNeighborLocations().add(new int[]{i, j});
+				this.getNeighborLocations().add(new Location(i,j));
 			}
 		}
+		return this.getNeighborLocations();
 	}
 
 	@Override
 	public void removeCorners() {
-		List<int[]> removeList = new ArrayList<>();
-		for (int[] arr : this.getNeighborLocations()){
+		List<Location> removeList = new ArrayList<>();
+		for (Location location : this.getNeighborLocations()){
 			if (sameParity()){
-				if (sameLocation(arr, row-1, col) || sameLocation(arr, row, col-1) || sameLocation(arr, row, col+1)){
+				if (sameLocation(location, row-1, col) 
+						|| sameLocation(location, row, col-1) 
+						|| sameLocation(location, row, col+1)){
 					continue;
 				}
 			} else{
-				if (sameLocation(arr, row+1, col) || sameLocation(arr, row, col-1) || sameLocation(arr, row, col+1)){
+				if (sameLocation(location, row+1, col) 
+						|| sameLocation(location, row, col-1) 
+						|| sameLocation(location, row, col+1)){
 					continue;
 				}
 			}
-			removeList.add(arr);	
+			removeList.add(location);	
 		}
 		this.getNeighborLocations().removeAll(removeList);
 	}

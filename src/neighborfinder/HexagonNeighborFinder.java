@@ -1,4 +1,9 @@
+// This entire file is part of my masterpiece.
+// Bihan Zhuang
+
 package neighborfinder;
+
+import java.util.List;
 
 /**
  * A <code>NeighborFinder</code> for hexagonal cells
@@ -19,7 +24,7 @@ public class HexagonNeighborFinder extends NeighborFinder {
 	}
 
 	@Override
-	public void findNeighbors() {
+	public List<Location> findNeighbors() {
 		
 		for (int i=row-1; i<=row+1; i++){
 			for (int j=col-1; j<=col+1; j++){
@@ -33,9 +38,10 @@ public class HexagonNeighborFinder extends NeighborFinder {
 				else{
 					if ((i==row-1 || i==row+1) && j==col+1) continue;
 				}
-				this.getNeighborLocations().add(new int[]{i, j});
+				this.getNeighborLocations().add(new Location(i,j));
 			}
 		}
+		return this.getNeighborLocations();
 	}
 
 	@Override
