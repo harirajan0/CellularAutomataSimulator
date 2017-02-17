@@ -1,6 +1,3 @@
-// This entire file is part of my masterpiece.
-// Bihan Zhuang
-
 package neighborfinder;
 
 import java.util.List;

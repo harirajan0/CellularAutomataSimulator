@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Bihan Zhuang
+
 package main;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,10 @@ import model.Model;
 import resources.Resources;
 
 /**
+ * I wrote and refactored a lot the code in the class starting
+ * from line 135. The four methods deal with displaying the
+ * different polygon shapes onto the GUI and it is really extensible.
+ * 
  * View containing the display of all of the cells
  */
 public class SimulationView {
@@ -126,21 +133,24 @@ public class SimulationView {
 	 */
 	
     protected void displayGrid(Model model, String shapeType) {
-		int sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
-		cellSimulationGroup.getChildren().clear();
-		for(int r = 0; r < model.getRows(); r++){
-			for(int c = 0; c < model.getCols(); c++){
-				Cell cell = model.get(r, c);
-				PolygonShapeView psv;
-				if (shapeType == Resources.TRIANGLE){
-					psv = new TriangleShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.SQUARE){
-					psv = new SquareShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
-				} else if (shapeType == Resources.HEXAGON){
-					psv = new HexagonShapeView(r, c, sideLength);
-					setupPolygon(psv, cell);
+		if (model != null) {
+			double sideLength = Resources.INIT_WINDOW_SIZE / Math.max(model.getRows(), model.getCols());
+
+			cellSimulationGroup.getChildren().clear();
+			for (int r = 0; r < model.getRows(); r++) {
+				for (int c = 0; c < model.getCols(); c++) {
+					Cell cell = model.get(r, c);
+					PolygonShapeView psv;
+					if (shapeType == Resources.TRIANGLE) {
+						psv = new TriangleShapeView(r, c, sideLength);
+						setupPolygon(psv, cell);
+					} else if (shapeType == Resources.SQUARE) {
+						psv = new SquareShapeView(r, c, sideLength);
+						setupPolygon(psv, cell);
+					} else if (shapeType == Resources.HEXAGON) {
+						psv = new HexagonShapeView(r, c, sideLength);
+						setupPolygon(psv, cell);
+					}
 				}
 			}
 		}

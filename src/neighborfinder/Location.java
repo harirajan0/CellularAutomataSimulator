@@ -3,6 +3,12 @@
 
 package neighborfinder;
 
+/**
+ * A class that does one thing -- to hold the x, y 
+ * coordinates of a Cell within the grid.
+ * @author zhuangbihan
+ *
+ */
 public class Location {
 	
 	private int x, y;

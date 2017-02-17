@@ -1,5 +1,5 @@
 // This entire file is part of my masterpiece.
-// Bihan Zhuanag
+// Bihan Zhuang
 
 package neighborfinder;
 
@@ -12,9 +12,9 @@ import java.util.List;
  */
 public abstract class NeighborFinder {
 	
-	// This is needed because the removeCorners method will
-	// need to access the list after the list is generated in
-	// certain types of simulations, such as Spreading Fire.
+	// This private instance is needed because the removeCorners 
+	// method will need to access the list after the list is generated 
+    // in certain types of simulations, such as Spreading Fire.
 	private List<Location> neighborLocations;
 	
 	/**
