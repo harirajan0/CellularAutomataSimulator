@@ -1,3 +1,5 @@
+// Written by Bihan Zhuang
+
 package neighborfinder;
 
 import java.util.ArrayList;

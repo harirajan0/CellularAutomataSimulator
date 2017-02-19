@@ -1,3 +1,5 @@
+// Written partially by Bihan Zhuang
+
 package model;
 
 import java.util.ArrayList;

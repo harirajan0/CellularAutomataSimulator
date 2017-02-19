@@ -1,3 +1,5 @@
+// Written by Bihan Zhuang
+
 package cells;
 import java.util.List;
 import states.SegregationState;
