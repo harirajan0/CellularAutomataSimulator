@@ -1,3 +1,5 @@
+//Gabriel Chen
+
 // This is part of my code masterpiece
 // I refactored it this way so that the simulation view just handles the displaying and the stuff involving the pane and the group display.
 // Meanwile the simulationviewshapeHandler will handle the making of the polygon.

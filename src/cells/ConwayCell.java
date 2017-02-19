@@ -1,17 +1,15 @@
+//Gabriel Chen
 package cells;
 import java.util.List;
 import states.ConwayState;
 
 /**
-<<<<<<< HEAD
  * A subclass of Cell for Conway's Game of Life simulation
-=======
  * a subclass of the cell that creates the particular cell type for
  * Conway's game of life
  * 
  * @author Gabriel Chen
  *
->>>>>>> master
  */
 public class ConwayCell extends Cell {
 	
